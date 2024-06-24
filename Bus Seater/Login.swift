@@ -10,15 +10,12 @@ import SwiftUI
 struct Login: View {
     var body: some View {
         ZStack {
-            Color("Backround Color")
+            Color(.white)
                 .ignoresSafeArea()
             
             VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.primary) // Changed to .primary for a valid style
                 
-                Text("Hello, World!")
+                Text("Login Screen")
             }
             .padding()
         }
