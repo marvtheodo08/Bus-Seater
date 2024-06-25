@@ -16,6 +16,7 @@
 		0C5608322C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */; };
 		0CB985092C271AC700920872 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB985082C271AC700920872 /* SplashScreen.swift */; };
 		0CB9850B2C28C21600920872 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9850A2C28C21600920872 /* Login.swift */; };
+		0CB9850E2C2B5DEF00920872 /* Bus_SeaterData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9850C2C2B5DEE00920872 /* Bus_SeaterData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0CB9850D2C2B5DEF00920872 /* Bus_SeaterData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bus_SeaterData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
 				0CB985082C271AC700920872 /* SplashScreen.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
+				0CB9850C2C2B5DEE00920872 /* Bus_SeaterData.xcdatamodeld */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
 				0C56081A2C25AA7E00828882 /* Preview Content */,
 			);
@@ -266,6 +269,7 @@
 				0C5608172C25AA7C00828882 /* ContentView.swift in Sources */,
 				0C5608152C25AA7C00828882 /* Bus_SeaterApp.swift in Sources */,
 				0CB985092C271AC700920872 /* SplashScreen.swift in Sources */,
+				0CB9850E2C2B5DEF00920872 /* Bus_SeaterData.xcdatamodeld in Sources */,
 				0CB9850B2C28C21600920872 /* Login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -598,6 +602,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0CB9850C2C2B5DEE00920872 /* Bus_SeaterData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0CB9850D2C2B5DEF00920872 /* Bus_SeaterData.xcdatamodel */,
+			);
+			currentVersion = 0CB9850D2C2B5DEF00920872 /* Bus_SeaterData.xcdatamodel */;
+			name = Bus_SeaterData.xcdatamodeld;
+			path = "/Users/estherfleurmond/Desktop/Bus Seater/Bus Seater/Bus_SeaterData.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0C5608092C25AA7C00828882 /* Project object */;
 }
