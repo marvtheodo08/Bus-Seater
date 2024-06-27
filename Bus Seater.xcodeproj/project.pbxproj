@@ -14,6 +14,7 @@
 		0C5608262C25AA7E00828882 /* Bus_SeaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608252C25AA7E00828882 /* Bus_SeaterTests.swift */; };
 		0C5608302C25AA7E00828882 /* Bus_SeaterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */; };
 		0C5608322C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */; };
+		0C7AFD6D2C2CFBF300AE97B1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7AFD6C2C2CFBF300AE97B1 /* libsqlite3.0.tbd */; };
 		0CB985092C271AC700920872 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB985082C271AC700920872 /* SplashScreen.swift */; };
 		0CB9850B2C28C21600920872 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9850A2C28C21600920872 /* Login.swift */; };
 		0CB985102C2B708200920872 /* Bus_Seater.db in Resources */ = {isa = PBXBuildFile; fileRef = 0CB9850F2C2B708200920872 /* Bus_Seater.db */; };
@@ -47,6 +48,7 @@
 		0C56082B2C25AA7E00828882 /* Bus SeaterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus SeaterUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITests.swift; sourceTree = "<group>"; };
 		0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0C7AFD6C2C2CFBF300AE97B1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0CB9850F2C2B708200920872 /* Bus_Seater.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Bus_Seater.db; path = ../../Bus_Seater.db; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C7AFD6D2C2CFBF300AE97B1 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +87,7 @@
 				0C5608242C25AA7E00828882 /* Bus SeaterTests */,
 				0C56082E2C25AA7E00828882 /* Bus SeaterUITests */,
 				0C5608122C25AA7C00828882 /* Products */,
+				0C7AFD6B2C2CFBF300AE97B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +138,14 @@
 				0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */,
 			);
 			path = "Bus SeaterUITests";
+			sourceTree = "<group>";
+		};
+		0C7AFD6B2C2CFBF300AE97B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C7AFD6C2C2CFBF300AE97B1 /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

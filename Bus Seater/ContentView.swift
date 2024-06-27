@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SQLite3
+
 
 struct ContentView: View {
     @State private var isSplash = true
