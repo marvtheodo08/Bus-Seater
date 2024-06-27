@@ -22,9 +22,11 @@ struct Login: View {
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 TextField("Username", text: $username)
                 TextField("Password", text: $password)
+                Text("Don't have an account? Sign up here!")
+                    .foregroundStyle(.blue)
+                
                 Spacer()
-                    .frame(height: 250)
-
+                    .frame(height: 10)
                 
             }
             .padding()
