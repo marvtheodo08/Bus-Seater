@@ -15,8 +15,11 @@ struct Login: View {
                 .ignoresSafeArea()
             
             VStack {
-                
-                Text("Login Screen")
+                Text("Welcome to Bus Seater, the world's first bus seating app!")
+                    .multilineTextAlignment(.center)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                Spacer()
+                    .frame(height: 250)
             }
             .padding()
         }

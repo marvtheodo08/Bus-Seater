@@ -10,16 +10,16 @@ import SQLite3
 
 struct SplashScreen: View {
     var body: some View {
-        ZStack {
-            Color("Backround Color")
-                .ignoresSafeArea()
-            
-            VStack {
-                Text("Application logo")
-                    .foregroundColor(.black)
+            ZStack {
+                Color("Backround Color")
+                    .ignoresSafeArea()
+                
+                VStack {
+                    Text("Application logo")
+                        .foregroundColor(.black)
+                }
+                .padding()
             }
-            .padding()
-        }
 
     }
 }
