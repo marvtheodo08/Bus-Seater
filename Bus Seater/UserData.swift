@@ -8,10 +8,6 @@
 import Foundation
 import SwiftData
 
-@Model
-class user{
-    
-}
 
 @Model
 class student{
@@ -27,6 +23,17 @@ class parent{
 class driver{
     
 }
+
+@Model
+class school{
+    
+}
+
+@Model
+class bus{
+    
+}
+
 
 
 
