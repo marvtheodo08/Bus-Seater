@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SQLite3
 
 struct Login: View {
     @State var username: String = ""

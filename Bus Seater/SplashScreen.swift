@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SQLite3
 
 struct SplashScreen: View {
     var body: some View {

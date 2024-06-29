@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C412E392C3046450096BD85 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C412E382C3046450096BD85 /* UserData.swift */; };
 		0C5608152C25AA7C00828882 /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C5608172C25AA7C00828882 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C5608192C25AA7E00828882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C5608182C25AA7E00828882 /* Assets.xcassets */; };
@@ -14,7 +15,6 @@
 		0C5608262C25AA7E00828882 /* Bus_SeaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608252C25AA7E00828882 /* Bus_SeaterTests.swift */; };
 		0C5608302C25AA7E00828882 /* Bus_SeaterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */; };
 		0C5608322C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */; };
-		0C7AFD6D2C2CFBF300AE97B1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7AFD6C2C2CFBF300AE97B1 /* libsqlite3.0.tbd */; };
 		0CB985092C271AC700920872 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB985082C271AC700920872 /* SplashScreen.swift */; };
 		0CB9850B2C28C21600920872 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9850A2C28C21600920872 /* Login.swift */; };
 /* End PBXBuildFile section */
@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C412E382C3046450096BD85 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0C5608112C25AA7C00828882 /* Bus Seater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bus Seater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterApp.swift; sourceTree = "<group>"; };
 		0C5608162C25AA7C00828882 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,20 +48,11 @@
 		0C56082B2C25AA7E00828882 /* Bus SeaterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus SeaterUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITests.swift; sourceTree = "<group>"; };
 		0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0C7AFD6C2C2CFBF300AE97B1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0C56080E2C25AA7C00828882 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C7AFD6D2C2CFBF300AE97B1 /* libsqlite3.0.tbd in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C56081E2C25AA7E00828882 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,7 +77,6 @@
 				0C5608242C25AA7E00828882 /* Bus SeaterTests */,
 				0C56082E2C25AA7E00828882 /* Bus SeaterUITests */,
 				0C5608122C25AA7C00828882 /* Products */,
-				0C7AFD6B2C2CFBF300AE97B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */,
+				0C412E382C3046450096BD85 /* UserData.swift */,
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
 				0CB985082C271AC700920872 /* SplashScreen.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
@@ -137,14 +129,6 @@
 			path = "Bus SeaterUITests";
 			sourceTree = "<group>";
 		};
-		0C7AFD6B2C2CFBF300AE97B1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0C7AFD6C2C2CFBF300AE97B1 /* libsqlite3.0.tbd */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,7 +137,6 @@
 			buildConfigurationList = 0C5608352C25AA7E00828882 /* Build configuration list for PBXNativeTarget "Bus Seater" */;
 			buildPhases = (
 				0C56080D2C25AA7C00828882 /* Sources */,
-				0C56080E2C25AA7C00828882 /* Frameworks */,
 				0C56080F2C25AA7C00828882 /* Resources */,
 			);
 			buildRules = (
@@ -278,6 +261,7 @@
 				0C5608172C25AA7C00828882 /* ContentView.swift in Sources */,
 				0C5608152C25AA7C00828882 /* Bus_SeaterApp.swift in Sources */,
 				0CB985092C271AC700920872 /* SplashScreen.swift in Sources */,
+				0C412E392C3046450096BD85 /* UserData.swift in Sources */,
 				0CB9850B2C28C21600920872 /* Login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
