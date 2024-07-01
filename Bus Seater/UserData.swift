@@ -17,9 +17,9 @@ class student{
     var last: String?
     @Relationship var parents: [parent] = []
     @Relationship var school: String?
-    @Relationship var grade: grade?
+    var grade: Character?
     @Relationship var bus: bus?
-    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, parents: [parent] = [], school: String? = nil, grade: grade? = nil, bus: bus? = nil) {
+    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, parents: [parent] = [], school: String? = nil, grade: Character? = nil, bus: bus? = nil) {
         self.username = username
         self.password = password
         self.First = First
@@ -68,9 +68,13 @@ class driver{
 
 @Model
 class school{
-    var school_name: String?
-    init(school_name: String? = nil) {
+    var school_name: String
+    var municipality: String
+    var state: String
+    init(school_name: String, municipality: String, state: String) {
         self.school_name = school_name
+        self.municipality = municipality
+        self.state = state
     }
 }
 
@@ -88,13 +92,7 @@ class bus{
     
 }
 
-@Model
-class grade{
-    var grade_level: Character
-    init(grade_level: Character) {
-        self.grade_level = grade_level
-    }
-}
+
 
 
 
