@@ -62,6 +62,7 @@ class driver{
         self.First = First
         self.last = last
         self.school = school
+        self.bus = bus
     }
 }
 
