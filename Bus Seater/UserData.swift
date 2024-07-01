@@ -55,7 +55,7 @@ class driver{
     var First: String?
     var last: String?
     @Relationship var school: school?
-    @Relationship var bus = bus?
+    @Relationship var bus: bus?
     init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, school: school? = nil, bus: bus? = nil) {
         self.username = username
         self.password = password
@@ -70,7 +70,7 @@ class driver{
 class school{
     var school_name: String?
     init(school_name: String? = nil) {
-        self.school = school_name
+        self.school_name = school_name
     }
 }
 
