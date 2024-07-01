@@ -15,11 +15,11 @@ class student{
     var password: String?
     var First: String?
     var last: String?
-    @Relationship var parents: [parent]
+    @Relationship var parents: [parent] = []
     @Relationship var school: String?
     @Relationship var grade: grade?
     @Relationship var bus: bus?
-    init(username: String?, password: String?, First: String?, last: String?, parents: [parent] = [], school: String?, grade: grade? = nil, bus: bus? = nil) {
+    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, parents: [parent] = [], school: String? = nil, grade: grade? = nil, bus: bus? = nil) {
         self.username = username
         self.password = password
         self.First = First
@@ -33,12 +33,12 @@ class student{
 
 @Model
 class parent{
-    var username: String
-    var password: String
-    var First: String
-    var last: String
-    @Relationship var offspring: [student]
-    init(username: String, password: String, First: String, last: String, offspring: [student]) {
+    var username: String?
+    var password: String?
+    var First: String?
+    var last: String?
+    @Relationship var offspring: [student] = []
+    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, offspring: [student] = []){
         self.username = username
         self.password = password
         self.First = First
@@ -50,12 +50,13 @@ class parent{
 
 @Model
 class driver{
-    var username: String
-    var password: String
-    var First: String
-    var last: String
+    var username: String?
+    var password: String?
+    var First: String?
+    var last: String?
     @Relationship var school: school?
-    init(username: String, password: String, First: String, last: String, school: school? = nil) {
+    @Relationship var bus = bus?
+    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, school: school? = nil, bus: bus? = nil) {
         self.username = username
         self.password = password
         self.First = First
@@ -66,18 +67,20 @@ class driver{
 
 @Model
 class school{
-    var school: String?
-    init(school: String? = nil) {
-        self.school = school
+    var school_name: String?
+    init(school_name: String? = nil) {
+        self.school = school_name
     }
 }
 
 @Model
 class bus{
     var bus_number: Int
+    @Relationship var students: [student] = []
     @Relationship var school: school?
-    init(bus_number: Int, school: school?) {
+    init(bus_number: Int, students: [student] = [], school: school? = nil) {
         self.bus_number = bus_number
+        self.students = students
         self.school = school
     }
     
@@ -86,8 +89,8 @@ class bus{
 
 @Model
 class grade{
-    var grade_level: String
-    init(grade_level: String) {
+    var grade_level: Character
+    init(grade_level: Character) {
         self.grade_level = grade_level
     }
 }
