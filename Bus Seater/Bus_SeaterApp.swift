@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 
 
@@ -15,5 +16,6 @@ struct Bus_SeaterApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [student.self, parent.self, driver.self, school.self, bus.self])
     }
 }

@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
+
+@Environment(\.modelContext) private var modelContext
+
 
 
 struct ContentView: View {
