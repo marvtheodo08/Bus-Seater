@@ -16,6 +16,6 @@ struct Bus_SeaterApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [student.self, parent.self, driver.self, school.self, bus.self])
+        .modelContainer(for: [student.self, driver.self, school.self, bus.self])
     }
 }
