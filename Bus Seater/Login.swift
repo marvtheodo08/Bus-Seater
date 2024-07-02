@@ -27,6 +27,15 @@ struct Login: View {
                 TextField("Password", text: $password)
                     .padding()
                     .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                Button(action: {}, label: {Text("Log in")
+                        .foregroundStyle(Color.white)
+                        .padding()
+                        .padding(.horizontal, 100)
+                        .background(Color.blue
+                            .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                        
+                        .padding()
+                        })
                 Button(action: {}, label: {Text("Don't have an account? Sign up here!")})
             }
             .padding()
