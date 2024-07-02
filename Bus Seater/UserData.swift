@@ -13,19 +13,17 @@ import SwiftData
 class student{
     var username: String?
     var password: String?
-    var First: String?
+    var first: String?
     var last: String?
-    @Relationship var parents: [parent] = []
     @Relationship var school: String?
     var grade: String?
     var grade_abriv: String?
     @Relationship var bus: bus?
-    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, parents: [parent] = [], school: String? = nil, grade: String? = nil, grade_abriv: String? = nil, bus: bus? = nil) {
+    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: String? = nil, grade: String? = nil, grade_abriv: String? = nil, bus: bus? = nil) {
         self.username = username
         self.password = password
-        self.First = First
+        self.first = first
         self.last = last
-        self.parents = parents
         self.school = school
         self.grade = grade
         self.grade_abriv = grade_abriv
@@ -34,34 +32,17 @@ class student{
 }
 
 @Model
-class parent{
-    var username: String?
-    var password: String?
-    var First: String?
-    var last: String?
-    @Relationship var offspring: [student] = []
-    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, offspring: [student] = []){
-        self.username = username
-        self.password = password
-        self.First = First
-        self.last = last
-        self.offspring = offspring
-    }
-    
-}
-
-@Model
 class driver{
     var username: String?
     var password: String?
-    var First: String?
+    var first: String?
     var last: String?
     @Relationship var school: school?
     @Relationship var bus: bus?
-    init(username: String? = nil, password: String? = nil, First: String? = nil, last: String? = nil, school: school? = nil, bus: bus? = nil) {
+    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: school? = nil, bus: bus? = nil) {
         self.username = username
         self.password = password
-        self.First = First
+        self.first = first
         self.last = last
         self.school = school
         self.bus = bus
