@@ -15,9 +15,9 @@ struct Bus_SeaterApp: App {
         WindowGroup {
             ContentView()
                 .onAppear{
-                    if !UserDefaults.standard.bool(forKey: "preDataInserted") {
+                    if !UserDefaults.standard.bool(forKey: "SchoolDataInserted") {
                         addSchools()
-                        UserDefaults.standard.set(true, forKey: "preDataInserted")
+                        UserDefaults.standard.set(true, forKey: "SchoolDataInserted")
                     }
                 }
         }
