@@ -11,7 +11,7 @@ import SwiftData
 
 @Model
 class student{
-    var username: String?
+    @Attribute(.unique) var username: String?
     var password: String?
     var first: String?
     var last: String?
@@ -33,7 +33,7 @@ class student{
 
 @Model
 class driver{
-    var username: String?
+    @Attribute(.unique) var username: String?
     var password: String?
     var first: String?
     var last: String?
