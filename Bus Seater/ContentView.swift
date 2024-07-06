@@ -31,17 +31,6 @@ struct ContentView: View {
         else
         {
             Login()
-                .onAppear(){
-                    addSchools()
-                }
-        }
-    }
-    func addSchools()
-    {
-        let schools =
-        [school(school_name: "South Shore Charter Public School", municipality: "Norwell", state: "MA")]
-        for school in schools {
-            modelContext.insert(school)
         }
     }
 
