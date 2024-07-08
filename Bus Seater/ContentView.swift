@@ -8,33 +8,54 @@
 import SwiftUI
 import SwiftData
 
-
-
-
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) var modelContext
     @State private var isSplash = true
     var body: some View{
-        if isSplash{
-            SplashScreen()
-                .onAppear{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                        withAnimation(.easeOut(duration: 0.5))
-                        {
-                            isSplash = false
+        Group{
+            if isSplash{
+                SplashScreen()
+                    .onAppear{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                            withAnimation(.easeOut(duration: 0.5))
+                            {
+                                isSplash = false
+                            }
+                            
                         }
-                        
                     }
-                }
-            
+                
+            }
+            else
+            {
+                Login()
+            }
         }
-        else
-        {
-            Login()
+        .onAppear {
+           if !UserDefaults.standard.bool(forKey: "SchoolDataInserted") {
+               addSchools()
+               UserDefaults.standard.set(true, forKey: "SchoolDataInserted")
+               
+           }
+       }
+
+    }
+    func addSchools() {
+        let schools = [
+            school(school_name: "South Shore Charter Public School", municipality: "Norwell", state: "MA"), school(school_name: "Brockton High School", municipality: "Brockton", state: "MA")]
+        
+        for school in schools {
+            modelContext.insert(school)
+        }
+        
+        do {
+            try modelContext.save()
+        } catch {
+            print("Failed to save context: \(error)")
         }
     }
-
 }
+
 #Preview {
     ContentView()
 }
