@@ -10,6 +10,7 @@ import SwiftUI
 struct Login: View {
     @State var username: String = ""
     @State var password: String  = ""
+    @State var UserSigningUp = false
     var body: some View {
         ZStack {
             Color(.white)
@@ -36,12 +37,17 @@ struct Login: View {
                         
                         .padding()
                         })
-                Button(action: {}, label: {Text("Don't have an account? Sign up here!")})
+                Button(action: {UserSigningUp = true}, label: {Text("Don't have an account? Sign up here!")})
+                .sheet(isPresented: $UserSigningUp, content: {SignUp()})
             }
             .padding()
         }
+
     }
+
+
 }
+
         
 #Preview {
     Login()

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C278BF32C3C90080009B5A4 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C278BF22C3C90080009B5A4 /* SignUp.swift */; };
 		0C412E392C3046450096BD85 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C412E382C3046450096BD85 /* UserData.swift */; };
 		0C5608152C25AA7C00828882 /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C5608172C25AA7C00828882 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C278BF22C3C90080009B5A4 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0C412E382C3046450096BD85 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0C5608112C25AA7C00828882 /* Bus Seater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bus Seater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterApp.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				0C412E382C3046450096BD85 /* UserData.swift */,
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
 				0CB985082C271AC700920872 /* SplashScreen.swift */,
+				0C278BF22C3C90080009B5A4 /* SignUp.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
 				0C56081A2C25AA7E00828882 /* Preview Content */,
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C278BF32C3C90080009B5A4 /* SignUp.swift in Sources */,
 				0C5608172C25AA7C00828882 /* ContentView.swift in Sources */,
 				0C5608152C25AA7C00828882 /* Bus_SeaterApp.swift in Sources */,
 				0CB985092C271AC700920872 /* SplashScreen.swift in Sources */,

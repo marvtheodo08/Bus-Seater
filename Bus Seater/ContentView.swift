@@ -42,7 +42,7 @@ struct ContentView: View {
     }
     func addSchools() {
         let schools = [
-            school(school_name: "South Shore Charter Public School", municipality: "Norwell", state: "MA"), school(school_name: "Brockton High School", municipality: "Brockton", state: "MA")]
+            school(school_name: "South Shore Charter Public School", municipality: "Norwell", state: "MA")]
         
         for school in schools {
             modelContext.insert(school)
