@@ -9,7 +9,25 @@ import SwiftUI
 
 struct SignUp: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .topLeading){
+            Color(.white)
+                .ignoresSafeArea()
+            VStack
+            {
+               Text("Hello World")
+                    .foregroundColor(.black)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(.black)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            })
+
+        }
+
     }
 }
 
