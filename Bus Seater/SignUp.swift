@@ -8,27 +8,33 @@
 import SwiftUI
 
 struct SignUp: View {
+    @Environment(\.isPresented) var isPresented
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
-        ZStack(alignment: .topLeading){
-            Color(.white)
-                .ignoresSafeArea()
-            VStack
-            {
-               Text("Hello World")
-                    .foregroundColor(.black)
+            ZStack(alignment: .topLeading){
+                Color(.white)
+                    .ignoresSafeArea()
+                VStack
+                {
+                   Text("Hello World")
+                        .foregroundColor(.black)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.white)
+
+                Button(action: {dismiss()}, label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.black)
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                })
+
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white)
 
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(.black)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            })
-
-        }
 
     }
+    
+
 }
 
 #Preview {
