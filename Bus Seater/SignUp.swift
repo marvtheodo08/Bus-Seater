@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SignUp: View {
-    @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
