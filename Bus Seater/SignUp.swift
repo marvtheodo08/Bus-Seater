@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUp: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
             ZStack(alignment: .topLeading){
