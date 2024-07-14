@@ -22,7 +22,7 @@ struct SplashScreen: View {
                     Text("Bus Seater")
                         .font(.largeTitle)
                         .padding(.top, 250)
-                        .padding(.leading, 10)
+                        .padding(.leading, 5)
                 }
                 Spacer()
             }
