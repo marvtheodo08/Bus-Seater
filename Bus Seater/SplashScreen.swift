@@ -13,11 +13,18 @@ struct SplashScreen: View {
                 Color("Backround Color")
                     .ignoresSafeArea()
                 
-                VStack {
-                    Text("Application logo")
-                        .foregroundColor(.black)
+                ZStack(alignment: .center) {
+                    Spacer()
+                    Image("App Logo")
+                        .resizable()
+                        .scaledToFill()
+                        .aspectRatio(contentMode: .fit)
+                    Text("Bus Seater")
+                        .font(.largeTitle)
+                        .padding(.top, 250)
+                        .padding(.leading, 10)
                 }
-                .padding()
+                Spacer()
             }
 
     }
