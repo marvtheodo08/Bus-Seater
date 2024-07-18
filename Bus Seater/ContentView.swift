@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
@@ -28,7 +29,13 @@ struct ContentView: View {
             }
             else
             {
-                Login()
+              Login()
+                    .onAppear{
+                        if !UserDefaults.standard.bool(forKey: "NotifsPermissionaAsked"){
+                            requestNotificationPermission()
+                            UserDefaults.standard.set(true, forKey: "NotifsPermissionaAsked")
+                        }
+                    }
             }
         }
         .onAppear {
@@ -37,6 +44,8 @@ struct ContentView: View {
                UserDefaults.standard.set(true, forKey: "SchoolDataInserted")
                
            }
+            
+        
        }
 
     }
@@ -52,6 +61,15 @@ struct ContentView: View {
             try modelContext.save()
         } catch {
             print("Failed to save context: \(error)")
+        }
+    }
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Granted")
+            } else if let error = error {
+                print("Denied")
+            }
         }
     }
 }
