@@ -14,10 +14,32 @@ struct SignUp: View {
             ZStack(alignment: .topLeading){
                 Color(.white)
                     .ignoresSafeArea()
-                VStack
+                ZStack
                 {
-                   Text("Hello World")
+                   Text("What type of User are you sigining up for?")
                         .foregroundColor(.black)
+                        .font(.title)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 500)
+                    HStack{
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Rectangle()
+                                .size(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Rectangle()
+                                .size(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Rectangle()
+                                .size(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        })
+
+
+                    }
+                    .padding(.top, 300)
+                    .padding(.leading)
+                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.white)

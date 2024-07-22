@@ -65,10 +65,10 @@ struct ContentView: View {
     }
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if granted {
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else {
                 print("Granted")
-            } else if let error = error {
-                print("Denied")
             }
         }
     }

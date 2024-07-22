@@ -75,6 +75,22 @@ class bus{
     
 }
 
+@Model
+class admin{
+    @Attribute(.unique) var username: String?
+    var password: String?
+    var first: String?
+    var last: String?
+    @Relationship var school: String?
+    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: String? = nil) {
+        self.username = username
+        self.password = password
+        self.first = first
+        self.last = last
+        self.school = school
+    }
+}
+
 
 
 
