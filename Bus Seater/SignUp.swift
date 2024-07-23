@@ -16,7 +16,7 @@ struct SignUp: View {
                     .ignoresSafeArea()
                 ZStack
                 {
-                   Text("What type of User are you sigining up for?")
+                   Text("What type of account are you sigining up for?")
                         .foregroundColor(.black)
                         .font(.title)
                         .multilineTextAlignment(.center)
