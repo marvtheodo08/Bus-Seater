@@ -11,12 +11,12 @@ import SwiftData
 
 @main
 struct Bus_SeaterApp: App {
-@StateObject private var userSettings = UserSettings()
+@StateObject private var loginCheck = LogInCheck()
         var body: some Scene {
             WindowGroup {
                 ContentView()
             }
-            .environmentObject(userSettings)
+            .environmentObject(loginCheck)
             .modelContainer(for: [student.self, driver.self, school.self, bus.self, admin.self])
         }
 
