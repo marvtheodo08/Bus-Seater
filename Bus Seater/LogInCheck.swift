@@ -1,5 +1,5 @@
 import SwiftUI
 
-class UserSignedIn: ObservableObject {
+class LogInCheck: ObservableObject {
     @Published var UserSignedIn: Bool = false
 }
