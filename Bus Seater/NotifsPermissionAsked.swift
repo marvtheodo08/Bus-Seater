@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class NotifsPermissionAsked: ObservableObject{
+    @Published var WasNotifsPermissionAsked: Bool = false
+}

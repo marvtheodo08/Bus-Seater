@@ -13,6 +13,8 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var isSplash = true
     @EnvironmentObject var lastUserInfo: LastUserInfo
+    @EnvironmentObject var notifsPermissionAsked: NotifsPermissionAsked
+    @EnvironmentObject var schoolDataAppended: SchoolDataAppended
     var body: some View{
         Group{
             if isSplash{
@@ -29,13 +31,13 @@ struct ContentView: View {
                 
             }
             else{
-                if lastUserInfo.WasUserLoggedIn == false
+                if !lastUserInfo.WasUserLoggedIn
                 {
                     Login()
                           .onAppear{
-                              if !UserDefaults.standard.bool(forKey: "NotifsPermissionaAsked"){
+                              if !notifsPermissionAsked.WasNotifsPermissionAsked{
                                   requestNotificationPermission()
-                                  UserDefaults.standard.set(true, forKey: "NotifsPermissionaAsked")
+                                  notifsPermissionAsked.WasNotifsPermissionAsked = true
                               }
                           }
                 }
@@ -45,12 +47,10 @@ struct ContentView: View {
             }
         }
         .onAppear {
-           if !UserDefaults.standard.bool(forKey: "SchoolDataInserted") {
+           if !schoolDataAppended.WasSchoolDataAppended{
                addSchools()
-               UserDefaults.standard.set(true, forKey: "SchoolDataInserted")
-               
+               schoolDataAppended.WasSchoolDataAppended = true
            }
-            
         
        }
 
