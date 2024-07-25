@@ -1,5 +1,5 @@
 //
-//  NotifsPermissionsAsked.swift
+//  NotifsPermission.swift
 //  Bus Seater
 //
 //  Created by Marvheen Theodore on 7/25/24.
