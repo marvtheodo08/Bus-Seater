@@ -12,7 +12,6 @@ struct SignUp: View {
     @State var StudentSigningUp = false
     @State var DriverSigningUp = false
     @State var AdminSigningUp = false
-    
     var body: some View {
         ZStack(alignment: .topLeading){
             Color(.white)
