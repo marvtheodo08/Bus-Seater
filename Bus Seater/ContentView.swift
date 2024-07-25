@@ -12,6 +12,7 @@ import UserNotifications
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var isSplash = true
+    @EnvironmentObject var lastUserInfo: LastUserInfo
     var body: some View{
         Group{
             if isSplash{
@@ -27,15 +28,20 @@ struct ContentView: View {
                     }
                 
             }
-            else
-            {
-              Login()
-                    .onAppear{
-                        if !UserDefaults.standard.bool(forKey: "NotifsPermissionaAsked"){
-                            requestNotificationPermission()
-                            UserDefaults.standard.set(true, forKey: "NotifsPermissionaAsked")
-                        }
-                    }
+            else{
+                if lastUserInfo.WasUserLoggedIn == false
+                {
+                    Login()
+                          .onAppear{
+                              if !UserDefaults.standard.bool(forKey: "NotifsPermissionaAsked"){
+                                  requestNotificationPermission()
+                                  UserDefaults.standard.set(true, forKey: "NotifsPermissionaAsked")
+                              }
+                          }
+                }
+                else{
+                    Homepage()
+                }
             }
         }
         .onAppear {

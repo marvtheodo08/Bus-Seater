@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SignUp: View {
     @Environment(\.dismiss) private var dismiss
+    @State var StudentSigningUp = false
+    @State var DriverSigningUp = false
+    @State var AdminSigningUp = false
     
     var body: some View {
         ZStack(alignment: .topLeading){
@@ -22,7 +25,7 @@ struct SignUp: View {
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 500)
                 HStack{
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {StudentSigningUp = true}, label: {
                         VStack{
                             Image(systemName: "studentdesk")
                             Text("Student")
@@ -33,11 +36,12 @@ struct SignUp: View {
                         .padding(25)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                     })
+                    .sheet(isPresented: $StudentSigningUp, content: {Student_SignUp()})
                     
                     Spacer()
                         .frame(width: 30)
                     
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {DriverSigningUp = true}, label: {
                         VStack{
                             Image(systemName: "bus")
                             Text("Driver")
@@ -48,11 +52,12 @@ struct SignUp: View {
                         .padding(25)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                     })
+                    .sheet(isPresented: $DriverSigningUp, content: {Driver_SignUp()})
                     
                     Spacer()
                         .frame(width: 30)
                     
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {AdminSigningUp = true}, label: {
                         VStack{
                             Image(systemName: "clipboard")
                             Text("Admin")
@@ -64,6 +69,7 @@ struct SignUp: View {
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue)
                         )
                     })
+                    .sheet(isPresented: $AdminSigningUp, content: {Admin_SignUp()})
                     
                 }
                 .padding(.leading, 10)

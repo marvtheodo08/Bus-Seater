@@ -2,7 +2,7 @@
 //  Student_SignUp.swift
 //  Bus Seater
 //
-//  Created by Esther Fleurmond on 7/25/24.
+//  Created by Marvheen Theodore on 7/25/24.
 //
 
 import SwiftUI

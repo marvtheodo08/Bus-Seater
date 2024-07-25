@@ -2,12 +2,13 @@
 //  Homepage.swift
 //  Bus Seater
 //
-//  Created by Esther Fleurmond on 7/25/24.
+//  Created by Marvheen Theodore on 7/25/24.
 //
 
 import SwiftUI
 
 struct Homepage: View {
+    @EnvironmentObject var lastUserInfo: LastUserInfo
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
