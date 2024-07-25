@@ -12,14 +12,14 @@ import SwiftData
 @main
 struct Bus_SeaterApp: App {
 @StateObject private var lastUserInfo = LastUserInfo()
-@StateObject private var notifsPermissionAsked = NotifsPermissionAsked()
+@StateObject private var notifsPermission = NotifsPermission()
 @StateObject private var schoolDataAppended = SchoolDataAppended()
         var body: some Scene {
             WindowGroup {
                 ContentView()
             }
             .environmentObject(lastUserInfo)
-            .environmentObject(notifsPermissionAsked)
+            .environmentObject(notifsPermission)
             .environmentObject(schoolDataAppended)
             .modelContainer(for: [student.self, driver.self, school.self, bus.self, admin.self])
         }

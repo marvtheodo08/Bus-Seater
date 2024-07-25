@@ -21,7 +21,7 @@
 		0C7B427A2C52755C000ADE5F /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */; };
 		0C7B427C2C527840000ADE5F /* LastUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427B2C527840000ADE5F /* LastUserInfo.swift */; };
 		0C7B427E2C527B5F000ADE5F /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* Homepage.swift */; };
-		0C7B42802C52A64C000ADE5F /* NotifsPermissionAsked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427F2C52A64C000ADE5F /* NotifsPermissionAsked.swift */; };
+		0C7B42802C52A64C000ADE5F /* NotifsPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427F2C52A64C000ADE5F /* NotifsPermission.swift */; };
 		0C7B42822C52A6B1000ADE5F /* SchoolDataAppended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42812C52A6B1000ADE5F /* SchoolDataAppended.swift */; };
 		0CB985092C271AC700920872 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB985082C271AC700920872 /* SplashScreen.swift */; };
 		0CB9850B2C28C21600920872 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9850A2C28C21600920872 /* Login.swift */; };
@@ -62,7 +62,7 @@
 		0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
 		0C7B427B2C527840000ADE5F /* LastUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastUserInfo.swift; sourceTree = "<group>"; };
 		0C7B427D2C527B5F000ADE5F /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
-		0C7B427F2C52A64C000ADE5F /* NotifsPermissionAsked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifsPermissionAsked.swift; sourceTree = "<group>"; };
+		0C7B427F2C52A64C000ADE5F /* NotifsPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifsPermission.swift; sourceTree = "<group>"; };
 		0C7B42812C52A6B1000ADE5F /* SchoolDataAppended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDataAppended.swift; sourceTree = "<group>"; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 				0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */,
 				0C278BF22C3C90080009B5A4 /* SignUp.swift */,
 				0C7B427B2C527840000ADE5F /* LastUserInfo.swift */,
-				0C7B427F2C52A64C000ADE5F /* NotifsPermissionAsked.swift */,
+				0C7B427F2C52A64C000ADE5F /* NotifsPermission.swift */,
 				0C7B42812C52A6B1000ADE5F /* SchoolDataAppended.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
@@ -293,7 +293,7 @@
 				0C7B427E2C527B5F000ADE5F /* Homepage.swift in Sources */,
 				0C412E392C3046450096BD85 /* UserData.swift in Sources */,
 				0CB9850B2C28C21600920872 /* Login.swift in Sources */,
-				0C7B42802C52A64C000ADE5F /* NotifsPermissionAsked.swift in Sources */,
+				0C7B42802C52A64C000ADE5F /* NotifsPermission.swift in Sources */,
 				0C7B42782C527417000ADE5F /* Driver_SignUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

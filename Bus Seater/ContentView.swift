@@ -13,7 +13,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var isSplash = true
     @EnvironmentObject var lastUserInfo: LastUserInfo
-    @EnvironmentObject var notifsPermissionAsked: NotifsPermissionAsked
+    @EnvironmentObject var notifsPermission: NotifsPermission
     @EnvironmentObject var schoolDataAppended: SchoolDataAppended
     var body: some View{
         Group{
@@ -35,9 +35,9 @@ struct ContentView: View {
                 {
                     Login()
                           .onAppear{
-                              if !notifsPermissionAsked.WasNotifsPermissionAsked{
+                              if !notifsPermission.WasPermissionAsked{
                                   requestNotificationPermission()
-                                  notifsPermissionAsked.WasNotifsPermissionAsked = true
+                                  notifsPermission.WasPermissionAsked = true
                               }
                           }
                 }
@@ -75,6 +75,8 @@ struct ContentView: View {
                 print("Error: \(error.localizedDescription)")
             } else if granted {
                 print("Granted")
+                notifsPermission.WasPermissionGranted = true
+                
             }
             else{
                 print("Permission Denied")
