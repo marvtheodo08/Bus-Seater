@@ -18,8 +18,9 @@ class student{
     @Relationship var school: String?
     var grade: String?
     var grade_abriv: String?
+    var hasaccount: Bool?
     @Relationship var bus: bus?
-    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: String? = nil, grade: String? = nil, grade_abriv: String? = nil, bus: bus? = nil) {
+    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: String? = nil, grade: String? = nil, grade_abriv: String? = nil, hasaccount: Bool? = false, bus: bus? = nil) {
         self.username = username
         self.password = password
         self.first = first
