@@ -29,6 +29,7 @@ class student{
         self.grade = grade
         self.grade_abriv = grade_abriv
         self.bus = bus
+        self.hasaccount = hasaccount
     }
 }
 
