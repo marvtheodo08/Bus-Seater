@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct Student_SignUp: View {
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .topLeading){
+            Color(.white)
+                .ignoresSafeArea()
+            ZStack{
+                Text("Please enter first and last name")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+            
+            Button(action: {dismiss()}, label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(.black)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            })
+        }
     }
 }
 
