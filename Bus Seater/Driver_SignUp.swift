@@ -19,7 +19,7 @@ struct Driver_SignUp: View {
                 Text("Please enter first and last name")
                     .font(.system(size: 40))
                     .multilineTextAlignment(.center)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title)
                     .padding(.bottom, 300)
                 
                 VStack{
@@ -32,6 +32,11 @@ struct Driver_SignUp: View {
 
                 }
                 .padding()
+                
+                Button(action: {}, label: {Image(systemName: "arrow.right")
+                        .padding(.leading, 300)
+                    .padding(.top, 200)})
+                
 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
