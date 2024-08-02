@@ -19,10 +19,10 @@ struct SignUp: View {
             ZStack
             {
                 Text("What type of account are you sigining up for?")
-                    .foregroundColor(.black)
-                    .font(.title)
+                    .font(.system(size: 40))
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 500)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .padding(.bottom, 300)
                 HStack{
                     Button(action: {StudentSigningUp = true}, label: {
                         VStack{

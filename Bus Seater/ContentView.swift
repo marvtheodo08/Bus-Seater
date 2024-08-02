@@ -75,7 +75,9 @@ struct ContentView: View {
                 print("Error: \(error.localizedDescription)")
             } else if granted {
                 print("Granted")
-                notifsPermission.WasPermissionGranted = true
+                DispatchQueue.main.async {
+                    notifsPermission.WasPermissionGranted = true
+                }
                 
             }
             else{
