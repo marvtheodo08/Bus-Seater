@@ -67,11 +67,11 @@ class school{
 
 @Model
 class bus{
-    var bus_code: String
+    var bus_code: String?
     @Relationship var students: [student] = []
     @Relationship(deleteRule: .cascade) var school: school?
-    init(bus_number: String? = nil, students: [student] = [], school: school? = nil) {
-        self.bus_number = bus_number
+    init(bus_code: String? = nil, students: [student] = [], school: school? = nil) {
+        self.bus_code = bus_code
         self.students = students
         self.school = school
     }
