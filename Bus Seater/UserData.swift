@@ -16,7 +16,7 @@ class student{
     var grade: String?
     var grade_abriv: String?
     var hasaccount: Bool?
-    @Relationship(deleteRule: .nullify) var bus: bus?
+    @Relationship(deleteRule: .cascade) var bus: bus?
     init(account: account? = nil, school: school? = nil, grade: String? = nil, grade_abriv: String? = nil, hasaccount: Bool? = false, bus: bus? = nil) {
         self.account = account
         self.school = school
@@ -43,9 +43,11 @@ class account{
 
 @Model
 class driver{
+    @Relationship(deleteRule: .cascade) var account: account?
     @Relationship(deleteRule: .nullify) var school: school?
     @Relationship(deleteRule: .nullify) var bus: bus?
-    init(school: school? = nil, bus: bus? = nil) {
+    init(account: account? = nil, school: school? = nil, bus: bus? = nil) {
+        self.account = account
         self.school = school
         self.bus = bus
     }
@@ -65,10 +67,10 @@ class school{
 
 @Model
 class bus{
-    var bus_number: Int
+    var bus_code: String
     @Relationship var students: [student] = []
     @Relationship(deleteRule: .cascade) var school: school?
-    init(bus_number: Int, students: [student] = [], school: school? = nil) {
+    init(bus_number: String? = nil, students: [student] = [], school: school? = nil) {
         self.bus_number = bus_number
         self.students = students
         self.school = school
@@ -79,8 +81,10 @@ class bus{
 
 @Model
 class admin{
-    @Relationship(deleteRule: .nullify) var school: String?
-    init(school: String? = nil) {
+    @Relationship(deleteRule: .cascade) var account: account?
+    @Relationship(deleteRule: .cascade) var school: school?
+    init(account: account? = nil, school: school? = nil) {
+        self.account = account
         self.school = school
     }
 }
