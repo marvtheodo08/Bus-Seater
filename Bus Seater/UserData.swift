@@ -11,20 +11,14 @@ import SwiftData
 
 @Model
 class student{
-    @Attribute(.unique) var username: String?
-    var password: String?
-    var first: String?
-    var last: String?
-    @Relationship var school: String?
+    @Relationship(deleteRule: .nullify) var account: account?
+    @Relationship(deleteRule: .nullify) var school: school?
     var grade: String?
     var grade_abriv: String?
     var hasaccount: Bool?
-    @Relationship var bus: bus?
-    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: String? = nil, grade: String? = nil, grade_abriv: String? = nil, hasaccount: Bool? = false, bus: bus? = nil) {
-        self.username = username
-        self.password = password
-        self.first = first
-        self.last = last
+    @Relationship(deleteRule: .nullify) var bus: bus?
+    init(account: account? = nil, school: school? = nil, grade: String? = nil, grade_abriv: String? = nil, hasaccount: Bool? = false, bus: bus? = nil) {
+        self.account = account
         self.school = school
         self.grade = grade
         self.grade_abriv = grade_abriv
@@ -34,18 +28,24 @@ class student{
 }
 
 @Model
-class driver{
+class account{
     @Attribute(.unique) var username: String?
     var password: String?
     var first: String?
     var last: String?
-    @Relationship var school: school?
-    @Relationship var bus: bus?
-    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: school? = nil, bus: bus? = nil) {
+    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil) {
         self.username = username
         self.password = password
         self.first = first
         self.last = last
+    }
+}
+
+@Model
+class driver{
+    @Relationship(deleteRule: .nullify) var school: school?
+    @Relationship(deleteRule: .nullify) var bus: bus?
+    init(school: school? = nil, bus: bus? = nil) {
         self.school = school
         self.bus = bus
     }
@@ -67,7 +67,7 @@ class school{
 class bus{
     var bus_number: Int
     @Relationship var students: [student] = []
-    @Relationship var school: school?
+    @Relationship(deleteRule: .cascade) var school: school?
     init(bus_number: Int, students: [student] = [], school: school? = nil) {
         self.bus_number = bus_number
         self.students = students
@@ -79,16 +79,8 @@ class bus{
 
 @Model
 class admin{
-    @Attribute(.unique) var username: String?
-    var password: String?
-    var first: String?
-    var last: String?
-    @Relationship var school: String?
-    init(username: String? = nil, password: String? = nil, first: String? = nil, last: String? = nil, school: String? = nil) {
-        self.username = username
-        self.password = password
-        self.first = first
-        self.last = last
+    @Relationship(deleteRule: .nullify) var school: String?
+    init(school: String? = nil) {
         self.school = school
     }
 }
