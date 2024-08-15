@@ -18,8 +18,6 @@ struct Bus_SeaterApp: App {
                 ContentView()
             }
             .environmentObject(lastUserInfo)
-            .environmentObject(schoolDataAppended)
-            .modelContainer(for: [student.self, driver.self, school.self, bus.self, admin.self, account.self])
         }
 
     }
