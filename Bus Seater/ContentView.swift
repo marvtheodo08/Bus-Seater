@@ -9,6 +9,7 @@ import SwiftUI
 import UserNotifications
 
 struct ContentView: View {
+    @State private var isSplash = true
     @State private var notifsAllowed = UserDefaults.standard.bool(forKey: "notifsAllowed")
     var body: some View{
         Group{
@@ -26,8 +27,6 @@ struct ContentView: View {
                 
             }
             else{
-                if !lastUserInfo.WasUserLoggedIn
-                {
                     Login()
                           .onAppear{
                               if !UserDefaults.standard.bool(forKey: "NotifsAsked"){
@@ -36,16 +35,12 @@ struct ContentView: View {
                               }
                           }
                 }
-                else{
-                    Homepage()
-                }
             }
         }
          
         
        }
 
-    }
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
@@ -60,7 +55,6 @@ struct ContentView: View {
             }
         }
     }
-}
 
 #Preview {
     ContentView()
