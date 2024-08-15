@@ -7,6 +7,3 @@
 
 import Foundation
 
-class SchoolDataAppended: ObservableObject{
-    @Published var WasSchoolDataAppended: Bool = false
-}
