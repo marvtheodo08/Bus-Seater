@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 import UserNotifications
 
 struct ContentView: View {
@@ -14,7 +13,6 @@ struct ContentView: View {
     @State private var notifsAllowed = UserDefaults.standard.bool(forKey: "notifsAllowed")
     @State private var isSplash = true
     @EnvironmentObject var lastUserInfo: LastUserInfo
-    @EnvironmentObject var schoolDataAppended: SchoolDataAppended
     var body: some View{
         Group{
             if isSplash{
@@ -46,28 +44,10 @@ struct ContentView: View {
                 }
             }
         }
-        .onAppear {
-           if !schoolDataAppended.WasSchoolDataAppended{
-               addSchools()
-               schoolDataAppended.WasSchoolDataAppended = true
-           }
+         
         
        }
 
-    }
-    func addSchools() {
-        let schools = [
-            school(school_name: "South Shore Charter Public School", municipality: "Norwell", state: "MA")]
-        
-        for school in schools {
-            modelContext.insert(school)
-        }
-        
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to save context: \(error)")
-        }
     }
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
