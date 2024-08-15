@@ -6,13 +6,9 @@
 //
 
 import SwiftUI
-import SwiftData
-
 
 @main
 struct Bus_SeaterApp: App {
-@StateObject private var lastUserInfo = LastUserInfo()
-@StateObject private var schoolDataAppended = SchoolDataAppended()
         var body: some Scene {
             WindowGroup {
                 ContentView()
