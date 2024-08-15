@@ -9,10 +9,7 @@ import SwiftUI
 import UserNotifications
 
 struct ContentView: View {
-    @Environment(\.modelContext) var modelContext
     @State private var notifsAllowed = UserDefaults.standard.bool(forKey: "notifsAllowed")
-    @State private var isSplash = true
-    @EnvironmentObject var lastUserInfo: LastUserInfo
     var body: some View{
         Group{
             if isSplash{
