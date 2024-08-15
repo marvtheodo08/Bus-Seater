@@ -17,7 +17,6 @@ struct Bus_SeaterApp: App {
             WindowGroup {
                 ContentView()
             }
-            .environmentObject(lastUserInfo)
         }
 
     }
