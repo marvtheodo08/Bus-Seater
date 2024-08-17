@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct Login: View {
-    @State var username: String = ""
+    @State var email: String = ""
     @State var password: String  = ""
     @State var UserSigningUp = false
     var body: some View {
@@ -22,7 +23,7 @@ struct Login: View {
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 Spacer()
                     .frame(height: 50)
-                TextField("Username", text: $username)
+                TextField("Email", text: $email)
                     .padding()
                     .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                 TextField("Password", text: $password)
