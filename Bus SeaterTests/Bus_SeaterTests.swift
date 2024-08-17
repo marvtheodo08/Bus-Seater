@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Bus_Seater
+@testable import Bus_Seater_1
 
 final class Bus_SeaterTests: XCTestCase {
 
