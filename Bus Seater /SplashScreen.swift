@@ -20,9 +20,10 @@ struct SplashScreen: View {
                         .resizable()
                         .scaledToFill()
                         .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 30)
                     Text("Bus Seater")
                         .font(.largeTitle)
-                        .padding(.top, 250)
+                        .padding(.top, 205)
                         .padding(.leading, 5)
                 }
                 Spacer()
