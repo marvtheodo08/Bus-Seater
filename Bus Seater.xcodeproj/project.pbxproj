@@ -22,6 +22,9 @@
 		0C75DB2D2C70BE91005247BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C5608182C25AA7E00828882 /* Assets.xcassets */; };
 		0C75DB2E2C70BEA8005247BC /* Bus_SeaterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */; };
 		0C75DB2F2C70BEAD005247BC /* Bus_SeaterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */; };
+		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
+		0CA752562C70C3D700DF03F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752552C70C3D700DF03F4 /* FirebaseFirestore */; };
+		0CA7525A2C70C68B00DF03F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,7 @@
 		0C7B42772C527417000ADE5F /* Driver_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver_SignUp.swift; sourceTree = "<group>"; };
 		0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
 		0C7B427D2C527B5F000ADE5F /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
+		0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */,
+				0CA752562C70C3D700DF03F4 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +127,7 @@
 				0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
+				0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */,
 				0C75DB002C70BE0C005247BC /* Preview Content */,
 			);
 			path = "Bus Seater";
@@ -168,6 +175,10 @@
 			dependencies = (
 			);
 			name = "Bus Seater 1";
+			packageProductDependencies = (
+				0CA752532C70C3D700DF03F4 /* FirebaseAuth */,
+				0CA752552C70C3D700DF03F4 /* FirebaseFirestore */,
+			);
 			productName = "Bus Seater 1";
 			productReference = 0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */;
 			productType = "com.apple.product-type.application";
@@ -241,6 +252,7 @@
 			);
 			mainGroup = 0C5608082C25AA7C00828882;
 			packageReferences = (
+				0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 0C5608122C25AA7C00828882 /* Products */;
 			projectDirPath = "";
@@ -260,6 +272,7 @@
 			files = (
 				0C75DB2D2C70BE91005247BC /* Assets.xcassets in Resources */,
 				0C75DB022C70BE0C005247BC /* Preview Assets.xcassets in Resources */,
+				0CA7525A2C70C68B00DF03F4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +636,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0CA752532C70C3D700DF03F4 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		0CA752552C70C3D700DF03F4 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0C5608092C25AA7C00828882 /* Project object */;
 }
