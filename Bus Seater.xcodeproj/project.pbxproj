@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C75DB022C70BE0C005247BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C75DB012C70BE0C005247BC /* Preview Assets.xcassets */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* Homepage.swift */; };
@@ -25,6 +24,7 @@
 		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
 		0CA752562C70C3D700DF03F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752552C70C3D700DF03F4 /* FirebaseFirestore */; };
 		0CA7525A2C70C68B00DF03F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */; };
+		0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,6 @@
 		0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITests.swift; sourceTree = "<group>"; };
 		0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bus Seater 1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C75DB012C70BE0C005247BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0C75DB072C70BE0C005247BC /* Bus Seater 1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater 1Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C75DB112C70BE0C005247BC /* Bus Seater 1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater 1UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student_SignUp.swift; sourceTree = "<group>"; };
@@ -62,6 +61,7 @@
 		0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
 		0C7B427D2C527B5F000ADE5F /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
 		0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +96,7 @@
 		0C5608082C25AA7C00828882 = {
 			isa = PBXGroup;
 			children = (
-				0C5608132C25AA7C00828882 /* Bus Seater */,
+				0C5608132C25AA7C00828882 /* Bus Seater  */,
 				0C5608242C25AA7E00828882 /* Bus SeaterTests */,
 				0C56082E2C25AA7E00828882 /* Bus SeaterUITests */,
 				0C5608122C25AA7C00828882 /* Products */,
@@ -113,7 +113,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0C5608132C25AA7C00828882 /* Bus Seater */ = {
+		0C5608132C25AA7C00828882 /* Bus Seater  */ = {
 			isa = PBXGroup;
 			children = (
 				0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */,
@@ -128,9 +128,9 @@
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
 				0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */,
-				0C75DB002C70BE0C005247BC /* Preview Content */,
+				0CA752B82C70E8F400DF03F4 /* Preview Content */,
 			);
-			path = "Bus Seater";
+			path = "Bus Seater ";
 			sourceTree = "<group>";
 		};
 		0C5608242C25AA7E00828882 /* Bus SeaterTests */ = {
@@ -150,14 +150,13 @@
 			path = "Bus SeaterUITests";
 			sourceTree = "<group>";
 		};
-		0C75DB002C70BE0C005247BC /* Preview Content */ = {
+		0CA752B82C70E8F400DF03F4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				0C75DB012C70BE0C005247BC /* Preview Assets.xcassets */,
+				0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */,
 			);
-			name = "Preview Content";
-			path = "Bus Seater 1/Preview Content";
-			sourceTree = SOURCE_ROOT;
+			path = "Preview Content";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -270,8 +269,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */,
 				0C75DB2D2C70BE91005247BC /* Assets.xcassets in Resources */,
-				0C75DB022C70BE0C005247BC /* Preview Assets.xcassets in Resources */,
 				0CA7525A2C70C68B00DF03F4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,7 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Bus Seater 1/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Bus\\ Seater\\ /Preview\\ Content";
 				DEVELOPMENT_TEAM = A4ND28TX3A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -498,7 +497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Bus Seater 1/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Bus\\ Seater\\ /Preview\\ Content";
 				DEVELOPMENT_TEAM = A4ND28TX3A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
