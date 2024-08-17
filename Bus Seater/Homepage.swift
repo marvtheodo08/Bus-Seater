@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Homepage: View {
-    @EnvironmentObject var lastUserInfo: LastUserInfo
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }

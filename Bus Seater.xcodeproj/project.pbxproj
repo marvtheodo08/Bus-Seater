@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1254E32C70415600FF1247 /* Bus-Seater-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C1254E22C70415600FF1247 /* Bus-Seater-Info.plist */; };
 		0C278BF32C3C90080009B5A4 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C278BF22C3C90080009B5A4 /* SignUp.swift */; };
 		0C4B52E72C6842290092B1C8 /* StudentNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */; };
 		0C5608152C25AA7C00828882 /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C1254E22C70415600FF1247 /* Bus-Seater-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Bus-Seater-Info.plist"; path = "../../Bus-Seater-Info.plist"; sourceTree = "<group>"; };
 		0C278BF22C3C90080009B5A4 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotifications.swift; sourceTree = "<group>"; };
 		0C5608112C25AA7C00828882 /* Bus Seater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bus Seater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 		0C5608132C25AA7C00828882 /* Bus Seater */ = {
 			isa = PBXGroup;
 			children = (
+				0C1254E22C70415600FF1247 /* Bus-Seater-Info.plist */,
 				0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */,
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
 				0C7B427D2C527B5F000ADE5F /* Homepage.swift */,
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C56081C2C25AA7E00828882 /* Preview Assets.xcassets in Resources */,
+				0C1254E32C70415600FF1247 /* Bus-Seater-Info.plist in Resources */,
 				0C5608192C25AA7E00828882 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
