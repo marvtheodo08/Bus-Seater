@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C459C0B2C73B99800E898FE /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 0C459C0A2C73B99800E898FE /* SQLite */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* Homepage.swift */; };
@@ -24,7 +25,6 @@
 		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
 		0CA7525A2C70C68B00DF03F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */; };
 		0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */; };
-		0CA752BC2C73771000DF03F4 /* PerfectMySQL in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752BB2C73771000DF03F4 /* PerfectMySQL */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C459C0B2C73B99800E898FE /* SQLite in Frameworks */,
 				0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */,
-				0CA752BC2C73771000DF03F4 /* PerfectMySQL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +176,7 @@
 			name = "Bus Seater 1";
 			packageProductDependencies = (
 				0CA752532C70C3D700DF03F4 /* FirebaseAuth */,
-				0CA752BB2C73771000DF03F4 /* PerfectMySQL */,
+				0C459C0A2C73B99800E898FE /* SQLite */,
 			);
 			productName = "Bus Seater 1";
 			productReference = 0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */;
@@ -252,7 +252,7 @@
 			mainGroup = 0C5608082C25AA7C00828882;
 			packageReferences = (
 				0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				0CA752BA2C73771000DF03F4 /* XCRemoteSwiftPackageReference "Perfect-MySQL" */,
+				0C459C092C73B99800E898FE /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 			);
 			productRefGroup = 0C5608122C25AA7C00828882 /* Products */;
 			projectDirPath = "";
@@ -638,6 +638,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0C459C092C73B99800E898FE /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
 		0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -646,26 +654,18 @@
 				minimumVersion = 11.0.0;
 			};
 		};
-		0CA752BA2C73771000DF03F4 /* XCRemoteSwiftPackageReference "Perfect-MySQL" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PerfectlySoft/Perfect-MySQL.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.5.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C459C0A2C73B99800E898FE /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C459C092C73B99800E898FE /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
 		0CA752532C70C3D700DF03F4 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
-		};
-		0CA752BB2C73771000DF03F4 /* PerfectMySQL */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0CA752BA2C73771000DF03F4 /* XCRemoteSwiftPackageReference "Perfect-MySQL" */;
-			productName = PerfectMySQL;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
