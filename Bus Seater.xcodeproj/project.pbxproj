@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C41F4402C74097E00AEEB3D /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41F43F2C74097E00AEEB3D /* UserDataManager.swift */; };
 		0C459C0B2C73B99800E898FE /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 0C459C0A2C73B99800E898FE /* SQLite */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		0C278BF22C3C90080009B5A4 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		0C41F43F2C74097E00AEEB3D /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotifications.swift; sourceTree = "<group>"; };
 		0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterApp.swift; sourceTree = "<group>"; };
 		0C5608162C25AA7C00828882 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
 				0C7B427D2C527B5F000ADE5F /* Homepage.swift */,
 				0CB985082C271AC700920872 /* SplashScreen.swift */,
+				0C41F43F2C74097E00AEEB3D /* UserDataManager.swift */,
 				0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */,
 				0C7B42772C527417000ADE5F /* Driver_SignUp.swift */,
 				0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */,
@@ -302,6 +305,7 @@
 				0C75DB252C70BE6A005247BC /* SplashScreen.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
 				0C75DB242C70BE67005247BC /* Homepage.swift in Sources */,
+				0C41F4402C74097E00AEEB3D /* UserDataManager.swift in Sources */,
 				0C75DB232C70BE64005247BC /* ContentView.swift in Sources */,
 				0C75DB262C70BE6D005247BC /* Student_SignUp.swift in Sources */,
 				0C75DB292C70BE77005247BC /* SignUp.swift in Sources */,
