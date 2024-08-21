@@ -16,7 +16,6 @@
 		0C75DB252C70BE6A005247BC /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB985082C271AC700920872 /* SplashScreen.swift */; };
 		0C75DB262C70BE6D005247BC /* Student_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */; };
 		0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42772C527417000ADE5F /* Driver_SignUp.swift */; };
-		0C75DB282C70BE73005247BC /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */; };
 		0C75DB292C70BE77005247BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C278BF22C3C90080009B5A4 /* SignUp.swift */; };
 		0C75DB2A2C70BE79005247BC /* StudentNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */; };
 		0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9850A2C28C21600920872 /* Login.swift */; };
@@ -27,6 +26,7 @@
 		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
 		0CA7525A2C70C68B00DF03F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */; };
 		0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */; };
+		0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7C6942C7627600018C041 /* Admin_SignUp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +62,12 @@
 		0C75DB112C70BE0C005247BC /* Bus Seater 1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater 1UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student_SignUp.swift; sourceTree = "<group>"; };
 		0C7B42772C527417000ADE5F /* Driver_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver_SignUp.swift; sourceTree = "<group>"; };
-		0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
 		0C7B427D2C527B5F000ADE5F /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
 		0CA752592C70C68B00DF03F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0CC7C6942C7627600018C041 /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,9 +125,9 @@
 				0C7B427D2C527B5F000ADE5F /* Homepage.swift */,
 				0CB985082C271AC700920872 /* SplashScreen.swift */,
 				0C41F43F2C74097E00AEEB3D /* UserDataManager.swift */,
+				0CC7C6942C7627600018C041 /* Admin_SignUp.swift */,
 				0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */,
 				0C7B42772C527417000ADE5F /* Driver_SignUp.swift */,
-				0C7B42792C52755C000ADE5F /* Admin_SignUp.swift */,
 				0C278BF22C3C90080009B5A4 /* SignUp.swift */,
 				0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
@@ -310,10 +310,10 @@
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
 				0C75DB242C70BE67005247BC /* Homepage.swift in Sources */,
 				0C41F4402C74097E00AEEB3D /* UserDataManager.swift in Sources */,
+				0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */,
 				0C75DB232C70BE64005247BC /* ContentView.swift in Sources */,
 				0C75DB262C70BE6D005247BC /* Student_SignUp.swift in Sources */,
 				0C75DB292C70BE77005247BC /* SignUp.swift in Sources */,
-				0C75DB282C70BE73005247BC /* Admin_SignUp.swift in Sources */,
 				0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
