@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C41F4422C74C5F200AEEB3D /* userdata.db in Resources */ = {isa = PBXBuildFile; fileRef = 0C41F4412C74C5F200AEEB3D /* userdata.db */; };
+		0C4475172CC40C49004D6BAE /* PerfectMySQL in Frameworks */ = {isa = PBXBuildFile; productRef = 0C4475162CC40C49004D6BAE /* PerfectMySQL */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* Homepage.swift */; };
@@ -73,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */,
+				0C4475172CC40C49004D6BAE /* PerfectMySQL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +179,7 @@
 			name = "Bus Seater 1";
 			packageProductDependencies = (
 				0CA752532C70C3D700DF03F4 /* FirebaseAuth */,
+				0C4475162CC40C49004D6BAE /* PerfectMySQL */,
 			);
 			productName = "Bus Seater 1";
 			productReference = 0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */;
@@ -252,6 +255,7 @@
 			mainGroup = 0C5608082C25AA7C00828882;
 			packageReferences = (
 				0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0C4475152CC40C49004D6BAE /* XCRemoteSwiftPackageReference "Perfect-MySQL" */,
 			);
 			productRefGroup = 0C5608122C25AA7C00828882 /* Products */;
 			projectDirPath = "";
@@ -648,6 +652,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0C4475152CC40C49004D6BAE /* XCRemoteSwiftPackageReference "Perfect-MySQL" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PerfectlySoft/Perfect-MySQL.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.1;
+			};
+		};
 		0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -659,6 +671,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C4475162CC40C49004D6BAE /* PerfectMySQL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C4475152CC40C49004D6BAE /* XCRemoteSwiftPackageReference "Perfect-MySQL" */;
+			productName = PerfectMySQL;
+		};
 		0CA752532C70C3D700DF03F4 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -1,5 +1,5 @@
 {
-  "originHash" : "c63c63846d9c539229e96de38d6af51417e28c0ee9a0bc48bd0f0f19d923c329",
+  "originHash" : "60755da34d4cbafdc1582fa4a9566e495543f603906b7d6dac99c164d0f9131d",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -101,6 +101,33 @@
       }
     },
     {
+      "identity" : "perfect-crud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PerfectlySoft/Perfect-CRUD.git",
+      "state" : {
+        "revision" : "5a947634b7ce0b991e8f455a61ce02449f2e6f36",
+        "version" : "1.2.3"
+      }
+    },
+    {
+      "identity" : "perfect-mysql",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PerfectlySoft/Perfect-MySQL.git",
+      "state" : {
+        "revision" : "fe63085fe4639944657bf2f33b775e8036974eef",
+        "version" : "3.5.1"
+      }
+    },
+    {
+      "identity" : "perfect-mysqlclient",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PerfectlySoft/Perfect-mysqlclient.git",
+      "state" : {
+        "revision" : "ed4f0e775c874b535fb24b00e6600b81f2932907",
+        "version" : "2.1.1"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
@@ -114,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "e17d61f26df0f0e06f58f6977ba05a097a720106",
-        "version" : "1.27.1"
+        "revision" : "ebc7251dd5b37f627c93698e4374084d98409633",
+        "version" : "1.28.2"
       }
     }
   ],
