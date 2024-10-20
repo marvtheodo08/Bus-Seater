@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C4475242CC5BD75004D6BAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C4475232CC5BD74004D6BAE /* GoogleService-Info.plist */; };
+		0C4475672CC5C774004D6BAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C4475662CC5C774004D6BAE /* GoogleService-Info.plist */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* Homepage.swift */; };
@@ -45,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		0C278BF22C3C90080009B5A4 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
-		0C4475232CC5BD74004D6BAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Library/Mobile Documents/.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0C4475662CC5C774004D6BAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotifications.swift; sourceTree = "<group>"; };
 		0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterApp.swift; sourceTree = "<group>"; };
 		0C5608162C25AA7C00828882 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,8 +54,8 @@
 		0C56082F2C25AA7E00828882 /* Bus_SeaterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITests.swift; sourceTree = "<group>"; };
 		0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bus Seater 1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C75DB072C70BE0C005247BC /* Bus Seater 1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater 1Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C75DB112C70BE0C005247BC /* Bus Seater 1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater 1UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C75DB072C70BE0C005247BC /* Bus Seater Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C75DB112C70BE0C005247BC /* Bus Seater UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student_SignUp.swift; sourceTree = "<group>"; };
 		0C7B42772C527417000ADE5F /* Driver_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver_SignUp.swift; sourceTree = "<group>"; };
 		0C7B427D2C527B5F000ADE5F /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */,
-				0C75DB072C70BE0C005247BC /* Bus Seater 1Tests.xctest */,
-				0C75DB112C70BE0C005247BC /* Bus Seater 1UITests.xctest */,
+				0C75DB072C70BE0C005247BC /* Bus Seater Tests.xctest */,
+				0C75DB112C70BE0C005247BC /* Bus Seater UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,7 +125,7 @@
 				0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
-				0C4475232CC5BD74004D6BAE /* GoogleService-Info.plist */,
+				0C4475662CC5C774004D6BAE /* GoogleService-Info.plist */,
 				0CA752B82C70E8F400DF03F4 /* Preview Content */,
 			);
 			path = "Bus Seater ";
@@ -179,9 +179,9 @@
 			productReference = 0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0C75DB062C70BE0C005247BC /* Bus Seater 1Tests */ = {
+		0C75DB062C70BE0C005247BC /* Bus Seater Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C75DB202C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater 1Tests" */;
+			buildConfigurationList = 0C75DB202C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater Tests" */;
 			buildPhases = (
 				0C75DB032C70BE0C005247BC /* Sources */,
 				0C75DB042C70BE0C005247BC /* Frameworks */,
@@ -192,14 +192,14 @@
 			dependencies = (
 				0C75DB092C70BE0C005247BC /* PBXTargetDependency */,
 			);
-			name = "Bus Seater 1Tests";
+			name = "Bus Seater Tests";
 			productName = "Bus Seater 1Tests";
-			productReference = 0C75DB072C70BE0C005247BC /* Bus Seater 1Tests.xctest */;
+			productReference = 0C75DB072C70BE0C005247BC /* Bus Seater Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0C75DB102C70BE0C005247BC /* Bus Seater 1UITests */ = {
+		0C75DB102C70BE0C005247BC /* Bus Seater UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C75DB212C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater 1UITests" */;
+			buildConfigurationList = 0C75DB212C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater UITests" */;
 			buildPhases = (
 				0C75DB0D2C70BE0C005247BC /* Sources */,
 				0C75DB0E2C70BE0C005247BC /* Frameworks */,
@@ -210,9 +210,9 @@
 			dependencies = (
 				0C75DB132C70BE0C005247BC /* PBXTargetDependency */,
 			);
-			name = "Bus Seater 1UITests";
+			name = "Bus Seater UITests";
 			productName = "Bus Seater 1UITests";
-			productReference = 0C75DB112C70BE0C005247BC /* Bus Seater 1UITests.xctest */;
+			productReference = 0C75DB112C70BE0C005247BC /* Bus Seater UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -255,8 +255,8 @@
 			projectRoot = "";
 			targets = (
 				0C75DAF72C70BE0A005247BC /* Bus Seater 1 */,
-				0C75DB062C70BE0C005247BC /* Bus Seater 1Tests */,
-				0C75DB102C70BE0C005247BC /* Bus Seater 1UITests */,
+				0C75DB062C70BE0C005247BC /* Bus Seater Tests */,
+				0C75DB102C70BE0C005247BC /* Bus Seater UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -267,7 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */,
-				0C4475242CC5BD75004D6BAE /* GoogleService-Info.plist in Resources */,
+				0C4475672CC5C774004D6BAE /* GoogleService-Info.plist in Resources */,
 				0C75DB2D2C70BE91005247BC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,7 +623,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C75DB202C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater 1Tests" */ = {
+		0C75DB202C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0C75DB1B2C70BE0C005247BC /* Debug */,
@@ -632,7 +632,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C75DB212C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater 1UITests" */ = {
+		0C75DB212C70BE0C005247BC /* Build configuration list for PBXNativeTarget "Bus Seater UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0C75DB1D2C70BE0C005247BC /* Debug */,
