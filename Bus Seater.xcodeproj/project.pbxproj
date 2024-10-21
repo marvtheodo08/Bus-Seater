@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C4475672CC5C774004D6BAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C4475662CC5C774004D6BAE /* GoogleService-Info.plist */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* Homepage.swift */; };
@@ -23,6 +22,7 @@
 		0C75DB2F2C70BEAD005247BC /* Bus_SeaterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608312C25AA7E00828882 /* Bus_SeaterUITestsLaunchTests.swift */; };
 		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
 		0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */; };
+		0CA778A32CC5E03700CEA30E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CA778A22CC5E03700CEA30E /* GoogleService-Info.plist */; };
 		0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7C6942C7627600018C041 /* Admin_SignUp.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		0C278BF22C3C90080009B5A4 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
-		0C4475662CC5C774004D6BAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotifications.swift; sourceTree = "<group>"; };
 		0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus_SeaterApp.swift; sourceTree = "<group>"; };
 		0C5608162C25AA7C00828882 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		0C7B42772C527417000ADE5F /* Driver_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver_SignUp.swift; sourceTree = "<group>"; };
 		0C7B427D2C527B5F000ADE5F /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
 		0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0CA778A22CC5E03700CEA30E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Library/Mobile Documents/.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0CC7C6942C7627600018C041 /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 				0C4B52E62C6842290092B1C8 /* StudentNotifications.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				0C5608182C25AA7E00828882 /* Assets.xcassets */,
-				0C4475662CC5C774004D6BAE /* GoogleService-Info.plist */,
+				0CA778A22CC5E03700CEA30E /* GoogleService-Info.plist */,
 				0CA752B82C70E8F400DF03F4 /* Preview Content */,
 			);
 			path = "Bus Seater ";
@@ -267,8 +267,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */,
-				0C4475672CC5C774004D6BAE /* GoogleService-Info.plist in Resources */,
 				0C75DB2D2C70BE91005247BC /* Assets.xcassets in Resources */,
+				0CA778A32CC5E03700CEA30E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
