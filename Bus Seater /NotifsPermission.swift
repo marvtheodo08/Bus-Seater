@@ -9,5 +9,5 @@ import Foundation
 
 class NotifsPermission: ObservableObject{
     @Published var WasPermissionAsked: Bool = false
-    @Published var WasPermissionGranted: Bool = false
+    @Published var WasPermissionGranted: Bool = nil
 }
