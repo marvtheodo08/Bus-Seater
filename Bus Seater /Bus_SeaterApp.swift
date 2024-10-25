@@ -22,11 +22,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct YourApp: App {
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+  @StateObject private var lastUserInfo = LastUserInfo()
   var body: some Scene {
     WindowGroup {
       NavigationView {
         ContentView()
       }
+      .environmentObject(lastUserInfo)
     }
   }
 }
