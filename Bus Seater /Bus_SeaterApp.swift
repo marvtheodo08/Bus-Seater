@@ -23,12 +23,14 @@ struct YourApp: App {
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
   @StateObject private var lastUserInfo = LastUserInfo()
+  @StateObject private var notifsPermissions = NotifsPermissions()
   var body: some Scene {
     WindowGroup {
       NavigationView {
         ContentView()
       }
       .environmentObject(lastUserInfo)
+      .enviormentObject(notifsPermissions)
     }
   }
 }
