@@ -12,6 +12,7 @@ import UserNotifications
 struct ContentView: View {
     @State private var isSplash = true
     @State private var notifsAllowed = UserDefaults.standard.bool(forKey: "notifsAllowed")
+    @EnvironmentObject var lastUserInfo: LastUserInfo
     var body: some View{
         Group{
             if isSplash{
