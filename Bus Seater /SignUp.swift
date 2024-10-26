@@ -19,6 +19,7 @@ struct SignUp: View {
             ZStack
             {
                 Text("What type of account are you sigining up for?")
+                    .foregroundColor(.black)
                     .font(.system(size: 40))
                     .multilineTextAlignment(.center)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
