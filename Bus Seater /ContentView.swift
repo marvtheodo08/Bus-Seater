@@ -11,8 +11,8 @@ import UserNotifications
 
 struct ContentView: View {
     @State private var isSplash = true
-    @State private var notifsAllowed = UserDefaults.standard.bool(forKey: "notifsAllowed")
     @EnvironmentObject var lastUserInfo: LastUserInfo
+    @EnvironmentObject var notifsPermissions: NotifsPermissions
     var body: some View{
         Group{
             if isSplash{
@@ -31,9 +31,9 @@ struct ContentView: View {
             else{
                     Login()
                           .onAppear{
-                              if !UserDefaults.standard.bool(forKey: "NotifsAsked"){
+                              if notifsPermissions.WasPermissionAsked = false{
                                   requestNotificationPermission()
-                                  UserDefaults.standard.set(true, forKey: "NotifsAsked")
+                                  notifsPermissions.WasPermissionAsked == true
                               }
                           }
                 }
@@ -48,12 +48,12 @@ struct ContentView: View {
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             } else if granted {
-                print("Granted")
-                UserDefaults.standard.setValue(true, forKey: "notifsAllowed")
+                print("Permission Granted")
+                notifsPermissions.WasPermissionGranted == true
             }
             else{
                 print("Permission Denied")
-                UserDefaults.standard.setValue(false, forKey: "notifsAllowed")
+                notifsPermissions.WasPermissionGranted == false
             }
         }
     }
