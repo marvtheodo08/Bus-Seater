@@ -21,14 +21,19 @@ struct Student_SignUp: View {
                     .multilineTextAlignment(.center)
                     .font(.title)
                     .padding(.bottom, 300)
+                    .foregroundColor(.black)
                 
                 VStack{
                         TextField("First name", text: $firstname)
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                            .accentColor(.black)
+                            .colorScheme(.light)
                         TextField("Password", text: $lastname)
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                            .accentColor(.black)
+                            .colorScheme(.light)
 
                 }
                 .padding()

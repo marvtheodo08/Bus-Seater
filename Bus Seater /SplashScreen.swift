@@ -25,6 +25,7 @@ struct SplashScreen: View {
                         .font(.largeTitle)
                         .padding(.top, 205)
                         .padding(.leading, 5)
+                        .foregroundColor(.black)
                 }
                 Spacer()
             }
