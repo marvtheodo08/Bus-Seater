@@ -30,7 +30,7 @@ struct YourApp: App {
         ContentView()
       }
       .environmentObject(lastUserInfo)
-      .enviormentObject(notifsPermissions)
+      .environmentObject(notifsPermissions)
     }
   }
 }

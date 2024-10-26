@@ -31,32 +31,31 @@ struct ContentView: View {
             else{
                     Login()
                           .onAppear{
-                              if notifsPermissions.WasPermissionAsked = false{
+                              if notifsPermissions.WasPermissionAsked == false{
                                   requestNotificationPermission()
-                                  notifsPermissions.WasPermissionAsked == true
+                                  notifsPermissions.changeAskedtoTrue()
                               }
                           }
                 }
             }
         }
-         
-        
-       }
-
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             } else if granted {
                 print("Permission Granted")
-                notifsPermissions.WasPermissionGranted == true
+                notifsPermissions.changeGrantedtoTrue()
             }
             else{
                 print("Permission Denied")
-                notifsPermissions.WasPermissionGranted == false
+                notifsPermissions.WasPermissionGranted = false
             }
         }
     }
+         
+        
+       }
 
 #Preview {
     ContentView()
