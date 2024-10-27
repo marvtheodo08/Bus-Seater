@@ -11,6 +11,7 @@ struct Student_SignUp: View {
     @Environment(\.dismiss) private var dismiss
     @State var firstname: String = ""
     @State var lastname: String  = ""
+    @State var email: String = ""
     var body: some View {
         ZStack(alignment: .topLeading){
             Color(.white)
@@ -29,7 +30,7 @@ struct Student_SignUp: View {
                             .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                             .accentColor(.black)
                             .colorScheme(.light)
-                        TextField("Password", text: $lastname)
+                        TextField("Last name", text: $lastname)
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                             .accentColor(.black)
