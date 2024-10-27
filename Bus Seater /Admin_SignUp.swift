@@ -9,18 +9,18 @@ import SwiftUI
 
 struct Admin_SignUp: View {
     var body: some View{
-        Email()
+        AdminEmail()
     }
 
 }
 
-struct Email: View{
+struct AdminEmail: View{
     @Environment(\.dismiss) private var dismiss
     @State var email: String = ""
     @State var lastname: String  = ""
-    @State var toEmail: Bool = false
+    @State var toAdminName: Bool = false
     var body: some View {
-        if toEmail == true{
+        if toAdminName == true{
            Name()
         }
         else{
@@ -28,7 +28,7 @@ struct Email: View{
                 Color(.white)
                     .ignoresSafeArea()
                 ZStack{
-                    Text("Please enter first and last name")
+                    Text("Please enter email")
                         .font(.system(size: 40))
                         .multilineTextAlignment(.center)
                         .font(.title)
@@ -45,7 +45,7 @@ struct Email: View{
                      }
                     .padding()
                     
-                     Button(action: {toEmail = true}, label: {Image(systemName: "arrow.right")
+                    Button(action: {toAdminName = true}, label: {Image(systemName: "arrow.right")
                         .padding(.leading, 300)
                         .padding(.top, 200)})
                     
@@ -71,10 +71,10 @@ struct Name: View{
     @Environment(\.dismiss) private var dismiss
     @State var firstname: String = ""
     @State var lastname: String  = ""
-    @State var backtoName: Bool = false
+    @State var backtoAdminEmail: Bool = false
     var body: some View{
-        if backtoName == true{
-            Email()
+        if backtoAdminEmail == true{
+            AdminEmail()
         }
         ZStack(alignment: .topLeading){
             Color(.white)
@@ -102,7 +102,7 @@ struct Name: View{
                 }
                 .padding()
                 
-                Button(action: {backtoName = true}, label: {Image(systemName: "arrow.left")
+                Button(action: {backtoAdminEmail = true}, label: {Image(systemName: "arrow.left")
                     .padding(.leading, 150)
                     .padding(.top, 200)})
                 
