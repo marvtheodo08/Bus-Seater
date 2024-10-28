@@ -14,6 +14,8 @@ struct Admin_SignUp: View {
     enum Stage {
         case email
         case name
+        case state
+        case school
     }
     
     // Track current stage
@@ -23,6 +25,8 @@ struct Admin_SignUp: View {
     @State private var email: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
+    @State private var state: String = ""
+    @State private var school: String = ""
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -123,6 +127,22 @@ struct AdminName: View {
                 .colorScheme(.light)
         }
         .padding()
+    }
+}
+
+// State stage View
+struct AdminState {
+    @Binding var state: String
+    var body: some View{
+        Text("Hello World")
+    }
+}
+
+// School stage View
+struct AdminSchool {
+    @Binding var School: String
+    var body: some View{
+        Text("Hello World")
     }
 }
 
