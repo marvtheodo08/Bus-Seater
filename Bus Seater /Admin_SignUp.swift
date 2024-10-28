@@ -46,7 +46,7 @@ struct Admin_SignUp: View {
                         Button(action: { currentStage = .email }) {
                             Image(systemName: "arrow.left")
                                 .padding()
-                                .foregroundColor(.black)
+                                .foregroundColor(.blue)
                         }
                     }
                     
@@ -57,7 +57,7 @@ struct Admin_SignUp: View {
                         Button(action: { currentStage = .name }) {
                             Image(systemName: "arrow.right")
                                 .padding()
-                                .foregroundColor(.black)
+                                .foregroundColor(.blue)
                         }
                     }
                 }
