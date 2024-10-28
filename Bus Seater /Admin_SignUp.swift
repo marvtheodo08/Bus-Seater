@@ -52,6 +52,12 @@ struct Admin_SignUp: View {
                                 .padding()
                                 .foregroundColor(.blue)
                         }
+                        Spacer().frame(width: 306)
+                        Button(action: {}) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+
                     }
                     
                     Spacer()

@@ -54,6 +54,12 @@ struct Driver_SignUp: View {
                                 .padding()
                                 .foregroundColor(.blue)
                         }
+                        Spacer().frame(width: 306)
+                        Button(action: {}) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+
                     }
                     
                     Spacer()
@@ -133,7 +139,7 @@ struct DriverName: View {
 }
 
 // State stage View
-struct AdminState {
+struct DriverState {
     @Binding var state: String
     var body: some View{
         Text("Hello World")
@@ -141,7 +147,7 @@ struct AdminState {
 }
 
 // School stage View
-struct AdminSchool {
+struct DriverSchool {
     @Binding var School: String
     var body: some View{
         Text("Hello World")
@@ -149,7 +155,7 @@ struct AdminSchool {
 }
 
 // Bus stage View
-struct AdminBus {
+struct DriverBus {
     @Binding var bus: String
     var body: some View{
         Text("Hello World")

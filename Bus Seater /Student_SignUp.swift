@@ -27,7 +27,7 @@ struct Student_SignUp: View {
     @State private var email: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
-    @State private var grade: Int = nil
+    @State private var grade: Int = 0
     @State private var school: String = ""
     @State private var bus: String = ""
     
@@ -55,6 +55,12 @@ struct Student_SignUp: View {
                                 .padding()
                                 .foregroundColor(.blue)
                         }
+                        Spacer().frame(width: 306)
+                        Button(action: {}) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+
                     }
                     
                     Spacer()
