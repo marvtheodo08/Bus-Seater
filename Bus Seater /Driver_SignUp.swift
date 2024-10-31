@@ -13,6 +13,7 @@ struct Driver_SignUp: View {
     // Enum for tracking the stages
     enum Stage {
         case email
+        case password
         case name
         case state
         case school
@@ -21,9 +22,11 @@ struct Driver_SignUp: View {
     
     // Track current stage
     @State private var currentStage: Stage = .email
+    @State private var pastStage: Stage
     
     // Shared variables across views
     @State private var email: String = ""
+    @State private var password: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var state: String = ""
@@ -40,8 +43,20 @@ struct Driver_SignUp: View {
                 // Display the current stage view
                 if currentStage == .email {
                     DriverEmail(email: $email)
-                } else if currentStage == .name {
+                } else if currentStage == .password {
+                    DriverPassword(password: $password)
+                }
+                else if currentStage == .name {
                     DriverName(firstname: $firstname, lastname: $lastname)
+                }
+                else if currentStage == .state {
+                    DriverState(state: $state)
+                }
+                else if currentStage == .school {
+                    DriverSchool(school: $school)
+                }
+                else if currentStage == .bus {
+                    DriverBus(bus: $bus)
                 }
                 
                 
@@ -108,6 +123,15 @@ struct DriverEmail: View {
         .padding()
     }
 }
+
+//Password stage view
+struct DriverPassword{
+    @Binding var password: String
+    var body: some View{
+        Text("Hello World")
+    }
+}
+
 
 // Name stage view
 struct DriverName: View {

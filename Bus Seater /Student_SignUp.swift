@@ -13,6 +13,7 @@ struct Student_SignUp: View {
     // Enum for tracking the stages
     enum Stage {
         case email
+        case password
         case name
         case grade
         case state
@@ -22,9 +23,11 @@ struct Student_SignUp: View {
     
     // Track current stage
     @State private var currentStage: Stage = .email
+    @State private var pastStage: Stage
     
     // Shared variables across views
     @State private var email: String = ""
+    @State private var password: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var grade: Int = 0
@@ -41,8 +44,23 @@ struct Student_SignUp: View {
                 // Display the current stage view
                 if currentStage == .email {
                     StudentEmail(email: $email)
-                } else if currentStage == .name {
+                } else if currentStage == .password {
+                    StudentPassword(password: $password)
+                }
+                else if currentStage == .name {
                     StudentName(firstname: $firstname, lastname: $lastname)
+                }
+                else if currentStage == .grade{
+                   StudentGrade(grade: $grade)
+                }
+                else if currentStage == .state {
+                    StudentState(state: $state)
+                }
+                else if currentStage == .school {
+                    StudnetSchool(school: $school)
+                }
+                else if currentStage == .bus {
+                    StudentBus(bus: $bus)
                 }
                 
                 
@@ -107,6 +125,14 @@ struct StudentEmail: View {
                 .colorScheme(.light)
         }
         .padding()
+    }
+}
+
+//Password stage view
+struct StudentPassword{
+    @Binding var password: String
+    var body: some View{
+        Text("Hello World")
     }
 }
 
