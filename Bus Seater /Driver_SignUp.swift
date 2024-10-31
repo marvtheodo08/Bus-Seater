@@ -13,6 +13,7 @@ struct Driver_SignUp: View {
     // Enum for tracking the stages
     enum Stage {
         case email
+        case password
         case name
         case state
         case school
@@ -24,6 +25,7 @@ struct Driver_SignUp: View {
     
     // Shared variables across views
     @State private var email: String = ""
+    @State private var password: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var state: String = ""
@@ -106,6 +108,14 @@ struct DriverEmail: View {
                 .colorScheme(.light)
         }
         .padding()
+    }
+}
+
+// Password stage view
+struct DriverPassword: View {
+    @Binding var password: String
+    var body: some View {
+        Text("Hello World")
     }
 }
 
