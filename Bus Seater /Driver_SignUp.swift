@@ -41,16 +41,16 @@ struct Driver_SignUp: View {
                 
                 // Display the current stage view
                 if currentStage == .email {
-                    DriverEmail(email: $email)
-                } else if currentStage == .name {
-                    DriverName(firstname: $firstname, lastname: $lastname)
+                    AdminEmail(email: $email)
+                } else if currentStage == .password {
+                    AdminPassword(password: $password)
                 }
                 
                 
                 // Navigation Buttons
                 HStack {
                     // Back button
-                    if currentStage == .name {
+                    if currentStage == .password {
                         Button(action: { currentStage = .email }) {
                             Image(systemName: "arrow.left")
                                 .padding()
@@ -68,7 +68,7 @@ struct Driver_SignUp: View {
                     
                     // Next button
                     if currentStage == .email {
-                        Button(action: { currentStage = .name }) {
+                        Button(action: { currentStage = .password }) {
                             Image(systemName: "arrow.right")
                                 .padding()
                                 .foregroundColor(.blue)
@@ -115,7 +115,20 @@ struct DriverEmail: View {
 struct DriverPassword: View {
     @Binding var password: String
     var body: some View {
-        Text("Hello World")
+        VStack {
+            Text("Please enter password here")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            
+            TextField("Password", text: $password)
+                .padding()
+                .background(Color.gray.opacity(0.3).cornerRadius(3))
+                .accentColor(.black)
+                .colorScheme(.light)
+        }
+        .padding()
     }
 }
 
