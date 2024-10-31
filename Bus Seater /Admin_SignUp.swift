@@ -13,7 +13,6 @@ struct Admin_SignUp: View {
     // Enum for tracking the stages
     enum Stage {
         case email
-        case password
         case name
         case state
         case school
@@ -21,11 +20,9 @@ struct Admin_SignUp: View {
     
     // Track current stage
     @State private var currentStage: Stage = .email
-    @State private var pastStage: Stage
     
     // Shared variables across views
     @State private var email: String = ""
-    @State private var password: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var state: String = ""
@@ -44,19 +41,13 @@ struct Admin_SignUp: View {
                 } else if currentStage == .name {
                     AdminName(firstname: $firstname, lastname: $lastname)
                 }
-                else if currentStage == .state {
-                    AdminState(state: $state)
-                }
-                else if currentStage == .school {
-                    AdminSchool(school: $school)
-                }
                 
                 
                 // Navigation Buttons
                 HStack {
                     // Back button
-                    if currentStage != .email || currentStage != .school {
-                        Button(action: { }) {
+                    if currentStage == .name {
+                        Button(action: { currentStage = .email }) {
                             Image(systemName: "arrow.left")
                                 .padding()
                                 .foregroundColor(.blue)
@@ -71,21 +62,13 @@ struct Admin_SignUp: View {
                     
                     Spacer()
                     
+                    // Next button
                     if currentStage == .email {
                         Button(action: { currentStage = .name }) {
                             Image(systemName: "arrow.right")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
-                    }
-
-                    if currentStage == .school {
-                        Button(action: { currentStage = .state }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                    
                     }
                 }
             }
@@ -121,14 +104,6 @@ struct AdminEmail: View {
                 .colorScheme(.light)
         }
         .padding()
-    }
-}
-
-//Password stage view
-struct AdminPassword{
-    @Binding var password: String
-    var body: some View{
-        Text("Hello World")
     }
 }
 
