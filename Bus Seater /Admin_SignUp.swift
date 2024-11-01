@@ -43,11 +43,19 @@ struct Admin_SignUp: View {
                 } else if currentStage == .password {
                     AdminPassword(password: $password)
                 }
+                else if currentStage == .state {
+                    AdminState(state: $state)
+                }
+                else if currentStage == .name {
+                    AdminName(firstname: $firstname, lastname: $lastname)
+                }
+                else if currentStage == .school {
+                    AdminSchool(School: $school)
+                }
                 
                 
                 // Navigation Buttons
                 HStack {
-                    // Back button
                     if currentStage == .password {
                         Button(action: { currentStage = .email }) {
                             Image(systemName: "arrow.left")
@@ -55,16 +63,48 @@ struct Admin_SignUp: View {
                                 .foregroundColor(.blue)
                         }
                         Spacer().frame(width: 306)
-                        Button(action: {}) {
+                        Button(action: { currentStage = .name }) {
                             Image(systemName: "arrow.right")
                                 .foregroundColor(.blue)
                         }
 
                     }
+                    else if currentStage == .name {
+                        Button(action: { currentStage = .password }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                        Spacer().frame(width: 306)
+                        Button(action: { currentStage = .state }) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+
+                    }
+                    else if currentStage == .state {
+                        Button(action: { currentStage = .name }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                        Spacer().frame(width: 306)
+                        Button(action: { currentStage = .school }) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    else if currentStage == .school {
+                        Button(action: { currentStage = .state }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                    }
+
                     
                     Spacer()
                     
-                    // Next button
                     if currentStage == .email {
                         Button(action: { currentStage = .password }) {
                             Image(systemName: "arrow.right")
@@ -93,7 +133,7 @@ struct AdminEmail: View {
     
     var body: some View {
         VStack {
-            Text("Please enter email")
+            Text("What is your email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)
@@ -114,7 +154,7 @@ struct AdminPassword: View {
     @Binding var password: String
     var body: some View {
         VStack {
-            Text("Please enter password here")
+            Text("What is your desired password?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)
@@ -137,7 +177,7 @@ struct AdminName: View {
     
     var body: some View {
         VStack {
-            Text("Please enter first and last name")
+            Text("What is your name?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)
@@ -160,18 +200,26 @@ struct AdminName: View {
 }
 
 // State stage View
-struct AdminState {
+struct AdminState: View {
     @Binding var state: String
     var body: some View{
-        Text("Hello World")
+        Text("What state do you live in?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.black)
+            .padding(.bottom, 50)
     }
 }
 
 // School stage View
-struct AdminSchool {
+struct AdminSchool: View {
     @Binding var School: String
     var body: some View{
-        Text("Hello World")
+        Text("What school are you employed to?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.black)
+            .padding(.bottom, 50)
     }
 }
 

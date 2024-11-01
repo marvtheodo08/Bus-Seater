@@ -41,15 +41,26 @@ struct Driver_SignUp: View {
                 
                 // Display the current stage view
                 if currentStage == .email {
-                    AdminEmail(email: $email)
+                    DriverEmail(email: $email)
                 } else if currentStage == .password {
-                    AdminPassword(password: $password)
+                    DriverPassword(password: $password)
+                }
+                else if currentStage == .name {
+                    DriverName(firstname: $firstname, lastname: $lastname)
+                }
+                else if currentStage == .state {
+                    DriverState(state: $state)
+                }
+                else if currentStage == .school {
+                    DriverSchool(School: $school)
+                }
+                else if currentStage == .bus {
+                    DriverBus(bus: $bus)
                 }
                 
                 
                 // Navigation Buttons
                 HStack {
-                    // Back button
                     if currentStage == .password {
                         Button(action: { currentStage = .email }) {
                             Image(systemName: "arrow.left")
@@ -57,16 +68,61 @@ struct Driver_SignUp: View {
                                 .foregroundColor(.blue)
                         }
                         Spacer().frame(width: 306)
-                        Button(action: {}) {
+                        Button(action: { currentStage = .name}) {
                             Image(systemName: "arrow.right")
                                 .foregroundColor(.blue)
                         }
 
                     }
+                    else if currentStage == .name {
+                        Button(action: { currentStage = .password }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                        Spacer().frame(width: 306)
+                        Button(action: { currentStage = .state }) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+
+                    }
+                    else if currentStage == .state {
+                        Button(action: { currentStage = .name }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                        Spacer().frame(width: 306)
+                        Button(action: { currentStage = .school }) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+
+                    }
+                    else if currentStage == .school {
+                        Button(action: { currentStage = .state }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                        Spacer().frame(width: 306)
+                        Button(action: { currentStage = .bus }) {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    else if currentStage == .bus {
+                        Button(action: { currentStage = .school }) {
+                            Image(systemName: "arrow.left")
+                                .padding()
+                                .foregroundColor(.blue)
+                        }
+                    }
+
                     
                     Spacer()
                     
-                    // Next button
                     if currentStage == .email {
                         Button(action: { currentStage = .password }) {
                             Image(systemName: "arrow.right")
@@ -116,7 +172,7 @@ struct DriverPassword: View {
     @Binding var password: String
     var body: some View {
         VStack {
-            Text("Please enter password here")
+            Text("What is your desired password?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)
@@ -139,7 +195,7 @@ struct DriverName: View {
     
     var body: some View {
         VStack {
-            Text("Please enter first and last name")
+            Text("What is your name?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)
@@ -162,26 +218,38 @@ struct DriverName: View {
 }
 
 // State stage View
-struct DriverState {
+struct DriverState: View {
     @Binding var state: String
     var body: some View{
-        Text("Hello World")
+        Text("What state do you live in?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.black)
+            .padding(.bottom, 50)
     }
 }
 
 // School stage View
-struct DriverSchool {
+struct DriverSchool: View {
     @Binding var School: String
     var body: some View{
-        Text("Hello World")
+        Text("What school do you drive for?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.black)
+            .padding(.bottom, 50)
     }
 }
 
 // Bus stage View
-struct DriverBus {
+struct DriverBus: View {
     @Binding var bus: String
     var body: some View{
-        Text("Hello World")
+        Text("What is your bus number/code?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.black)
+            .padding(.bottom, 50)
     }
 }
 
