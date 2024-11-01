@@ -16,15 +16,16 @@ struct ContentView: View {
     @EnvironmentObject var notifsPermissions: NotifsPermissions
     var body: some View{
         Group{
-            // if isSplash is true, show splash scree 
+            // if isSplash is true
             if isSplash{
+                //Show Splash screen
                 SplashScreen()
-                // make Splasb screen appear with an animation
+                // make Splash screen appear with an animation
                     .onAppear{
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2){
                             withAnimation(.easeOut(duration: 0.5))
                             {
-                                // set splash to false when 
+                                // set splash to false when animation is done
                                 isSplash = false
                             }
                             
@@ -49,6 +50,7 @@ struct ContentView: View {
                 }
             }
         }
+        // Function for asking Notifs Permission
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
