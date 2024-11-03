@@ -133,7 +133,7 @@ struct AdminEmail: View {
     
     var body: some View {
         VStack {
-            Text("What is your email address?")
+            Text("What is your admin email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)

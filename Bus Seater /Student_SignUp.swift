@@ -169,7 +169,7 @@ struct StudentEmail: View {
     
     var body: some View {
         VStack {
-            Text("Please enter email")
+            Text("What is your personal email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)

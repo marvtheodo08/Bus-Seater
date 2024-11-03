@@ -151,7 +151,7 @@ struct DriverEmail: View {
     
     var body: some View {
         VStack {
-            Text("Please enter email")
+            Text("What is your email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundColor(.black)
