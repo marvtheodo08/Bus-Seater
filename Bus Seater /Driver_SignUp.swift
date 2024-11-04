@@ -143,34 +143,6 @@ struct Driver_SignUp: View {
             }
         }
     }
-    func emailVerification(email: $email, password: $password, firstname: $firstname) {
-    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        if let error = error {
-            print("Error signing up:", error)
-            return
-        }
-        
-        guard let user = authResult?.user else { return }
-
-        // Update display name
-        let changeRequest = user.createProfileChangeRequest()
-        changeRequest.displayName = firstname
-        changeRequest.commitChanges { error in
-            if let error = error {
-                print("Error updating display name:", error)
-            } else {
-                // Send verification email after updating display name
-                user.sendEmailVerification { error in
-                    if let error = error {
-                        print("Error sending verification email:", error)
-                    } else {
-                        print("Verification email sent with display name:", firstname)
-                    }
-                }
-            }
-        }
-    }
-}
 }
 
 // Email stage view
