@@ -81,7 +81,7 @@ struct Driver_SignUp: View {
                                 .foregroundColor(.blue)
                         }
                         Spacer().frame(width: 306)
-                        Button(action: { emailVerification(email: $email, password: $password, firstname: $firstname) }) {
+                        Button(action: { currentStage = .state }) {
                             Image(systemName: "arrow.right")
                                 .foregroundColor(.blue)
                         }
@@ -164,8 +164,6 @@ struct Driver_SignUp: View {
                     if let error = error {
                         print("Error sending verification email:", error)
                     } else {
-                        //Display the next stage if email was sent successfully
-                        currentStage = .state
                         print("Verification email sent with display name:", firstname)
                     }
                 }

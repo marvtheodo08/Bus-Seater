@@ -86,7 +86,7 @@ struct Student_SignUp: View {
                                 .foregroundColor(.blue)
                         }
                         Spacer().frame(width: 306)
-                        Button(action: { emailVerification(email: $email, password: $password, firstname: $firstname) }) {
+                        Button(action: { currentStage = .grade }) {
                             Image(systemName: "arrow.right")
                                 .foregroundColor(.blue)
                         }
@@ -183,8 +183,6 @@ func emailVerification(email: $email, password: $password, firstname: $firstname
                     if let error = error {
                         print("Error sending verification email:", error)
                     } else {
-                        //Display the next stage if email was sent successfully
-                        currentStage = .grade
                         print("Verification email sent with display name:", firstname)
                     }
                 }
