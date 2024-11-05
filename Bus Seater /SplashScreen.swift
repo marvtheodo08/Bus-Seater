@@ -22,6 +22,7 @@ struct SplashScreen: View {
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 30)
                     Text("Bus Seater")
+                        .bold()
                         .font(.largeTitle)
                         .padding(.top, 205)
                         .padding(.leading, 5)
