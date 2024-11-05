@@ -12,7 +12,11 @@ struct Admin_SignUp: View {
     @Environment(\.dismiss) private var dismiss
     
     enum Stage {
-        case email, password, name, state, school
+        case email
+        case password
+        case name
+        case state
+        case school
     }
     
     @State private var currentStage: Stage = .email
