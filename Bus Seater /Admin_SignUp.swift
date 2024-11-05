@@ -11,26 +11,18 @@ import FirebaseAuth
 struct Admin_SignUp: View {
     @Environment(\.dismiss) private var dismiss
     
-    // Enum for tracking the stages
     enum Stage {
-        case email
-        case password
-        case name
-        case state
-        case school
+        case email, password, name, state, school
     }
     
-    // Track current stage
     @State private var currentStage: Stage = .email
-    
-    // Shared variables across views
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var state: String = ""
     @State private var school: String = ""
-    
+
     var body: some View {
         ZStack(alignment: .topLeading) {
             Color.white.ignoresSafeArea()
@@ -39,81 +31,38 @@ struct Admin_SignUp: View {
                 Spacer()
                 
                 // Display the current stage view
-                if currentStage == .email {
+                switch currentStage {
+                case .email:
                     AdminEmail(email: $email)
-                } else if currentStage == .password {
+                case .password:
                     AdminPassword(password: $password)
-                }
-                else if currentStage == .state {
-                    AdminState(state: $state)
-                }
-                else if currentStage == .name {
+                case .name:
                     AdminName(firstname: $firstname, lastname: $lastname)
+                case .state:
+                    AdminState(state: $state)
+                case .school:
+                    AdminSchool(school: $school)
                 }
-                else if currentStage == .school {
-                    AdminSchool(School: $school)
-                }
-                
                 
                 // Navigation Buttons
                 HStack {
-                    if currentStage == .password {
-                        Button(action: { currentStage = .email }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .name }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .name {
-                        Button(action: { currentStage = .password }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .state }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .state {
-                        Button(action: { currentStage = .name }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .school }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    else if currentStage == .school {
-                        Button(action: { currentStage = .state }) {
+                    if currentStage != .email {
+                        Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
                     }
-
-                    
                     Spacer()
-                    
-                    if currentStage == .email {
-                        Button(action: { currentStage = .password }) {
+                    if currentStage != .school {
+                        Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
                     }
                 }
+                .padding(.horizontal)
             }
             .padding(.bottom, 250)
             
@@ -126,34 +75,53 @@ struct Admin_SignUp: View {
             }
         }
     }
-    func emailVerification(email: String, password: String, firstname: String) {
-    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        if let error = error {
-            print("Error signing up:", error)
-            return
+    
+    func goBack() {
+        switch currentStage {
+        case .password: currentStage = .email
+        case .name: currentStage = .password
+        case .state: currentStage = .name
+        case .school: currentStage = .state
+        default: break
         }
-        
-        guard let user = authResult?.user else { return }
+    }
 
-        // Update display name
-        let changeRequest = user.createProfileChangeRequest()
-        changeRequest.displayName = firstname
-        changeRequest.commitChanges { error in
+    func goNext() {
+        switch currentStage {
+        case .email: currentStage = .password
+        case .password: currentStage = .name
+        case .name: currentStage = .state
+        case .state: currentStage = .school
+        default: break
+        }
+    }
+    
+    // Firebase email verification function (moved outside of the body)
+    func emailVerification(email: String, password: String, firstname: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error updating display name:", error)
-            } else {
-                // Send verification email after updating display name
-                user.sendEmailVerification { error in
-                    if let error = error {
-                        print("Error sending verification email:", error)
-                    } else {
-                        print("Verification email sent with display name:", firstname)
+                print("Error signing up:", error)
+                return
+            }
+            
+            guard let user = authResult?.user else { return }
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = firstname
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error updating display name:", error)
+                } else {
+                    user.sendEmailVerification { error in
+                        if let error = error {
+                            print("Error sending verification email:", error)
+                        } else {
+                            print("Verification email sent with display name:", firstname)
+                        }
                     }
                 }
             }
         }
     }
-}
 }
 
 // Email stage view
@@ -242,7 +210,7 @@ struct AdminState: View {
 
 // School stage View
 struct AdminSchool: View {
-    @Binding var School: String
+    @Binding var school: String
     var body: some View{
         Text("What school are you employed to?")
             .multilineTextAlignment(.center)

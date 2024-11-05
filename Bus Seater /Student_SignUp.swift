@@ -43,113 +43,43 @@ struct Student_SignUp: View {
                 Spacer()
                 
                 // Display the current stage view
-                if currentStage == .email {
+                switch currentStage {
+                case .email:
                     StudentEmail(email: $email)
-                } else if currentStage == .password {
+                case .password:
                     StudentPassword(password: $password)
-                }
-                else if currentStage == .name {
+                case .name:
                     StudentName(firstname: $firstname, lastname: $lastname)
-                }
-                else if currentStage == .grade {
+                case .grade:
                     StudentGrade(grade: $grade)
-                }
-                else if currentStage == .state {
+                case .state:
                     StudentState(state: $state)
-                }
-                else if currentStage == .school {
+                case .school:
                     StudentSchool(School: $school)
-                }
-                else if currentStage == .bus {
+                case .bus:
                     StudentBus(bus: $bus)
                 }
                 
                 
                 // Navigation Buttons
                 HStack {
-                    if currentStage == .password {
-                        Button(action: { currentStage = .email }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .name}) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .name {
-                        Button(action: { currentStage = .password }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .grade }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .grade {
-                        Button(action: { currentStage = .name }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .state }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    else if currentStage == .state {
-                        Button(action: { currentStage = .grade }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .school }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    else if currentStage == .school {
-                        Button(action: { currentStage = .state }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .bus }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    else if currentStage == .bus {
-                        Button(action: { currentStage = .school }) {
+                    if currentStage != .email {
+                        Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
                     }
-                    
-                    
-
-                    
                     Spacer()
-                    
-                    if currentStage == .email {
-                        Button(action: { currentStage = .password }) {
+                    if currentStage != .bus {
+                        Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
                     }
                 }
+                .padding(.horizontal)
             }
             .padding(.bottom, 250)
             
@@ -163,6 +93,29 @@ struct Student_SignUp: View {
         }
     }
 
+    func goBack() {
+        switch currentStage {
+        case .password: currentStage = .email
+        case .name: currentStage = .password
+        case .grade: currentStage = .name
+        case .state: currentStage = .grade
+        case .school: currentStage = .state
+        case .bus: currentStage = .school
+        default: break
+        }
+    }
+
+    func goNext() {
+        switch currentStage {
+        case .email: currentStage = .password
+        case .password: currentStage = .name
+        case .name: currentStage = .grade
+        case .grade: currentStage = .state
+        case .state: currentStage = .school
+        case .school: currentStage = .bus
+        default: break
+        }
+    }
 func emailVerification(email: String, password: String, firstname: String) {
     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
         if let error = error {

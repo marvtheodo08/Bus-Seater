@@ -62,76 +62,23 @@ struct Driver_SignUp: View {
                 
                 // Navigation Buttons
                 HStack {
-                    if currentStage == .password {
-                        Button(action: { currentStage = .email }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .name}) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .name {
-                        Button(action: { currentStage = .password }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .state }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .state {
-                        Button(action: { currentStage = .name }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .school }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-
-                    }
-                    else if currentStage == .school {
-                        Button(action: { currentStage = .state }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundColor(.blue)
-                        }
-                        Spacer().frame(width: 306)
-                        Button(action: { currentStage = .bus }) {
-                            Image(systemName: "arrow.right")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    else if currentStage == .bus {
-                        Button(action: { currentStage = .school }) {
+                    if currentStage != .email {
+                        Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
                     }
-
-                    
                     Spacer()
-                    
-                    if currentStage == .email {
-                        Button(action: { currentStage = .password }) {
+                    if currentStage != .bus {
+                        Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
                                 .foregroundColor(.blue)
                         }
                     }
                 }
+                .padding(.horizontal)
             }
             .padding(.bottom, 250)
             
@@ -144,6 +91,29 @@ struct Driver_SignUp: View {
             }
         }
     }
+    
+    func goBack() {
+        switch currentStage {
+        case .password: currentStage = .email
+        case .name: currentStage = .password
+        case .state: currentStage = .name
+        case .school: currentStage = .state
+        case .bus: currentStage = .school
+        default: break
+        }
+    }
+
+    func goNext() {
+        switch currentStage {
+        case .email: currentStage = .password
+        case .password: currentStage = .name
+        case .name: currentStage = .state
+        case .state: currentStage = .school
+        case .school: currentStage = .bus
+        default: break
+        }
+    }
+    
     func emailVerification(email: String, password: String, firstname: String) {
     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
         if let error = error {
