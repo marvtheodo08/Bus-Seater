@@ -242,6 +242,7 @@ struct StudentGrade: View {
             
         )
         .pickerStyle(WheelPickerStyle())
+        .colorScheme(.light)
     }
 }
 
