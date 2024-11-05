@@ -11,7 +11,7 @@ import Firebase
 struct SplashScreen: View {
     var body: some View {
             ZStack {
-                Color("Backround Color")
+                Color("Background Color")
                     .ignoresSafeArea()
                 
                 ZStack(alignment: .center) {
