@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct Student_SignUp: View {
     @Environment(\.dismiss) private var dismiss
@@ -162,7 +163,7 @@ struct Student_SignUp: View {
         }
     }
 
-func emailVerification(email: $email, password: $password, firstname: $firstname) {
+func emailVerification(email: String, password: String, firstname: String) {
     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
         if let error = error {
             print("Error signing up:", error)
@@ -226,7 +227,7 @@ struct StudentPassword: View {
                 .foregroundColor(.black)
                 .padding(.bottom, 50)
             
-            TextField("Password", text: $password)
+            SecureField("Password", text: $password)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
