@@ -153,6 +153,7 @@ struct AdminEmail: View {
 // Password stage view
 struct AdminPassword: View {
     @Binding var password: String
+    
     var body: some View {
         VStack {
             Text("What is your desired password?")
@@ -203,18 +204,39 @@ struct AdminName: View {
 // State stage View
 struct AdminState: View {
     @Binding var state: String
-    var body: some View{
-        Text("What state do you live in?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
+
+    let states = [
+        "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+        "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+        "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina",
+        "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
+        "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
+        "Wisconsin", "Wyoming"
+    ]
+    
+    var body: some View {
+        VStack {
+            Text("What state do you live in?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            
+            Picker("State", selection: $state) {
+                ForEach(states, id: \.self) { stateOption in
+                    Text(stateOption).tag(stateOption)
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
+            .colorScheme(.light)
+        }
     }
 }
-
 // School stage View
 struct AdminSchool: View {
     @Binding var school: String
+    
     var body: some View{
         Text("What school are you employed to?")
             .multilineTextAlignment(.center)

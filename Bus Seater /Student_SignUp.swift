@@ -172,6 +172,7 @@ struct StudentEmail: View {
 //Password stage view
 struct StudentPassword: View {
     @Binding var password: String
+    
     var body: some View {
         VStack {
             Text("What is you desired password?")
@@ -222,30 +223,65 @@ struct StudentName: View {
 // Grade stage View
 struct StudentGrade: View {
     @Binding var grade: Int
+    
     var body: some View{
         Text("What grade level are you in?")
             .multilineTextAlignment(.center)
             .font(.title)
             .foregroundColor(.black)
             .padding(.bottom, 50)
+        Picker(
+            selection: $grade,
+            label: Text("Grade"),
+            content: {
+                ForEach(6..<13) { grade in
+                    Text("\(grade)")
+                        .tag(grade)
+                }
+            }
+            
+        )
+        .pickerStyle(WheelPickerStyle())
     }
 }
 
 // State stage View
 struct StudentState: View {
-    @Binding var state: String
-    var body: some View{
-        Text("What state do you live in?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
+    @Binding var state: String 
+    
+    let states = [
+        "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+        "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+        "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina",
+        "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
+        "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
+        "Wisconsin", "Wyoming"
+    ]
+    
+    var body: some View {
+        VStack {
+            Text("What state do you live in?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            
+            Picker("State", selection: $state) {
+                ForEach(states, id: \.self) { stateOption in
+                    Text(stateOption).tag(stateOption)
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
+            .colorScheme(.light)
+        }
     }
 }
 
 // School stage View
 struct StudentSchool: View {
     @Binding var School: String
+    
     var body: some View{
         Text("What school do you attend?")
             .multilineTextAlignment(.center)
@@ -258,6 +294,7 @@ struct StudentSchool: View {
 // Bus stage View
 struct StudentBus: View {
     @Binding var bus: String
+    
     var body: some View{
         Text("What is you bus number/code?")
             .multilineTextAlignment(.center)
