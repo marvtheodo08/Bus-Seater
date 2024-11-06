@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct SplashScreen: View {
     var body: some View {
