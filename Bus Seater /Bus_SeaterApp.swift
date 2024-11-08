@@ -24,6 +24,7 @@ struct YourApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
   @StateObject private var lastUserInfo = LastUserInfo()
   @StateObject private var notifsPermissions = NotifsPermissions()
+  @StateObject private var newStudentInfo = NewStudentInfo()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -31,6 +32,7 @@ struct YourApp: App {
       }
       .environmentObject(lastUserInfo)
       .environmentObject(notifsPermissions)
+      .environmentObject(newStudentInfo)
     }
   }
 }
