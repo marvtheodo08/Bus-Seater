@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
 import FirebaseAuth
 
 struct Admin_SignUp: View {
@@ -243,6 +245,8 @@ struct AdminSchool: View {
             .font(.title)
             .foregroundColor(.black)
             .padding(.bottom, 50)
+        Picker("School", selection: $school) {
+        }
     }
 }
 

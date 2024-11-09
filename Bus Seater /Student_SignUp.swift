@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
 import FirebaseAuth
 
 struct Student_SignUp: View {
@@ -55,7 +57,7 @@ struct Student_SignUp: View {
                 case .state:
                     StudentState(state: $state)
                 case .school:
-                    StudentSchool(School: $school)
+                    StudentSchool(school: $school)
                 case .bus:
                     StudentBus(bus: $bus)
                 }
@@ -281,7 +283,7 @@ struct StudentState: View {
 
 // School stage View
 struct StudentSchool: View {
-    @Binding var School: String
+    @Binding var school: String
     
     var body: some View{
         Text("What school do you attend?")
@@ -289,6 +291,9 @@ struct StudentSchool: View {
             .font(.title)
             .foregroundColor(.black)
             .padding(.bottom, 50)
+        Picker("School", selection: $school) {
+        }
+        .colorScheme(.light)
     }
 }
 
@@ -302,6 +307,9 @@ struct StudentBus: View {
             .font(.title)
             .foregroundColor(.black)
             .padding(.bottom, 50)
+        Picker("Bus", selection: $bus) {
+        }
+        .colorScheme(.light)
     }
 }
 

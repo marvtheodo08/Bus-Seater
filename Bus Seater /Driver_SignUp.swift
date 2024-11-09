@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
 import FirebaseAuth
 
 struct Driver_SignUp: View {
@@ -53,7 +55,7 @@ struct Driver_SignUp: View {
                     DriverState(state: $state)
                 }
                 else if currentStage == .school {
-                    DriverSchool(School: $school)
+                    DriverSchool(school: $school)
                 }
                 else if currentStage == .bus {
                     DriverBus(bus: $bus)
@@ -252,14 +254,17 @@ struct DriverState: View {
 
 // School stage View
 struct DriverSchool: View {
-    @Binding var School: String
-    
+    @Binding var school: String
+        
     var body: some View{
         Text("What school do you drive for?")
             .multilineTextAlignment(.center)
             .font(.title)
             .foregroundColor(.black)
             .padding(.bottom, 50)
+        Picker("School", selection: $school) {
+        }
+        .colorScheme(.light)
     }
 }
 
@@ -273,8 +278,12 @@ struct DriverBus: View {
             .font(.title)
             .foregroundColor(.black)
             .padding(.bottom, 50)
+        Picker("Bus", selection: $bus) {
+        }
+        .colorScheme(.light)
     }
 }
+
 
 
 #Preview {
