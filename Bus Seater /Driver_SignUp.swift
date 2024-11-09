@@ -257,7 +257,7 @@ struct DriverSchool: View {
     @Binding var school: String
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
-        
+    
     var body: some View{
         VStack {
             Text("What school do you drive for?")
@@ -267,35 +267,35 @@ struct DriverSchool: View {
                 .padding(.bottom, 50)
             Picker("School", selection: $school) {
                 ForEach(getSchools.schools) { school in
-                    Text(school.school_name).tag(school.school_name)
+                    Text(school.schoolName).tag(school.schoolName)
                 }
             }
             .colorScheme(.light)
         }
         .onAppear {
-           getSchools.fetchSchools(state: state)
-       }
-    }
-}
-
-// Bus stage View
-struct DriverBus: View {
-    @Binding var bus: String
-    
-    var body: some View{
-        Text("What is your bus number/code?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
-        Picker("Bus", selection: $bus) {
+            Task{
+                await  getSchools.fetchSchools(state: state)
+            }
+            
         }
-        .colorScheme(.light)
     }
 }
-
-
-
+    
+    // Bus stage View
+    struct DriverBus: View {
+        @Binding var bus: String
+        
+        var body: some View{
+            Text("What is your bus number/code?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+        }
+    }
+    
+    
+    
 #Preview {
     Driver_SignUp()
 }

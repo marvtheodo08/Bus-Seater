@@ -250,15 +250,17 @@ struct AdminSchool: View {
                 .padding(.bottom, 50)
             Picker("School", selection: $school) {
                 ForEach(getSchools.schools) { school in
-                    Text(school.school_name).tag(school.school_name)
+                    Text(school.schoolName).tag(school.schoolName)
                 }
             }
             .colorScheme(.light)
         }
         .onAppear {
-           getSchools.fetchSchools(state: state)
-       }
-
+            Task{
+                await  getSchools.fetchSchools(state: state)
+            }
+            
+        }
     }
 }
 

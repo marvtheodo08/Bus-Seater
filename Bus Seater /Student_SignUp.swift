@@ -296,35 +296,38 @@ struct StudentSchool: View {
                 .padding(.bottom, 50)
             Picker("School", selection: $school) {
                 ForEach(getSchools.schools) { school in
-                    Text(school.school_name).tag(school.school_name)
+                    Text(school.schoolName).tag(school.schoolName)
                 }
             }
             .colorScheme(.light)
         }
         .onAppear {
-           getSchools.fetchSchools(state: state)
-       }
-
-    }
-}
-
-// Bus stage View
-struct StudentBus: View {
-    @Binding var bus: String
-    
-    
-    var body: some View{
-        Text("What is you bus number/code?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
-        Picker("Bus", selection: $bus) {
+            Task{
+                await  getSchools.fetchSchools(state: state)
+            }
+            
+            
         }
-        .colorScheme(.light)
     }
 }
-
-#Preview {
-    Student_SignUp()
-}
+    
+    // Bus stage View
+    struct StudentBus: View {
+        @Binding var bus: String
+        
+        
+        var body: some View{
+            Text("What is you bus number/code?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            Picker("Bus", selection: $bus) {
+            }
+            .colorScheme(.light)
+        }
+    }
+    
+    #Preview {
+        Student_SignUp()
+    }
