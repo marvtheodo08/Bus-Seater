@@ -47,7 +47,7 @@ struct Admin_SignUp: View {
                 case .state:
                     AdminState(state: $state)
                 case .school:
-                    AdminSchool(school: $school)
+                    AdminSchool(school: $school, state: $state)
                 }
                 
                 // Navigation Buttons
@@ -238,15 +238,27 @@ struct AdminState: View {
 // School stage View
 struct AdminSchool: View {
     @Binding var school: String
+    @Binding var state: String
+    @EnvironmentObject var getSchools: GetSchools
     
     var body: some View{
-        Text("What school are you employed to?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
-        Picker("School", selection: $school) {
+        VStack {
+            Text("What school are you employed to?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            Picker("School", selection: $school) {
+                ForEach(getSchools.schools) { school in
+                    Text(school.school_name).tag(school.school_name)
+                }
+            }
+            .colorScheme(.light)
         }
+        .onAppear {
+           getSchools.fetchSchools(state: state)
+       }
+
     }
 }
 

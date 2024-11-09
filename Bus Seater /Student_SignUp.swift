@@ -57,7 +57,7 @@ struct Student_SignUp: View {
                 case .state:
                     StudentState(state: $state)
                 case .school:
-                    StudentSchool(school: $school)
+                    StudentSchool(school: $school, state: $state)
                 case .bus:
                     StudentBus(bus: $bus)
                 }
@@ -284,22 +284,34 @@ struct StudentState: View {
 // School stage View
 struct StudentSchool: View {
     @Binding var school: String
+    @Binding var state: String
+    @EnvironmentObject var getSchools: GetSchools
     
     var body: some View{
-        Text("What school do you attend?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
-        Picker("School", selection: $school) {
+        VStack {
+            Text("What school do you attend?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            Picker("School", selection: $school) {
+                ForEach(getSchools.schools) { school in
+                    Text(school.school_name).tag(school.school_name)
+                }
+            }
+            .colorScheme(.light)
         }
-        .colorScheme(.light)
+        .onAppear {
+           getSchools.fetchSchools(state: state)
+       }
+
     }
 }
 
 // Bus stage View
 struct StudentBus: View {
     @Binding var bus: String
+    
     
     var body: some View{
         Text("What is you bus number/code?")

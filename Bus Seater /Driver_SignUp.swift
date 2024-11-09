@@ -55,7 +55,7 @@ struct Driver_SignUp: View {
                     DriverState(state: $state)
                 }
                 else if currentStage == .school {
-                    DriverSchool(school: $school)
+                    DriverSchool(school: $school, state: $state)
                 }
                 else if currentStage == .bus {
                     DriverBus(bus: $bus)
@@ -255,16 +255,26 @@ struct DriverState: View {
 // School stage View
 struct DriverSchool: View {
     @Binding var school: String
+    @Binding var state: String
+    @EnvironmentObject var getSchools: GetSchools
         
     var body: some View{
-        Text("What school do you drive for?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundColor(.black)
-            .padding(.bottom, 50)
-        Picker("School", selection: $school) {
+        VStack {
+            Text("What school do you drive for?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(.bottom, 50)
+            Picker("School", selection: $school) {
+                ForEach(getSchools.schools) { school in
+                    Text(school.school_name).tag(school.school_name)
+                }
+            }
+            .colorScheme(.light)
         }
-        .colorScheme(.light)
+        .onAppear {
+           getSchools.fetchSchools(state: state)
+       }
     }
 }
 
