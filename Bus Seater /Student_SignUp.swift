@@ -328,7 +328,7 @@ struct StudentSchool: View {
                 .foregroundColor(.black)
                 .padding(.bottom, 50)
             Picker("School", selection: $school) {
-                ForEach(schools) { school in
+                ForEach(schools, id: \.id) { school in
                     Text(school.schoolName).tag(school.schoolName)
                 }
             }
