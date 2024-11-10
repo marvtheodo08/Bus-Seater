@@ -28,7 +28,7 @@ struct DriverSchools: Identifiable, Codable {
 }
 
 struct Driver_SignUp: View {
-    @State private var schools: [DriverSchools] = []
+    @State private var schools = [DriverSchools]()
     private var cancellables = Set<AnyCancellable>()
     @Environment(\.dismiss) private var dismiss
     

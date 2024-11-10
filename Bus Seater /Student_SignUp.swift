@@ -28,7 +28,7 @@ struct StudentSchools: Identifiable, Codable {
 }
 
 struct Student_SignUp: View {
-    @State private var schools: [StudentSchools] = []
+    @State private var schools = [StudentSchools]()
     private var cancellables = Set<AnyCancellable>()
     @Environment(\.dismiss) private var dismiss
     
