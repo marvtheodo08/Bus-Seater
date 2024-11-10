@@ -285,7 +285,7 @@ struct AdminSchool: View {
                 .padding(.bottom, 50)
             
             Picker("School", selection: $school) {
-                ForEach(schools, id: \.id) { school in
+                ForEach(schools) { school in
                     Text(school.schoolName).tag(school.schoolName)
                 }
             }
