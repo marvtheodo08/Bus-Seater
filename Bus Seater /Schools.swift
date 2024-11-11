@@ -29,7 +29,7 @@ class GetSchools: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     func fetchSchools(state: String) async {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { return }
+        guard let url = URL(string: "busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { return }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
