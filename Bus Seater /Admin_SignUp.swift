@@ -243,10 +243,11 @@ struct AdminSchool: View {
     @Binding var school: String
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
+    @State var loading: Bool = true
 
     var body: some View {
         VStack {
-            if getSchools.isLoading {
+            if loading {
                 ProgressView()
                     .colorScheme(.light)
             } else {
@@ -274,6 +275,7 @@ struct AdminSchool: View {
         .onAppear {
             Task {
                 await getSchools.fetchSchools(state: state)
+                loading = false
             }
         }
     }

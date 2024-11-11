@@ -27,18 +27,9 @@ struct School: Identifiable, Codable {
 class GetSchools: ObservableObject {
     @Published var schools = [School]()
     private var cancellables = Set<AnyCancellable>()
-    @Published var isLoading = false
     
     func fetchSchools(state: String) async {
-        DispatchQueue.main.async{
-            self.isLoading = true
-        }
-        defer {
-            DispatchQueue.main.async{
-                self.isLoading = false
-            }
-        }
-
+        
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { return }
         
         do {
