@@ -248,7 +248,7 @@ struct AdminSchool: View {
     var body: some View {
         VStack {
             if loading {
-                ProgressView()
+                ProgressView("Loading available schools...")
                     .colorScheme(.light)
             } else {
                 if getSchools.schools.isEmpty {
