@@ -326,7 +326,6 @@ struct StudentSchool: View {
         @Binding var bus: String
         @Binding var school: String
         
-        
         var body: some View{
             Text("What is you bus number/code?")
                 .multilineTextAlignment(.center)
