@@ -291,7 +291,8 @@ struct StudentSchool: View {
     var body: some View {
         VStack {
             if getSchools.isLoading {
-                ProgressView("Loading...")
+                ProgressView()
+                    .colorScheme(.light)
             } else {
                 if getSchools.schools.isEmpty {
                     Text("No schools available, please select a different state.")

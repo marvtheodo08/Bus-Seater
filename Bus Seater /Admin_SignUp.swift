@@ -247,14 +247,15 @@ struct AdminSchool: View {
     var body: some View {
         VStack {
             if getSchools.isLoading {
-                ProgressView("Loading...")
+                ProgressView()
+                    .colorScheme(.light)
             } else {
                 if getSchools.schools.isEmpty {
                     Text("No schools available, please select a different state.")
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
                 } else {
-                    Text("What school are administer of?")
+                    Text("What school are you administrator of?")
                         .multilineTextAlignment(.center)
                         .font(.title)
                         .foregroundColor(.black)
