@@ -260,29 +260,38 @@ struct DriverSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
 
-    var body: some View{
+    var body: some View {
         VStack {
-            Text("What school do you attend?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .foregroundColor(.black)
-                .padding(.bottom, 50)
-            Picker("School", selection: $school) {
-                ForEach(getSchools.schools, id: \.id) { school in
-                    Text(school.schoolName).tag(school.schoolName)
+            if getSchools.isLoading {
+                ProgressView()
+                    .colorScheme(.light)
+            } else {
+                if getSchools.schools.isEmpty {
+                    Text("No schools available, please select a different state.")
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("What school do you drive for?")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .padding(.bottom, 50)
+                    
+                    Picker("Select a School", selection: $school) {
+                        ForEach(getSchools.schools, id: \.id) { school in
+                            Text(school.schoolName).tag(school.schoolName)
+                        }
+                    }
+                    .colorScheme(.light)
                 }
             }
-            .colorScheme(.light)
         }
         .onAppear {
-            Task{
-                await  getSchools.fetchSchools(state: state)
+            Task {
+                await getSchools.fetchSchools(state: state)
             }
-            
-            
         }
     }
-
 }
 
     

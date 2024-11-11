@@ -243,21 +243,32 @@ struct AdminSchool: View {
     @Binding var school: String
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
-    
+
     var body: some View {
         VStack {
-            Text("What school are you employed to?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .foregroundColor(.black)
-                .padding(.bottom, 50)
-            
-            Picker("School", selection: $school) {
-                ForEach(getSchools.schools, id: \.id) { school in
-                    Text(school.schoolName).tag(school.schoolName)
+            if getSchools.isLoading {
+                ProgressView("Loading...")
+            } else {
+                if getSchools.schools.isEmpty {
+                    Text("No schools available, please select a different state.")
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("What school are administer of?")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .padding(.bottom, 50)
+                    
+                    Picker("Select a School", selection: $school) {
+                        ForEach(getSchools.schools, id: \.id) { school in
+                            Text(school.schoolName).tag(school.schoolName)
+                        }
+                    }
+                    .colorScheme(.light)
+                    
                 }
             }
-            .colorScheme(.light)
         }
         .onAppear {
             Task {
@@ -265,7 +276,6 @@ struct AdminSchool: View {
             }
         }
     }
-    
 }
 
 
