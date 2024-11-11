@@ -10,8 +10,26 @@ import Foundation
 import Combine
 import FirebaseAuth
 
+struct DriverSchools: Identifiable, Codable {
+    let id: Int
+    let schoolName: String
+    let municipality: String
+    let state: String
+    let stateAbriviation: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case schoolName = "school_name"
+        case municipality
+        case state
+        case stateAbriviation = "state_abriviation"
+    }
+    
+}
 
 struct Driver_SignUp: View {
+    @State private var schools = [DriverSchools]()
+    private var cancellables = Set<AnyCancellable>()
     @Environment(\.dismiss) private var dismiss
     
     // Enum for tracking the stages
@@ -56,7 +74,7 @@ struct Driver_SignUp: View {
                     DriverState(state: $state)
                 }
                 else if currentStage == .school {
-                    DriverSchool(school: $school, state: $state)
+                    DriverSchool(school: $school, state: $state, schools: $schools)
                 }
                 else if currentStage == .bus {
                     DriverBus(bus: $bus)
@@ -145,6 +163,20 @@ struct Driver_SignUp: View {
         }
     }
 }
+    func fetchSchools(state: String) async {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { return }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            if let decodedResponse = try? JSONDecoder().decode([DriverSchools].self, from: data) {
+                schools = decodedResponse
+            }
+        }
+        catch {
+            print("Error fetching schools: \(error.localizedDescription)")
+        }
+    }
 
 }
 
@@ -258,8 +290,8 @@ struct DriverState: View {
 struct DriverSchool: View {
     @Binding var school: String
     @Binding var state: String
-    @EnvironmentObject var getSchools: GetSchools
-
+    @Binding var schools: [DriverSchools]
+    
     var body: some View{
         VStack {
             Text("What school do you attend?")
@@ -268,7 +300,7 @@ struct DriverSchool: View {
                 .foregroundColor(.black)
                 .padding(.bottom, 50)
             Picker("School", selection: $school) {
-                ForEach(getSchools.schools, id: \.id) { school in
+                ForEach(schools, id: \.id) { school in
                     Text(school.schoolName).tag(school.schoolName)
                 }
             }
@@ -276,13 +308,15 @@ struct DriverSchool: View {
         }
         .onAppear {
             Task{
-                await  getSchools.fetchSchools(state: state)
+                await  fetchSchools()
             }
             
             
         }
     }
-
+    func fetchSchools() async {
+        await Admin_SignUp().fetchSchools(state: state)
+    }
 }
 
     
