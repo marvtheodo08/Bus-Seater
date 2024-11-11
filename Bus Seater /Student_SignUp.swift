@@ -60,7 +60,7 @@ struct Student_SignUp: View {
                 case .school:
                     StudentSchool(school: $school, state: $state)
                 case .bus:
-                    StudentBus(bus: $bus)
+                    StudentBus(bus: $bus, school: $school)
                 }
                 
                 
@@ -324,6 +324,7 @@ struct StudentSchool: View {
     // Bus stage View
     struct StudentBus: View {
         @Binding var bus: String
+        @Binding var school: String
         
         
         var body: some View{

@@ -59,7 +59,7 @@ struct Driver_SignUp: View {
                     DriverSchool(school: $school, state: $state)
                 }
                 else if currentStage == .bus {
-                    DriverBus(bus: $bus)
+                    DriverBus(bus: $bus, school: $school)
                 }
                 
                 
@@ -298,6 +298,7 @@ struct DriverSchool: View {
     // Bus stage View
     struct DriverBus: View {
         @Binding var bus: String
+        @Binding var school: String
         
         var body: some View{
             Text("What is your bus number/code?")
@@ -305,6 +306,10 @@ struct DriverSchool: View {
                 .font(.title)
                 .foregroundColor(.black)
                 .padding(.bottom, 50)
+            Picker("Bus", selection: $bus) {
+            }
+            .colorScheme(.light)
+
         }
     }
     
