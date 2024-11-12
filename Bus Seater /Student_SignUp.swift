@@ -81,6 +81,11 @@ struct Student_SignUp: View {
                                 .foregroundColor(.blue)
                         }
                     }
+                    else if currentStage == .bus {
+                        Button(action: {}, label: {Text("Create Account")
+                                .foregroundStyle(Color.black)
+                                })
+                    }
                 }
                 .padding(.horizontal)
             }

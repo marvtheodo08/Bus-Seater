@@ -80,6 +80,11 @@ struct Driver_SignUp: View {
                                 .foregroundColor(.blue)
                         }
                     }
+                    else if currentStage == .school {
+                        Button(action: {}, label: {Text("Create Account")
+                                .foregroundStyle(Color.black)
+                                })
+                    }
                 }
                 .padding(.horizontal)
             }
