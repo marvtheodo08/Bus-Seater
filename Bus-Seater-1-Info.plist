@@ -4,48 +4,12 @@
 <dict>
     <key>NSAppTransportSecurity</key>
     <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
         <key>NSExceptionDomains</key>
         <dict>
-            <key>firebaseapp.com</key>
-            <dict>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <false/>
-                <key>NSExceptionRequiresForwardSecrecy</key>
-                <false/>
-                <key>NSRequiresCertificateTransparency</key>
-                <false/>
-            </dict>
-
-            <key>googleapis.com</key>
-            <dict>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <false/>
-                <key>NSExceptionRequiresForwardSecrecy</key>
-                <false/>
-                <key>NSRequiresCertificateTransparency</key>
-                <false/>
-            </dict>
-
-            <key>gstatic.com</key>
-            <dict>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <false/>
-                <key>NSExceptionRequiresForwardSecrecy</key>
-                <false/>
-                <key>NSRequiresCertificateTransparency</key>
-                <false/>
-            </dict>
-
             <key>busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com</key>
             <dict>
-                <key>NSIncludesSubdomains</key>
-                <true/>
                 <key>NSExceptionAllowsInsecureHTTPLoads</key>
                 <true/>
             </dict>
@@ -53,4 +17,3 @@
     </dict>
 </dict>
 </plist>
-
