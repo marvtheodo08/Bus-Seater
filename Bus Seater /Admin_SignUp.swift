@@ -259,7 +259,7 @@ struct AdminSchool: View {
                     .colorScheme(.light)
             } else {
                 if getSchools.schools.isEmpty {
-                    Text("No schools available, please select a different state.")
+                    Text("No schools available for \(state) yet, please check back later.")
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
                 } else {
