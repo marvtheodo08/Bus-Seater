@@ -69,7 +69,7 @@ struct Admin_SignUp: View {
                         }
                     }
                     else if currentStage == .school {
-                        Button(action: {}, label: {Text("Create Account")
+                        Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
                                 .foregroundStyle(Color.black)
                                 })
                     }
@@ -114,7 +114,7 @@ struct Admin_SignUp: View {
     func emailVerification(email: String, password: String, firstname: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error signing up:", error)
+                print("Error signing up:", error.localizedDescription)
                 return
             }
             
@@ -127,7 +127,7 @@ struct Admin_SignUp: View {
                 } else {
                     user.sendEmailVerification { error in
                         if let error = error {
-                            print("Error sending verification email:", error)
+                            print("Error sending verification email:", error.localizedDescription)
                         } else {
                             print("Verification email sent with display name:", firstname)
                         }
@@ -151,6 +151,8 @@ struct AdminEmail: View {
                 .padding(.bottom, 50)
             
             TextField("Email", text: $email)
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)

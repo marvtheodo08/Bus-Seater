@@ -82,7 +82,7 @@ struct Student_SignUp: View {
                         }
                     }
                     else if currentStage == .bus {
-                        Button(action: {}, label: {Text("Create Account")
+                        Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
                                 .foregroundStyle(Color.black)
                                 })
                     }
@@ -168,6 +168,8 @@ struct StudentEmail: View {
                 .padding(.bottom, 50)
             
             TextField("Email", text: $email)
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)

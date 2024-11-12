@@ -25,6 +25,8 @@ struct Login: View {
                 Spacer()
                     .frame(height: 50)
                 TextField("Email", text: $email)
+                    .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
                     .padding()
                     .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                     .accentColor(.black)
