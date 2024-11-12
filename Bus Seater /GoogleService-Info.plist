@@ -4,6 +4,8 @@
 <dict>
 	<key>API_KEY</key>
 	<string>AIzaSyAfyq1HUnIDdfAFimGpwUKOUj3kLydPZWk</string>
+	<key>AUTH_DOMAIN</key>
+    <string>bus-seater-d47e2.firebaseapp.com</string>
 	<key>GCM_SENDER_ID</key>
 	<string>699437239764</string>
 	<key>PLIST_VERSION</key>
