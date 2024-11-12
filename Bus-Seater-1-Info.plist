@@ -4,6 +4,8 @@
 <dict>
     <key>NSAppTransportSecurity</key>
     <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
         <key>NSExceptionDomains</key>
         <dict>
             <key>busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com</key>
