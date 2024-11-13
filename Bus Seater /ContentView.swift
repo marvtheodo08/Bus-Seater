@@ -37,8 +37,12 @@ struct ContentView: View {
             else{
                   //make Login screen appear
                     Login()
-                    //When Login screen appears
+                    //When Login screen appears 
                           .onAppear{
+                            //Make the sceen appear with an animation
+                            DispatchQueue.main.asyncAfter(){
+                                withAnimation(.easeOut(duration: 0.5))
+                            }
                             //if NotifsPermission was not ask
                               if notifsPermissions.WasPermissionAsked == false{
                                 //Ask NotifsPermission
