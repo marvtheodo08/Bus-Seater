@@ -11,7 +11,6 @@ import Combine
 import FirebaseAuth
 
 struct Student_SignUp: View {
-    @Environment(\.dismiss) private var dismiss
     
     // Enum for tracking the stages
     enum Stage {
@@ -39,8 +38,9 @@ struct Student_SignUp: View {
     @State private var bus: String = ""
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            Color.white.ignoresSafeArea()
+        ZStack {
+            Color(.white)
+                .ignoresSafeArea()
             
             VStack {
                 Spacer()
@@ -91,13 +91,8 @@ struct Student_SignUp: View {
             }
             .padding(.bottom, 250)
             
-            // Dismiss button (dismisses the entire signup process)
-            Button(action: { dismiss() }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.black)
-                    .font(.title)
-                    .padding()
-            }
+            
+            
         }
     }
 
