@@ -18,7 +18,7 @@ struct SignUp: View {
                 Color(.white)
                     .ignoresSafeArea()
                     Text("What type of account are you sigining up for?")
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .font(.system(size: 40))
                         .multilineTextAlignment(.center)
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -30,7 +30,7 @@ struct SignUp: View {
                                 Text("Student")
                                     .font(.system(size: 10))
                             }
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                             .frame(width: 40.0, height: 40.0)
                             .padding(25)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
@@ -45,7 +45,7 @@ struct SignUp: View {
                                 Text("Driver")
                                     .font(.system(size: 12))
                             }
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                             .frame(width: 40.0, height: 40.0)
                             .padding(25)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
@@ -60,7 +60,7 @@ struct SignUp: View {
                                 Text("Admin")
                                     .font(.system(size: 12))
                             }
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                             .frame(width: 40.0, height: 40.0)
                             .padding(25)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue)

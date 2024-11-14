@@ -22,7 +22,7 @@ struct Login: View {
                     Text("Welcome to Bus Seater, the world's first bus seating app!")
                         .multilineTextAlignment(.center)
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(.black)
                     Spacer()
                         .frame(height: 50)
                     TextField("Email", text: $email)
@@ -38,7 +38,7 @@ struct Login: View {
                         .accentColor(.black)
                         .colorScheme(.light)
                     Button(action: {}, label: {Text("Log in")
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(.white)
                             .padding()
                             .padding(.horizontal, 100)
                             .background(Color.blue

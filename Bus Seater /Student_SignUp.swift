@@ -70,7 +70,7 @@ struct Student_SignUp: View {
                         Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
                         }
                     }
                     Spacer()
@@ -78,12 +78,12 @@ struct Student_SignUp: View {
                         Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
                         }
                     }
                     else if currentStage == .bus {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
-                                .foregroundStyle(Color.black)
+                                .foregroundStyle(.black)
                                 })
                     }
                 }
@@ -159,7 +159,7 @@ struct StudentEmail: View {
             Text("What is your personal email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             TextField("Email", text: $email)
@@ -183,7 +183,7 @@ struct StudentPassword: View {
             Text("What is you desired password?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             SecureField("Password", text: $password)
@@ -206,7 +206,7 @@ struct StudentName: View {
             Text("What is your name?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             TextField("First name", text: $firstname)
@@ -233,7 +233,7 @@ struct StudentGrade: View {
         Text("What grade level are you in?")
             .multilineTextAlignment(.center)
             .font(.title)
-            .foregroundColor(.black)
+            .foregroundStyle(.black)
             .padding(.bottom, 50)
         Picker(
             selection: $grade,
@@ -270,7 +270,7 @@ struct StudentState: View {
             Text("What state do you live in?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             Picker("State", selection: $state) {
@@ -299,13 +299,13 @@ struct StudentSchool: View {
             } else {
                 if getSchools.schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
                 } else {
                     Text("What school do you attend?")
                         .multilineTextAlignment(.center)
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .padding(.bottom, 50)
                     
                     Picker("Select a School", selection: $school) {
@@ -334,7 +334,7 @@ struct StudentSchool: View {
             Text("What is you bus number/code?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             Picker("Bus", selection: $bus) {
             }

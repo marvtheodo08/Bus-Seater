@@ -56,7 +56,7 @@ struct Admin_SignUp: View {
                         Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
                         }
                     }
                     Spacer()
@@ -64,12 +64,12 @@ struct Admin_SignUp: View {
                         Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
                         }
                     }
                     else if currentStage == .school {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
-                                .foregroundStyle(Color.black)
+                                .foregroundStyle(.black)
                                 })
                     }
                 }
@@ -139,7 +139,7 @@ struct AdminEmail: View {
             Text("What is your admin email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             TextField("Email", text: $email)
@@ -163,7 +163,7 @@ struct AdminPassword: View {
             Text("What is your desired password?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             SecureField("Password", text: $password)
@@ -186,7 +186,7 @@ struct AdminName: View {
             Text("What is your name?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             TextField("First name", text: $firstname)
@@ -224,7 +224,7 @@ struct AdminState: View {
             Text("What state do you live in?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             Picker("State", selection: $state) {
@@ -252,13 +252,13 @@ struct AdminSchool: View {
             } else {
                 if getSchools.schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
                 } else {
                     Text("What school are you administrator of?")
                         .multilineTextAlignment(.center)
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .padding(.bottom, 50)
                     
                     Picker("Select a School", selection: $school) {

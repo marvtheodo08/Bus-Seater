@@ -69,7 +69,7 @@ struct Driver_SignUp: View {
                         Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
                         }
                     }
                     Spacer()
@@ -77,12 +77,12 @@ struct Driver_SignUp: View {
                         Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
                         }
                     }
                     else if currentStage == .bus {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
-                                .foregroundStyle(Color.black)
+                                .foregroundStyle(.black)
                                 })
                     }
                 }
@@ -155,7 +155,7 @@ struct DriverEmail: View {
             Text("What is your email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             TextField("Email", text: $email)
@@ -179,7 +179,7 @@ struct DriverPassword: View {
             Text("What is your desired password?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             SecureField("Password", text: $password)
@@ -202,7 +202,7 @@ struct DriverName: View {
             Text("What is your name?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             TextField("First name", text: $firstname)
@@ -240,7 +240,7 @@ struct DriverState: View {
             Text("What state do you live in?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
             Picker("State", selection: $state) {
@@ -269,13 +269,13 @@ struct DriverSchool: View {
             } else {
                 if getSchools.schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
                 } else {
                     Text("What school do you drive for?")
                         .multilineTextAlignment(.center)
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .padding(.bottom, 50)
                     
                     Picker("Select a School", selection: $school) {
@@ -306,7 +306,7 @@ struct DriverSchool: View {
             Text("What is your bus number/code?")
                 .multilineTextAlignment(.center)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
                 .padding(.bottom, 50)
             Picker("Bus", selection: $bus) {
             }
