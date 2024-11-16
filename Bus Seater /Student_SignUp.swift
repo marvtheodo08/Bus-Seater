@@ -143,6 +143,17 @@ func emailVerification(email: String, password: String, firstname: String) {
                         print("Verification email sent with display name:", firstname)
                     }
                 }
+                user.reload { error in
+                    if let error = error {
+                        print("Error reloading user:", error.localizedDescription)
+                    } else {
+                        if user.isEmailVerified {
+                            print("User email is verified")
+                        } else {
+                            print("User email is not yet verified")
+                        }
+                    }
+                }
             }
         }
     }
