@@ -21,12 +21,14 @@ struct Driver_SignUp: View {
         case state
         case school
         case bus
+        case verification
     }
     
     // Track current stage
     @State private var currentStage: Stage = .email
     
     // Shared variables across views
+    @State private var isVerified: Bool = false
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var firstname: String = ""
@@ -61,6 +63,9 @@ struct Driver_SignUp: View {
                 else if currentStage == .bus {
                     DriverBus(bus: $bus, school: $school)
                 }
+                else if currentStage == .verification {
+                    DriverVerification(isVerified: $isVerified)
+                }
                 
                 
                 // Navigation Buttons
@@ -89,7 +94,9 @@ struct Driver_SignUp: View {
                 .padding(.horizontal)
             }
             .padding(.bottom, 250)
-            
+        }
+        .fullScreenCover(isPresented: $isVerified) {
+            DriverHomepage()
         }
     }
     
@@ -100,6 +107,7 @@ struct Driver_SignUp: View {
         case .state: currentStage = .name
         case .school: currentStage = .state
         case .bus: currentStage = .school
+        case .verification: currentStage = .bus
         default: break
         }
     }
@@ -326,6 +334,47 @@ struct DriverSchool: View {
 
         }
     }
+
+struct DriverVerification: View {
+    @Binding var isVerified: Bool
+    @State private var pollingTimer: Timer? = nil
+
+    var body: some View {
+        VStack {
+            Text("We've sent a verification email. Once you've verified, you'll be redirected.")
+                .multilineTextAlignment(.center)
+                .padding()
+            ProgressView("Waiting for verification...")
+                .padding()
+        }
+        .onAppear {
+            startPolling()
+        }
+        .onDisappear {
+            stopPolling()
+        }
+    }
+    
+    func startPolling() {
+        pollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            guard let user = Auth.auth().currentUser else { return }
+            user.reload { error in
+                if let error = error {
+                    print("Error reloading user:", error.localizedDescription)
+                } else if user.isEmailVerified {
+                    print("User email is verified")
+                    isVerified = true
+                    stopPolling()
+                }
+            }
+        }
+    }
+    
+    func stopPolling() {
+        pollingTimer?.invalidate()
+        pollingTimer = nil
+    }
+}
     
     
     

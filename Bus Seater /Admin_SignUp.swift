@@ -18,8 +18,10 @@ struct Admin_SignUp: View {
         case name
         case state
         case school
+        case verification
     }
     
+    @State private var isVerified: Bool = false
     @State private var currentStage: Stage = .email
     @State private var email: String = ""
     @State private var password: String = ""
@@ -48,6 +50,8 @@ struct Admin_SignUp: View {
                     AdminState(state: $state)
                 case .school:
                     AdminSchool(school: $school, state: $state)
+                case .verification:
+                    AdminVerification(isVerified: $isVerified)
                 }
                 
                 // Navigation Buttons
@@ -76,7 +80,9 @@ struct Admin_SignUp: View {
                 .padding(.horizontal)
             }
             .padding(.bottom, 250)
-            
+        }
+        .fullScreenCover(isPresented: $isVerified) {
+            AdminHomepage()
         }
     }
     
@@ -88,6 +94,7 @@ struct Admin_SignUp: View {
         case .name: currentStage = .password
         case .state: currentStage = .name
         case .school: currentStage = .state
+        case .verification: currentStage = .school
         default: break
         }
     }
@@ -122,17 +129,7 @@ struct Admin_SignUp: View {
                             print("Error sending verification email:", error.localizedDescription)
                         } else {
                             print("Verification email sent with display name:", firstname)
-                        }
-                    }
-                    user.reload { error in
-                        if let error = error {
-                            print("Error reloading user:", error.localizedDescription)
-                        } else {
-                            if user.isEmailVerified {
-                                print("User email is verified")
-                            } else {
-                                print("User email is not yet verified")
-                            }
+                            currentStage = .verification
                         }
                     }
                 }
@@ -290,6 +287,48 @@ struct AdminSchool: View {
         }
     }
 }
+
+struct AdminVerification: View {
+    @Binding var isVerified: Bool
+    @State private var pollingTimer: Timer? = nil
+
+    var body: some View {
+        VStack {
+            Text("We've sent a verification email. Once you've verified, you'll be redirected.")
+                .multilineTextAlignment(.center)
+                .padding()
+            ProgressView("Waiting for verification...")
+                .padding()
+        }
+        .onAppear {
+            startPolling()
+        }
+        .onDisappear {
+            stopPolling()
+        }
+    }
+    
+    func startPolling() {
+        pollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            guard let user = Auth.auth().currentUser else { return }
+            user.reload { error in
+                if let error = error {
+                    print("Error reloading user:", error.localizedDescription)
+                } else if user.isEmailVerified {
+                    print("User email is verified")
+                    isVerified = true
+                    stopPolling()
+                }
+            }
+        }
+    }
+    
+    func stopPolling() {
+        pollingTimer?.invalidate()
+        pollingTimer = nil
+    }
+}
+
 
 
 
