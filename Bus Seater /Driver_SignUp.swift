@@ -34,7 +34,7 @@ struct Driver_SignUp: View {
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var state: String = ""
-    @State private var school: String = ""
+    @State private var schoolID: Int = 0
     @State private var bus: String = ""
     
     var body: some View {
@@ -58,10 +58,10 @@ struct Driver_SignUp: View {
                     DriverState(state: $state)
                 }
                 else if currentStage == .school {
-                    DriverSchool(school: $school, state: $state)
+                    DriverSchool(schoolID: $schoolID, state: $state)
                 }
                 else if currentStage == .bus {
-                    DriverBus(bus: $bus, school: $school)
+                    DriverBus(bus: $bus, schoolID: $schoolID)
                 }
                 else if currentStage == .verification {
                     DriverVerification(isVerified: $isVerified)
@@ -266,7 +266,7 @@ struct DriverState: View {
 
 // School stage View
 struct DriverSchool: View {
-    @Binding var school: String
+    @Binding var schoolID: Int
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
@@ -288,9 +288,9 @@ struct DriverSchool: View {
                         .foregroundStyle(.black)
                         .padding(.bottom, 50)
                     
-                    Picker("Select a School", selection: $school) {
+                    Picker("Select a School", selection: $schoolID) {
                         ForEach(getSchools.schools, id: \.id) { school in
-                            Text(school.schoolName).tag(school.schoolName)
+                            Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
                     .colorScheme(.light)
@@ -310,7 +310,7 @@ struct DriverSchool: View {
 // Bus stage View
 struct DriverBus: View {
     @Binding var bus: String
-    @Binding var school: String
+    @Binding var schoolID: Int
     
     var body: some View{
         Text("What is your bus number/code?")
@@ -331,10 +331,7 @@ struct DriverVerification: View {
     
     var body: some View {
         VStack {
-            Text("We've sent a verification email. Once you've verified, you'll be redirected.")
-                .multilineTextAlignment(.center)
-                .padding()
-            ProgressView("Waiting for verification...")
+            ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
                 .colorScheme(.light)
         }
         .onAppear {
