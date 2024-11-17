@@ -256,6 +256,7 @@ struct AdminSchool: View {
         VStack {
             if loading {
                 ProgressView("Loading available schools...")
+                    .multilineTextAlignment(.center)
                     .colorScheme(.light)
             } else {
                 if getSchools.schools.isEmpty {
@@ -295,6 +296,7 @@ struct AdminVerification: View {
     var body: some View {
         VStack {
             ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
+                .multilineTextAlignment(.center)
                 .colorScheme(.light)
         }
         .onAppear {
