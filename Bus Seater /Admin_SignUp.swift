@@ -296,9 +296,8 @@ struct AdminVerification: View {
         VStack {
             Text("We've sent a verification email. Once you've verified, you'll be redirected.")
                 .multilineTextAlignment(.center)
-                .padding()
             ProgressView("Waiting for verification...")
-                .padding()
+                .colorScheme(.light)
         }
         .onAppear {
             startPolling()

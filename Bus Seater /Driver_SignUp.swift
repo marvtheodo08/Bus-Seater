@@ -335,7 +335,7 @@ struct DriverVerification: View {
                 .multilineTextAlignment(.center)
                 .padding()
             ProgressView("Waiting for verification...")
-                .padding()
+                .colorScheme(.light)
         }
         .onAppear {
             startPolling()

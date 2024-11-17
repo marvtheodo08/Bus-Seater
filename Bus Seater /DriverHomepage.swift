@@ -9,7 +9,12 @@ import SwiftUI
 
 struct DriverHomepage: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Color(.white)
+                .ignoresSafeArea()
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                .foregroundStyle(.black)
+        }
     }
 }
 
