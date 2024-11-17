@@ -28,21 +28,18 @@ class GetSchools: ObservableObject {
     @Published var schools = [School]()
     private var cancellables = Set<AnyCancellable>()
     
-    func fetchSchools(state: String) async {
+    func fetchSchools(state: String) async throws -> [School] {
         
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { return }
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { throw URLError(.badURL) }
         
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            
-            if let decodedResponse = try? JSONDecoder().decode([School].self, from: data) {
-                DispatchQueue.main.async {
-                    self.schools = decodedResponse
-                }
-            }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let decodedResponse = try JSONDecoder().decode([School].self, from: data)
+        
+        DispatchQueue.main.async {
+            self.schools = decodedResponse
         }
-        catch {
-            print("Error fetching schools: \(error.localizedDescription)")
-        }
+        
+        return decodedResponse
     }
 }
