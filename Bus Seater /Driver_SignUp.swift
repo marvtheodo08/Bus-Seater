@@ -88,7 +88,7 @@ struct Driver_SignUp: View {
                     else if currentStage == .bus {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
                                 .foregroundStyle(.black)
-                                })
+                        })
                     }
                 }
                 .padding(.horizontal)
@@ -111,7 +111,7 @@ struct Driver_SignUp: View {
         default: break
         }
     }
-
+    
     func goNext() {
         switch currentStage {
         case .email: currentStage = .password
@@ -124,46 +124,36 @@ struct Driver_SignUp: View {
     }
     
     func emailVerification(email: String, password: String, firstname: String) {
-    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        if let error = error {
-            print("Error signing up:", error)
-            return
-        }
-        
-        guard let user = authResult?.user else { return }
-
-        // Update display name
-        let changeRequest = user.createProfileChangeRequest()
-        changeRequest.displayName = firstname
-        changeRequest.commitChanges { error in
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error updating display name:", error)
-            } else {
-                // Send verification email after updating display name
-                user.sendEmailVerification { error in
-                    if let error = error {
-                        print("Error sending verification email:", error)
-                    } else {
-                        print("Verification email sent with display name:", firstname)
-                    }
-                }
-                user.reload { error in
-                    if let error = error {
-                        print("Error reloading user:", error.localizedDescription)
-                    } else {
-                        if user.isEmailVerified {
-                            print("User email is verified")
+                print("Error signing up:", error)
+                return
+            }
+            
+            guard let user = authResult?.user else { return }
+            
+            // Update display name
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = firstname
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error updating display name:", error)
+                } else {
+                    // Send verification email after updating display name
+                    user.sendEmailVerification { error in
+                        if let error = error {
+                            print("Error sending verification email:", error)
                         } else {
-                            print("User email is not yet verified")
+                            print("Verification email sent with display name:", firstname)
+                            currentStage = .verification
                         }
                     }
+                    
                 }
-                
             }
         }
     }
-}
-
+    
 }
 
 // Email stage view
@@ -280,7 +270,7 @@ struct DriverSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
-
+    
     var body: some View {
         VStack {
             if loading {
@@ -316,29 +306,29 @@ struct DriverSchool: View {
     }
 }
 
-    
-    // Bus stage View
-    struct DriverBus: View {
-        @Binding var bus: String
-        @Binding var school: String
-        
-        var body: some View{
-            Text("What is your bus number/code?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .foregroundStyle(.black)
-                .padding(.bottom, 50)
-            Picker("Bus", selection: $bus) {
-            }
-            .colorScheme(.light)
 
+// Bus stage View
+struct DriverBus: View {
+    @Binding var bus: String
+    @Binding var school: String
+    
+    var body: some View{
+        Text("What is your bus number/code?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundStyle(.black)
+            .padding(.bottom, 50)
+        Picker("Bus", selection: $bus) {
         }
+        .colorScheme(.light)
+        
     }
+}
 
 struct DriverVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
-
+    
     var body: some View {
         VStack {
             Text("We've sent a verification email. Once you've verified, you'll be redirected.")
@@ -375,9 +365,7 @@ struct DriverVerification: View {
         pollingTimer = nil
     }
 }
-    
-    
-    
+
 #Preview {
     Driver_SignUp()
 }

@@ -88,7 +88,7 @@ struct Student_SignUp: View {
                     else if currentStage == .bus {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
                                 .foregroundStyle(.black)
-                                })
+                        })
                     }
                 }
                 .padding(.horizontal)
@@ -99,7 +99,7 @@ struct Student_SignUp: View {
             StudentHomepage()
         }
     }
-
+    
     func goBack() {
         switch currentStage {
         case .password: currentStage = .email
@@ -112,7 +112,7 @@ struct Student_SignUp: View {
         default: break
         }
     }
-
+    
     func goNext() {
         switch currentStage {
         case .email: currentStage = .password
@@ -124,46 +124,36 @@ struct Student_SignUp: View {
         default: break
         }
     }
-func emailVerification(email: String, password: String, firstname: String) {
-    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        if let error = error {
-            print("Error signing up:", error)
-            return
-        }
-        
-        guard let user = authResult?.user else { return }
-
-        // Update display name
-        let changeRequest = user.createProfileChangeRequest()
-        changeRequest.displayName = firstname
-        changeRequest.commitChanges { error in
+    func emailVerification(email: String, password: String, firstname: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error updating display name:", error)
-            } else {
-                // Send verification email after updating display name
-                user.sendEmailVerification { error in
-                    if let error = error {
-                        print("Error sending verification email:", error)
-                    } else {
-                        print("Verification email sent with display name:", firstname)
-                    }
-                }
-                user.reload { error in
-                    if let error = error {
-                        print("Error reloading user:", error.localizedDescription)
-                    } else {
-                        if user.isEmailVerified {
-                            print("User email is verified")
+                print("Error signing up:", error)
+                return
+            }
+            
+            guard let user = authResult?.user else { return }
+            
+            // Update display name
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = firstname
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error updating display name:", error)
+                } else {
+                    // Send verification email after updating display name
+                    user.sendEmailVerification { error in
+                        if let error = error {
+                            print("Error sending verification email:", error)
                         } else {
-                            print("User email is not yet verified")
+                            print("Verification email sent with display name:", firstname)
+                            currentStage = .verification
                         }
                     }
                 }
             }
         }
     }
-}
-
+    
 }
 
 // Email stage view
@@ -269,7 +259,7 @@ struct StudentGrade: View {
 
 // State stage View
 struct StudentState: View {
-    @Binding var state: String 
+    @Binding var state: String
     
     let states = [
         "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -306,7 +296,7 @@ struct StudentSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
-
+    
     var body: some View {
         VStack {
             if loading {
@@ -340,28 +330,28 @@ struct StudentSchool: View {
         }
     }
 }
+
+// Bus stage View
+struct StudentBus: View {
+    @Binding var bus: String
+    @Binding var school: String
     
-    // Bus stage View
-    struct StudentBus: View {
-        @Binding var bus: String
-        @Binding var school: String
-        
-        var body: some View{
-            Text("What is you bus number/code?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .foregroundStyle(.black)
-                .padding(.bottom, 50)
-            Picker("Bus", selection: $bus) {
-            }
-            .colorScheme(.light)
+    var body: some View{
+        Text("What is you bus number/code?")
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundStyle(.black)
+            .padding(.bottom, 50)
+        Picker("Bus", selection: $bus) {
         }
+        .colorScheme(.light)
     }
+}
 
 struct StudentVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
-
+    
     var body: some View {
         VStack {
             Text("We've sent a verification email. Once you've verified, you'll be redirected.")
@@ -398,7 +388,7 @@ struct StudentVerification: View {
         pollingTimer = nil
     }
 }
-    
-    #Preview {
-        Student_SignUp()
-    }
+
+#Preview {
+    Student_SignUp()
+}

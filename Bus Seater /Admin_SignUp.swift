@@ -11,7 +11,7 @@ import Combine
 import FirebaseAuth
 
 struct Admin_SignUp: View {
-        
+    
     enum Stage {
         case email
         case password
@@ -74,7 +74,7 @@ struct Admin_SignUp: View {
                     else if currentStage == .school {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
                                 .foregroundStyle(.black)
-                                })
+                        })
                     }
                 }
                 .padding(.horizontal)
@@ -216,7 +216,7 @@ struct AdminName: View {
 // State stage View
 struct AdminState: View {
     @Binding var state: String
-
+    
     let states = [
         "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
         "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
@@ -251,7 +251,7 @@ struct AdminSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
-
+    
     var body: some View {
         VStack {
             if loading {
@@ -291,7 +291,7 @@ struct AdminSchool: View {
 struct AdminVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
-
+    
     var body: some View {
         VStack {
             Text("We've sent a verification email. Once you've verified, you'll be redirected.")
@@ -328,9 +328,6 @@ struct AdminVerification: View {
         pollingTimer = nil
     }
 }
-
-
-
 
 #Preview {
     Admin_SignUp()
