@@ -22,32 +22,29 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App Logo" translatesAutoresizingMaskIntoConstraints="NO" id="h7B-sa-W2I">
+                                <rect key="frame" x="55" y="278" width="283" height="259"/>
+                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bus Seater" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-RWb">
-                                <rect key="frame" x="0.0" y="526" width="393" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="82c-4V-CNk"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="475" width="393" height="43"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App Logo" translatesAutoresizingMaskIntoConstraints="NO" id="h7B-sa-W2I">
-                                <rect key="frame" x="77" y="348" width="239" height="170"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DGt-sc-Emb"/>
                         <color key="backgroundColor" name="Background Color"/>
                         <constraints>
-                            <constraint firstItem="h7B-sa-W2I" firstAttribute="centerX" secondItem="GJd-Yh-RWb" secondAttribute="centerX" id="4GV-MH-KBt"/>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="BmW-xA-n8p"/>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="trailing" secondItem="obG-Y5-kRd" secondAttribute="trailing" id="Gxm-da-rdu"/>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="top" secondItem="h7B-sa-W2I" secondAttribute="bottom" constant="8" symbolic="YES" id="Kum-xz-1aR"/>
-                            <constraint firstItem="h7B-sa-W2I" firstAttribute="leading" secondItem="DGt-sc-Emb" secondAttribute="leading" constant="77" id="M1k-Cu-hGS"/>
-                            <constraint firstItem="DGt-sc-Emb" firstAttribute="bottom" secondItem="GJd-Yh-RWb" secondAttribute="bottom" constant="249" id="doX-ro-2Yw"/>
-                            <constraint firstItem="h7B-sa-W2I" firstAttribute="top" secondItem="DGt-sc-Emb" secondAttribute="top" constant="289" id="eqf-Ma-8EC"/>
+                            <constraint firstItem="h7B-sa-W2I" firstAttribute="leading" secondItem="DGt-sc-Emb" secondAttribute="leading" constant="55" id="0g9-DW-Crq"/>
+                            <constraint firstItem="DGt-sc-Emb" firstAttribute="bottom" secondItem="h7B-sa-W2I" secondAttribute="bottom" constant="281" id="HbT-yY-Zuu"/>
+                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="leading" secondItem="obG-Y5-kRd" secondAttribute="leading" id="S15-pn-L17"/>
+                            <constraint firstItem="h7B-sa-W2I" firstAttribute="centerX" secondItem="GJd-Yh-RWb" secondAttribute="centerX" id="agx-7P-05D"/>
+                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="trailing" secondItem="obG-Y5-kRd" secondAttribute="trailing" id="dOt-kh-PXy"/>
+                            <constraint firstItem="h7B-sa-W2I" firstAttribute="top" secondItem="DGt-sc-Emb" secondAttribute="top" constant="219" id="jiq-HF-GQi"/>
+                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mFx-Ki-ulR"/>
                             <constraint firstAttribute="bottomMargin" secondItem="obG-Y5-kRd" secondAttribute="bottom" constant="-14" id="nad-UT-j1Y"/>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="leading" secondItem="obG-Y5-kRd" secondAttribute="leading" id="o9f-Lg-QUa"/>
-                            <constraint firstAttribute="trailing" secondItem="GJd-Yh-RWb" secondAttribute="trailing" id="t4K-pa-aGZ"/>
+                            <constraint firstAttribute="trailing" secondItem="GJd-Yh-RWb" secondAttribute="trailing" id="pTU-Zm-3Cf"/>
+                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="top" secondItem="DGt-sc-Emb" secondAttribute="top" constant="416" id="qDY-8w-wdz"/>
                         </constraints>
                     </view>
                 </viewController>
