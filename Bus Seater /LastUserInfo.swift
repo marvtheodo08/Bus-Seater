@@ -13,4 +13,6 @@ class LastUserInfo: ObservableObject{
     @Published var Firstname: String = ""
     @Published var Lastname: String = ""
     @Published var AccountType: String = ""
+    @Published var accountID: Int = 0
+    @Published var schoolID: Int = 0
 }
