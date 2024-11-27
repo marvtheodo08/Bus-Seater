@@ -29,7 +29,7 @@
 		0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7C6942C7627600018C041 /* Admin_SignUp.swift */; };
 		7E0FE3C52CF6CAA90088B7FA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */; };
 		7E37DF1F2CF7DAED001EB870 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF1E2CF7DAED001EB870 /* User.swift */; };
-		7E37DF212CF7DB11001EB870 /* StudentUserVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF202CF7DB11001EB870 /* StudentUserVerification.swift */; };
+		7E37DF212CF7DB11001EB870 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF202CF7DB11001EB870 /* Student.swift */; };
 		7E37DF232CF7DD63001EB870 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF222CF7DD63001EB870 /* Bus.swift */; };
 		7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* Schools.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +76,7 @@
 		0CC7C6942C7627600018C041 /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
 		7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		7E37DF1E2CF7DAED001EB870 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		7E37DF202CF7DB11001EB870 /* StudentUserVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentUserVerification.swift; sourceTree = "<group>"; };
+		7E37DF202CF7DB11001EB870 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		7E37DF222CF7DD63001EB870 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 		7E85D49D2CE1957700341DE7 /* Schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +137,7 @@
 				0C5F17042CCB13C500C62695 /* AdminHomepage.swift */,
 				0C5F17022CCB134900C62695 /* DriverHomepage.swift */,
 				0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */,
-				7E37DF202CF7DB11001EB870 /* StudentUserVerification.swift */,
+				7E37DF202CF7DB11001EB870 /* Student.swift */,
 				7E37DF222CF7DD63001EB870 /* Bus.swift */,
 				7E37DF1E2CF7DAED001EB870 /* User.swift */,
 				0CC7C6942C7627600018C041 /* Admin_SignUp.swift */,
@@ -319,7 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C75DB2A2C70BE79005247BC /* StudentNotifications.swift in Sources */,
-				7E37DF212CF7DB11001EB870 /* StudentUserVerification.swift in Sources */,
+				7E37DF212CF7DB11001EB870 /* Student.swift in Sources */,
 				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
