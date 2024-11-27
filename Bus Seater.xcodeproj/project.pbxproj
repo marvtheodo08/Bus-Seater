@@ -14,7 +14,6 @@
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* StudentHomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* StudentHomepage.swift */; };
-		0C75DB252C70BE6A005247BC /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB985082C271AC700920872 /* SplashScreen.swift */; };
 		0C75DB262C70BE6D005247BC /* Student_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */; };
 		0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B42772C527417000ADE5F /* Driver_SignUp.swift */; };
 		0C75DB292C70BE77005247BC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C278BF22C3C90080009B5A4 /* SignUp.swift */; };
@@ -28,6 +27,7 @@
 		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
 		0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */; };
 		0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7C6942C7627600018C041 /* Admin_SignUp.swift */; };
+		7E0FE3C52CF6CAA90088B7FA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */; };
 		7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* Schools.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,9 +69,9 @@
 		0C7B427D2C527B5F000ADE5F /* StudentHomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentHomepage.swift; sourceTree = "<group>"; };
 		0C8EF4052CC8906D004133EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0CB985082C271AC700920872 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0CC7C6942C7627600018C041 /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
+		7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		7E85D49D2CE1957700341DE7 /* Schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,11 +126,11 @@
 			children = (
 				0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */,
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
+				7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */,
 				0C7B427D2C527B5F000ADE5F /* StudentHomepage.swift */,
 				0C5F17042CCB13C500C62695 /* AdminHomepage.swift */,
 				0C5F17022CCB134900C62695 /* DriverHomepage.swift */,
 				0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */,
-				0CB985082C271AC700920872 /* SplashScreen.swift */,
 				0CC7C6942C7627600018C041 /* Admin_SignUp.swift */,
 				0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */,
 				0C7B42772C527417000ADE5F /* Driver_SignUp.swift */,
@@ -283,6 +283,7 @@
 			files = (
 				0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */,
 				0C8EF4062CC8906D004133EA /* GoogleService-Info.plist in Resources */,
+				7E0FE3C52CF6CAA90088B7FA /* Launch Screen.storyboard in Resources */,
 				0C75DB2D2C70BE91005247BC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +313,6 @@
 				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
-				0C75DB252C70BE6A005247BC /* SplashScreen.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
 				0C5F17072CCB1F5D00C62695 /* LastUserInfo.swift in Sources */,
 				0C5F17052CCB13C500C62695 /* AdminHomepage.swift in Sources */,
@@ -495,6 +495,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
@@ -532,6 +534,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
