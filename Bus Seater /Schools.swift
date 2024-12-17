@@ -28,6 +28,7 @@ class GetSchools: ObservableObject {
     @Published var schools = [School]()
     private var cancellables = Set<AnyCancellable>()
     
+    @MainActor
     func fetchSchools(state: String) async {
         
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else { return }
@@ -36,9 +37,7 @@ class GetSchools: ObservableObject {
             let (data, _) = try await URLSession.shared.data(from: url)
             
             if let decodedResponse = try? JSONDecoder().decode([School].self, from: data) {
-                DispatchQueue.main.async {
-                    self.schools = decodedResponse
-                }
+              self.schools = decodedResponse
             }
         }
         catch {
