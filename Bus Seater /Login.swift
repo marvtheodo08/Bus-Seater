@@ -46,7 +46,7 @@ struct Login: View {
                                 .padding()
                                 .padding(.horizontal, 100)
                                 .background(Color.blue
-                                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                                 .padding()
                         })
                         Button(action: {userSigningUp = true}, label: {Text("Don't have an account? Sign up here!")})
@@ -57,8 +57,8 @@ struct Login: View {
                     }
                     
                 }
-
-                }
+                
+            }
         }
         
     }
@@ -75,7 +75,7 @@ struct Login: View {
         }
     }
     
-
+    
 }
 
 struct LoggingUserIn: View {
