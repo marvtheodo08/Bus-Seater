@@ -21,41 +21,43 @@ struct Login: View {
                 if userLoggingIn {
                     LoggingUserIn()
                 }
-                VStack {
-                    Text("Welcome to Bus Seater, the world's first bus seating app!")
-                        .multilineTextAlignment(.center)
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        .foregroundStyle(.black)
-                    Spacer()
-                        .frame(height: 50)
-                    TextField("Email", text: $email)
-                        .keyboardType(.emailAddress)
-                        .textContentType(.emailAddress)
-                        .padding()
-                        .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
-                        .accentColor(.black)
-                        .colorScheme(.light)
-                    SecureField("Password", text: $password)
-                        .padding()
-                        .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
-                        .accentColor(.black)
-                        .colorScheme(.light)
-                    Button(action: {login(email: email, password: password)}, label: {Text("Log in")
-                            .foregroundStyle(.white)
+                else {
+                    VStack {
+                        Text("Welcome to Bus Seater, the world's first bus seating app!")
+                            .multilineTextAlignment(.center)
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            .foregroundStyle(.black)
+                        Spacer()
+                            .frame(height: 50)
+                        TextField("Email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .textContentType(.emailAddress)
                             .padding()
-                            .padding(.horizontal, 100)
-                            .background(Color.blue
-                                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                            .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                            .accentColor(.black)
+                            .colorScheme(.light)
+                        SecureField("Password", text: $password)
                             .padding()
-                    })
-                    Button(action: {userSigningUp = true}, label: {Text("Don't have an account? Sign up here!")})
+                            .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                            .accentColor(.black)
+                            .colorScheme(.light)
+                        Button(action: {login(email: email, password: password)}, label: {Text("Log in")
+                                .foregroundStyle(.white)
+                                .padding()
+                                .padding(.horizontal, 100)
+                                .background(Color.blue
+                                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
+                                .padding()
+                        })
+                        Button(action: {userSigningUp = true}, label: {Text("Don't have an account? Sign up here!")})
+                    }
+                    .padding()
+                    .navigationDestination(isPresented: $userSigningUp) {
+                        SignUp()
+                    }
+                    
                 }
-                .padding()
-                .navigationDestination(isPresented: $userSigningUp) {
-                    SignUp()
                 }
-                
-            }
             
         }
     }
