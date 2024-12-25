@@ -12,6 +12,7 @@ import FirebaseAuth
 
 struct Admin_SignUp: View {
     
+    // Enum suggested by ChatGPT
     enum Stage {
         case email
         case password
@@ -29,6 +30,8 @@ struct Admin_SignUp: View {
     @State private var lastname: String = ""
     @State private var state: String = ""
     @State private var schoolID: Int = 0
+    @EnvironmentObject var newaccount: NewAccount
+    @EnvironmentObject var account: Account
     
     var body: some View {
         ZStack {
@@ -51,10 +54,10 @@ struct Admin_SignUp: View {
                 case .school:
                     AdminSchool(schoolID: $schoolID, state: $state)
                 case .verification:
-                    AdminVerification(isVerified: $isVerified)
+                    AdminVerification(isVerified: $isVerified, firstname: $firstname, lastname: $lastname, email: $email, schoolID: $schoolID)
                 }
                 
-                // Navigation Buttons
+                // Navigation Buttons sugguested by ChatGPT
                 HStack {
                     if currentStage != .email {
                         Button(action: { goBack() }) {
@@ -298,6 +301,12 @@ struct AdminSchool: View {
 struct AdminVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
+    @Binding var firstname: String
+    @Binding var lastname: String
+    @Binding var email: String
+    @Binding var schoolID: Int
+    @EnvironmentObject var newaccount: NewAccount
+    @EnvironmentObject var account: Account
     
     var body: some View {
         VStack {
@@ -306,10 +315,25 @@ struct AdminVerification: View {
                 .colorScheme(.light)
         }
         .onAppear {
-            startPolling()
-        }
-        .onDisappear {
-            stopPolling()
+            if !isVerified{
+                startPolling()
+            }
+            else {
+                account.firstName = firstname
+                account.lastName = lastname
+                account.email = email
+                account.accountType = "admin"
+                account.schoolID = schoolID
+                
+                Task {
+                    do {
+                        _ = try await newaccount.createAccount(newAccount: account)
+                    } catch {
+                        print("Failed to fetch schools: \(error)")
+                    }
+                    
+                }
+            }
         }
     }
     

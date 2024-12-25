@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 
-class Account: Identifiable, Codable, ObservableObject {
-    let firstName: String
-    let lastName: String
-    let email: String
-    let accountType: String
-    let schoolID: Int
+class Account: Codable, ObservableObject {
+    var firstName: String
+    var lastName: String
+    var email: String
+    var accountType: String
+    var schoolID: Int
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
@@ -29,7 +29,7 @@ class NewAccount: ObservableObject {
     @Published var newAccount: Account? // Single account instead of an array
     private var cancellables = Set<AnyCancellable>()
     
-    func createAdminAccount() async throws -> Account {
+    func createAccount(newAccount: Account) async throws -> Account {
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/create/account/admin") else {
             throw URLError(.badURL)
         }

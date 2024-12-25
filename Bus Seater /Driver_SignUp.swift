@@ -13,6 +13,7 @@ import FirebaseAuth
 
 struct Driver_SignUp: View {
     
+    // Enum suggested by ChatGPT
     // Enum for tracking the stages
     enum Stage {
         case email
@@ -64,11 +65,11 @@ struct Driver_SignUp: View {
                     DriverBus(bus: $bus, schoolID: $schoolID)
                 }
                 else if currentStage == .verification {
-                    DriverVerification(isVerified: $isVerified)
+                    DriverVerification(isVerified: $isVerified, firstname: $firstname, lastname: $lastname, email: $email, schoolID: $schoolID)
                 }
                 
                 
-                // Navigation Buttons
+                // Navigation Buttons sugguested by ChatGPT
                 HStack {
                     if currentStage != .email {
                         Button(action: { goBack() }) {
@@ -335,6 +336,12 @@ struct DriverBus: View {
 struct DriverVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
+    @Binding var firstname: String
+    @Binding var lastname: String
+    @Binding var email: String
+    @Binding var schoolID: Int
+    @EnvironmentObject var newaccount: NewAccount
+    @EnvironmentObject var account: Account
     
     var body: some View {
         VStack {
@@ -343,10 +350,25 @@ struct DriverVerification: View {
                 .colorScheme(.light)
         }
         .onAppear {
-            startPolling()
-        }
-        .onDisappear {
-            stopPolling()
+            if !isVerified{
+                startPolling()
+            }
+            else {
+                account.firstName = firstname
+                account.lastName = lastname
+                account.email = email
+                account.accountType = "driver"
+                account.schoolID = schoolID
+                
+                Task {
+                    do {
+                        _ = try await newaccount.createAccount(newAccount: account)
+                    } catch {
+                        print("Failed to fetch schools: \(error)")
+                    }
+                    
+                }
+            }
         }
     }
     

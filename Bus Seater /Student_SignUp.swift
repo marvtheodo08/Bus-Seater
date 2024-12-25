@@ -12,6 +12,7 @@ import FirebaseAuth
 
 struct Student_SignUp: View {
     
+    // Enum suggested by ChatGPT
     // Enum for tracking the stages
     enum Stage {
         case email
@@ -68,7 +69,7 @@ struct Student_SignUp: View {
                 }
                 
                 
-                // Navigation Buttons
+                // Navigation Buttons sugguested by ChatGPT
                 HStack {
                     if currentStage != .email {
                         Button(action: { goBack() }) {
