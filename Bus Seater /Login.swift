@@ -81,7 +81,7 @@ struct Login: View {
 struct LoggingUserIn: View {
     var body: some View {
         VStack {
-            ProgressView("Logging User In...")
+            ProgressView("Logging you in...")
                 .multilineTextAlignment(.center)
                 .colorScheme(.light)
         }
