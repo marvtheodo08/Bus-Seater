@@ -282,8 +282,14 @@ struct AdminSchool: View {
         }
         .onAppear {
             Task {
-                await getSchools.fetchSchools(state: state)
+                do {
+                    loading = true
+                    try await getSchools.fetchSchools(state: state)
+                } catch {
+                    print("Failed to fetch schools: \(error)")
+                }
                 loading = false
+                
             }
         }
     }
