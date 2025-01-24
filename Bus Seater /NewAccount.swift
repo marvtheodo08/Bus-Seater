@@ -8,6 +8,23 @@
 import Foundation
 import Combine
 
+class Account: Codable, ObservableObject {
+    var firstName: String
+    var lastName: String
+    var email: String
+    var accountType: String
+    var schoolID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case email
+        case accountType = "account_type"
+        case schoolID = "school_id"
+    }
+    
+}
+
 class NewAccount: ObservableObject {
     @Published var newAccount: Account? // Single account instead of an array
     private var cancellables = Set<AnyCancellable>()

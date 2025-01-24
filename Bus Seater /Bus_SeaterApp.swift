@@ -24,6 +24,7 @@ struct YourApp: App {
   @StateObject private var lastUserInfo = LastUserInfo()
   @StateObject private var notifsPermissions = NotifsPermissions()
   @StateObject private var getSchools = GetSchools()
+  @StateObject private var account = try! Account(from: JSONDecoder.self as! Decoder)
   @StateObject private var newaccount = NewAccount()
   var body: some Scene {
     WindowGroup {
@@ -34,6 +35,7 @@ struct YourApp: App {
       .environmentObject(notifsPermissions)
       .environmentObject(getSchools)
       .environmentObject(newaccount)
+      .environmentObject(account)
     }
   }
 }
