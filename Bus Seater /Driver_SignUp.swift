@@ -341,7 +341,6 @@ struct DriverVerification: View {
     @Binding var email: String
     @Binding var schoolID: Int
     @EnvironmentObject var newaccount: NewAccount
-    @EnvironmentObject var account: Account
     
     var body: some View {
         VStack {
@@ -352,22 +351,6 @@ struct DriverVerification: View {
         .onAppear {
             if !isVerified{
                 startPolling()
-            }
-            else {
-                account.firstName = firstname
-                account.lastName = lastname
-                account.email = email
-                account.accountType = "driver"
-                account.schoolID = schoolID
-                
-                Task {
-                    do {
-                        _ = try await newaccount.createAccount(newAccount: account)
-                    } catch {
-                        print("Failed to fetch schools: \(error)")
-                    }
-                    
-                }
             }
         }
     }

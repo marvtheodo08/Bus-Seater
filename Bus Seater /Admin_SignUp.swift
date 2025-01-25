@@ -30,8 +30,6 @@ struct Admin_SignUp: View {
     @State private var lastname: String = ""
     @State private var state: String = ""
     @State private var schoolID: Int = 0
-    @EnvironmentObject var newaccount: NewAccount
-    @EnvironmentObject var account: Account
     
     var body: some View {
         ZStack {
@@ -306,7 +304,6 @@ struct AdminVerification: View {
     @Binding var email: String
     @Binding var schoolID: Int
     @EnvironmentObject var newaccount: NewAccount
-    @EnvironmentObject var account: Account
     
     var body: some View {
         VStack {
@@ -317,22 +314,6 @@ struct AdminVerification: View {
         .onAppear {
             if !isVerified{
                 startPolling()
-            }
-            else {
-                account.firstName = firstname
-                account.lastName = lastname
-                account.email = email
-                account.accountType = "admin"
-                account.schoolID = schoolID
-                
-                Task {
-                    do {
-                        _ = try await newaccount.createAccount(newAccount: account)
-                    } catch {
-                        print("Failed to fetch schools: \(error)")
-                    }
-                    
-                }
             }
         }
     }
