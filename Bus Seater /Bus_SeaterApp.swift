@@ -24,7 +24,7 @@ struct YourApp: App {
   @StateObject private var lastUserInfo = LastUserInfo()
   @StateObject private var notifsPermissions = NotifsPermissions()
   @StateObject private var getSchools = GetSchools()
-  @StateObject private var newaccount = NewAccount()
+  @StateObject private var newAccount = NewAccount()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -33,7 +33,7 @@ struct YourApp: App {
       .environmentObject(lastUserInfo)
       .environmentObject(notifsPermissions)
       .environmentObject(getSchools)
-      .environmentObject(newaccount)
+      .environmentObject(newAccount)
     }
   }
 }

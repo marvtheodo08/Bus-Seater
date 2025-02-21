@@ -25,6 +25,23 @@ struct Driver_SignUp: View {
         case verification
     }
     
+    class Account: Codable, ObservableObject {
+        var firstName: String
+        var lastName: String
+        var email: String
+        var accountType: String
+        var schoolID: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case firstName = "first_name"
+            case lastName = "last_name"
+            case email
+            case accountType = "account_type"
+            case schoolID = "school_id"
+        }
+        
+    }
+    
     // Track current stage
     @State private var currentStage: Stage = .email
     
@@ -340,7 +357,6 @@ struct DriverVerification: View {
     @Binding var lastname: String
     @Binding var email: String
     @Binding var schoolID: Int
-    @EnvironmentObject var newaccount: NewAccount
     
     var body: some View {
         VStack {
@@ -355,6 +371,7 @@ struct DriverVerification: View {
         }
     }
     
+    //Function created by ChatGPT
     func startPolling() {
         pollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             guard let user = Auth.auth().currentUser else { return }

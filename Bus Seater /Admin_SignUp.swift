@@ -299,11 +299,35 @@ struct AdminSchool: View {
 struct AdminVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
+    @EnvironmentObject var newAccount: NewAccount
     @Binding var firstname: String
     @Binding var lastname: String
     @Binding var email: String
     @Binding var schoolID: Int
-    @EnvironmentObject var newaccount: NewAccount
+    
+    class Account: Codable {
+        var firstName: String
+        var lastName: String
+        var email: String
+        var accountType: String
+        var schoolID: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case firstName = "first_name"
+            case lastName = "last_name"
+            case email
+            case accountType = "account_type"
+            case schoolID = "school_id"
+        }
+        
+        init(firstName: String, lastName: String, email: String, accountType: String, schoolID: Int) {
+            self.firstName = firstName
+            self.lastName = lastName
+            self.email = email
+            self.accountType = accountType
+            self.schoolID = schoolID
+        }
+    }
     
     var body: some View {
         VStack {
@@ -315,9 +339,13 @@ struct AdminVerification: View {
             if !isVerified{
                 startPolling()
             }
+            else {
+                newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
+            }
         }
     }
     
+    // Function created by ChatGPT
     func startPolling() {
         pollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             guard let user = Auth.auth().currentUser else { return }

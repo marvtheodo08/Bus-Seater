@@ -24,6 +24,24 @@ struct Student_SignUp: View {
         case bus
         case verification
     }
+    
+    class Account: Codable, ObservableObject {
+        var firstName: String
+        var lastName: String
+        var email: String
+        var accountType: String
+        var schoolID: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case firstName = "first_name"
+            case lastName = "last_name"
+            case email
+            case accountType = "account_type"
+            case schoolID = "school_id"
+        }
+        
+    }
+    
     @EnvironmentObject var getSchools: GetSchools
     
     // Track current stage
@@ -373,6 +391,7 @@ struct StudentVerification: View {
         }
     }
     
+    // Function created by ChatGPT
     func startPolling() {
         pollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             guard let user = Auth.auth().currentUser else { return }
