@@ -39,7 +39,7 @@ class NewAccount: ObservableObject {
     
     //Function prompted by ChatGPT
     func addAccount(_ account: Account) async throws {
-        guard let url = URL(string: "https://http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/account/create") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/create/account/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -50,7 +50,7 @@ class NewAccount: ObservableObject {
             print("Failed to encode parameters: \(error)")
         }
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
             throw URLError(.badServerResponse)
         }
