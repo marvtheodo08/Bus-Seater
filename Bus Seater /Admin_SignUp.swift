@@ -305,30 +305,6 @@ struct AdminVerification: View {
     @Binding var email: String
     @Binding var schoolID: Int
     
-    class Account: Codable {
-        var firstName: String
-        var lastName: String
-        var email: String
-        var accountType: String
-        var schoolID: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case firstName = "first_name"
-            case lastName = "last_name"
-            case email
-            case accountType = "account_type"
-            case schoolID = "school_id"
-        }
-        
-        init(firstName: String, lastName: String, email: String, accountType: String, schoolID: Int) {
-            self.firstName = firstName
-            self.lastName = lastName
-            self.email = email
-            self.accountType = accountType
-            self.schoolID = schoolID
-        }
-    }
-    
     var body: some View {
         VStack {
             ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
