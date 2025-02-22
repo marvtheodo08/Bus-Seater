@@ -30,6 +30,8 @@ struct Admin_SignUp: View {
     @State private var lastname: String = ""
     @State private var state: String = ""
     @State private var schoolID: Int = 0
+    @EnvironmentObject var newAccount: NewAccount
+
     
     var body: some View {
         ZStack {
@@ -84,6 +86,11 @@ struct Admin_SignUp: View {
         }
         .fullScreenCover(isPresented: $isVerified) {
             AdminHomepage()
+                .onAppear() {
+                    Task {
+                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
+                    }
+                }
         }
     }
     
@@ -299,7 +306,6 @@ struct AdminSchool: View {
 struct AdminVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
-    @EnvironmentObject var newAccount: NewAccount
     @Binding var firstname: String
     @Binding var lastname: String
     @Binding var email: String
@@ -316,7 +322,7 @@ struct AdminVerification: View {
                 startPolling()
             }
             else {
-                newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
+
             }
         }
     }

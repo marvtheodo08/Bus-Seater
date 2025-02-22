@@ -10,7 +10,9 @@ import Combine
 
 class NewAccount: ObservableObject {
     
-    class Account: Codable {
+    private var cancellables = Set<AnyCancellable>()
+    
+    struct Account: Codable {
         var firstName: String
         var lastName: String
         var email: String
@@ -35,11 +37,8 @@ class NewAccount: ObservableObject {
         
     }
     
-    @Published var account = [Account]()
-    private var cancellables = Set<AnyCancellable>()
-    
     //Function prompted by ChatGPT
-    func addAccount(_ account: Account) {
+    func addAccount(_ account: Account) async throws {
         guard let url = URL(string: "https://http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/account/create") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -51,20 +50,11 @@ class NewAccount: ObservableObject {
             print("Failed to encode parameters: \(error)")
         }
         
-        // Send the request
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
-            if let httpResponse = response as? HTTPURLResponse {
-                print("Response code: \(httpResponse.statusCode)")
-            }
-            if let data = data, let responseString = String(data: data, encoding: .utf8) {
-                print("Response data: \(responseString)")
-            }
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+            throw URLError(.badServerResponse)
         }
-        task.resume()
+        
     }
     
 }
