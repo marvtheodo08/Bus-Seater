@@ -6,11 +6,8 @@
 //
 
 import Foundation
-import Combine
 
 class NewAccount: ObservableObject {
-    
-    private var cancellables = Set<AnyCancellable>()
     
     struct Account: Codable {
         var firstName: String

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Foundation
-import Combine
 import FirebaseAuth
 
 struct Student_SignUp: View {

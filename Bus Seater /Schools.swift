@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 struct School: Identifiable, Codable {
     let id: Int
@@ -26,7 +25,6 @@ struct School: Identifiable, Codable {
 }
 class GetSchools: ObservableObject {
     @Published var schools = [School]()
-    private var cancellables = Set<AnyCancellable>()
     
     @MainActor
     func fetchSchools(state: String) async throws {
