@@ -12,6 +12,7 @@ import FirebaseAuth
 struct Admin_SignUp: View {
     
     // Enum suggested by ChatGPT
+    // Enum for tracking the stages
     enum Stage {
         case email
         case password
