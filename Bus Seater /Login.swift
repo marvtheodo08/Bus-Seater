@@ -57,7 +57,7 @@ struct Login: View {
                     }
                     
                 }
-                }
+            }
             
         }
     }

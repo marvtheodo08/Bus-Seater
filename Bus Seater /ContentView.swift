@@ -13,19 +13,39 @@ struct ContentView: View {
     @EnvironmentObject var lastUserInfo: LastUserInfo
     @EnvironmentObject var notifsPermissions: NotifsPermissions
     var body: some View{
-        //make Login screen appear
-        Login()
-        //When Login screen appears
-            .onAppear{
-                //if NotifsPermission was not ask
-                if notifsPermissions.WasPermissionAsked == false{
-                    //Ask NotifsPermission
-                    requestNotificationPermission()
-                    //Change that Permission was asked
-                    notifsPermissions.changeAskedtoTrue()
-                }
+        // If there was a user logged in
+        if lastUserInfo.WasUserLoggedIn == true{
+            // If that user was an admin
+            if lastUserInfo.AccountType == "admin"{
+                // Display Admin Homepage
+                AdminHomepage()
             }
-        
+            // Otherwise if the user was a driver
+            else if lastUserInfo.AccountType == "driver"{
+                // Display Driver Homepage
+                DriverHomepage()
+            }
+            // Else Display the Student Homepage
+            else {
+                StudentHomepage()
+            }
+        }
+        // Otherwise
+        else{
+            //make Login screen appear
+            Login()
+            //When Login screen appears
+                .onAppear{
+                    //if NotifsPermission was not ask
+                    if notifsPermissions.WasPermissionAsked == false{
+                        //Ask NotifsPermission
+                        requestNotificationPermission()
+                        //Change that Permission was asked
+                        notifsPermissions.changeAskedtoTrue()
+                    }
+                }
+        }
+
     }
         // Function for asking Notifs Permission
     func requestNotificationPermission() {

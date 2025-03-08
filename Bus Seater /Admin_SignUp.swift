@@ -31,7 +31,8 @@ struct Admin_SignUp: View {
     @State private var state: String = ""
     @State private var schoolID: Int = 0
     @EnvironmentObject var newAccount: NewAccount
-
+    @EnvironmentObject var lastUserInfo: LastUserInfo
+    @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     
     var body: some View {
         ZStack {
@@ -89,6 +90,16 @@ struct Admin_SignUp: View {
                 .onAppear() {
                     Task {
                         try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
+                        try await obtainAccountInfo.obtainAccountInfo(email: email)
+                        for account in obtainAccountInfo.account{
+                            lastUserInfo.Firstname = account.firstName
+                            lastUserInfo.Lastname = account.lastName
+                            lastUserInfo.schoolID = account.schoolID
+                            lastUserInfo.Email = account.email
+                            lastUserInfo.AccountType = account.accountType
+                            lastUserInfo.accountID = account.id
+                        }
+                        lastUserInfo.WasUserLoggedIn = true
                     }
                 }
         }
