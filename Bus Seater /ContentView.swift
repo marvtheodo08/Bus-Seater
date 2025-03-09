@@ -47,7 +47,7 @@ struct ContentView: View {
         }
 
     }
-        // Function for asking Notifs Permission
+    // Function for asking Notifs Permission
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
