@@ -91,15 +91,6 @@ struct Admin_SignUp: View {
                     Task {
                         try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
                         try await obtainAccountInfo.obtainAccountInfo(email: email)
-                        for account in obtainAccountInfo.account{
-                            lastUserInfo.Firstname = account.firstName
-                            lastUserInfo.Lastname = account.lastName
-                            lastUserInfo.schoolID = account.schoolID
-                            lastUserInfo.Email = account.email
-                            lastUserInfo.AccountType = account.accountType
-                            lastUserInfo.accountID = account.id
-                        }
-                        lastUserInfo.WasUserLoggedIn = true
                     }
                 }
         }
