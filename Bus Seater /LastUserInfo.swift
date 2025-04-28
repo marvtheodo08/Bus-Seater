@@ -46,7 +46,7 @@ class LastUserInfo: ObservableObject{
 }
 
 class ObtainAccountInfo: ObservableObject {
-    @Published var account = [Account]()
+    @Published var account: Account?
     
     @MainActor
     func obtainAccountInfo(email: String) async throws {
@@ -60,8 +60,11 @@ class ObtainAccountInfo: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let accountInfo = try JSONDecoder().decode([Account].self, from: data)
+        let accountInfo = try JSONDecoder().decode(Account.self, from: data)
         
         self.account = accountInfo
+        if let account = account {
+            print(account)
+        }
     }
 }
