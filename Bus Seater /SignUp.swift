@@ -82,15 +82,6 @@ struct SignUp: View {
 
             }
         }
-        .onAppear{
-            Task {
-                do {
-                    try await obtainAccountInfo.obtainAccountInfo(email: "marv.theodo@gmail.com")
-                } catch {
-                    print("Error fetching account:", error)
-                }
-            }
-        }
     }
 }
 

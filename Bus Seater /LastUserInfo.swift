@@ -23,16 +23,6 @@ struct Account: Codable {
         case accountType = "account_type"
         case schoolID = "school_id"
     }
-    
-    init(id: Int, firstName: String, lastName: String, email: String, accountType: String, schoolID: Int) {
-        self.id = id
-        self.firstName = firstName
-        self.lastName = lastName
-        self.email = email
-        self.accountType = accountType
-        self.schoolID = schoolID
-    }
-    
 }
 
 class LastUserInfo: ObservableObject{
@@ -46,11 +36,11 @@ class LastUserInfo: ObservableObject{
 }
 
 class ObtainAccountInfo: ObservableObject {
-    @Published var account: Account?
+    @Published var account = [Account]()
     
     @MainActor
     func obtainAccountInfo(email: String) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/account/info/\(email)/") else {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/account/info/\(email)") else {
             throw URLError(.badURL)
         }
         
@@ -60,11 +50,8 @@ class ObtainAccountInfo: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let accountInfo = try JSONDecoder().decode(Account.self, from: data)
-        
+        let accountInfo = try JSONDecoder().decode([Account].self, from: data)
         self.account = accountInfo
-        if let account = account {
-            print(account)
-        }
+        print(accountInfo)
     }
 }
