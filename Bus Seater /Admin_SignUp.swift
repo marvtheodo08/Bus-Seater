@@ -89,10 +89,9 @@ struct Admin_SignUp: View {
             AdminHomepage()
                 .onAppear() {
                     Task {
-                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
                         try await obtainAccountInfo.obtainAccountInfo(email: email)
                         
-                        for account in obtainAccountInfo.account{
+                        if let account = obtainAccountInfo.account.first{
                             lastUserInfo.Firstname = account.firstName
                             lastUserInfo.Lastname = account.lastName
                             lastUserInfo.schoolID = account.schoolID

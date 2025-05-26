@@ -12,23 +12,21 @@ struct AdminHomepage: View {
     @EnvironmentObject var lastUserInfo: LastUserInfo
     
     var body: some View {
-        NavigationStack {
-            ZStack{
-                Color(.white)
-                    .ignoresSafeArea()
-                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-                    .foregroundStyle(.black)
-                Button(action: {UserloggingOut = true}, label: {Text("Logout")})
-                    .foregroundStyle(.black)
-                    .padding(.bottom, 700)
-                    .padding(.leading, 250)
-            }
-            .navigationDestination(isPresented: $UserloggingOut) {
-                Login()
-                    .onAppear() {
-                        lastUserInfo.WasUserLoggedIn = false
-                    }
-            }
+        ZStack{
+            Color(.white)
+                .ignoresSafeArea()
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                .foregroundStyle(.black)
+            Button(action: {UserloggingOut = true}, label: {Text("Logout")})
+                .foregroundStyle(.black)
+                .padding(.bottom, 700)
+                .padding(.leading, 250)
+        }
+        .fullScreenCover(isPresented: $UserloggingOut) {
+            Login()
+                .onAppear() {
+                    lastUserInfo.WasUserLoggedIn = false
+                }
         }
     }
 }
