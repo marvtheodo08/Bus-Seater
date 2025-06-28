@@ -6,7 +6,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com</key>
+			<key>busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
