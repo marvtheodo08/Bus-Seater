@@ -21,7 +21,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct YourApp: App {
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @StateObject private var lastUserInfo = LastUserInfo()
   @StateObject private var notifsPermissions = NotifsPermissions()
   @StateObject private var getSchools = GetSchools()
   @StateObject private var newAccount = NewAccount()
@@ -31,7 +30,6 @@ struct YourApp: App {
       NavigationView {
         ContentView()
       }
-      .environmentObject(lastUserInfo)
       .environmentObject(notifsPermissions)
       .environmentObject(getSchools)
       .environmentObject(newAccount)

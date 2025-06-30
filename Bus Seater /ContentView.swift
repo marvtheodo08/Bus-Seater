@@ -10,18 +10,18 @@ import Firebase
 import UserNotifications
 
 struct ContentView: View {
-    @EnvironmentObject var lastUserInfo: LastUserInfo
     @EnvironmentObject var notifsPermissions: NotifsPermissions
     var body: some View{
+        let defaults = UserDefaults.standard
         // If there was a user logged in
-        if lastUserInfo.WasUserLoggedIn == true{
+        if defaults.bool(forKey: "WasUserLoggedIn") == true{
             // If that user was an admin
-            if lastUserInfo.AccountType == "admin"{
+            if defaults.string(forKey: "accountType") == "admin"{
                 // Display Admin Homepage
                 AdminHomepage()
             }
             // Otherwise if the user was a driver
-            else if lastUserInfo.AccountType == "driver"{
+            else if defaults.string(forKey: "accountType") == "driver"{
                 // Display Driver Homepage
                 DriverHomepage()
             }

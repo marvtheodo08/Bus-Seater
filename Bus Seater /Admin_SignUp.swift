@@ -89,18 +89,19 @@ struct Admin_SignUp: View {
             AdminHomepage()
                 .onAppear() {
                     Task {
+                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
                         try await obtainAccountInfo.obtainAccountInfo(email: email)
                         
                         if let account = obtainAccountInfo.account.first{
-                            lastUserInfo.Firstname = account.firstName
-                            lastUserInfo.Lastname = account.lastName
-                            lastUserInfo.schoolID = account.schoolID
-                            lastUserInfo.Email = account.email
-                            lastUserInfo.AccountType = account.accountType
-                            lastUserInfo.accountID = account.id
+                            let defaults = UserDefaults.standard
+                            defaults.set(account.firstName, forKey: "firstName")
+                            defaults.set(account.lastName, forKey: "lastName")
+                            defaults.set(account.schoolID, forKey: "schoolID")
+                            defaults.set(account.email, forKey: "email")
+                            defaults.set(account.accountType, forKey: "accountType")
+                            defaults.set(account.id, forKey: "accountID")
+                            defaults.set(true, forKey: "WasUserLoggedIn")
                         }
-                        lastUserInfo.WasUserLoggedIn = true
-                        print(lastUserInfo.Email)
                     }
                 }
         }
