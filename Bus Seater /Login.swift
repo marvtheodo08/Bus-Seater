@@ -19,7 +19,7 @@ struct Login: View {
                 Color(.white)
                     .ignoresSafeArea()
                 if userLoggingIn {
-                    LoggingUserIn()
+                    LoggingUserIn(email: $email, password: $password)
                 }
                 else {
                     VStack {
@@ -64,9 +64,15 @@ struct Login: View {
     
     func login(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                print("Error logging in:", error.localizedDescription)
-                return
+            if let error = error as? NSError {
+                switch AuthErrorCode(rawValue: error.code) {
+                case .wrongPassword:
+                    print("Wrong Password")
+                case .invalidEmail:
+                    print("Invalid Email")
+                default:
+                    print("Error: \(error.localizedDescription)")
+                }
             }
             else {
                 print ("User logging in")
@@ -74,17 +80,21 @@ struct Login: View {
             }
         }
     }
-    
-    
 }
 
 struct LoggingUserIn: View {
+    @Binding var email: String
+    @Binding var password: String
+    
     var body: some View {
         VStack {
             ProgressView("Logging you in...")
                 .multilineTextAlignment(.center)
                 .colorScheme(.light)
         }
+    }
+    func logginguserin() {
+        
     }
 }
 

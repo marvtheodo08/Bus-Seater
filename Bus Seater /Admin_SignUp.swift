@@ -31,7 +31,6 @@ struct Admin_SignUp: View {
     @State private var state: String = ""
     @State private var schoolID: Int = 0
     @EnvironmentObject var newAccount: NewAccount
-    @EnvironmentObject var lastUserInfo: LastUserInfo
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     
     var body: some View {
