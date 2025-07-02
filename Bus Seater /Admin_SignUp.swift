@@ -333,9 +333,6 @@ struct AdminVerification: View {
             if !isVerified{
                 startPolling()
             }
-            else {
-
-            }
         }
     }
     

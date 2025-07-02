@@ -8,6 +8,15 @@
 import SwiftUI
 import FirebaseAuth
 
+//Enum suggested by ChatGPT
+enum AccountType: String, Identifiable {
+    case admin
+    case driver
+    case student
+
+    var id: String { self.rawValue }
+}
+
 struct Login: View {
     @State var email: String = ""
     @State var password: String  = ""
@@ -19,7 +28,7 @@ struct Login: View {
                 Color(.white)
                     .ignoresSafeArea()
                 if userLoggingIn {
-                    LoggingUserIn(email: $email, password: $password)
+                    LoggingUserIn(email: $email, userLoggingIn: $userLoggingIn)
                 }
                 else {
                     VStack {
@@ -84,16 +93,59 @@ struct Login: View {
 
 struct LoggingUserIn: View {
     @Binding var email: String
-    @Binding var password: String
+    @Binding var userLoggingIn: Bool
+    @State private var accountType: String = ""
+    @State private var type: AccountType? = nil
+    @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     
     var body: some View {
         VStack {
-            ProgressView("Logging you in...")
-                .multilineTextAlignment(.center)
-                .colorScheme(.light)
+            if userLoggingIn {
+                ProgressView("Logging you in...")
+                    .multilineTextAlignment(.center)
+                    .colorScheme(.light)
+            }
         }
-    }
-    func logginguserin() {
+        .onAppear{
+            Task {
+                try await obtainAccountInfo.obtainAccountInfo(email: email)
+                
+                if let account = obtainAccountInfo.account.first{
+                    let defaults = UserDefaults.standard
+                    defaults.set(account.firstName, forKey: "firstName")
+                    defaults.set(account.lastName, forKey: "lastName")
+                    defaults.set(account.schoolID, forKey: "schoolID")
+                    defaults.set(account.email, forKey: "email")
+                    defaults.set(account.accountType, forKey: "accountType")
+                    defaults.set(account.id, forKey: "accountID")
+                    defaults.set(true, forKey: "WasUserLoggedIn")
+                    accountType = account.accountType
+                }
+                if accountType == "admin" {
+                    type = .admin
+                }
+                else if accountType == "driver" {
+                    type = .driver
+                }
+                else {
+                    type = .student
+                }
+            }
+            
+        }
+        .onDisappear {
+            userLoggingIn = false
+        }
+        .fullScreenCover(item: $type) { type in
+            switch type {
+            case .admin:
+                AdminHomepage()
+            case .driver:
+                DriverHomepage()
+            case .student:
+                StudentHomepage()
+            }
+        }
         
     }
 }
