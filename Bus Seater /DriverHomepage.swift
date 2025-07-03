@@ -14,8 +14,14 @@ struct DriverHomepage: View {
         ZStack{
             Color(.white)
                 .ignoresSafeArea()
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Button(action: {}, label: {
+                 Image(systemName: "plus")
+                    .foregroundStyle(.gray)
+                    .font(.system(size: 50))
+            })
+            Text("Add your students here.")
                 .foregroundStyle(.black)
+                .padding(.top, 120)
             Button(action: {UserloggingOut = true
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "firstName")

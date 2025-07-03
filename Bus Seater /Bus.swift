@@ -12,12 +12,14 @@ struct Bus: Identifiable, Codable {
     let seatAmount: Int
     let busCode: String
     let schoolID: Int
+    let busRows: Int
     
     enum CodingKeys: String, CodingKey {
         case id
         case seatAmount = "seat_amount"
         case busCode = "bus_code"
         case schoolID = "school_id"
+        case busRows = "bus_rows"
     }
     
 }

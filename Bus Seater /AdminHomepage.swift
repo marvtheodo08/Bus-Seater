@@ -9,13 +9,20 @@ import SwiftUI
 
 struct AdminHomepage: View {
     @State var UserloggingOut = false
+    @State var AdminAddingBuses = false
     
     var body: some View {
         ZStack{
             Color(.white)
                 .ignoresSafeArea()
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Button(action: {AdminAddingBuses = true}, label: {
+                 Image(systemName: "plus")
+                    .foregroundStyle(.gray)
+                    .font(.system(size: 50))
+            })
+            Text("Add your buses here.")
                 .foregroundStyle(.black)
+                .padding(.top, 120)
             Button(action: {UserloggingOut = true
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "firstName")
@@ -28,6 +35,9 @@ struct AdminHomepage: View {
                 .foregroundStyle(.black)
                 .padding(.bottom, 700)
                 .padding(.leading, 250)
+        }
+        .navigationDestination(isPresented: $AdminAddingBuses) {
+            AddBuses()
         }
         .fullScreenCover(isPresented: $UserloggingOut) {
             Login()
