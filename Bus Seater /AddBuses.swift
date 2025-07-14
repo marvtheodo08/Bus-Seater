@@ -137,18 +137,24 @@ struct BusRows: View {
     
     var body: some View {
         VStack {
-            Text("How many seats does this bus have?")
+            Text("How many rows does this bus have?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
                 .padding(.bottom, 50)
-            
-            TextField("Seats", value: $rows, format: .number)
-                .padding()
-                .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
-                .colorScheme(.light)
-                .keyboardType(.numberPad)
+            Picker(
+                selection: $rows,
+                label: Text("Grade"),
+                content: {
+                    ForEach(5..<14) { grade in
+                        Text("\(grade)")
+                            .tag(grade)
+                    }
+                }
+                
+            )
+            .pickerStyle(WheelPickerStyle())
+            .colorScheme(.light)
         }
         .padding()
     }
