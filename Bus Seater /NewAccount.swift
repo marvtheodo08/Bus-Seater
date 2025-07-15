@@ -36,7 +36,7 @@ class NewAccount: ObservableObject {
     
     //Function prompted by ChatGPT
     func addAccount(_ account: Account) async throws {
-        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/account/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "\(Environment.current.apiBaseURL)/account/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
