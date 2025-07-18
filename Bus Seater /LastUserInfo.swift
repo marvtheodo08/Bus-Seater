@@ -30,7 +30,7 @@ class ObtainAccountInfo: ObservableObject {
     
     @MainActor
     func obtainAccountInfo(email: String) async throws {
-        guard let url = URL(string: "\(Environment.current.apiBaseURL)/account/info/\(email)") else {
+        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/account/info/\(email)") else {
             throw URLError(.badURL)
         }
         

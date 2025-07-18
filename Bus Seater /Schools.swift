@@ -28,7 +28,7 @@ class GetSchools: ObservableObject {
     
     @MainActor
     func fetchSchools(state: String) async throws {
-        guard let url = URL(string: "\(Environment.current.apiBaseURL)/\(state)") else {
+        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else {
             throw URLError(.badURL)
         }
         
