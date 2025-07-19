@@ -52,7 +52,7 @@ struct Driver_SignUp: View {
     @State private var lastname: String = ""
     @State private var state: String = ""
     @State private var schoolID: Int = 0
-    @State private var bus: String = ""
+    @State private var bus: Int = 0
     
     var body: some View {
         ZStack() {
@@ -333,20 +333,52 @@ struct DriverSchool: View {
 
 // Bus stage View
 struct DriverBus: View {
-    @Binding var bus: String
+    @Binding var bus: Int
     @Binding var schoolID: Int
+    @EnvironmentObject var getBuses: GetBuses
+    @State var loading: Bool = true
     
-    var body: some View{
-        Text("What is your bus number/code?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundStyle(.black)
-            .padding(.bottom, 50)
-        Picker("Bus", selection: $bus) {
+    var body: some View {
+        VStack {
+            if loading {
+                ProgressView("Loading available buses...")
+                    .multilineTextAlignment(.center)
+                    .colorScheme(.light)
+            } else {
+                if getBuses.buses.isEmpty {
+                    Text("No buses available for this school yet, please check back later.")
+                        .foregroundStyle(.black)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("What bus do you drive?")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .foregroundStyle(.black)
+                        .padding(.bottom, 50)
+                    
+                    Picker("Select a bus", selection: $bus) {
+                        ForEach(getBuses.buses, id: \.id) { bus in
+                            Text("\(bus.busCode)").tag(bus.id)
+                        }
+                    }
+                    .colorScheme(.light)
+                }
+            }
         }
-        .colorScheme(.light)
-        
+        .onAppear {
+            Task {
+                do {
+                    loading = true
+                    try await getBuses.fetchBus(schoolID: schoolID)
+                } catch {
+                    print("Failed to fetch schools: \(error)")
+                }
+                loading = false
+                
+            }
+        }
     }
+
 }
 
 struct DriverVerification: View {

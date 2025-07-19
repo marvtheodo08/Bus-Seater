@@ -43,10 +43,9 @@ struct ContentView: View {
                         //Change that Permission was asked
                         notifsPermissions.changeAskedtoTrue()
                     }
-                    print(Environment.current.apiBaseURL)
                 }
         }
-
+        
     }
     // Function for asking Notifs Permission
     func requestNotificationPermission() {

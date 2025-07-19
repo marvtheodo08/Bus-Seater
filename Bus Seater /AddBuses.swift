@@ -146,9 +146,9 @@ struct BusRows: View {
                 selection: $rows,
                 label: Text("Grade"),
                 content: {
-                    ForEach(5..<14) { grade in
-                        Text("\(grade)")
-                            .tag(grade)
+                    ForEach(5..<14) { option in
+                        Text("\(option)")
+                            .tag(option)
                     }
                 }
                 

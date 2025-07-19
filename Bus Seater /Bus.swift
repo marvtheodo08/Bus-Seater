@@ -23,3 +23,25 @@ struct Bus: Identifiable, Codable {
     }
     
 }
+
+class GetBuses: ObservableObject {
+    @Published var buses = [Bus]()
+    
+    @MainActor
+    func fetchBus(schoolID: Int) async throws {
+        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let fetchedbuses = try JSONDecoder().decode([Bus].self, from: data)
+        
+        // Update the @Published property
+        self.buses = fetchedbuses
+    }
+}
