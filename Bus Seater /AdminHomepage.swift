@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct AdminHomepage: View {
+    @State var UserloggingOut = false
     @State var AdminAddingBuses = false
-    @Binding var isUserLoggedIn: Bool
-    @Binding var path: [Route]
 
     var body: some View {
         NavigationStack {
@@ -25,7 +24,7 @@ struct AdminHomepage: View {
                 Text("Add your buses here.")
                     .foregroundStyle(.black)
                     .padding(.top, 120)
-                Button(action: { isUserLoggedIn = false
+                Button(action: {UserloggingOut = true
                     let defaults = UserDefaults.standard
                     defaults.removeObject(forKey: "firstName")
                     defaults.removeObject(forKey: "lastName")
@@ -41,10 +40,13 @@ struct AdminHomepage: View {
             .navigationDestination(isPresented: $AdminAddingBuses) {
                 AddBuses()
             }
+            .fullScreenCover(isPresented: $UserloggingOut) {
+                Login(path: .constant([]))
+            }
         }
     }
 }
 
 #Preview {
-    AdminHomepage(isUserLoggedIn: .constant(true), path: .constant([]))
+    AdminHomepage()
 }

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct StudentHomepage: View {
-    @Binding var isUserLoggedIn: Bool
-    @Binding var path: [Route]
+    @State var UserloggingOut = false
     
     var body: some View {
         ZStack{
@@ -17,7 +16,7 @@ struct StudentHomepage: View {
                 .ignoresSafeArea()
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
                 .foregroundStyle(.black)
-            Button(action: {isUserLoggedIn = false
+            Button(action: {UserloggingOut = true
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "firstName")
                 defaults.removeObject(forKey: "lastName")
@@ -30,9 +29,12 @@ struct StudentHomepage: View {
                 .padding(.bottom, 700)
                 .padding(.leading, 250)
         }
+        .fullScreenCover(isPresented: $UserloggingOut) {
+            Login(path: .constant([]))
+        }
     }
 }
 
 #Preview {
-    StudentHomepage(isUserLoggedIn: .constant(true), path: .constant([]))
+    StudentHomepage()
 }

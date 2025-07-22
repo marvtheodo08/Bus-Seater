@@ -20,7 +20,6 @@ enum Route: Hashable {
 
 struct ContentView: View {
     @State private var path: [Route] = []
-    @State private var isUserLoggedIn = UserDefaults.standard.bool(forKey: "WasUserLoggedIn")
     @EnvironmentObject var notifsPermissions: NotifsPermissions
     
     var body: some View {
@@ -32,16 +31,16 @@ struct ContentView: View {
                     // If that user was an admin
                     if defaults.string(forKey: "accountType") == "admin"{
                         // Display Admin Homepage
-                        AdminHomepage(isUserLoggedIn: $isUserLoggedIn, path: $path)
+                        AdminHomepage()
                     }
                     // Otherwise if the user was a driver
                     else if defaults.string(forKey: "accountType") == "driver"{
                         // Display Driver Homepage
-                        DriverHomepage(isUserLoggedIn: $isUserLoggedIn, path: $path)
+                        DriverHomepage()
                     }
                     // Else Display the Student Homepage
                     else {
-                        StudentHomepage(isUserLoggedIn: $isUserLoggedIn, path: $path)
+                        StudentHomepage()
                     }
                 }
                 // Otherwise
