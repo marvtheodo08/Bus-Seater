@@ -36,7 +36,7 @@ struct DriverHomepage: View {
                 .padding(.leading, 250)
         }
         .fullScreenCover(isPresented: $UserloggingOut) {
-            Login()
+            Login(path: .constant([]))
         }
     }
 }

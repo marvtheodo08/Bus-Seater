@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct SignUp: View {
-    @State var StudentSigningUp = false
-    @State var DriverSigningUp = false
-    @State var AdminSigningUp = false
-    @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
+    @Binding var path: [Route]
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color(.white)
                     .ignoresSafeArea()
@@ -25,7 +21,7 @@ struct SignUp: View {
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         .padding(.bottom, 300)
                     HStack{
-                        Button(action: {StudentSigningUp = true}, label: {
+                        Button(action: {path.append(.studentSignUp)}, label: {
                             VStack{
                                 Image(systemName: "studentdesk")
                                 Text("Student")
@@ -40,7 +36,7 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        Button(action: {DriverSigningUp = true}, label: {
+                        Button(action: {path.append(.driverSignUp)}, label: {
                             VStack{
                                 Image(systemName: "bus")
                                 Text("Driver")
@@ -55,7 +51,7 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        Button(action: {AdminSigningUp = true}, label: {
+                        Button(action: {path.append(.adminSignUp)}, label: {
                             VStack{
                                 Image(systemName: "clipboard")
                                 Text("Admin")
@@ -69,22 +65,11 @@ struct SignUp: View {
                         })
                     }
                     .padding(.leading, 10)
-                
-                    .navigationDestination(isPresented: $AdminSigningUp) {
-                        Admin_SignUp()
-                    }
-                    .navigationDestination(isPresented: $DriverSigningUp) {
-                        Driver_SignUp()
-                    }
-                    .navigationDestination(isPresented: $StudentSigningUp) {
-                        Student_SignUp()
-                    }
 
             }
-        }
     }
 }
 
 #Preview {
-    SignUp()
+    SignUp(path: .constant([]))
 }

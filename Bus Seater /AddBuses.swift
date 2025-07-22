@@ -23,9 +23,7 @@ struct AddBuses: View {
         ZStack {
             Color(.white)
                 .ignoresSafeArea()
-            VStack {
-                Spacer()
-                
+            VStack {                
                 // Display the current stage view
                 switch currentStage {
                 case .bus_code:

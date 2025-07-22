@@ -22,6 +22,8 @@ struct Login: View {
     @State var password: String  = ""
     @State var userSigningUp = false
     @State var userLoggingIn = false
+    @Binding var path: [Route]
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -58,12 +60,9 @@ struct Login: View {
                                     .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                                 .padding()
                         })
-                        Button(action: {userSigningUp = true}, label: {Text("Don't have an account? Sign up here!")})
+                        Button(action: {path.append(.signup)}, label: {Text("Don't have an account? Sign up here!")})
                     }
                     .padding()
-                    .navigationDestination(isPresented: $userSigningUp) {
-                        SignUp()
-                    }
                     
                 }
             }
@@ -151,5 +150,5 @@ struct LoggingUserIn: View {
 }
 
 #Preview {
-    Login()
+    Login(path: .constant([]))
 }

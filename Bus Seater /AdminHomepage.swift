@@ -10,37 +10,39 @@ import SwiftUI
 struct AdminHomepage: View {
     @State var UserloggingOut = false
     @State var AdminAddingBuses = false
-    
+
     var body: some View {
-        ZStack{
-            Color(.white)
-                .ignoresSafeArea()
-            Button(action: {AdminAddingBuses = true}, label: {
-                 Image(systemName: "plus")
-                    .foregroundStyle(.gray)
-                    .font(.system(size: 50))
-            })
-            Text("Add your buses here.")
-                .foregroundStyle(.black)
-                .padding(.top, 120)
-            Button(action: {UserloggingOut = true
-                let defaults = UserDefaults.standard
-                defaults.removeObject(forKey: "firstName")
-                defaults.removeObject(forKey: "lastName")
-                defaults.removeObject(forKey: "schoolID")
-                defaults.removeObject(forKey: "email")
-                defaults.removeObject(forKey: "accountType")
-                defaults.removeObject(forKey: "accountID")
-                defaults.set(false, forKey: "WasUserLoggedIn")}, label: {Text("Logout")})
-                .foregroundStyle(.black)
-                .padding(.bottom, 700)
-                .padding(.leading, 250)
-        }
-        .navigationDestination(isPresented: $AdminAddingBuses) {
-            AddBuses()
-        }
-        .fullScreenCover(isPresented: $UserloggingOut) {
-            Login()
+        NavigationStack {
+            ZStack{
+                Color(.white)
+                    .ignoresSafeArea()
+                Button(action: {AdminAddingBuses = true}, label: {
+                     Image(systemName: "plus")
+                        .foregroundStyle(.gray)
+                        .font(.system(size: 50))
+                })
+                Text("Add your buses here.")
+                    .foregroundStyle(.black)
+                    .padding(.top, 120)
+                Button(action: {UserloggingOut = true
+                    let defaults = UserDefaults.standard
+                    defaults.removeObject(forKey: "firstName")
+                    defaults.removeObject(forKey: "lastName")
+                    defaults.removeObject(forKey: "schoolID")
+                    defaults.removeObject(forKey: "email")
+                    defaults.removeObject(forKey: "accountType")
+                    defaults.removeObject(forKey: "accountID")
+                    defaults.set(false, forKey: "WasUserLoggedIn")}, label: {Text("Logout")})
+                    .foregroundStyle(.black)
+                    .padding(.bottom, 700)
+                    .padding(.leading, 250)
+            }
+            .navigationDestination(isPresented: $AdminAddingBuses) {
+                AddBuses()
+            }
+            .fullScreenCover(isPresented: $UserloggingOut) {
+                Login(path: .constant([]))
+            }
         }
     }
 }
