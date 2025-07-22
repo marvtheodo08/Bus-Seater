@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct DriverHomepage: View {
-    @State var UserloggingOut = false
+    @Binding var isUserLoggedIn: Bool
+    @Binding var path: [Route]
     
     var body: some View {
         ZStack{
@@ -22,7 +23,7 @@ struct DriverHomepage: View {
             Text("Add your students here.")
                 .foregroundStyle(.black)
                 .padding(.top, 120)
-            Button(action: {UserloggingOut = true
+            Button(action: {
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "firstName")
                 defaults.removeObject(forKey: "lastName")
@@ -35,12 +36,9 @@ struct DriverHomepage: View {
                 .padding(.bottom, 700)
                 .padding(.leading, 250)
         }
-        .fullScreenCover(isPresented: $UserloggingOut) {
-            Login(path: .constant([]))
-        }
     }
 }
 
 #Preview {
-    DriverHomepage()
+    DriverHomepage(isUserLoggedIn: .constant(true), path: .constant([]))
 }
