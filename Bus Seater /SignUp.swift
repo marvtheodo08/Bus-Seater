@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUp: View {
-    @Binding var path: [Route]
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
             ZStack {
@@ -21,7 +21,7 @@ struct SignUp: View {
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         .padding(.bottom, 300)
                     HStack{
-                        Button(action: {path.append(.studentSignUp)}, label: {
+                        Button(action: {appState.path.append(.studentSignUp)}, label: {
                             VStack{
                                 Image(systemName: "studentdesk")
                                 Text("Student")
@@ -36,7 +36,7 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        Button(action: {path.append(.driverSignUp)}, label: {
+                        Button(action: {appState.path.append(.driverSignUp)}, label: {
                             VStack{
                                 Image(systemName: "bus")
                                 Text("Driver")
@@ -51,7 +51,7 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        Button(action: {path.append(.adminSignUp)}, label: {
+                        Button(action: {appState.path.append(.adminSignUp)}, label: {
                             VStack{
                                 Image(systemName: "clipboard")
                                 Text("Admin")
@@ -71,5 +71,5 @@ struct SignUp: View {
 }
 
 #Preview {
-    SignUp(path: .constant([]))
+    SignUp()
 }

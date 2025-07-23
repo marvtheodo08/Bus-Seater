@@ -25,6 +25,7 @@ struct YourApp: App {
   @StateObject private var getSchools = GetSchools()
   @StateObject private var newAccount = NewAccount()
   @StateObject private var obtainAccountInfo = ObtainAccountInfo()
+  @StateObject private var appState = AppState()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -34,6 +35,7 @@ struct YourApp: App {
       .environmentObject(getSchools)
       .environmentObject(newAccount)
       .environmentObject(obtainAccountInfo)
+      .environmentObject(appState)
     }
   }
 }

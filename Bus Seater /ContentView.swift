@@ -19,35 +19,34 @@ enum Route: Hashable {
 }
 
 struct ContentView: View {
-    @State private var path: [Route] = []
-    @State private var isUserLoggedIn = UserDefaults.standard.bool(forKey: "WasUserLoggedIn")
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var notifsPermissions: NotifsPermissions
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $appState.path) {
             let defaults = UserDefaults.standard
             Group{
                 // If there was a user logged in
-                if defaults.bool(forKey: "WasUserLoggedIn") == true{
+                if appState.isUserLoggedIn == true{
                     // If that user was an admin
                     if defaults.string(forKey: "accountType") == "admin"{
                         // Display Admin Homepage
-                        AdminHomepage(isUserLoggedIn: $isUserLoggedIn, path: $path)
+                        AdminHomepage()
                     }
                     // Otherwise if the user was a driver
                     else if defaults.string(forKey: "accountType") == "driver"{
                         // Display Driver Homepage
-                        DriverHomepage(isUserLoggedIn: $isUserLoggedIn, path: $path)
+                        DriverHomepage()
                     }
                     // Else Display the Student Homepage
                     else {
-                        StudentHomepage(isUserLoggedIn: $isUserLoggedIn, path: $path)
+                        StudentHomepage()
                     }
                 }
                 // Otherwise
                 else{
                     //make Login screen appear
-                    Login(path: $path)
+                    Login()
                     //When Login screen appears
                         .onAppear{
                             //if NotifsPermission was not ask
@@ -63,8 +62,8 @@ struct ContentView: View {
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
-                case .login: Login(path: $path)
-                case .signup: SignUp(path: $path)
+                case .login: Login()
+                case .signup: SignUp()
                 case .studentSignUp: Student_SignUp()
                 case .driverSignUp: Driver_SignUp()
                 case .adminSignUp: Admin_SignUp()

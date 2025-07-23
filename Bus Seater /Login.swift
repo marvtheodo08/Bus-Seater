@@ -22,10 +22,9 @@ struct Login: View {
     @State var password: String  = ""
     @State var userSigningUp = false
     @State var userLoggingIn = false
-    @Binding var path: [Route]
-
+    @EnvironmentObject var appState: AppState
+    
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color(.white)
                     .ignoresSafeArea()
@@ -60,14 +59,13 @@ struct Login: View {
                                     .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                                 .padding()
                         })
-                        Button(action: {path.append(.signup)}, label: {Text("Don't have an account? Sign up here!")})
+                        Button(action: {appState.path.append(.signup)}, label: {Text("Don't have an account? Sign up here!")})
                     }
                     .padding()
                     
                 }
             }
             
-        }
     }
     
     func login(email: String, password: String) {
@@ -150,5 +148,5 @@ struct LoggingUserIn: View {
 }
 
 #Preview {
-    Login(path: .constant([]))
+    Login()
 }
