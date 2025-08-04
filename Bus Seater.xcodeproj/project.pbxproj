@@ -33,6 +33,7 @@
 		7E37DF212CF7DB11001EB870 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF202CF7DB11001EB870 /* Student.swift */; };
 		7E37DF232CF7DD63001EB870 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF222CF7DD63001EB870 /* Bus.swift */; };
 		7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* Schools.swift */; };
+		7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2A8612E404C120005CE54 /* BusRows.swift */; };
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		7E37DF202CF7DB11001EB870 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		7E37DF222CF7DD63001EB870 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 		7E85D49D2CE1957700341DE7 /* Schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schools.swift; sourceTree = "<group>"; };
+		7EA2A8612E404C120005CE54 /* BusRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRows.swift; sourceTree = "<group>"; };
 		7EABE03A2D68F4B000C00697 /* NewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 				7E85D49D2CE1957700341DE7 /* Schools.swift */,
 				7E37DF202CF7DB11001EB870 /* Student.swift */,
 				7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */,
+				7EA2A8612E404C120005CE54 /* BusRows.swift */,
 				7E37DF222CF7DD63001EB870 /* Bus.swift */,
 				0CC7C6942C7627600018C041 /* Admin_SignUp.swift */,
 				7EABE03A2D68F4B000C00697 /* NewAccount.swift */,
@@ -329,6 +332,7 @@
 				7E155B3C2E3114DE00DC1351 /* AppState.swift in Sources */,
 				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
+				7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
 				0C5F17072CCB1F5D00C62695 /* LastUserInfo.swift in Sources */,

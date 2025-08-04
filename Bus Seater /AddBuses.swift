@@ -10,30 +10,25 @@ import SwiftUI
 struct AddBuses: View {
     enum Stage {
         case bus_code
-        case seats
         case rows
-        case row_seats
     }
-    
     @State private var busCode: String = ""
     @State private var seats: Int = 0
     @State private var rows: Int = 0
     @State private var currentStage: Stage = .bus_code
+    @EnvironmentObject var newBus: NewBus
+    @EnvironmentObject var getBuses: GetBuses
     var body: some View {
         ZStack {
             Color(.white)
                 .ignoresSafeArea()
-            VStack {                
+            VStack {
                 // Display the current stage view
                 switch currentStage {
                 case .bus_code:
                     BusCode(busCode: $busCode)
-                case .seats:
-                    BusSeats(seats: $seats)
                 case .rows:
                     BusRows(rows: $rows)
-                case .row_seats:
-                    RowSeats()
                 }
                 
                 // Navigation Buttons sugguested by ChatGPT
@@ -65,21 +60,19 @@ struct AddBuses: View {
             
         }
     }
-    func goBack() {
-        switch currentStage {
-        case .seats: currentStage = .bus_code
-        case .rows: currentStage = .seats
-        default: break
+        func goBack() {
+            switch currentStage {
+            case .rows: currentStage = .bus_code
+            default: break
+            }
         }
-    }
-    
-    func goNext() {
-        switch currentStage {
-        case .bus_code: currentStage = .seats
-        case .seats: currentStage = .rows
-        default: break
+        
+        func goNext() {
+            switch currentStage {
+            case .bus_code: currentStage = .rows
+            default: break
+            }
         }
-    }
 }
 
 // Bus code stage view
@@ -153,19 +146,6 @@ struct BusRows: View {
             )
             .pickerStyle(WheelPickerStyle())
             .colorScheme(.light)
-        }
-        .padding()
-    }
-}
-
-struct RowSeats: View {
-    var body: some View {
-        VStack {
-            Text("Add how many seats per row.")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .foregroundStyle(.black)
-                .padding(.bottom, 50)
         }
         .padding()
     }
