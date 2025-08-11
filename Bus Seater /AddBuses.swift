@@ -11,12 +11,13 @@ struct AddBuses: View {
     enum Stage {
         case bus_code
         case rows
+        case addingBus
     }
+    @State private var busAdded: Bool = false
     @State private var busCode: String = ""
     @State private var seats: Int = 0
     @State private var rows: Int = 0
     @State private var currentStage: Stage = .bus_code
-    @EnvironmentObject var newBus: NewBus
     @EnvironmentObject var getBuses: GetBuses
     var body: some View {
         ZStack {
@@ -29,6 +30,8 @@ struct AddBuses: View {
                     BusCode(busCode: $busCode)
                 case .rows:
                     BusRows(rows: $rows)
+                case .addingBus:
+                    AddingBus(busCode: $busCode, seats: $seats, rows: $rows)
                 }
                 
                 // Navigation Buttons sugguested by ChatGPT
@@ -58,6 +61,9 @@ struct AddBuses: View {
             }
 
             
+        }
+        .fullScreenCover(isPresented: $busAdded) {
+            AdminHomepage()
         }
     }
         func goBack() {
@@ -99,29 +105,6 @@ struct BusCode: View {
     }
 }
 
-// Seats stage view
-struct BusSeats: View {
-    @Binding var seats: Int
-    
-    var body: some View {
-        VStack {
-            Text("How many seats does this bus have?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .foregroundStyle(.black)
-                .padding(.bottom, 50)
-            
-            TextField("Seats", value: $seats, format: .number)
-                .padding()
-                .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
-                .colorScheme(.light)
-                .keyboardType(.numberPad)
-        }
-        .padding()
-    }
-}
-
 // Bus rows stage view
 struct BusRows: View {
     @Binding var rows: Int
@@ -148,6 +131,45 @@ struct BusRows: View {
             .colorScheme(.light)
         }
         .padding()
+    }
+}
+
+struct AddingBus: View {
+    @EnvironmentObject var newBus: NewBus
+    @EnvironmentObject var newRow: NewRow
+    @EnvironmentObject var obtainBusID: ObtainBusID
+    @State private var busID: Int = 0
+    @State private var schoolID: Int = 0
+    @Binding var busCode: String
+    @Binding var seats: Int
+    @Binding var rows: Int
+    
+    var body: some View {
+        VStack {
+            ProgressView("Adding bus to database...")
+                .multilineTextAlignment(.center)
+                .colorScheme(.light)
+        }
+        .onAppear {
+            seats = rows * 4
+            seats = seats - 1
+            schoolID = UserDefaults.standard.integer(forKey: "schoolID")
+            Task {
+                try await newBus.addBus(NewBus.Bus(rowAmount: rows, seatCount: seats, busCode: busCode, schoolID: schoolID))
+                try await obtainBusID.obtainBusID(bus_code: busCode, school_id: schoolID)
+                busID = obtainBusID.id.first?.id ?? 0
+                var i = 1
+                while i <= rows {
+                    if i == rows {
+                        try await newRow.addRow(NewRow.Row(rowNumber: i, seatCount: 3, busID: busID))
+                    }
+                    else {
+                        try await newRow.addRow(NewRow.Row(rowNumber: i, seatCount: 4, busID: busID))
+                    }
+                    i = i + 1
+                }
+            }
+        }
     }
 }
 

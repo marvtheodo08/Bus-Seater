@@ -19,6 +19,7 @@ struct StudentHomepage: View {
                 .foregroundStyle(.black)
             Button(action: {userLoggingOut = true
                 appState.isUserLoggedIn = false
+                appState.path = []
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "firstName")
                 defaults.removeObject(forKey: "lastName")

@@ -27,6 +27,7 @@ struct AdminHomepage: View {
                     .padding(.top, 120)
                 Button(action: { userLoggingOut = true
                     appState.isUserLoggedIn = false
+                    appState.path = []
                     let defaults = UserDefaults.standard
                     defaults.removeObject(forKey: "firstName")
                     defaults.removeObject(forKey: "lastName")

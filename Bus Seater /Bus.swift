@@ -24,11 +24,18 @@ struct Bus: Identifiable, Codable {
     
 }
 
+struct BusID: Identifiable, Codable {
+    let id: Int
+    enum CodingKeys: String, CodingKey {
+        case id
+    }
+}
+
 class ObtainBusInfo: ObservableObject {
     @Published var bus = [Bus]()
     
     @MainActor
-    func obtainBusInfo(id: String) async throws {
+    func obtainBusInfo(id: Int) async throws {
         guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/info/\(id)") else {
             throw URLError(.badURL)
         }
@@ -42,6 +49,27 @@ class ObtainBusInfo: ObservableObject {
         let busInfo = try JSONDecoder().decode([Bus].self, from: data)
         self.bus = busInfo
         print(busInfo)
+    }
+}
+
+class ObtainBusID: ObservableObject {
+    @Published var id = [BusID]()
+    
+    @MainActor
+    func obtainBusID(bus_code: String, school_id: Int) async throws {
+        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/id/\(school_id)/\(bus_code)") else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let busID = try JSONDecoder().decode([BusID].self, from: data)
+        self.id = busID
+        print(busID)
     }
 }
 
@@ -78,7 +106,7 @@ class NewBus: ObservableObject {
             case rowAmount = "row_amount"
             case seatCount = "seat_count"
             case busCode = "bus_code"
-            case schoolID = "account_type"
+            case schoolID = "school_id"
         }
         
         init(rowAmount: Int, seatCount: Int, busCode: String, schoolID: Int) {

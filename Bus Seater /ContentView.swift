@@ -23,53 +23,40 @@ struct ContentView: View {
     @EnvironmentObject var notifsPermissions: NotifsPermissions
     
     var body: some View {
-        NavigationStack(path: $appState.path) {
-            let defaults = UserDefaults.standard
-            Group{
-                // If there was a user logged in
-                if appState.isUserLoggedIn == true{
-                    // If that user was an admin
-                    if defaults.string(forKey: "accountType") == "admin"{
-                        // Display Admin Homepage
-                        AdminHomepage()
-                    }
-                    // Otherwise if the user was a driver
-                    else if defaults.string(forKey: "accountType") == "driver"{
-                        // Display Driver Homepage
-                        DriverHomepage()
-                    }
-                    // Else Display the Student Homepage
-                    else {
-                        StudentHomepage()
-                    }
-                }
-                // Otherwise
-                else{
-                    //make Login screen appear
-                    Login()
-                    //When Login screen appears
-                        .onAppear{
-                            //if NotifsPermission was not ask
-                            if notifsPermissions.WasPermissionAsked == false{
-                                //Ask NotifsPermission
-                                requestNotificationPermission()
-                                //Change that Permission was asked
-                                notifsPermissions.changeAskedtoTrue()
-                            }
+        let defaults = UserDefaults.standard
+        if appState.isUserLoggedIn {
+            switch defaults.string(forKey: "accountType"){
+            case "admin":
+                AdminHomepage()
+            case "driver":
+                DriverHomepage()
+            default:
+                StudentHomepage()
+            }
+        }
+        else {
+            NavigationStack(path: $appState.path) {
+                Login()
+                //When Login screen appears
+                    .onAppear{
+                        //if NotifsPermission was not ask
+                        if notifsPermissions.WasPermissionAsked == false{
+                            //Ask NotifsPermission
+                            requestNotificationPermission()
+                            //Change that Permission was asked
+                            notifsPermissions.changeAskedtoTrue()
                         }
-                }
-                
+                    }
+                    .navigationDestination(for: Route.self) { route in
+                        switch route {
+                        case .login: Login()
+                        case .signup: SignUp()
+                        case .studentSignUp: Student_SignUp()
+                        case .driverSignUp: Driver_SignUp()
+                        case .adminSignUp: Admin_SignUp()
+                        }
+                    }
             }
-            .navigationDestination(for: Route.self) { route in
-                switch route {
-                case .login: Login()
-                case .signup: SignUp()
-                case .studentSignUp: Student_SignUp()
-                case .driverSignUp: Driver_SignUp()
-                case .adminSignUp: Admin_SignUp()
-                }
-            }
-            
         }
         
     }
