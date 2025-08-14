@@ -369,7 +369,7 @@ struct DriverBus: View {
             Task {
                 do {
                     loading = true
-                    try await getBuses.fetchBus(schoolID: schoolID)
+                    try await getBuses.fetchBuses(schoolID: schoolID)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }

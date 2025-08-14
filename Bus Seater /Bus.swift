@@ -36,7 +36,7 @@ class ObtainBusInfo: ObservableObject {
     
     @MainActor
     func obtainBusInfo(id: Int) async throws {
-        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/info/\(id)") else {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/info/\(id)") else {
             throw URLError(.badURL)
         }
         
@@ -57,7 +57,7 @@ class ObtainBusID: ObservableObject {
     
     @MainActor
     func obtainBusID(bus_code: String, school_id: Int) async throws {
-        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/id/\(school_id)/\(bus_code)") else {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/id/\(school_id)/\(bus_code)") else {
             throw URLError(.badURL)
         }
         
@@ -77,8 +77,8 @@ class GetBuses: ObservableObject {
     @Published var buses = [Bus]()
     
     @MainActor
-    func fetchBus(schoolID: Int) async throws {
-        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
+    func fetchBuses(schoolID: Int) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
             throw URLError(.badURL)
         }
         
@@ -87,6 +87,8 @@ class GetBuses: ObservableObject {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
+        
+        print("Status code: \(httpResponse.statusCode)")
         
         let fetchedbuses = try JSONDecoder().decode([Bus].self, from: data)
         
@@ -120,7 +122,7 @@ class NewBus: ObservableObject {
     
     //Function prompted by ChatGPT
     func addBus(_ bus: Bus) async throws {
-        guard let url = URL(string: "http://busseater-env-1.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

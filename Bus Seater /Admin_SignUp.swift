@@ -309,7 +309,6 @@ struct AdminSchool: View {
                     print("Failed to fetch schools: \(error)")
                 }
                 loading = false
-                
             }
         }
     }
