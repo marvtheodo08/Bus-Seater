@@ -25,7 +25,7 @@ struct AdminHomepage: View {
         NavigationStack {
             if fetchingBuses {
                 VStack {
-                    ProgressView("Loading available buses...")
+                    ProgressView("Loading buses...")
                         .multilineTextAlignment(.center)
                         .colorScheme(.light)
                 }
@@ -57,6 +57,11 @@ struct AdminHomepage: View {
                         .foregroundStyle(.black)
                         .padding(.bottom, 700)
                         .padding(.leading, 250)
+                        Button(action: {}, label: {Image(systemName: "gearshape.fill")})
+                            .foregroundStyle(.gray)
+                            .padding(.bottom, 700)
+                            .padding(.trailing, 250)
+                            .font(.system(size: 20))
                     }
                     .navigationDestination(isPresented: $AdminAddingBuses) {
                         AddBuses()
@@ -66,52 +71,70 @@ struct AdminHomepage: View {
                     }
                 }
                 else {
-                    ZStack{
-                        Color(.white)
-                            .ignoresSafeArea()
-                        Button(action: { userLoggingOut = true
-                            appState.isUserLoggedIn = false
-                            appState.path = []
-                            let defaults = UserDefaults.standard
-                            defaults.removeObject(forKey: "firstName")
-                            defaults.removeObject(forKey: "lastName")
-                            defaults.removeObject(forKey: "schoolID")
-                            defaults.removeObject(forKey: "email")
-                            defaults.removeObject(forKey: "accountType")
-                            defaults.removeObject(forKey: "accountID")
-                            defaults.set(false, forKey: "WasUserLoggedIn")}, label: {Text("Logout")})
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 700)
-                        .padding(.leading, 250)
-                        VStack(alignment: .leading) {
-                            ScrollView {
-                                LazyVGrid(columns: columns, spacing: 16) {
-                                    ForEach(getBuses.buses) { bus in
-                                        Button(action: {}, label: {
+                        ZStack{
+                            Color(.white)
+                                .ignoresSafeArea()
+                            Button(action: { userLoggingOut = true
+                                appState.isUserLoggedIn = false
+                                appState.path = []
+                                let defaults = UserDefaults.standard
+                                defaults.removeObject(forKey: "firstName")
+                                defaults.removeObject(forKey: "lastName")
+                                defaults.removeObject(forKey: "schoolID")
+                                defaults.removeObject(forKey: "email")
+                                defaults.removeObject(forKey: "accountType")
+                                defaults.removeObject(forKey: "accountID")
+                                defaults.set(false, forKey: "WasUserLoggedIn")}, label: {Text("Logout")})
+                            .foregroundStyle(.black)
+                            .padding(.bottom, 700)
+                            .padding(.leading, 250)
+                            Button(action: {}, label: {Image(systemName: "gearshape.fill")})
+                                .foregroundStyle(.gray)
+                                .padding(.bottom, 700)
+                                .padding(.trailing, 250)
+                                .font(.system(size: 20))
+                            VStack(alignment: .leading) {
+                                ScrollView{
+                                    LazyVGrid(columns: columns, spacing: 16) {
+                                        ForEach(getBuses.buses) { bus in
+                                            Button(action: {}, label: {
+                                                VStack{
+                                                    Image(systemName: "bus")
+                                                    Text("\(bus.busCode)")
+                                                        .font(.system(size: 12))
+                                                }
+                                                .foregroundStyle(.white)
+                                                .frame(width: 40.0, height: 40.0)
+                                                .padding(25)
+                                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                                            })
+                                        }
+                                        // ➕ Add Bus button after all buses
+                                        Button(action: {AdminAddingBuses = true}, label: {
                                             VStack{
-                                                Image(systemName: "bus")
-                                                Text("\(bus.busCode)")
-                                                    .font(.system(size: 12))
+                                                Image(systemName: "plus")
+                                                    .foregroundStyle(.gray)
+                                                    .font(.system(size: 40))
+                                                Text("Add more buses")
+                                                    .foregroundStyle(.black)
                                             }
-                                            .foregroundStyle(.white)
-                                            .frame(width: 40.0, height: 40.0)
-                                            .padding(25)
-                                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                                         })
+                                        
                                     }
-                                    // ➕ Add Bus button after all buses
-                                    Button(action: {AdminAddingBuses = true}, label: {
-                                        Image(systemName: "plus")
-                                            .foregroundStyle(.gray)
-                                            .font(.system(size: 10))
-                                    })
-                                    
+                                    .padding()
                                 }
-                                .padding()
-                            }
-                        }
+                                .padding(.top, 50)
 
-                    }
+                            }
+                            
+                        }
+                        .navigationDestination(isPresented: $AdminAddingBuses) {
+                            AddBuses()
+                        }
+                        .fullScreenCover(isPresented: $userLoggingOut) {
+                            Login()
+                        }
+                    
                 }
                 
             }

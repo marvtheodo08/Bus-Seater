@@ -31,7 +31,7 @@ struct AddBuses: View {
                 case .rows:
                     BusRows(rows: $rows)
                 case .addingBus:
-                    AddingBus(busCode: $busCode, seats: $seats, rows: $rows)
+                    AddingBus(busCode: $busCode, seats: $seats, rows: $rows, busAdded: $busAdded)
                 }
                 
                 // Navigation Buttons sugguested by ChatGPT
@@ -52,7 +52,7 @@ struct AddBuses: View {
                         }
                     }
                     else if currentStage == .rows {
-                        Button(action: {}, label: {Text("Add Bus")
+                        Button(action: {currentStage = .addingBus}, label: {Text("Add Bus")
                                 .foregroundStyle(.black)
                         })
                     }
@@ -143,6 +143,7 @@ struct AddingBus: View {
     @Binding var busCode: String
     @Binding var seats: Int
     @Binding var rows: Int
+    @Binding var busAdded: Bool
     
     var body: some View {
         VStack {
@@ -151,8 +152,7 @@ struct AddingBus: View {
                 .colorScheme(.light)
         }
         .onAppear {
-            seats = rows * 4
-            seats = seats - 1
+            seats = rows * 4 - 1
             schoolID = UserDefaults.standard.integer(forKey: "schoolID")
             Task {
                 try await newBus.addBus(NewBus.Bus(rowAmount: rows, seatCount: seats, busCode: busCode, schoolID: schoolID))
@@ -169,6 +169,7 @@ struct AddingBus: View {
                     i = i + 1
                 }
             }
+            busAdded = true
         }
     }
 }

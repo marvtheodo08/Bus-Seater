@@ -30,6 +30,7 @@ struct YourApp: App {
   @StateObject private var newBus = NewBus()
   @StateObject private var obtainBusInfo = ObtainBusInfo()
   @StateObject private var obtainBusID = ObtainBusID()
+  @StateObject private var newRow = NewRow()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -44,6 +45,7 @@ struct YourApp: App {
       .environmentObject(newBus)
       .environmentObject(obtainBusInfo)
       .environmentObject(obtainBusID)
+      .environmentObject(newRow)
     }
   }
 }
