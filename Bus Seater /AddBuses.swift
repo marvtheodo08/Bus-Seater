@@ -165,7 +165,7 @@ struct AddingBus: View {
                         try await newRow.addRow(NewRow.Row(rowNumber: i, seatCount: 3, busID: busID))
                         var j = 1
                         while j <= 3 {
-                            try await newSeat.addSeat(NewSeat.Seat(busID: busID, rowNumber: i, seatNumber: j, isOccupied: false))
+                            try await newSeat.addSeat(NewSeat.Seat(busID: busID, rowNumber: i, seatNumber: j))
                             j = j + 1
                         }
                     }
@@ -173,7 +173,7 @@ struct AddingBus: View {
                         try await newRow.addRow(NewRow.Row(rowNumber: i, seatCount: 4, busID: busID))
                         var j = 1
                         while j <= 4 {
-                            try await newSeat.addSeat(NewSeat.Seat(busID: busID, rowNumber: i, seatNumber: j, isOccupied: false))
+                            try await newSeat.addSeat(NewSeat.Seat(busID: busID, rowNumber: i, seatNumber: j))
                             j = j + 1
                         }
                     }

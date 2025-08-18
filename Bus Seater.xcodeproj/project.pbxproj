@@ -27,6 +27,7 @@
 		0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA752532C70C3D700DF03F4 /* FirebaseAuth */; };
 		0CA752B92C70E8F400DF03F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */; };
 		0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7C6942C7627600018C041 /* Admin_SignUp.swift */; };
+		7E0AD8362E539C4C00BC6460 /* ManageBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0AD8352E539C4C00BC6460 /* ManageBus.swift */; };
 		7E0FE3C52CF6CAA90088B7FA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */; };
 		7E155B3C2E3114DE00DC1351 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E155B3B2E3114DE00DC1351 /* AppState.swift */; };
 		7E31E3BA2E170A6900E1E8A1 /* AddBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */; };
@@ -78,6 +79,7 @@
 		0CA752B72C70E8F400DF03F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0CB9850A2C28C21600920872 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0CC7C6942C7627600018C041 /* Admin_SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin_SignUp.swift; sourceTree = "<group>"; };
+		7E0AD8352E539C4C00BC6460 /* ManageBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBus.swift; sourceTree = "<group>"; };
 		7E0FE3C42CF6CAA90088B7FA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		7E155B3B2E3114DE00DC1351 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuses.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				0C5F17022CCB134900C62695 /* DriverHomepage.swift */,
 				0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */,
 				7E85D49D2CE1957700341DE7 /* Schools.swift */,
+				7E0AD8352E539C4C00BC6460 /* ManageBus.swift */,
 				7E37DF202CF7DB11001EB870 /* Student.swift */,
 				7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */,
 				7EA2A8612E404C120005CE54 /* BusRows.swift */,
@@ -333,6 +336,7 @@
 				0C75DB2A2C70BE79005247BC /* StudentNotifications.swift in Sources */,
 				7E37DF212CF7DB11001EB870 /* Student.swift in Sources */,
 				7E155B3C2E3114DE00DC1351 /* AppState.swift in Sources */,
+				7E0AD8362E539C4C00BC6460 /* ManageBus.swift in Sources */,
 				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
 				7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */,

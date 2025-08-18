@@ -11,6 +11,7 @@ struct AdminHomepage: View {
     @State var userLoggingOut = false
     @State var AdminAddingBuses = false
     @State var fetchingBuses = true
+    @State var busSelected = false
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var getBuses: GetBuses
     
@@ -97,7 +98,7 @@ struct AdminHomepage: View {
                                 ScrollView{
                                     LazyVGrid(columns: columns, spacing: 16) {
                                         ForEach(getBuses.buses) { bus in
-                                            Button(action: {}, label: {
+                                            Button(action: {busSelected = true}, label: {
                                                 VStack{
                                                     Image(systemName: "bus")
                                                     Text("\(bus.busCode)")
@@ -108,6 +109,7 @@ struct AdminHomepage: View {
                                                 .padding(25)
                                                 .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                                             })
+                                            .sheet(isPresented: $busSelected, content: {ManageBus()})
                                         }
                                         // ➕ Add Bus button after all buses
                                         Button(action: {AdminAddingBuses = true}, label: {

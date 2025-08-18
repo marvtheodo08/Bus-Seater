@@ -13,20 +13,17 @@ class NewSeat: ObservableObject {
         var busID: Int
         var rowNumber: Int
         var seatNumber: Int
-        var isOccupied: Bool
         
         enum CodingKeys: String, CodingKey {
             case busID = "bus_id"
             case rowNumber = "row_num"
             case seatNumber = "seat_number"
-            case isOccupied = "is_occupied"
         }
         
-        init(busID: Int, rowNumber: Int, seatNumber: Int, isOccupied: Bool) {
+        init(busID: Int, rowNumber: Int, seatNumber: Int) {
             self.busID = busID
             self.rowNumber = rowNumber
             self.seatNumber = seatNumber
-            self.isOccupied = isOccupied
         }
         
     }
