@@ -137,6 +137,7 @@ struct BusRows: View {
 struct AddingBus: View {
     @EnvironmentObject var newBus: NewBus
     @EnvironmentObject var newRow: NewRow
+    @EnvironmentObject var newSeat: NewSeat
     @EnvironmentObject var obtainBusID: ObtainBusID
     @State private var busID: Int = 0
     @State private var schoolID: Int = 0
@@ -162,9 +163,19 @@ struct AddingBus: View {
                 while i <= rows {
                     if i == rows {
                         try await newRow.addRow(NewRow.Row(rowNumber: i, seatCount: 3, busID: busID))
+                        var j = 1
+                        while j <= 3 {
+                            try await newSeat.addSeat(NewSeat.Seat(busID: busID, rowNumber: i, seatNumber: j, isOccupied: false))
+                            j = j + 1
+                        }
                     }
                     else {
                         try await newRow.addRow(NewRow.Row(rowNumber: i, seatCount: 4, busID: busID))
+                        var j = 1
+                        while j <= 4 {
+                            try await newSeat.addSeat(NewSeat.Seat(busID: busID, rowNumber: i, seatNumber: j, isOccupied: false))
+                            j = j + 1
+                        }
                     }
                     i = i + 1
                 }

@@ -32,6 +32,7 @@
 		7E31E3BA2E170A6900E1E8A1 /* AddBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */; };
 		7E37DF212CF7DB11001EB870 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF202CF7DB11001EB870 /* Student.swift */; };
 		7E37DF232CF7DD63001EB870 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF222CF7DD63001EB870 /* Bus.swift */; };
+		7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */; };
 		7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* Schools.swift */; };
 		7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2A8612E404C120005CE54 /* BusRows.swift */; };
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
@@ -82,6 +83,7 @@
 		7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuses.swift; sourceTree = "<group>"; };
 		7E37DF202CF7DB11001EB870 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		7E37DF222CF7DD63001EB870 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
+		7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSeats.swift; sourceTree = "<group>"; };
 		7E85D49D2CE1957700341DE7 /* Schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schools.swift; sourceTree = "<group>"; };
 		7EA2A8612E404C120005CE54 /* BusRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRows.swift; sourceTree = "<group>"; };
 		7EABE03A2D68F4B000C00697 /* NewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccount.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */,
 				7EA2A8612E404C120005CE54 /* BusRows.swift */,
 				7E37DF222CF7DD63001EB870 /* Bus.swift */,
+				7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */,
 				0CC7C6942C7627600018C041 /* Admin_SignUp.swift */,
 				7EABE03A2D68F4B000C00697 /* NewAccount.swift */,
 				0C7B42752C5273FB000ADE5F /* Student_SignUp.swift */,
@@ -336,6 +339,7 @@
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
 				0C5F17072CCB1F5D00C62695 /* LastUserInfo.swift in Sources */,
+				7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */,
 				0C5F17052CCB13C500C62695 /* AdminHomepage.swift in Sources */,
 				0C75DB242C70BE67005247BC /* StudentHomepage.swift in Sources */,
 				7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */,
