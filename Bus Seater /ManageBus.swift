@@ -9,28 +9,59 @@ import SwiftUI
 
 struct ManageBus: View {
     @Environment(\.dismiss) var dismiss
+    var bus: Bus
+    @State private var doubleCheck = false
     var body: some View {
         ZStack(alignment: .topTrailing){
             Color(.white)
                 .ignoresSafeArea()
             VStack
             {
-               Text("Hello World")
-                    .foregroundColor(.black)
+                Button(action: {doubleCheck = true} , label: {Text("Delete Bus")
+                    .foregroundStyle(.red)})
+            }
+            .alert("Are you sure you want to delete this bus?", isPresented: $doubleCheck) {
+                Button("Yes", role: .destructive) {
+                    Task {
+                        do {
+                            try await deleteBus(id: bus.id)
+                        } catch {
+                            print("Error deleting bus: \(error)")
+                        }
+                    }
+                    dismiss()
+                }
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("This action cannot be undone.")
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)
             Button(action: {dismiss()}, label: {
                 Image(systemName: "xmark")
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
             })
 
         }
             
     }
+    func deleteBus(id: Int) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/delete/bus/\(id)") else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+            throw URLError(.badServerResponse)
+        }
+        
+    }
 }
 
 #Preview {
-    ManageBus()
+    ManageBus(bus: Bus(id: 0, seatCount: 0, busCode: "Test", schoolID: 0, rowAmount: 0))
 }
