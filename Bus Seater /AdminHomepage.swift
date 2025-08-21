@@ -124,6 +124,7 @@ struct AdminHomepage: View {
         }
         .onAppear{
             Task{
+                try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
                     try await getBuses.fetchBuses(schoolID: UserDefaults.standard.integer(forKey: "schoolID"))
                 } catch {
