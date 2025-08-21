@@ -44,7 +44,9 @@ struct ContentView: View {
                             //Ask NotifsPermission
                             requestNotificationPermission()
                             //Change that Permission was asked
-                            notifsPermissions.changeAskedtoTrue()
+                            Task{
+                                notifsPermissions.WasPermissionAsked = true
+                            }
                         }
                     }
                     .navigationDestination(for: Route.self) { route in
@@ -67,7 +69,9 @@ struct ContentView: View {
                 print("Error: \(error.localizedDescription)")
             } else if granted {
                 print("Permission Granted")
-                notifsPermissions.changeGrantedtoTrue()
+                Task{
+                    notifsPermissions.WasPermissionGranted = true
+                }
             }
             else{
                 print("Permission Denied")
