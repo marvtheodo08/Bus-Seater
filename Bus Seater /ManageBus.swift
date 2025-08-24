@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ManageBus: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var busActions: BusActions
     var bus: Bus
     @State private var doubleCheck = false
     var body: some View {
@@ -28,6 +29,8 @@ struct ManageBus: View {
                         } catch {
                             print("Error deleting bus: \(error)")
                         }
+                        busActions.busDeleted = true
+                        
                     }
                     dismiss()
                 }

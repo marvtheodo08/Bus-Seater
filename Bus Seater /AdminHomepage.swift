@@ -14,6 +14,7 @@ struct AdminHomepage: View {
     @State private var busSelected: Bus? = nil
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var getBuses: GetBuses
+    @EnvironmentObject var busActions: BusActions
     
     // 3 columns = 3 buses per row
     let columns = [
@@ -131,6 +132,22 @@ struct AdminHomepage: View {
                     print("Failed to fetch buses: \(error)")
                 }
                 fetchingBuses = false
+            }
+        }
+        .onChange(of: busActions.busDeleted) { oldValue, newValue in
+            if newValue {
+                Task {
+                    fetchingBuses = true
+                    do {
+                        try await getBuses.fetchBuses(
+                            schoolID: UserDefaults.standard.integer(forKey: "schoolID")
+                        )
+                    } catch {
+                        print("Failed to fetch buses: \(error)")
+                    }
+                    busActions.busDeleted = false
+                    fetchingBuses = false
+                }
             }
         }
     }
