@@ -52,7 +52,7 @@ struct Student_SignUp: View {
     @State private var password: String = ""
     @State private var firstname: String = ""
     @State private var lastname: String = ""
-    @State private var grade: Int = 0
+    @State private var grade: String = ""
     @State private var state: String = ""
     @State private var schoolID: Int = 0
     @State private var bus: String = ""
@@ -72,9 +72,9 @@ struct Student_SignUp: View {
                 case .password:
                     StudentPassword(password: $password)
                 case .name:
-                    StudentName(firstname: $firstname, lastname: $lastname)
+                    StudentAccountName(firstname: $firstname, lastname: $lastname)
                 case .grade:
-                    StudentGrade(grade: $grade)
+                    StudentAccountGrade(grade: $grade)
                 case .state:
                     StudentState(state: $state)
                 case .school:
@@ -221,7 +221,7 @@ struct StudentPassword: View {
 }
 
 // Name stage view
-struct StudentName: View {
+struct StudentAccountName: View {
     @Binding var firstname: String
     @Binding var lastname: String
     
@@ -250,8 +250,8 @@ struct StudentName: View {
 }
 
 // Grade stage View
-struct StudentGrade: View {
-    @Binding var grade: Int
+struct StudentAccountGrade: View {
+    @Binding var grade: String
     
     var body: some View{
         Text("What grade level are you in?")
