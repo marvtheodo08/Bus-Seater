@@ -12,6 +12,26 @@ import FirebaseAuth
 
 struct Driver_SignUp: View {
     
+    // Defining Driver struct for JSON function
+    struct Driver: Codable {
+        var accountID: Int
+        var schoolID: Int
+        var busID: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case accountID = "account_id"
+            case schoolID = "school_id"
+            case busID = "bus_id"
+        }
+        
+        init(accountID: Int, schoolID: Int, busID: Int) {
+            self.accountID = accountID
+            self.schoolID = schoolID
+            self.busID = busID
+        }
+        
+    }
+    
     // Enum suggested by ChatGPT
     // Enum for tracking the stages
     enum Stage {
@@ -53,6 +73,8 @@ struct Driver_SignUp: View {
     @State private var state: String = ""
     @State private var schoolID: Int = 0
     @State private var bus: Int = 0
+    @EnvironmentObject var newAccount: NewAccount
+    @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     
     var body: some View {
         ZStack() {
@@ -114,6 +136,25 @@ struct Driver_SignUp: View {
         }
         .fullScreenCover(isPresented: $isVerified) {
             DriverHomepage()
+                .onAppear() {
+                    Task {
+                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolID: schoolID))
+                        try await obtainAccountInfo.obtainAccountInfo(email: email)
+                        if let accountID = obtainAccountInfo.account.first?.id{
+                            try await addDriver(Driver(accountID: accountID, schoolID: schoolID, busID: bus))
+                        }
+                        if let account = obtainAccountInfo.account.first{
+                            let defaults = UserDefaults.standard
+                            defaults.set(account.firstName, forKey: "firstName")
+                            defaults.set(account.lastName, forKey: "lastName")
+                            defaults.set(account.schoolID, forKey: "schoolID")
+                            defaults.set(account.email, forKey: "email")
+                            defaults.set(account.accountType, forKey: "accountType")
+                            defaults.set(account.id, forKey: "accountID")
+                            defaults.set(true, forKey: "WasUserLoggedIn")
+                        }
+                    }
+                }
         }
     }
     
@@ -138,6 +179,25 @@ struct Driver_SignUp: View {
         case .school: currentStage = .bus
         default: break
         }
+    }
+    
+    func addDriver(_ driver: Driver) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/driver/create/") else { fatalError("Invalid URL") }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(driver)
+        } catch {
+            print("Failed to encode parameters: \(error)")
+        }
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+            throw URLError(.badServerResponse)
+        }
+        
     }
     
     func emailVerification(email: String, password: String, firstname: String) {
