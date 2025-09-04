@@ -17,6 +17,7 @@ struct AdminHomepage: View {
     @EnvironmentObject var busActions: BusActions
     
     // 3 columns = 3 buses per row
+    // Columns suggusted by ChatGPT
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),

@@ -10,7 +10,7 @@ import SwiftUI
 struct ManageBus: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var busActions: BusActions
-    var bus: Bus
+    var bus: Bus? = nil
     @State private var doubleCheck = false
     var body: some View {
         ZStack(alignment: .topTrailing){
@@ -25,7 +25,7 @@ struct ManageBus: View {
                 Button("Yes", role: .destructive) {
                     Task {
                         do {
-                            try await deleteBus(id: bus.id)
+                            try await deleteBus(id: bus?.id ?? 0)
                         } catch {
                             print("Error deleting bus: \(error)")
                         }
@@ -66,5 +66,5 @@ struct ManageBus: View {
 }
 
 #Preview {
-    ManageBus(bus: Bus(id: 0, seatCount: 0, busCode: "Test", schoolID: 0, rowAmount: 0))
+    ManageBus()
 }

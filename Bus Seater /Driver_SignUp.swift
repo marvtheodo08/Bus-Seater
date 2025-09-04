@@ -140,10 +140,10 @@ struct Driver_SignUp: View {
                     Task {
                         try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolID: schoolID))
                         try await obtainAccountInfo.obtainAccountInfo(email: email)
-                        if let accountID = obtainAccountInfo.account.first?.id{
+                        if let accountID = obtainAccountInfo.account?.id{
                             try await addDriver(Driver(accountID: accountID, schoolID: schoolID, busID: bus))
                         }
-                        if let account = obtainAccountInfo.account.first{
+                        if let account = obtainAccountInfo.account{
                             let defaults = UserDefaults.standard
                             defaults.set(account.firstName, forKey: "firstName")
                             defaults.set(account.lastName, forKey: "lastName")

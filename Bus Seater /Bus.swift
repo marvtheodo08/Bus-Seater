@@ -32,7 +32,7 @@ struct BusID: Identifiable, Codable {
 }
 
 class ObtainBusInfo: ObservableObject {
-    @Published var bus = [Bus]()
+    @Published var bus: Bus?
     
     @MainActor
     func obtainBusInfo(id: Int) async throws {
@@ -46,14 +46,14 @@ class ObtainBusInfo: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let busInfo = try JSONDecoder().decode([Bus].self, from: data)
+        let busInfo = try JSONDecoder().decode(Bus.self, from: data)
         self.bus = busInfo
         print(busInfo)
     }
 }
 
 class ObtainBusID: ObservableObject {
-    @Published var id = [BusID]()
+    @Published var id: BusID?
     
     @MainActor
     func obtainBusID(bus_code: String, school_id: Int) async throws {
@@ -67,7 +67,7 @@ class ObtainBusID: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let busID = try JSONDecoder().decode([BusID].self, from: data)
+        let busID = try JSONDecoder().decode(BusID.self, from: data)
         self.id = busID
         print(busID)
     }

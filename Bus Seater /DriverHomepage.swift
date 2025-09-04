@@ -10,7 +10,7 @@ import SwiftUI
 struct DriverHomepage: View {
     @State var userLoggingOut = false
     @State var DriverAddingStudent = false
-    @State private var studentSelected: Bus? = nil
+    @State private var studentSelected: Student? = nil
     @State var fetchingStudents = true
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var getStudents: GetStudents
@@ -88,7 +88,7 @@ struct DriverHomepage: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                                         })
                                         .sheet(item: $studentSelected) {
-                                            student in ManageBus(bus: student)
+                                            student in AssignStudent(student: student)
                                         }
                                     }
                                     // ➕ Add Bus button after all buses

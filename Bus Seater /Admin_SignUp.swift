@@ -91,7 +91,7 @@ struct Admin_SignUp: View {
                         try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolID: schoolID))
                         try await obtainAccountInfo.obtainAccountInfo(email: email)
                         
-                        if let account = obtainAccountInfo.account.first{
+                        if let account = obtainAccountInfo.account{
                             let defaults = UserDefaults.standard
                             defaults.set(account.firstName, forKey: "firstName")
                             defaults.set(account.lastName, forKey: "lastName")
