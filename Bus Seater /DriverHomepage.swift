@@ -11,9 +11,9 @@ struct DriverHomepage: View {
     @State var userLoggingOut = false
     @State var DriverAddingStudent = false
     @State private var studentSelected: Student? = nil
+    @State private var students = [Student]()
     @State var fetchingStudents = true
     @EnvironmentObject var appState: AppState
-    @EnvironmentObject var getStudents: GetStudents
     
     // 3 columns = 3 buses per row
     let columns = [
@@ -26,13 +26,13 @@ struct DriverHomepage: View {
         NavigationStack {
             if fetchingStudents {
                 VStack {
-                    ProgressView("Loading buses...")
+                    ProgressView("Loading students...")
                         .multilineTextAlignment(.center)
                         .colorScheme(.light)
                 }
             }
             else {
-                if getStudents.students.isEmpty {
+                if students.isEmpty {
                     ZStack{
                         Color(.white)
                             .ignoresSafeArea()
@@ -41,7 +41,7 @@ struct DriverHomepage: View {
                                 .foregroundStyle(.gray)
                                 .font(.system(size: 50))
                         })
-                        Text("Add your buses here.")
+                        Text("Add your students here.")
                             .foregroundStyle(.black)
                             .padding(.top, 120)
                         Button(action: {logout()}, label: {Text("Logout")})
@@ -77,7 +77,7 @@ struct DriverHomepage: View {
                         VStack(alignment: .leading) {
                             ScrollView{
                                 LazyVGrid(columns: columns, spacing: 16) {
-                                    ForEach(getStudents.students) { student in
+                                    ForEach(students) { student in
                                         Button(action: {studentSelected = student}, label: {
                                             VStack{
                                                 Image(systemName: "bus")
@@ -124,9 +124,9 @@ struct DriverHomepage: View {
             Task{
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
-                    try await getStudents.fetchStudents(schoolID: UserDefaults.standard.integer(forKey: "schoolID"))
+                    try await fetchStudents(schoolID: UserDefaults.standard.integer(forKey: "schoolID"))
                 } catch {
-                    print("Failed to fetch buses: \(error)")
+                    print("Failed to fetch students: \(error)")
                 }
                 fetchingStudents = false
             }
@@ -144,7 +144,25 @@ struct DriverHomepage: View {
         defaults.removeObject(forKey: "accountType")
         defaults.removeObject(forKey: "accountID")
         defaults.set(false, forKey: "WasUserLoggedIn")
-    } 
+    }
+    @MainActor
+    func fetchStudents(schoolID: Int) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        print("Status code: \(httpResponse.statusCode)")
+        
+        let fetchedstudents = try JSONDecoder().decode([Student].self, from: data)
+        
+        self.students = fetchedstudents
+    }
 }
 
 #Preview {

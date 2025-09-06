@@ -26,30 +26,6 @@ struct Student: Identifiable, Codable {
     
 }
 
-class GetStudents: ObservableObject {
-    @Published var students = [Student]()
-    
-    @MainActor
-    func fetchStudents(schoolID: Int) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
-            throw URLError(.badURL)
-        }
-        
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        print("Status code: \(httpResponse.statusCode)")
-        
-        let fetchedbuses = try JSONDecoder().decode([Student].self, from: data)
-        
-        // Update the @Published property
-        self.students = fetchedbuses
-    }
-}
-
 class NewStudent: ObservableObject {
     struct Student: Codable {
         let busID: Int
@@ -76,15 +52,15 @@ class NewStudent: ObservableObject {
         
     }
     
-    //Function prompted by ChatGPT
-    func addBus(_ bus: Bus) async throws {
+    //Function modeled from ChatGPT
+    func addStudent(_ student: Student) async throws {
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/student/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            request.httpBody = try JSONEncoder().encode(bus)
+            request.httpBody = try JSONEncoder().encode(student)
         } catch {
             print("Failed to encode parameters: \(error)")
         }
