@@ -55,7 +55,7 @@ struct DriverHomepage: View {
                             .font(.system(size: 20))
                     }
                     .navigationDestination(isPresented: $DriverAddingStudent) {
-                        AddBuses()
+                        AddStudent()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()
@@ -111,7 +111,7 @@ struct DriverHomepage: View {
                         
                     }
                     .navigationDestination(isPresented: $DriverAddingStudent) {
-                        AddBuses()
+                        AddStudent()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()

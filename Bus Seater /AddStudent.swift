@@ -11,7 +11,9 @@ struct AddStudent: View {
     enum Stage {
         case name
         case grade
+        case addingStudent
     }
+    @State private var studentAdded: Bool = false
     @State private var currentStage: Stage = .name
     @State private var firstname: String = ""
     @State private var lastname: String = ""
@@ -30,6 +32,8 @@ struct AddStudent: View {
                     StudentName(firstname: $firstname, lastname: $lastname)
                 case .grade:
                     StudentGrade(grade: $grade)
+                case .addingStudent:
+                    AddingStudent(firstname: $firstname, lastname: $lastname, grade: $grade, studentAdded: $studentAdded)
                 }
                 HStack {
                     if currentStage != .name {
@@ -48,7 +52,7 @@ struct AddStudent: View {
                         }
                     }
                     else if currentStage == .grade {
-                        Button(action: {}, label: {Text("Add Student")
+                        Button(action: {currentStage = .addingStudent}, label: {Text("Add Student")
                                 .foregroundStyle(.black)
                         })
                     }
@@ -56,6 +60,9 @@ struct AddStudent: View {
                 .padding(.horizontal)
             }
             .padding(.bottom, 250)
+        }
+        .fullScreenCover(isPresented: $studentAdded) {
+            AdminHomepage()
         }
     }
     
@@ -116,15 +123,78 @@ struct StudentGrade: View {
             selection: $grade,
             label: Text("Grade"),
             content: {
-                ForEach(6..<13) { grade in
+                Text("K").tag("K")
+                ForEach(1..<13) { grade in
                     Text("\(grade)")
-                        .tag(grade)
+                        .tag("\(grade)")
                 }
             }
             
         )
         .pickerStyle(WheelPickerStyle())
         .colorScheme(.light)
+    }
+}
+
+struct AddingStudent: View {
+    @State var id: BusID?
+    @State private var accountID: Int = 0
+    @State private var busID: Int = 0
+    @State private var schoolID: Int = 0
+    @Binding var firstname: String
+    @Binding var lastname: String
+    @Binding var grade: String
+    @Binding var studentAdded: Bool
+    
+    var body: some View {
+        VStack {
+            ProgressView("Adding student to database...")
+                .multilineTextAlignment(.center)
+                .colorScheme(.light)
+        }
+        .onAppear {
+            schoolID = UserDefaults.standard.integer(forKey: "schoolID")
+            accountID = UserDefaults.standard.integer(forKey: "accountID")
+            Task {
+                try await obtainBusIDfromAccountID(accountID: accountID)
+                busID = id?.id ?? 0
+                try await addStudent(NewStudent(busID: busID, schoolID: schoolID, grade: grade, firstName: firstname, lastName: lastname))
+            }
+            studentAdded = true
+        }
+    }
+    func addStudent(_ student: NewStudent) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/student/create/") else { fatalError("Invalid URL") }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(student)
+        } catch {
+            print("Failed to encode parameters: \(error)")
+        }
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+            throw URLError(.badServerResponse)
+        }
+        
+    }
+    func obtainBusIDfromAccountID(accountID: Int) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/driver/busID/\(accountID)") else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let busID = try JSONDecoder().decode(BusID.self, from: data)
+        id = busID
+        print(busID)
     }
 }
 
