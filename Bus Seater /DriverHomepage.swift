@@ -13,7 +13,10 @@ struct DriverHomepage: View {
     @State private var studentSelected: Student? = nil
     @State private var students = [Student]()
     @State var fetchingStudents = true
+    @State private var accountID: Int = 0
+    @State private var busID: Int = 0
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
     
     // 3 columns = 3 buses per row
     let columns = [
@@ -80,7 +83,11 @@ struct DriverHomepage: View {
                                     ForEach(students) { student in
                                         Button(action: {studentSelected = student}, label: {
                                             VStack{
-                                                Image(systemName: "bus")
+                                                Image(systemName: "studentdesk")
+                                                Text("\(student.firstName) \(student.lastName)")
+                                                    .font(.system(size: 8))
+                                                Text("\(student.grade)")
+                                                    .font(.system(size: 12))
                                             }
                                             .foregroundStyle(.white)
                                             .frame(width: 40.0, height: 40.0)
@@ -97,7 +104,7 @@ struct DriverHomepage: View {
                                             Image(systemName: "plus")
                                                 .foregroundStyle(.gray)
                                                 .font(.system(size: 40))
-                                            Text("Add more buses")
+                                            Text("Add more students")
                                                 .foregroundStyle(.black)
                                         }
                                     })
@@ -121,10 +128,12 @@ struct DriverHomepage: View {
             }
         }
         .onAppear{
+            accountID = UserDefaults.standard.integer(forKey: "accountID")
             Task{
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
-                    try await fetchStudents(schoolID: UserDefaults.standard.integer(forKey: "schoolID"))
+                    busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: accountID)
+                    try await fetchStudents(busID: busID)
                 } catch {
                     print("Failed to fetch students: \(error)")
                 }
@@ -146,8 +155,8 @@ struct DriverHomepage: View {
         defaults.set(false, forKey: "WasUserLoggedIn")
     }
     @MainActor
-    func fetchStudents(schoolID: Int) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
+    func fetchStudents(busID: Int) async throws {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/students/\(busID)") else {
             throw URLError(.badURL)
         }
         
@@ -161,7 +170,7 @@ struct DriverHomepage: View {
         
         let fetchedstudents = try JSONDecoder().decode([Student].self, from: data)
         
-        self.students = fetchedstudents
+        students = fetchedstudents
     }
 }
 

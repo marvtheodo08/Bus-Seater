@@ -158,7 +158,7 @@ struct AddingBus: View {
             Task {
                 try await newBus.addBus(NewBus.Bus(rowAmount: rows, seatCount: seats, busCode: busCode, schoolID: schoolID))
                 try await obtainBusID.obtainBusID(bus_code: busCode, school_id: schoolID)
-                busID = obtainBusID.id?.id ?? 0
+                busID = obtainBusID.id?.busID ?? 0
                 var i = 1
                 while i <= rows {
                     if i == rows {

@@ -24,10 +24,27 @@ struct Bus: Identifiable, Codable {
     
 }
 
-struct BusID: Identifiable, Codable {
-    let id: Int
+struct BusID: Codable {
+    let busID: Int
     enum CodingKeys: String, CodingKey {
-        case id
+        case busID = "bus_id"
+    }
+}
+
+class ObtainBusIDfromAccount: ObservableObject {
+    func obtainBusIDfromAccountID(accountID: Int) async throws -> Int {
+        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/driver/busID/\(accountID)") else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let busID = try JSONDecoder().decode(BusID.self, from: data)
+        return busID.busID
     }
 }
 

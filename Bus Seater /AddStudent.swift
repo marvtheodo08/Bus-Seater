@@ -62,7 +62,7 @@ struct AddStudent: View {
             .padding(.bottom, 250)
         }
         .fullScreenCover(isPresented: $studentAdded) {
-            AdminHomepage()
+            DriverHomepage()
         }
     }
     
@@ -137,10 +137,10 @@ struct StudentGrade: View {
 }
 
 struct AddingStudent: View {
-    @State var id: BusID?
     @State private var accountID: Int = 0
     @State private var busID: Int = 0
     @State private var schoolID: Int = 0
+    @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
     @Binding var firstname: String
     @Binding var lastname: String
     @Binding var grade: String
@@ -156,8 +156,7 @@ struct AddingStudent: View {
             schoolID = UserDefaults.standard.integer(forKey: "schoolID")
             accountID = UserDefaults.standard.integer(forKey: "accountID")
             Task {
-                try await obtainBusIDfromAccountID(accountID: accountID)
-                busID = id?.id ?? 0
+                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: accountID)
                 try await addStudent(NewStudent(busID: busID, schoolID: schoolID, grade: grade, firstName: firstname, lastName: lastname))
             }
             studentAdded = true
@@ -180,21 +179,6 @@ struct AddingStudent: View {
             throw URLError(.badServerResponse)
         }
         
-    }
-    func obtainBusIDfromAccountID(accountID: Int) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/driver/busID/\(accountID)") else {
-            throw URLError(.badURL)
-        }
-        
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let busID = try JSONDecoder().decode(BusID.self, from: data)
-        id = busID
-        print(busID)
     }
 }
 
