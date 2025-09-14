@@ -12,6 +12,7 @@ struct AdminHomepage: View {
     @State var AdminAddingBus = false
     @State var fetchingBuses = true
     @State private var busSelected: Bus? = nil
+    @State private var buses = [Bus]()
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var getBuses: GetBuses
     @EnvironmentObject var busActions: BusActions
@@ -34,7 +35,7 @@ struct AdminHomepage: View {
                 }
             }
             else {
-                if getBuses.buses.isEmpty {
+                if buses.isEmpty {
                     ZStack{
                         Color(.white)
                             .ignoresSafeArea()
@@ -79,7 +80,7 @@ struct AdminHomepage: View {
                         VStack(alignment: .leading) {
                             ScrollView{
                                 LazyVGrid(columns: columns, spacing: 16) {
-                                    ForEach(getBuses.buses) { bus in
+                                    ForEach(buses) { bus in
                                         Button(action: {busSelected = bus}, label: {
                                             VStack{
                                                 Image(systemName: "bus")
@@ -128,7 +129,7 @@ struct AdminHomepage: View {
             Task{
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
-                    try await getBuses.fetchBuses(schoolID: UserDefaults.standard.integer(forKey: "schoolID"))
+                   buses = try await getBuses.fetchBuses(schoolID: UserDefaults.standard.integer(forKey: "schoolID"))
                 } catch {
                     print("Failed to fetch buses: \(error)")
                 }
@@ -140,7 +141,7 @@ struct AdminHomepage: View {
                 Task {
                     fetchingBuses = true
                     do {
-                        try await getBuses.fetchBuses(
+                        buses = try await getBuses.fetchBuses(
                             schoolID: UserDefaults.standard.integer(forKey: "schoolID")
                         )
                     } catch {

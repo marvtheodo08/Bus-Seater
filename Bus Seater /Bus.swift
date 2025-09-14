@@ -49,10 +49,7 @@ class ObtainBusIDfromAccount: ObservableObject {
 }
 
 class ObtainBusInfo: ObservableObject {
-    @Published var bus: Bus?
-    
-    @MainActor
-    func obtainBusInfo(id: Int) async throws {
+    func obtainBusInfo(id: Int) async throws -> Bus {
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/info/\(id)") else {
             throw URLError(.badURL)
         }
@@ -64,8 +61,7 @@ class ObtainBusInfo: ObservableObject {
         }
         
         let busInfo = try JSONDecoder().decode(Bus.self, from: data)
-        self.bus = busInfo
-        print(busInfo)
+        return busInfo
     }
 }
 
@@ -91,10 +87,7 @@ class ObtainBusID: ObservableObject {
 }
 
 class GetBuses: ObservableObject {
-    @Published var buses = [Bus]()
-    
-    @MainActor
-    func fetchBuses(schoolID: Int) async throws {
+    func fetchBuses(schoolID: Int) async throws -> [Bus]{
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
             throw URLError(.badURL)
         }
@@ -109,8 +102,7 @@ class GetBuses: ObservableObject {
         
         let fetchedbuses = try JSONDecoder().decode([Bus].self, from: data)
         
-        // Update the @Published property
-        self.buses = fetchedbuses
+        return fetchedbuses
     }
 }
 class NewBus: ObservableObject {

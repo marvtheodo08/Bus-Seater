@@ -347,6 +347,7 @@ struct DriverSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
+    @State private var schools = [School]()
     
     var body: some View {
         VStack {
@@ -355,7 +356,7 @@ struct DriverSchool: View {
                     .multilineTextAlignment(.center)
                     .colorScheme(.light)
             } else {
-                if getSchools.schools.isEmpty {
+                if schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
@@ -367,7 +368,7 @@ struct DriverSchool: View {
                         .padding(.bottom, 50)
                     
                     Picker("Select a School", selection: $schoolID) {
-                        ForEach(getSchools.schools, id: \.id) { school in
+                        ForEach(schools, id: \.id) { school in
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
@@ -379,7 +380,7 @@ struct DriverSchool: View {
             Task {
                 do {
                     loading = true
-                    try await getSchools.fetchSchools(state: state)
+                    schools = try await getSchools.fetchSchools(state: state)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }
@@ -397,6 +398,7 @@ struct DriverBus: View {
     @Binding var schoolID: Int
     @EnvironmentObject var getBuses: GetBuses
     @State var loading: Bool = true
+    @State private var buses = [Bus]()
     
     var body: some View {
         VStack {
@@ -405,7 +407,7 @@ struct DriverBus: View {
                     .multilineTextAlignment(.center)
                     .colorScheme(.light)
             } else {
-                if getBuses.buses.isEmpty {
+                if buses.isEmpty {
                     Text("No buses available for this school yet, please check back later.")
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
@@ -417,7 +419,7 @@ struct DriverBus: View {
                         .padding(.bottom, 50)
                     
                     Picker("Select a bus", selection: $bus) {
-                        ForEach(getBuses.buses, id: \.id) { bus in
+                        ForEach(buses, id: \.id) { bus in
                             Text("\(bus.busCode)").tag(bus.id)
                         }
                     }
@@ -429,7 +431,7 @@ struct DriverBus: View {
             Task {
                 do {
                     loading = true
-                    try await getBuses.fetchBuses(schoolID: schoolID)
+                    buses = try await getBuses.fetchBuses(schoolID: schoolID)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }

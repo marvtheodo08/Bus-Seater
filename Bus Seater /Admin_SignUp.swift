@@ -271,6 +271,7 @@ struct AdminSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
+    @State private var schools = [School]()
     
     var body: some View {
         VStack {
@@ -279,7 +280,7 @@ struct AdminSchool: View {
                     .multilineTextAlignment(.center)
                     .colorScheme(.light)
             } else {
-                if getSchools.schools.isEmpty {
+                if schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
@@ -291,7 +292,7 @@ struct AdminSchool: View {
                         .padding(.bottom, 50)
                     
                     Picker("Select a School", selection: $schoolID) {
-                        ForEach(getSchools.schools, id: \.id) { school in
+                        ForEach(schools, id: \.id) { school in
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
@@ -304,7 +305,7 @@ struct AdminSchool: View {
             Task {
                 do {
                     loading = true
-                    try await getSchools.fetchSchools(state: state)
+                    schools = try await getSchools.fetchSchools(state: state)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }

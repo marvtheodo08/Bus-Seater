@@ -314,6 +314,7 @@ struct StudentSchool: View {
     @Binding var state: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
+    @State private var schools = [School]()
     
     var body: some View {
         VStack {
@@ -322,7 +323,7 @@ struct StudentSchool: View {
                     .multilineTextAlignment(.center)
                     .colorScheme(.light)
             } else {
-                if getSchools.schools.isEmpty {
+                if schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
@@ -334,7 +335,7 @@ struct StudentSchool: View {
                         .padding(.bottom, 50)
                     
                     Picker("Select a School", selection: $schoolID) {
-                        ForEach(getSchools.schools, id: \.id) { school in
+                        ForEach(schools, id: \.id) { school in
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
@@ -345,7 +346,7 @@ struct StudentSchool: View {
             Task {
                 do {
                     loading = true
-                    try await getSchools.fetchSchools(state: state)
+                   schools = try await getSchools.fetchSchools(state: state)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }
@@ -359,17 +360,51 @@ struct StudentSchool: View {
 struct StudentBus: View {
     @Binding var bus: String
     @Binding var schoolID: Int
+    @EnvironmentObject var getBuses: GetBuses
+    @State var loading: Bool = true
+    @State private var buses = [Bus]()
     
-    var body: some View{
-        Text("What is you bus number/code?")
-            .multilineTextAlignment(.center)
-            .font(.title)
-            .foregroundStyle(.black)
-            .padding(.bottom, 50)
-        Picker("Bus", selection: $bus) {
+    var body: some View {
+        VStack {
+            if loading {
+                ProgressView("Loading available buses...")
+                    .multilineTextAlignment(.center)
+                    .colorScheme(.light)
+            } else {
+                if buses.isEmpty {
+                    Text("No buses available for this school yet, please check back later.")
+                        .foregroundStyle(.black)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("What bus are you on?")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .foregroundStyle(.black)
+                        .padding(.bottom, 50)
+                    
+                    Picker("Select a bus", selection: $bus) {
+                        ForEach(buses, id: \.id) { bus in
+                            Text("\(bus.busCode)").tag(bus.id)
+                        }
+                    }
+                    .colorScheme(.light)
+                }
+            }
         }
-        .colorScheme(.light)
+        .onAppear {
+            Task {
+                do {
+                    loading = true
+                    buses = try await getBuses.fetchBuses(schoolID: schoolID)
+                } catch {
+                    print("Failed to fetch schools: \(error)")
+                }
+                loading = false
+                
+            }
+        }
     }
+
 }
 
 struct StudentVerification: View {

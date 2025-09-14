@@ -24,10 +24,7 @@ struct School: Identifiable, Codable {
     
 }
 class GetSchools: ObservableObject {
-    @Published var schools = [School]()
-    
-    @MainActor
-    func fetchSchools(state: String) async throws {
+    func fetchSchools(state: String) async throws -> [School]{
         guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/\(state)") else {
             throw URLError(.badURL)
         }
@@ -40,7 +37,6 @@ class GetSchools: ObservableObject {
         
         let fetchedSchools = try JSONDecoder().decode([School].self, from: data)
         
-        // Update the @Published property
-        self.schools = fetchedSchools
+        return fetchedSchools
     }
 }
