@@ -54,7 +54,7 @@ struct AssignStudent: View {
         }
     }
     func obtainDriverInfo (accountID: Int) async throws -> Driver{
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/drivers/info/\(accountID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/drivers/info/\(accountID)") else {
             throw URLError(.badURL)
         }
         

@@ -156,7 +156,7 @@ struct DriverHomepage: View {
     }
     @MainActor
     func fetchStudents(busID: Int) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/students/\(busID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/students/\(busID)") else {
             throw URLError(.badURL)
         }
         

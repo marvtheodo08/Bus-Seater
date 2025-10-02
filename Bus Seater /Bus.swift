@@ -33,7 +33,7 @@ struct BusID: Codable {
 
 class ObtainBusIDfromAccount: ObservableObject {
     func obtainBusIDfromAccountID(accountID: Int) async throws -> Int {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/driver/busID/\(accountID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/driver/busID/\(accountID)") else {
             throw URLError(.badURL)
         }
         
@@ -50,7 +50,7 @@ class ObtainBusIDfromAccount: ObservableObject {
 
 class ObtainBusInfo: ObservableObject {
     func obtainBusInfo(id: Int) async throws -> Bus {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/info/\(id)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/bus/info/\(id)") else {
             throw URLError(.badURL)
         }
         
@@ -70,7 +70,7 @@ class ObtainBusID: ObservableObject {
     
     @MainActor
     func obtainBusID(bus_code: String, school_id: Int) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/id/\(school_id)/\(bus_code)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/bus/id/\(school_id)/\(bus_code)") else {
             throw URLError(.badURL)
         }
         
@@ -88,7 +88,7 @@ class ObtainBusID: ObservableObject {
 
 class GetBuses: ObservableObject {
     func fetchBuses(schoolID: Int) async throws -> [Bus]{
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/buses/\(schoolID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/buses/\(schoolID)") else {
             throw URLError(.badURL)
         }
         
@@ -131,7 +131,7 @@ class NewBus: ObservableObject {
     
     //Function prompted by ChatGPT
     func addBus(_ bus: Bus) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/bus/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/bus/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

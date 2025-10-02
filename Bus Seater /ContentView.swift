@@ -70,14 +70,26 @@ struct ContentView: View {
             } else if granted {
                 print("Permission Granted")
                 Task{
-                    notifsPermissions.WasPermissionGranted = true
+                    await changetoTrue()
                 }
             }
             else{
                 print("Permission Denied")
-                notifsPermissions.WasPermissionGranted = false
+                Task{
+                    await changetoFalse()
+                }
             }
         }
+    }
+    
+    @MainActor
+    func changetoTrue(){
+        notifsPermissions.WasPermissionGranted = true
+    }
+    
+    @MainActor
+    func changetoFalse(){
+        notifsPermissions.WasPermissionGranted = false
     }
          
         

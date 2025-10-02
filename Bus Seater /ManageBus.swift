@@ -50,7 +50,7 @@ struct ManageBus: View {
             
     }
     func deleteBus(id: Int) async throws {
-        guard let url = URL(string: "http://busseater-env.eba-nxi9tenj.us-east-2.elasticbeanstalk.com/delete/bus/\(id)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/delete/bus/\(id)") else {
             throw URLError(.badURL)
         }
 
