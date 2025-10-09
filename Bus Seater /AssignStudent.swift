@@ -43,6 +43,18 @@ struct AssignStudent: View {
                         .colorScheme(.light)
                 }
             }
+            else {
+                VStack(alignment: .leading) {
+                    ScrollView{
+                        LazyVGrid(columns: columns, spacing: 16) {
+                            
+                        }
+                        .padding()
+                    }
+                    .padding(.top, 50)
+
+                }
+            }
         }
         .onAppear {
             Task {
@@ -50,6 +62,7 @@ struct AssignStudent: View {
                 busID = driverInfo?.busID ?? 0
                 busInfo = try await obtainBusInfo.obtainBusInfo(id: busID)
                 rows = busInfo?.rowAmount ?? 0
+                seats = busInfo?.seatCount ?? 0
             }
         }
     }
