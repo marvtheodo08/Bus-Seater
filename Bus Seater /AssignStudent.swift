@@ -10,12 +10,14 @@ import SwiftUI
 struct AssignStudent: View {
     var student: Student? = nil
     @EnvironmentObject var obtainBusInfo: ObtainBusInfo
+    @EnvironmentObject var getSeats: GetSeats
     @State private var driverInfo: Driver? = nil
     @State private var busInfo: Bus? = nil
     @State private var busID: Int = 0
     @State var loadingSeats = true
-    @State private var rows: Int = 0
-    @State private var seats: Int = 0
+    @State private var rowNum: Int = 0
+    @State private var seatNum: Int = 0
+    @State private var seats = [Seat]()
     
     let columns = [
         GridItem(.flexible()),
@@ -47,6 +49,31 @@ struct AssignStudent: View {
                 VStack(alignment: .leading) {
                     ScrollView{
                         LazyVGrid(columns: columns, spacing: 16) {
+                            ForEach(seats) { seat in
+                                if seat.isOccupied {
+                                    VStack{
+                                        Text("This seat is taken")
+                                            .font(.system(size: 3))
+                                    }
+                                    .foregroundStyle(.white)
+                                    .frame(width: 15.0, height: 15.0)
+                                    .padding(25)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                                }
+                                else {
+                                    Button(action: {}, label: {
+                                        VStack{
+                                            Text("\(seat.rowNumber) \(seat.seatNumber)")
+                                                .font(.system(size: 7))
+                                        }
+                                        .foregroundStyle(.white)
+                                        .frame(width: 15.0, height: 15.0)
+                                        .padding(25)
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                                    })
+
+                                }
+                            }
                             
                         }
                         .padding()
@@ -61,8 +88,12 @@ struct AssignStudent: View {
                 driverInfo = try await obtainDriverInfo(accountID: UserDefaults.standard.integer(forKey: "accountID"))
                 busID = driverInfo?.busID ?? 0
                 busInfo = try await obtainBusInfo.obtainBusInfo(id: busID)
-                rows = busInfo?.rowAmount ?? 0
-                seats = busInfo?.seatCount ?? 0
+                do {
+                    seats = try await getSeats.fetchSeats(busID: busID)
+                } catch {
+                    print("Failed to fetch seats: \(error)")
+                }
+                loadingSeats = false
             }
         }
     }

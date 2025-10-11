@@ -7,12 +7,16 @@
 
 import Foundation
 
-struct Seat: Codable {
+struct Seat: Identifiable, Codable {
     let seatNumber: Int
     let rowNumber: Int
     let busID: Int
-    let studentID: Int
+    let studentID: Int?
     let isOccupied: Bool
+    
+    var id: String {
+        "\(busID).\(rowNumber).\(seatNumber)"
+    }
     
     enum CodingKeys: String, CodingKey {
         case seatNumber = "seat_number"
