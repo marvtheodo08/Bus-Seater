@@ -49,51 +49,51 @@ struct AssignStudent: View {
                 VStack(alignment: .leading) {
                     ScrollView{
                         LazyVGrid(columns: columns, spacing: 16) {
-                            ForEach(seats) { seat in
-                                if seat.isOccupied {
-                                    VStack{
-                                        Text("This seat is taken")
-                                            .font(.system(size: 3))
-                                    }
-                                    .foregroundStyle(.white)
-                                    .frame(width: 15.0, height: 15.0)
-                                    .padding(25)
-                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
-                                }
-                                else {
-                                    Button(action: {}, label: {
-                                        VStack{
-                                            Text("\(seat.rowNumber) \(seat.seatNumber)")
-                                                .font(.system(size: 7))
+                            // Seat formatting suggested by ChatGPT
+                            ForEach(1...rowNum, id: \.self) { row in
+                                var columns = 1
+                                HStack {
+                                    ForEach(seats.filter { $0.rowNumber == row }) { seat in
+                                        if row < rowNum && columns == 3 || row == rowNum && (columns == 2 || columns == 3) {
+                                            Color.clear.frame(height: 15.0)
                                         }
-                                        .foregroundStyle(.white)
-                                        .frame(width: 15.0, height: 15.0)
-                                        .padding(25)
-                                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
-                                    })
-
+                                        
+                                        else {
+                                            if seat.isOccupied {
+                                                VStack{
+                                                    Text("This seat is taken")
+                                                        .font(.system(size: 3))
+                                                }
+                                                .foregroundStyle(.white)
+                                                .frame(width: 15.0, height: 15.0)
+                                                .padding(25)
+                                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                                            }
+                                            else {
+                                                Button(action: {}, label: {
+                                                    VStack{
+                                                        Text("\(seat.rowNumber) \(seat.seatNumber)")
+                                                            .font(.system(size: 7))
+                                                    }
+                                                    .foregroundStyle(.white)
+                                                    .frame(width: 15.0, height: 15.0)
+                                                    .padding(25)
+                                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                                                })
+                                                
+                                            }
+                                        }
+   
+                                    }
                                 }
+                                
                             }
-                            
+                            .padding()
                         }
-                        .padding()
+                        .padding(.top, 50)
+                        
                     }
-                    .padding(.top, 50)
-
                 }
-            }
-        }
-        .onAppear {
-            Task {
-                driverInfo = try await obtainDriverInfo(accountID: UserDefaults.standard.integer(forKey: "accountID"))
-                busID = driverInfo?.busID ?? 0
-                busInfo = try await obtainBusInfo.obtainBusInfo(id: busID)
-                do {
-                    seats = try await getSeats.fetchSeats(busID: busID)
-                } catch {
-                    print("Failed to fetch seats: \(error)")
-                }
-                loadingSeats = false
             }
         }
     }
