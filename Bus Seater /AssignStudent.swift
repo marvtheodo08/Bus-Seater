@@ -124,7 +124,7 @@ struct SeatView: View {
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
             }
             else {
-                Button(action: {}, label: {
+                Button(action: {assignmentConfirm = true}, label: {
                     VStack{
                         Text("\(seat.rowNumber) \(seat.seatNumber)")
                             .font(.system(size: 7))
@@ -132,12 +132,12 @@ struct SeatView: View {
                     .alert("Would you like to assign this student to this seat?", isPresented: $assignmentConfirm) {
                         Button("Yes", role: .destructive) {
                             Task {
+                                dismiss()
                                 do {
                                     try await studentAssignment.assignStudent(seat: seat, studentID: student.id)
                                 } catch {
                                     print("Error assigning student: \(error)")
                                 }
-                                
                             }
                         }
                         Button("Cancel", role: .cancel) { }

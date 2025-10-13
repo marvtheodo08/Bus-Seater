@@ -10,7 +10,8 @@ import Foundation
 class StudentAssignment: ObservableObject {
     
     func assignStudent(seat: Seat, studentID: Int) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/update/seat/true/\(studentID)/\(seat.busID)/\(seat.rowNumber)/\(seat.seatNumber)") else {
+        
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/update/seat/true/\(seat.busID)/\(seat.rowNumber)/\(seat.seatNumber)/\(studentID)") else {
             throw URLError(.badURL)
         }
 
@@ -18,13 +19,13 @@ class StudentAssignment: ObservableObject {
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let encoder = JSONEncoder()
-        request.httpBody = try encoder.encode(seat)
-
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
+        
+        print("\(seat)")
+        print("\(studentID)")
 
     }
     
@@ -37,10 +38,7 @@ class StudentAssignment: ObservableObject {
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let encoder = JSONEncoder()
-        request.httpBody = try encoder.encode(seat)
-
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
