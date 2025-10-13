@@ -18,6 +18,7 @@ struct AssignStudent: View {
     @State private var rowNum: Int = 0
     @State private var seatNum: Int = 0
     @State private var seats = [Seat]()
+    @State private var assignmentConfirm = false
     
     let columns = [
         GridItem(.flexible()),
@@ -53,19 +54,19 @@ struct AssignStudent: View {
                             ForEach(1...rowNum, id: \.self) { row in
                                 if row < rowNum{
                                     ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber <= 2 }) { seat in
-                                        SeatView(seat: seat)
+                                        SeatView(assignmentConfirm: $assignmentConfirm, student: student!, seat: seat)
                                     }
                                     
                                     Color.clear
                                         .frame(width: 15, height: 15)
                                     
                                     ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber > 2 }) { seat in
-                                        SeatView(seat: seat)
+                                        SeatView(assignmentConfirm: $assignmentConfirm, student: student!, seat: seat)
                                     }
                                 }
                                 else {
                                     ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber == 1 }) { seat in
-                                        SeatView(seat: seat)
+                                        SeatView(assignmentConfirm: $assignmentConfirm, student: student!, seat: seat)
                                     }
                                     
                                     Color.clear
@@ -74,7 +75,7 @@ struct AssignStudent: View {
                                         .frame(width: 15, height: 15)
                                     
                                     ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber > 1 }) { seat in
-                                        SeatView(seat: seat)
+                                        SeatView(assignmentConfirm: $assignmentConfirm, student: student!, seat: seat)
                                     }
                                 }
                             }
@@ -105,6 +106,10 @@ struct AssignStudent: View {
 }
 
 struct SeatView: View {
+    @Binding var assignmentConfirm: Bool
+    var student: Student
+    @EnvironmentObject var studentAssignment: StudentAssignment
+    @Environment(\.dismiss) var dismiss
     let seat: Seat
     var body: some View {
         Group {
@@ -123,6 +128,21 @@ struct SeatView: View {
                     VStack{
                         Text("\(seat.rowNumber) \(seat.seatNumber)")
                             .font(.system(size: 7))
+                    }
+                    .alert("Would you like to assign this student to this seat?", isPresented: $assignmentConfirm) {
+                        Button("Yes", role: .destructive) {
+                            Task {
+                                do {
+                                    try await studentAssignment.assignStudent(seat: seat, studentID: student.id)
+                                } catch {
+                                    print("Error assigning student: \(error)")
+                                }
+                                
+                            }
+                        }
+                        Button("Cancel", role: .cancel) { }
+                    } message: {
+                        Text("This action cannot be undone.")
                     }
                     .foregroundStyle(.white)
                     .frame(width: 15.0, height: 15.0)

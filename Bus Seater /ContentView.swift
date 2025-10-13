@@ -91,9 +91,9 @@ struct ContentView: View {
     func changetoFalse(){
         notifsPermissions.WasPermissionGranted = false
     }
-         
-        
-       }
+    
+    
+}
 
 #Preview {
     ContentView()

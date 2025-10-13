@@ -30,9 +30,9 @@ struct ManageBus: View {
                             print("Error deleting bus: \(error)")
                         }
                         busActions.busDeleted = true
+                        dismiss()
                         
                     }
-                    dismiss()
                 }
                 Button("Cancel", role: .cancel) { }
             } message: {
