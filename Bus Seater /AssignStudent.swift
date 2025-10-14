@@ -49,6 +49,9 @@ struct AssignStudent: View {
             else {
                 VStack(alignment: .leading) {
                     ScrollView{
+                        Text("Legend")
+                            .bold()
+                            .font(.system(size: 30))
                         Text("C: Current Seat of selected student")
                         Text("X: Unavailable Seat")
                         LazyVGrid(columns: columns, spacing: 16) {
