@@ -14,8 +14,6 @@ struct ManageBus: View {
     @State private var doubleCheck = false
     var body: some View {
         ZStack(alignment: .topTrailing){
-            Color(.white)
-                .ignoresSafeArea()
             VStack
             {
                 Button(action: {doubleCheck = true} , label: {Text("Delete Bus")

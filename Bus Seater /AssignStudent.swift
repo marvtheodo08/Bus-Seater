@@ -45,7 +45,6 @@ struct AssignStudent: View {
                 VStack {
                     ProgressView("Loading seats...")
                         .multilineTextAlignment(.center)
-                        .colorScheme(.light)
                 }
             }
             else {

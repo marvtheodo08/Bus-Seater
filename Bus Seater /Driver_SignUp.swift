@@ -78,8 +78,6 @@ struct Driver_SignUp: View {
     
     var body: some View {
         ZStack() {
-            Color(.white)
-                .ignoresSafeArea()
             
             VStack {
                 Spacer()
@@ -251,7 +249,6 @@ struct DriverEmail: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -273,7 +270,6 @@ struct DriverPassword: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -296,13 +292,11 @@ struct DriverName: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
             
             TextField("Last name", text: $lastname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -336,7 +330,6 @@ struct DriverState: View {
                 }
             }
             .pickerStyle(WheelPickerStyle())
-            .colorScheme(.light)
         }
     }
 }
@@ -354,7 +347,6 @@ struct DriverSchool: View {
             if loading {
                 ProgressView("Loading available schools...")
                     .multilineTextAlignment(.center)
-                    .colorScheme(.light)
             } else {
                 if schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
@@ -372,7 +364,6 @@ struct DriverSchool: View {
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
-                    .colorScheme(.light)
                 }
             }
         }
@@ -405,7 +396,6 @@ struct DriverBus: View {
             if loading {
                 ProgressView("Loading available buses...")
                     .multilineTextAlignment(.center)
-                    .colorScheme(.light)
             } else {
                 if buses.isEmpty {
                     Text("No buses available for this school yet, please check back later.")
@@ -423,7 +413,6 @@ struct DriverBus: View {
                             Text("\(bus.busCode)").tag(bus.id)
                         }
                     }
-                    .colorScheme(.light)
                 }
             }
         }
@@ -455,7 +444,6 @@ struct DriverVerification: View {
         VStack {
             ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
                 .multilineTextAlignment(.center)
-                .colorScheme(.light)
         }
         .onAppear {
             if !isVerified{

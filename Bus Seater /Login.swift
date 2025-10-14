@@ -26,8 +26,6 @@ struct Login: View {
     
     var body: some View {
             ZStack {
-                Color(.white)
-                    .ignoresSafeArea()
                 if userLoggingIn {
                     LoggingUserIn(email: $email, userLoggingIn: $userLoggingIn)
                 }
@@ -45,12 +43,10 @@ struct Login: View {
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                             .accentColor(.black)
-                            .colorScheme(.light)
                         SecureField("Password", text: $password)
                             .padding()
                             .background(Color.gray.opacity(0.3).cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                             .accentColor(.black)
-                            .colorScheme(.light)
                         Button(action: {login(email: email, password: password)}, label: {Text("Log in")
                                 .foregroundStyle(.white)
                                 .padding()
@@ -100,7 +96,6 @@ struct LoggingUserIn: View {
             if userLoggingIn {
                 ProgressView("Logging you in...")
                     .multilineTextAlignment(.center)
-                    .colorScheme(.light)
             }
         }
         .onAppear{

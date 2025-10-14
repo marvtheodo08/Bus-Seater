@@ -31,14 +31,11 @@ struct AdminHomepage: View {
                 VStack {
                     ProgressView("Loading buses...")
                         .multilineTextAlignment(.center)
-                        .colorScheme(.light)
                 }
             }
             else {
                 if buses.isEmpty {
                     ZStack{
-                        Color(.white)
-                            .ignoresSafeArea()
                         Button(action: {AdminAddingBus = true}, label: {
                             Image(systemName: "plus")
                                 .foregroundStyle(.gray)
@@ -66,8 +63,6 @@ struct AdminHomepage: View {
                 }
                 else {
                     ZStack{
-                        Color(.white)
-                            .ignoresSafeArea()
                         Button(action: {logout()}, label: {Text("Logout")})
                         .foregroundStyle(.black)
                         .padding(.bottom, 700)

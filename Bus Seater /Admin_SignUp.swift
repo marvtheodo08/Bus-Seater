@@ -35,9 +35,6 @@ struct Admin_SignUp: View {
     
     var body: some View {
         ZStack {
-            Color(.white)
-                .ignoresSafeArea()
-            
             VStack {
                 Spacer()
                 
@@ -176,7 +173,6 @@ struct AdminEmail: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -198,7 +194,6 @@ struct AdminPassword: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -221,13 +216,11 @@ struct AdminName: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
             
             TextField("Last name", text: $lastname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -261,7 +254,6 @@ struct AdminState: View {
                 }
             }
             .pickerStyle(WheelPickerStyle())
-            .colorScheme(.light)
         }
     }
 }
@@ -278,7 +270,6 @@ struct AdminSchool: View {
             if loading {
                 ProgressView("Loading available schools...")
                     .multilineTextAlignment(.center)
-                    .colorScheme(.light)
             } else {
                 if schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
@@ -296,7 +287,6 @@ struct AdminSchool: View {
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
-                    .colorScheme(.light)
                     
                 }
             }
@@ -327,7 +317,6 @@ struct AdminVerification: View {
         VStack {
             ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
                 .multilineTextAlignment(.center)
-                .colorScheme(.light)
         }
         .onAppear {
             if !isVerified{

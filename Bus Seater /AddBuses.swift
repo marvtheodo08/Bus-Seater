@@ -21,8 +21,6 @@ struct AddBuses: View {
     @EnvironmentObject var getBuses: GetBuses
     var body: some View {
         ZStack {
-            Color(.white)
-                .ignoresSafeArea()
             VStack {
                 // Display the current stage view
                 switch currentStage {
@@ -150,7 +148,6 @@ struct AddingBus: View {
         VStack {
             ProgressView("Adding bus to database...")
                 .multilineTextAlignment(.center)
-                .colorScheme(.light)
         }
         .onAppear {
             seats = rows * 4 - 1

@@ -12,8 +12,6 @@ struct SignUp: View {
     
     var body: some View {
             ZStack {
-                Color(.white)
-                    .ignoresSafeArea()
                     Text("What type of account are you sigining up for?")
                         .foregroundStyle(.black)
                         .font(.system(size: 40))

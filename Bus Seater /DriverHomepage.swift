@@ -31,14 +31,11 @@ struct DriverHomepage: View {
                 VStack {
                     ProgressView("Loading students...")
                         .multilineTextAlignment(.center)
-                        .colorScheme(.light)
                 }
             }
             else {
                 if students.isEmpty {
                     ZStack{
-                        Color(.white)
-                            .ignoresSafeArea()
                         Button(action: {DriverAddingStudent = true}, label: {
                             Image(systemName: "plus")
                                 .foregroundStyle(.gray)
@@ -66,8 +63,6 @@ struct DriverHomepage: View {
                 }
                 else {
                     ZStack{
-                        Color(.white)
-                            .ignoresSafeArea()
                         Button(action: {logout()}, label: {Text("Logout")})
                         .foregroundStyle(.black)
                         .padding(.bottom, 700)

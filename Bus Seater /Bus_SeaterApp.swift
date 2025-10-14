@@ -40,6 +40,7 @@ struct YourApp: App {
     WindowGroup {
       NavigationView {
         ContentView()
+              .preferredColorScheme(.light)
       }
       .environmentObject(notifsPermissions)
       .environmentObject(getSchools)
