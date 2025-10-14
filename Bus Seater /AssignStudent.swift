@@ -49,6 +49,8 @@ struct AssignStudent: View {
             else {
                 VStack(alignment: .leading) {
                     ScrollView{
+                        Text("C: Current Seat of selected student")
+                        Text("X: Unavailable Seat")
                         LazyVGrid(columns: columns, spacing: 16) {
                             // Seat formatting suggested by ChatGPT
                             ForEach(1...rowNum, id: \.self) { row in
@@ -114,17 +116,29 @@ struct SeatView: View {
     var body: some View {
         Group {
             if seat.isOccupied {
-                VStack{
-                    Text("This seat is taken")
-                        .font(.system(size: 3))
+                if seat.studentID == student.id {
+                    VStack{
+                        Text("C")
+                            .font(.system(size: 20))
+                    }
+                    .foregroundStyle(.white)
+                    .frame(width: 15.0, height: 15.0)
+                    .padding(25)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray))
                 }
-                .foregroundStyle(.white)
-                .frame(width: 15.0, height: 15.0)
-                .padding(25)
-                .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                else {
+                    VStack{
+                        Text("X")
+                            .font(.system(size: 20))
+                    }
+                    .foregroundStyle(.white)
+                    .frame(width: 15.0, height: 15.0)
+                    .padding(25)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray))
+                }
             }
             else {
-                Button(action: {assignmentConfirm = true}, label: {
+                Button(action: {assignmentConfirm = true; print("\(seat)"); print("\(student.id)")}, label: {
                     VStack{
                         Text("\(seat.rowNumber) \(seat.seatNumber)")
                             .font(.system(size: 7))
