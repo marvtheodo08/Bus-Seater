@@ -442,7 +442,7 @@ struct DriverVerification: View {
     
     var body: some View {
         VStack {
-            ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
+            ProgressView("We've sent you an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
                 .multilineTextAlignment(.center)
         }
         .onAppear {

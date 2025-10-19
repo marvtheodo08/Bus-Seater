@@ -47,7 +47,7 @@ struct Student_SignUp: View {
     @State private var currentStage: Stage = .email
     
     // Shared variables across views
-    @State private var isVerified: Bool = false
+    @State private var isEmailVerified: Bool = false
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var firstname: String = ""
@@ -55,7 +55,7 @@ struct Student_SignUp: View {
     @State private var grade: String = ""
     @State private var state: String = ""
     @State private var schoolID: Int = 0
-    @State private var bus: String = ""
+    @State private var busID: Int = 0
     
     var body: some View {
         ZStack {
@@ -77,9 +77,9 @@ struct Student_SignUp: View {
                 case .school:
                     StudentSchool(schoolID: $schoolID, state: $state)
                 case .bus:
-                    StudentBus(bus: $bus, schoolID: $schoolID)
+                    StudentBus(busID: $busID, schoolID: $schoolID)
                 case .verification:
-                    StudentVerification(isVerified: $isVerified)
+                    StudentVerification(isEmailVerified: $isEmailVerified, firstname: $firstname, lastname: $lastname, grade: $grade, schoolID: $schoolID, busID: $busID, email: $email, password: $password)
                 }
                 
                 
@@ -101,7 +101,7 @@ struct Student_SignUp: View {
                         }
                     }
                     else if currentStage == .bus {
-                        Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
+                        Button(action: {currentStage = .verification}, label: {Text("Create Account")
                                 .foregroundStyle(.black)
                         })
                     }
@@ -110,7 +110,7 @@ struct Student_SignUp: View {
             }
             .padding(.bottom, 250)
         }
-        .fullScreenCover(isPresented: $isVerified) {
+        .fullScreenCover(isPresented: $isEmailVerified) {
             StudentHomepage()
         }
     }
@@ -139,35 +139,6 @@ struct Student_SignUp: View {
         default: break
         }
     }
-    func emailVerification(email: String, password: String, firstname: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                print("Error signing up:", error)
-                return
-            }
-            
-            guard let user = authResult?.user else { return }
-            
-            // Update display name
-            let changeRequest = user.createProfileChangeRequest()
-            changeRequest.displayName = firstname
-            changeRequest.commitChanges { error in
-                if let error = error {
-                    print("Error updating display name:", error)
-                } else {
-                    // Send verification email after updating display name
-                    user.sendEmailVerification { error in
-                        if let error = error {
-                            print("Error sending verification email:", error)
-                        } else {
-                            print("Verification email sent with display name:", firstname)
-                            currentStage = .verification
-                        }
-                    }
-                }
-            }
-        }
-    }
     
 }
 
@@ -189,7 +160,6 @@ struct StudentEmail: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -211,7 +181,6 @@ struct StudentPassword: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -234,13 +203,11 @@ struct StudentAccountName: View {
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
             
             TextField("Last name", text: $lastname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
                 .accentColor(.black)
-                .colorScheme(.light)
         }
         .padding()
     }
@@ -268,7 +235,6 @@ struct StudentAccountGrade: View {
             
         )
         .pickerStyle(WheelPickerStyle())
-        .colorScheme(.light)
     }
 }
 
@@ -300,7 +266,6 @@ struct StudentState: View {
                 }
             }
             .pickerStyle(WheelPickerStyle())
-            .colorScheme(.light)
         }
     }
 }
@@ -318,7 +283,6 @@ struct StudentSchool: View {
             if loading {
                 ProgressView("Loading available schools...")
                     .multilineTextAlignment(.center)
-                    .colorScheme(.light)
             } else {
                 if schools.isEmpty {
                     Text("No schools available for \(state) yet, please check back later.")
@@ -336,7 +300,7 @@ struct StudentSchool: View {
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
-                    .colorScheme(.light)                }
+                }
             }
         }
         .onAppear {
@@ -355,7 +319,7 @@ struct StudentSchool: View {
 
 // Bus stage View
 struct StudentBus: View {
-    @Binding var bus: String
+    @Binding var busID: Int
     @Binding var schoolID: Int
     @EnvironmentObject var getBuses: GetBuses
     @State var loading: Bool = true
@@ -366,7 +330,6 @@ struct StudentBus: View {
             if loading {
                 ProgressView("Loading available buses...")
                     .multilineTextAlignment(.center)
-                    .colorScheme(.light)
             } else {
                 if buses.isEmpty {
                     Text("No buses available for this school yet, please check back later.")
@@ -379,12 +342,11 @@ struct StudentBus: View {
                         .foregroundStyle(.black)
                         .padding(.bottom, 50)
                     
-                    Picker("Select a bus", selection: $bus) {
+                    Picker("Select a bus", selection: $busID) {
                         ForEach(buses, id: \.id) { bus in
                             Text("\(bus.busCode)").tag(bus.id)
                         }
                     }
-                    .colorScheme(.light)
                 }
             }
         }
@@ -405,20 +367,58 @@ struct StudentBus: View {
 }
 
 struct StudentVerification: View {
-    @Binding var isVerified: Bool
+    @Binding var isEmailVerified: Bool
+    @Binding var firstname: String
+    @Binding var lastname: String
+    @Binding var grade: String
+    @Binding var schoolID: Int
+    @Binding var busID: Int
+    @Binding var email: String
+    @Binding var password: String
+    @State private var student: Student? = nil
+    @State private var infoTrue: Bool = false
+    @State private var studentChecked: Bool = false
     @State private var pollingTimer: Timer? = nil
     
     var body: some View {
-        VStack {
-            ProgressView("We've sent an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
-                .multilineTextAlignment(.center)
-                .colorScheme(.light)
+        if !studentChecked {
+            VStack {
+                ProgressView("Give us a moment while we verify this info...")
+                    .multilineTextAlignment(.center)
+            }
+            .onAppear {
+                Task {
+                    student = try await verifyStudent(firstname: firstname, lastname: lastname, grade: grade, schoolID: schoolID, busID: busID)
+                    if student == nil {
+                        infoTrue = false
+                    }
+                    else {
+                        infoTrue = true
+                    }
+                    studentChecked = true
+                    emailVerification(email: email, password: password, firstname: firstname)
+                }
+            }
         }
-        .onAppear {
-            startPolling()
-        }
-        .onDisappear {
-            stopPolling()
+        else {
+            if infoTrue {
+                VStack {
+                    ProgressView("We've sent you an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
+                        .multilineTextAlignment(.center)
+                }
+                .onAppear {
+                    emailVerification(email: email, password: password, firstname: firstname)
+                    if !isEmailVerified{
+                        startPolling()
+                    }
+                }
+            }
+            else {
+                VStack {
+                    ProgressView("Looks like the info you provided is false. Please sign up for a different bus.")
+                        .multilineTextAlignment(.center)
+                }
+            }
         }
     }
     
@@ -431,7 +431,7 @@ struct StudentVerification: View {
                     print("Error reloading user:", error.localizedDescription)
                 } else if user.isEmailVerified {
                     print("User email is verified")
-                    isVerified = true
+                    isEmailVerified = true
                     stopPolling()
                 }
             }
@@ -441,6 +441,51 @@ struct StudentVerification: View {
     func stopPolling() {
         pollingTimer?.invalidate()
         pollingTimer = nil
+    }
+    
+    func verifyStudent(firstname: String, lastname: String, grade: String, schoolID: Int, busID: Int) async throws -> Student {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/student/verify/\(firstname)/\(lastname)/\(grade)/\(schoolID)/\(busID)") else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let fetchedStudent = try JSONDecoder().decode(Student.self, from: data)
+        
+        return fetchedStudent
+    }
+    
+    func emailVerification(email: String, password: String, firstname: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                print("Error signing up:", error)
+                return
+            }
+            
+            guard let user = authResult?.user else { return }
+            
+            // Update display name
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = firstname
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error updating display name:", error)
+                } else {
+                    // Send verification email after updating display name
+                    user.sendEmailVerification { error in
+                        if let error = error {
+                            print("Error sending verification email:", error)
+                        } else {
+                            print("Verification email sent with display name:", firstname)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
