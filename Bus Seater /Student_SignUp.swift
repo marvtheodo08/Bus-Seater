@@ -229,7 +229,7 @@ struct StudentAccountGrade: View {
             content: {
                 ForEach(6..<13) { grade in
                     Text("\(grade)")
-                        .tag(grade)
+                        .tag("\(grade)")
                 }
             }
             
@@ -388,15 +388,17 @@ struct StudentVerification: View {
             }
             .onAppear {
                 Task {
-                    student = try await verifyStudent(firstname: firstname, lastname: lastname, grade: grade, schoolID: schoolID, busID: busID)
-                    if student == nil {
+                    do {
+                        let result = try await verifyStudent(firstname: firstname, lastname: lastname, grade: grade, schoolID: schoolID, busID: busID)
+                        student = result
+                        infoTrue = true
+                        emailVerification(email: email, password: password, firstname: firstname)
+                    } catch {
+                        print("Error verifying student: \(error)")
+                        student = nil
                         infoTrue = false
                     }
-                    else {
-                        infoTrue = true
-                    }
                     studentChecked = true
-                    emailVerification(email: email, password: password, firstname: firstname)
                 }
             }
         }
@@ -407,7 +409,6 @@ struct StudentVerification: View {
                         .multilineTextAlignment(.center)
                 }
                 .onAppear {
-                    emailVerification(email: email, password: password, firstname: firstname)
                     if !isEmailVerified{
                         startPolling()
                     }
@@ -447,8 +448,13 @@ struct StudentVerification: View {
         guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/student/verify/\(firstname)/\(lastname)/\(grade)/\(schoolID)/\(busID)") else {
             throw URLError(.badURL)
         }
-        
+                
         let (data, response) = try await URLSession.shared.data(from: url)
+        print("Request URL: \(url)")
+        if let httpResponse = response as? HTTPURLResponse {
+            print("Status code: \(httpResponse.statusCode)")
+        }
+        print("Response body: \(String(data: data, encoding: .utf8) ?? "No body")")
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
