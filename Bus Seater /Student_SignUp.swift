@@ -93,18 +93,22 @@ struct Student_SignUp: View {
                         }
                     }
                     Spacer()
-                    if currentStage != .bus {
-                        Button(action: { goNext() }) {
-                            Image(systemName: "arrow.right")
-                                .padding()
-                                .foregroundStyle(.blue)
+                    if currentStage != .verification {
+                        if currentStage == .bus {
+                            Button(action: { goNext() }, label: {Text("Create Account")
+                                    .foregroundStyle(.black)
+                            })
                         }
+                        else {
+                            Button(action: { goNext() }) {
+                                Image(systemName: "arrow.right")
+                                    .padding()
+                                    .foregroundStyle(.blue)
+                            }
+                        }
+                        
                     }
-                    else if currentStage == .bus {
-                        Button(action: {currentStage = .verification}, label: {Text("Create Account")
-                                .foregroundStyle(.black)
-                        })
-                    }
+                    
                 }
                 .padding(.horizontal)
             }
@@ -136,6 +140,7 @@ struct Student_SignUp: View {
         case .grade: currentStage = .state
         case .state: currentStage = .school
         case .school: currentStage = .bus
+        case .bus: currentStage = .verification
         default: break
         }
     }
@@ -416,7 +421,7 @@ struct StudentVerification: View {
             }
             else {
                 VStack {
-                    ProgressView("Looks like the info you provided is false. Please sign up for a different bus.")
+                    Text("Looks like the info you provided is false. Please sign up for a different bus.")
                         .multilineTextAlignment(.center)
                 }
             }

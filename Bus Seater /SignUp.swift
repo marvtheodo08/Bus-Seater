@@ -19,16 +19,17 @@ struct SignUp: View {
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         .padding(.bottom, 300)
                     HStack{
-                        Button(action: {appState.path.append(.studentSignUp)}, label: {
+                        Button(action: {appState.path.append(.adminSignUp)}, label: {
                             VStack{
-                                Image(systemName: "studentdesk")
-                                Text("Student")
-                                    .font(.system(size: 10))
+                                Image(systemName: "clipboard")
+                                Text("Admin")
+                                    .font(.system(size: 12))
                             }
                             .foregroundStyle(.white)
                             .frame(width: 40.0, height: 40.0)
                             .padding(25)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue)
+                            )
                         })
                         
                         Spacer()
@@ -49,17 +50,16 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        Button(action: {appState.path.append(.adminSignUp)}, label: {
+                        Button(action: {appState.path.append(.studentSignUp)}, label: {
                             VStack{
-                                Image(systemName: "clipboard")
-                                Text("Admin")
-                                    .font(.system(size: 12))
+                                Image(systemName: "studentdesk")
+                                Text("Student")
+                                    .font(.system(size: 10))
                             }
                             .foregroundStyle(.white)
                             .frame(width: 40.0, height: 40.0)
                             .padding(25)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue)
-                            )
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                         })
                     }
                     .padding(.leading, 10)
