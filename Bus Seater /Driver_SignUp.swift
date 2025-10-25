@@ -349,7 +349,7 @@ struct DriverMunicipality: View {
                 .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
-            TextField("Email", text: $municipality)
+            TextField("Town or City", text: $municipality)
                 .keyboardType(.emailAddress)
                 .textContentType(.emailAddress)
                 .padding()
