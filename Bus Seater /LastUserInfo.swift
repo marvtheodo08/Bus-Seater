@@ -26,10 +26,8 @@ struct Account: Codable {
 }
 
 class ObtainAccountInfo: ObservableObject {
-    @Published var account: Account?
-    
     @MainActor
-    func obtainAccountInfo(email: String) async throws {
+    func obtainAccountInfo(email: String) async throws -> Account{
         guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/account/info/\(email)") else {
             throw URLError(.badURL)
         }
@@ -41,7 +39,7 @@ class ObtainAccountInfo: ObservableObject {
         }
         
         let accountInfo = try JSONDecoder().decode(Account.self, from: data)
-        self.account = accountInfo
         print(accountInfo)
+        return accountInfo
     }
 }

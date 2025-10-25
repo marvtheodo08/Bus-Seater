@@ -100,9 +100,9 @@ struct LoggingUserIn: View {
         }
         .onAppear{
             Task {
-                try await obtainAccountInfo.obtainAccountInfo(email: email)
-                
-                if let account = obtainAccountInfo.account{
+                let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                do {
+                  let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                     let defaults = UserDefaults.standard
                     defaults.set(account.firstName, forKey: "firstName")
                     defaults.set(account.lastName, forKey: "lastName")
@@ -112,6 +112,9 @@ struct LoggingUserIn: View {
                     defaults.set(account.id, forKey: "accountID")
                     defaults.set(true, forKey: "WasUserLoggedIn")
                     accountType = account.accountType
+                }
+                catch {
+                    print("Failed to fetch obtain account info: \(error)")
                 }
                 if accountType == "admin" {
                     type = .admin

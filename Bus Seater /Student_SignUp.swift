@@ -19,6 +19,7 @@ struct Student_SignUp: View {
         case name
         case grade
         case state
+        case municipality
         case school
         case bus
         case verification
@@ -54,8 +55,11 @@ struct Student_SignUp: View {
     @State private var lastname: String = ""
     @State private var grade: String = ""
     @State private var state: String = ""
+    @State private var municipality: String = ""
     @State private var schoolID: Int = 0
     @State private var busID: Int = 0
+    @EnvironmentObject var newAccount: NewAccount
+    @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     
     var body: some View {
         ZStack {
@@ -74,8 +78,10 @@ struct Student_SignUp: View {
                     StudentAccountGrade(grade: $grade)
                 case .state:
                     StudentState(state: $state)
+                case .municipality:
+                    StudentMunicipality(municipality: $municipality)
                 case .school:
-                    StudentSchool(schoolID: $schoolID, state: $state)
+                    StudentSchool(schoolID: $schoolID, state: $state, municipality: $municipality)
                 case .bus:
                     StudentBus(busID: $busID, schoolID: $schoolID)
                 case .verification:
@@ -116,7 +122,27 @@ struct Student_SignUp: View {
         }
         .fullScreenCover(isPresented: $isEmailVerified) {
             StudentHomepage()
+                .onAppear() {
+                    Task {
+                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "student", schoolID: schoolID))
+                        do {
+                          let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                            let defaults = UserDefaults.standard
+                            defaults.set(account.firstName, forKey: "firstName")
+                            defaults.set(account.lastName, forKey: "lastName")
+                            defaults.set(account.schoolID, forKey: "schoolID")
+                            defaults.set(account.email, forKey: "email")
+                            defaults.set(account.accountType, forKey: "accountType")
+                            defaults.set(account.id, forKey: "accountID")
+                            defaults.set(true, forKey: "WasUserLoggedIn")
+                        }
+                        catch {
+                            print("Failed to fetch account info: \(error)")
+                        }
+                    }
+                }
         }
+
     }
     
     func goBack() {
@@ -125,7 +151,8 @@ struct Student_SignUp: View {
         case .name: currentStage = .password
         case .grade: currentStage = .name
         case .state: currentStage = .grade
-        case .school: currentStage = .state
+        case .municipality: currentStage = .state
+        case .school: currentStage = .municipality
         case .bus: currentStage = .school
         case .verification: currentStage = .bus
         default: break
@@ -138,7 +165,8 @@ struct Student_SignUp: View {
         case .password: currentStage = .name
         case .name: currentStage = .grade
         case .grade: currentStage = .state
-        case .state: currentStage = .school
+        case .state: currentStage = .municipality
+        case .municipality: currentStage = .school
         case .school: currentStage = .bus
         case .bus: currentStage = .verification
         default: break
@@ -275,10 +303,34 @@ struct StudentState: View {
     }
 }
 
+struct StudentMunicipality: View {
+    @Binding var municipality: String
+    
+    var body: some View {
+        VStack {
+            Text("Please enter the town or city your school is in.")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundStyle(.black)
+                .padding(.bottom, 50)
+            
+            TextField("Email", text: $municipality)
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .padding()
+                .background(Color.gray.opacity(0.3).cornerRadius(3))
+                .accentColor(.black)
+        }
+        .padding()
+    }
+}
+
+
 // School stage View
 struct StudentSchool: View {
     @Binding var schoolID: Int
     @Binding var state: String
+    @Binding var municipality: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
     @State private var schools = [School]()
@@ -312,7 +364,7 @@ struct StudentSchool: View {
             Task {
                 do {
                     loading = true
-                   schools = try await getSchools.fetchSchools(state: state)
+                    schools = try await getSchools.fetchSchools(state: state, municipality: municipality)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }
@@ -399,7 +451,6 @@ struct StudentVerification: View {
                         infoTrue = true
                         emailVerification(email: email, password: password, firstname: firstname)
                     } catch {
-                        print("Error verifying student: \(error)")
                         student = nil
                         infoTrue = false
                     }
@@ -410,7 +461,7 @@ struct StudentVerification: View {
         else {
             if infoTrue {
                 VStack {
-                    ProgressView("We've sent you an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
+                    ProgressView("We've sent you an email for verification. Once verified, reopen the app and you will be redirected to the homepage. (Check spam folder if needed)")
                         .multilineTextAlignment(.center)
                 }
                 .onAppear {
@@ -434,9 +485,8 @@ struct StudentVerification: View {
             guard let user = Auth.auth().currentUser else { return }
             user.reload { error in
                 if let error = error {
-                    print("Error reloading user:", error.localizedDescription)
+                    print("Error reloading user: \(error)")
                 } else if user.isEmailVerified {
-                    print("User email is verified")
                     isEmailVerified = true
                     stopPolling()
                 }
@@ -473,7 +523,7 @@ struct StudentVerification: View {
     func emailVerification(email: String, password: String, firstname: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error signing up:", error)
+                print("Error creating user: \(error)")
                 return
             }
             
@@ -484,14 +534,12 @@ struct StudentVerification: View {
             changeRequest.displayName = firstname
             changeRequest.commitChanges { error in
                 if let error = error {
-                    print("Error updating display name:", error)
+                    print("Error updating profile: \(error)")
                 } else {
                     // Send verification email after updating display name
                     user.sendEmailVerification { error in
                         if let error = error {
-                            print("Error sending verification email:", error)
-                        } else {
-                            print("Verification email sent with display name:", firstname)
+                            print("Error sending email verification: \(error)")
                         }
                     }
                 }

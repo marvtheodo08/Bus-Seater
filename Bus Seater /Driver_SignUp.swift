@@ -39,6 +39,7 @@ struct Driver_SignUp: View {
         case password
         case name
         case state
+        case municipality
         case school
         case bus
         case verification
@@ -71,6 +72,7 @@ struct Driver_SignUp: View {
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var state: String = ""
+    @State private var municipality: String = ""
     @State private var schoolID: Int = 0
     @State private var bus: Int = 0
     @EnvironmentObject var newAccount: NewAccount
@@ -83,24 +85,22 @@ struct Driver_SignUp: View {
                 Spacer()
                 
                 // Display the current stage view
-                if currentStage == .email {
+                switch currentStage {
+                case .email:
                     DriverEmail(email: $email)
-                } else if currentStage == .password {
+                case .password:
                     DriverPassword(password: $password)
-                }
-                else if currentStage == .name {
+                case .name:
                     DriverName(firstname: $firstname, lastname: $lastname)
-                }
-                else if currentStage == .state {
+                case .state:
                     DriverState(state: $state)
-                }
-                else if currentStage == .school {
-                    DriverSchool(schoolID: $schoolID, state: $state)
-                }
-                else if currentStage == .bus {
+                case .municipality:
+                    DriverMunicipality(municipality: $municipality)
+                case .school:
+                    DriverSchool(schoolID: $schoolID, state: $state, municipality: $municipality)
+                case .bus:
                     DriverBus(bus: $bus, schoolID: $schoolID)
-                }
-                else if currentStage == .verification {
+                case .verification:
                     DriverVerification(isVerified: $isVerified, firstname: $firstname, lastname: $lastname, email: $email, schoolID: $schoolID)
                 }
                 
@@ -137,11 +137,9 @@ struct Driver_SignUp: View {
                 .onAppear() {
                     Task {
                         try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolID: schoolID))
-                        try await obtainAccountInfo.obtainAccountInfo(email: email)
-                        if let accountID = obtainAccountInfo.account?.id{
-                            try await addDriver(Driver(accountID: accountID, schoolID: schoolID, busID: bus))
-                        }
-                        if let account = obtainAccountInfo.account{
+                        do {
+                          let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                            try await addDriver(Driver(accountID: account.id, schoolID: schoolID, busID: bus))
                             let defaults = UserDefaults.standard
                             defaults.set(account.firstName, forKey: "firstName")
                             defaults.set(account.lastName, forKey: "lastName")
@@ -150,6 +148,9 @@ struct Driver_SignUp: View {
                             defaults.set(account.accountType, forKey: "accountType")
                             defaults.set(account.id, forKey: "accountID")
                             defaults.set(true, forKey: "WasUserLoggedIn")
+                        }
+                        catch {
+                            print("Failed to fetch account info: \(error)")
                         }
                     }
                 }
@@ -161,7 +162,8 @@ struct Driver_SignUp: View {
         case .password: currentStage = .email
         case .name: currentStage = .password
         case .state: currentStage = .name
-        case .school: currentStage = .state
+        case .municipality: currentStage = .state
+        case .school: currentStage = .municipality
         case .bus: currentStage = .school
         case .verification: currentStage = .bus
         default: break
@@ -173,7 +175,8 @@ struct Driver_SignUp: View {
         case .email: currentStage = .password
         case .password: currentStage = .name
         case .name: currentStage = .state
-        case .state: currentStage = .school
+        case .state: currentStage = .municipality
+        case .municipality: currentStage = .school
         case .school: currentStage = .bus
         default: break
         }
@@ -334,10 +337,34 @@ struct DriverState: View {
     }
 }
 
+// Municipality stage View
+struct DriverMunicipality: View {
+    @Binding var municipality: String
+    
+    var body: some View {
+        VStack {
+            Text("Please enter the town or city your school is in.")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .foregroundStyle(.black)
+                .padding(.bottom, 50)
+            
+            TextField("Email", text: $municipality)
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .padding()
+                .background(Color.gray.opacity(0.3).cornerRadius(3))
+                .accentColor(.black)
+        }
+        .padding()
+    }
+}
+
 // School stage View
 struct DriverSchool: View {
     @Binding var schoolID: Int
     @Binding var state: String
+    @Binding var municipality: String
     @EnvironmentObject var getSchools: GetSchools
     @State var loading: Bool = true
     @State private var schools = [School]()
@@ -371,7 +398,7 @@ struct DriverSchool: View {
             Task {
                 do {
                     loading = true
-                    schools = try await getSchools.fetchSchools(state: state)
+                    schools = try await getSchools.fetchSchools(state: state, municipality: municipality)
                 } catch {
                     print("Failed to fetch schools: \(error)")
                 }
@@ -442,7 +469,7 @@ struct DriverVerification: View {
     
     var body: some View {
         VStack {
-            ProgressView("We've sent you an email for verification. Once verified, reopen the app and you will be redirected to the homepage.")
+            ProgressView("We've sent you an email for verification. Once verified, reopen the app and you will be redirected to the homepage. (Check spam folder if needed)")
                 .multilineTextAlignment(.center)
         }
         .onAppear {
