@@ -10,6 +10,7 @@ import SwiftUI
 struct AdminHomepage: View {
     @State var userLoggingOut = false
     @State var AdminAddingBus = false
+    @State var adminSettingBreak = false
     @State var fetchingBuses = true
     @State private var busSelected: Bus? = nil
     @State private var buses = [Bus]()
@@ -104,11 +105,16 @@ struct AdminHomepage: View {
                                     
                                 }
                                 .padding()
+                                Button(action: {adminSettingBreak = true}, label: {Text("Set school breaks")})
+                                    .foregroundStyle(.black)
                             }
                             .padding(.top, 50)
 
                         }
                         
+                    }
+                    .navigationDestination(isPresented: $adminSettingBreak) {
+                        SchoolBreaks()
                     }
                     .navigationDestination(isPresented: $AdminAddingBus) {
                         AddBuses()

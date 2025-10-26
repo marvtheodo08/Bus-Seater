@@ -40,6 +40,7 @@
 		7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */; };
 		7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* Schools.swift */; };
 		7E8C659B2E5BBE1600058C07 /* BusActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C659A2E5BBE1600058C07 /* BusActions.swift */; };
+		7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */; };
 		7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2A8612E404C120005CE54 /* BusRows.swift */; };
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSeats.swift; sourceTree = "<group>"; };
 		7E85D49D2CE1957700341DE7 /* Schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schools.swift; sourceTree = "<group>"; };
 		7E8C659A2E5BBE1600058C07 /* BusActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusActions.swift; sourceTree = "<group>"; };
+		7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolBreaks.swift; sourceTree = "<group>"; };
 		7EA2A8612E404C120005CE54 /* BusRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRows.swift; sourceTree = "<group>"; };
 		7EABE03A2D68F4B000C00697 /* NewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +161,7 @@
 				0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */,
 				7E5C51FF2E5CCCBA003CD5D6 /* AddStudent.swift */,
 				7E85D49D2CE1957700341DE7 /* Schools.swift */,
+				7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */,
 				7E8C659A2E5BBE1600058C07 /* BusActions.swift */,
 				7E7EEDC92E63A9ED0019134D /* AssignStudent.swift */,
 				7E2489C32E775DBF006721DF /* Driver.swift */,
@@ -369,6 +372,7 @@
 				7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */,
 				7E31E3BA2E170A6900E1E8A1 /* AddBuses.swift in Sources */,
 				0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */,
+				7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */,
 				7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */,
 				0C75DB232C70BE64005247BC /* ContentView.swift in Sources */,
 				0C75DB262C70BE6D005247BC /* Student_SignUp.swift in Sources */,
