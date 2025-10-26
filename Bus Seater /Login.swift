@@ -100,9 +100,8 @@ struct LoggingUserIn: View {
         }
         .onAppear{
             Task {
-                let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                 do {
-                  let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                    let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                     let defaults = UserDefaults.standard
                     defaults.set(account.firstName, forKey: "firstName")
                     defaults.set(account.lastName, forKey: "lastName")
