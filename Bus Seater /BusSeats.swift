@@ -28,6 +28,25 @@ struct Seat: Identifiable, Codable {
     
 }
 
+struct NewSeat: Codable {
+    var busID: Int
+    var rowNumber: Int
+    var seatNumber: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case busID = "bus_id"
+        case rowNumber = "row_num"
+        case seatNumber = "seat_number"
+    }
+    
+    init(busID: Int, rowNumber: Int, seatNumber: Int) {
+        self.busID = busID
+        self.rowNumber = rowNumber
+        self.seatNumber = seatNumber
+    }
+    
+}
+
 class GetSeats: ObservableObject {
     func fetchSeats(busID: Int) async throws -> [Seat]{
         guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/seats/\(busID)") else {

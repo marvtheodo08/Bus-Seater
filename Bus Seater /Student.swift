@@ -50,23 +50,3 @@ struct NewStudent: Codable {
     }
     
 }
-    
-//Function modeled from ChatGPT
-func addStudent(_ student: NewStudent) async throws {
-    guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/student/create/") else { fatalError("Invalid URL") }
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    
-    do {
-        request.httpBody = try JSONEncoder().encode(student)
-    } catch {
-        print("Failed to encode parameters: \(error)")
-    }
-    
-    let (_, response) = try await URLSession.shared.data(for: request)
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
-        throw URLError(.badServerResponse)
-    }
-    
-}

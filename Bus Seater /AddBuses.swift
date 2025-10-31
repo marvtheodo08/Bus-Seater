@@ -134,66 +134,6 @@ struct BusRows: View {
 
 struct AddingBus: View {
     
-    struct NewBus: Codable {
-        var rowAmount: Int
-        var seatCount: Int
-        var busCode: String
-        var schoolID: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case rowAmount = "row_amount"
-            case seatCount = "seat_count"
-            case busCode = "bus_code"
-            case schoolID = "school_id"
-        }
-        
-        init(rowAmount: Int, seatCount: Int, busCode: String, schoolID: Int) {
-            self.rowAmount = rowAmount
-            self.seatCount = seatCount
-            self.busCode = busCode
-            self.schoolID = schoolID
-        }
-        
-    }
-    
-    struct NewRow: Codable {
-        var rowNumber: Int
-        var seatCount: Int
-        var busID: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case rowNumber = "row_num"
-            case seatCount = "seat_count"
-            case busID = "bus_id"
-        }
-        
-        init(rowNumber: Int, seatCount: Int, busID: Int) {
-            self.rowNumber = rowNumber
-            self.seatCount = seatCount
-            self.busID = busID
-        }
-        
-    }
-    
-    struct NewSeat: Codable {
-        var busID: Int
-        var rowNumber: Int
-        var seatNumber: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case busID = "bus_id"
-            case rowNumber = "row_num"
-            case seatNumber = "seat_number"
-        }
-        
-        init(busID: Int, rowNumber: Int, seatNumber: Int) {
-            self.busID = busID
-            self.rowNumber = rowNumber
-            self.seatNumber = seatNumber
-        }
-        
-    }
-    
     @EnvironmentObject var obtainBusID: ObtainBusID
     @State private var busID: Int = 0
     @State private var schoolID: Int = 0

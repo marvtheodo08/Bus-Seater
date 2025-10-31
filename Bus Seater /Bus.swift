@@ -31,6 +31,28 @@ struct BusID: Codable {
     }
 }
 
+struct NewBus: Codable {
+    var rowAmount: Int
+    var seatCount: Int
+    var busCode: String
+    var schoolID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case rowAmount = "row_amount"
+        case seatCount = "seat_count"
+        case busCode = "bus_code"
+        case schoolID = "school_id"
+    }
+    
+    init(rowAmount: Int, seatCount: Int, busCode: String, schoolID: Int) {
+        self.rowAmount = rowAmount
+        self.seatCount = seatCount
+        self.busCode = busCode
+        self.schoolID = schoolID
+    }
+    
+}
+
 class ObtainBusIDfromAccount: ObservableObject {
     func obtainBusIDfromAccountID(accountID: Int) async throws -> Int {
         guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/driver/busID/\(accountID)") else {
