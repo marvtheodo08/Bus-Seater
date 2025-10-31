@@ -9,15 +9,6 @@ import SwiftUI
 import Firebase
 import UserNotifications
 
-// Navigation Route sugguested by ChatGPT
-enum Route: Hashable {
-    case login
-    case signup
-    case studentSignUp
-    case driverSignUp
-    case adminSignUp
-}
-
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var notifsPermissions: NotifsPermissions
@@ -35,7 +26,6 @@ struct ContentView: View {
             }
         }
         else {
-            NavigationStack(path: $appState.path) {
                 Login()
                 //When Login screen appears
                     .onAppear{
@@ -49,17 +39,7 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .navigationDestination(for: Route.self) { route in
-                        switch route {
-                        case .login: Login()
-                        case .signup: SignUp()
-                        case .studentSignUp: Student_SignUp()
-                        case .driverSignUp: Driver_SignUp()
-                        case .adminSignUp: Admin_SignUp()
-                        }
-                    }
             }
-        }
         
     }
     // Function for asking Notifs Permission

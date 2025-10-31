@@ -157,7 +157,6 @@ struct AdminHomepage: View {
     func logout() {
         userLoggingOut = true
         appState.isUserLoggedIn = false
-        appState.path = []
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")

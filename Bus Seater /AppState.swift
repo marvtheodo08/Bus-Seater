@@ -8,6 +8,5 @@
 import Foundation
 
 class AppState: ObservableObject {
-    @Published var path: [Route] = []
     @Published var isUserLoggedIn = UserDefaults.standard.bool(forKey: "WasUserLoggedIn")
 }

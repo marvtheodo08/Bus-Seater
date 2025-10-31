@@ -55,7 +55,9 @@ struct Login: View {
                                     .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                                 .padding()
                         })
-                        Button(action: {appState.path.append(.signup)}, label: {Text("Don't have an account? Sign up here!")})
+                        NavigationLink(destination: SignUp()) {
+                            Text("Don't have an account? Sign up here!")
+                        }
                     }
                     .padding()
                     
