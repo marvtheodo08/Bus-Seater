@@ -28,49 +28,6 @@ struct Seat: Identifiable, Codable {
     
 }
 
-class NewSeat: ObservableObject {
-    
-    struct Seat: Codable {
-        var busID: Int
-        var rowNumber: Int
-        var seatNumber: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case busID = "bus_id"
-            case rowNumber = "row_num"
-            case seatNumber = "seat_number"
-        }
-        
-        init(busID: Int, rowNumber: Int, seatNumber: Int) {
-            self.busID = busID
-            self.rowNumber = rowNumber
-            self.seatNumber = seatNumber
-        }
-        
-    }
-    
-    //Function prompted by ChatGPT
-    func addSeat(_ seat: Seat) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/seat/create/") else { fatalError("Invalid URL") }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(seat)
-        } catch {
-            print("Failed to encode parameters: \(error)")
-        }
-        
-        let (_, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
-            throw URLError(.badServerResponse)
-        }
-        
-    }
-    
-}
-
 class GetSeats: ObservableObject {
     func fetchSeats(busID: Int) async throws -> [Seat]{
         guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/seats/\(busID)") else {

@@ -41,7 +41,6 @@
 		7E85D49E2CE1957700341DE7 /* Schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* Schools.swift */; };
 		7E8C659B2E5BBE1600058C07 /* BusActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C659A2E5BBE1600058C07 /* BusActions.swift */; };
 		7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */; };
-		7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2A8612E404C120005CE54 /* BusRows.swift */; };
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,7 +98,6 @@
 		7E85D49D2CE1957700341DE7 /* Schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schools.swift; sourceTree = "<group>"; };
 		7E8C659A2E5BBE1600058C07 /* BusActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusActions.swift; sourceTree = "<group>"; };
 		7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolBreaks.swift; sourceTree = "<group>"; };
-		7EA2A8612E404C120005CE54 /* BusRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRows.swift; sourceTree = "<group>"; };
 		7EABE03A2D68F4B000C00697 /* NewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,7 +167,6 @@
 				7E37DF202CF7DB11001EB870 /* Student.swift */,
 				7E39E9312E9D4A2E00D51EE9 /* StudentAssignment.swift */,
 				7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */,
-				7EA2A8612E404C120005CE54 /* BusRows.swift */,
 				7E37DF222CF7DD63001EB870 /* Bus.swift */,
 				7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */,
 				0CC7C6942C7627600018C041 /* Admin_SignUp.swift */,
@@ -358,7 +355,6 @@
 				7E0AD8362E539C4C00BC6460 /* ManageBus.swift in Sources */,
 				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
-				7EA2A8622E404C120005CE54 /* BusRows.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
 				7E39E9322E9D4A2E00D51EE9 /* StudentAssignment.swift in Sources */,
