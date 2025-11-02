@@ -12,20 +12,20 @@ struct School: Identifiable, Codable {
     let schoolName: String
     let municipality: String
     let state: String
-    let stateAbriviation: String
+    let stateAbbreviation: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case schoolName = "school_name"
         case municipality
         case state
-        case stateAbriviation = "state_abriviation"
+        case stateAbbreviation = "state_abbreviation"
     }
     
 }
 class GetSchools: ObservableObject {
     func fetchSchools(state: String, municipality: String) async throws -> [School]{
-        guard let url = URL(string: "http://127.0.0.1:5001/\(state)/\(municipality)") else {
+        guard let url = URL(string: "\(baseURL)/\(state)/\(municipality)") else {
             throw URLError(.badURL)
         }
         
