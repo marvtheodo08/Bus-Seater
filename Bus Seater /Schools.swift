@@ -25,7 +25,7 @@ struct School: Identifiable, Codable {
 }
 class GetSchools: ObservableObject {
     func fetchSchools(state: String, municipality: String) async throws -> [School]{
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/\(state)/\(municipality)") else {
+        guard let url = URL(string: "http://127.0.0.1:5001/\(state)/\(municipality)") else {
             throw URLError(.badURL)
         }
         

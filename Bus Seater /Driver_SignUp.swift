@@ -354,7 +354,6 @@ struct DriverMunicipality: View {
                 .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }

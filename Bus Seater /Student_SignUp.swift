@@ -192,7 +192,6 @@ struct StudentEmail: View {
                 .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
@@ -213,7 +212,6 @@ struct StudentPassword: View {
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
@@ -235,12 +233,10 @@ struct StudentAccountName: View {
             TextField("First name", text: $firstname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
             
             TextField("Last name", text: $lastname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
@@ -319,7 +315,6 @@ struct StudentMunicipality: View {
                 .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }

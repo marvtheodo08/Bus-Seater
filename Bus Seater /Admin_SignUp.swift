@@ -180,7 +180,6 @@ struct AdminEmail: View {
                 .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
@@ -201,7 +200,6 @@ struct AdminPassword: View {
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
@@ -223,12 +221,10 @@ struct AdminName: View {
             TextField("First name", text: $firstname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
             
             TextField("Last name", text: $lastname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
@@ -283,7 +279,6 @@ struct AdminMunicipality: View {
                 .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
