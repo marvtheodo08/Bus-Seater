@@ -20,5 +20,11 @@
 	</dict>
   <key>NSLocalNetworkUsageDescription</key>
   <string>This app needs access to your local network to connect to the development server.</string>
+
+  <key>NSBonjourServices</key>
+  <array>
+    <string>_http._tcp</string>
+  </array>
+
 </dict>
 </plist>
