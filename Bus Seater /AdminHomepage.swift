@@ -114,7 +114,7 @@ struct AdminHomepage: View {
                         
                     }
                     .navigationDestination(isPresented: $adminSettingBreak) {
-                        SchoolBreaks()
+                        SetSchoolBreak()
                     }
                     .navigationDestination(isPresented: $AdminAddingBus) {
                         AddBuses()

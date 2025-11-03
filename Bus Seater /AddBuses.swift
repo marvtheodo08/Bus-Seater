@@ -180,7 +180,7 @@ struct AddingBus: View {
     }
     
     func addBus(_ bus: NewBus) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/bus/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "\(baseURL)/bus/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -199,7 +199,7 @@ struct AddingBus: View {
     }
     
     func addRow(_ row: NewRow) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/row/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "\(baseURL)/row/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -218,7 +218,7 @@ struct AddingBus: View {
     }
     
     func addSeat(_ seat: NewSeat) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/seat/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "\(baseURL)/seat/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

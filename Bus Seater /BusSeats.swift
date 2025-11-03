@@ -49,7 +49,7 @@ struct NewSeat: Codable {
 
 class GetSeats: ObservableObject {
     func fetchSeats(busID: Int) async throws -> [Seat]{
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/seats/\(busID)") else {
+        guard let url = URL(string: "\(baseURL)/seats/\(busID)") else {
             throw URLError(.badURL)
         }
         

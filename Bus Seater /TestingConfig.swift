@@ -9,7 +9,7 @@ import Foundation
 
 var baseURL: String {
     #if targetEnvironment(simulator)
-    return "http://127.0.0.1:5001"
+    return "http://localhost:5001"
     #else
     return "http://10.0.0.44:5001"
     #endif
