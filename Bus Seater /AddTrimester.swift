@@ -115,7 +115,7 @@ struct TrimesterNumber: View {
     
     var body: some View {
         VStack {
-            Text("What type of break are you setting?")
+            Text("What is the trimester number?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
@@ -142,7 +142,7 @@ struct TrimesterStartDate: View {
     
     var body: some View {
         VStack {
-            Text("When is the first day of the quarter?")
+            Text("When is the first day of the trimester?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
@@ -164,7 +164,7 @@ struct TrimesterEndDate: View {
     
     var body: some View {
         VStack {
-            Text("When is the last day of the quarter?")
+            Text("When is the last day of the trimester?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)

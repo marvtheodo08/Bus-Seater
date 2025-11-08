@@ -116,7 +116,7 @@ struct QuarterNumber: View {
     
     var body: some View {
         VStack {
-            Text("What type of break are you setting?")
+            Text("What is the quarter number?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
@@ -190,7 +190,7 @@ struct AddingQuarter: View {
     
     var body: some View {
         VStack {
-            ProgressView("Adding break to database...")
+            ProgressView("Adding quarter to database...")
                 .multilineTextAlignment(.center)
                 .colorScheme(.light)
         }

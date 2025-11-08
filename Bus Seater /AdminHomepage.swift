@@ -108,7 +108,8 @@ struct AdminHomepage: View {
                                 .padding()
                                 Button(action: {adminSettingBreak = true}, label: {Text("Set school breaks")})
                                     .foregroundStyle(.black)
-                                Button(action: {adminSettingGrading = true}, label: {Text("Set school breaks")})
+                                    .padding()
+                                Button(action: {adminSettingGrading = true}, label: {Text("Set grading period")})
                                     .foregroundStyle(.black)
                             }
                             .padding(.top, 50)
