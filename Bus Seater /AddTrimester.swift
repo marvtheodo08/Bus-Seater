@@ -1,48 +1,48 @@
 //
-//  SchoolBreaks.swift
+//  AddTrimester.swift
 //  Bus Seater 1
 //
-//  Created by Marvheen Theodore on 10/26/25.
+//  Created by Marvheen Theodore on 11/7/25.
 //
 
 import SwiftUI
 
-struct SchoolBreak: Codable {
+struct Trimester: Codable {
     let schoolID: Int
-    let breakType: String
+    let trimesterNumber: Int
     let startDate: Date
     let endDate: Date
     
     enum CodingKeys: String, CodingKey {
         case schoolID = "school_id"
-        case breakType = "break_type"
+        case trimesterNumber = "trimester_number"
         case startDate = "start_date"
         case endDate = "end_date"
     }
     
-    init(schoolID: Int, breakType: String, startDate: Date, endDate: Date) {
+    init(schoolID: Int, trimesterNumber: Int, startDate: Date, endDate: Date) {
         self.schoolID = schoolID
-        self.breakType = breakType
+        self.trimesterNumber = trimesterNumber
         self.startDate = startDate
         self.endDate = endDate
     }
     
 }
 
-struct SetSchoolBreak: View {
+struct AddTrimester: View {
     
     enum Stage {
-        case breakType
+        case trimesterNumber
         case startDate
         case endDate
-        case addingBreak
+        case addingQuarter
     }
     
-    @State private var breakAdded = false
-    @State private var breakType: String = "Christmas"
+    @State private var quarterAdded = false
+    @State private var trimesterNumber: Int = 1
     @State private var startDate = Date()
     @State private var endDate = Date()
-    @State private var currentStage: Stage = .breakType
+    @State private var currentStage: Stage = .trimesterNumber
     
     var body: some View {
         ZStack {
@@ -51,19 +51,19 @@ struct SetSchoolBreak: View {
                 
                 // Display the current stage view
                 switch currentStage {
-                case .breakType:
-                    BreakType(breakType: $breakType)
+                case .trimesterNumber:
+                    TrimesterNumber(trimesterNumber: $trimesterNumber)
                 case .startDate:
-                    BreakStartDate(startDate: $startDate)
+                    TrimesterStartDate(startDate: $startDate)
                 case .endDate:
-                    BreakEndDate(endDate: $endDate)
-                case .addingBreak:
-                    AddingBreak(breakAdded: $breakAdded, breakType: $breakType, startDate: $startDate, endDate: $endDate)
+                    TrimesterEndDate(endDate: $endDate)
+                case .addingQuarter:
+                    AddingTrimester(quarterAdded: $quarterAdded, trimesterNumber: $trimesterNumber, startDate: $startDate, endDate: $endDate)
                 }
                 
                 // Navigation Buttons sugguested by ChatGPT
                 HStack {
-                    if currentStage != .breakType {
+                    if currentStage != .trimesterNumber {
                         Button(action: { goBack() }) {
                             Image(systemName: "arrow.left")
                                 .padding()
@@ -79,7 +79,7 @@ struct SetSchoolBreak: View {
                         }
                     }
                     else if currentStage == .endDate {
-                        Button(action: {currentStage = .addingBreak}, label: {Text("Create Break")
+                        Button(action: {currentStage = .addingQuarter}, label: {Text("Create Break")
                                 .foregroundStyle(.black)
                         })
                     }
@@ -88,7 +88,7 @@ struct SetSchoolBreak: View {
             }
             .padding(.bottom, 250)
         }
-        .fullScreenCover(isPresented: $breakAdded) {
+        .fullScreenCover(isPresented: $quarterAdded) {
             AdminHomepage()
         }
     }
@@ -96,23 +96,22 @@ struct SetSchoolBreak: View {
     func goBack() {
         switch currentStage {
         case .endDate: currentStage = .startDate
-        case .startDate: currentStage = .breakType
+        case .startDate: currentStage = .trimesterNumber
         default: break
         }
     }
     
     func goNext() {
         switch currentStage {
-        case .breakType: currentStage = .startDate
+        case .trimesterNumber: currentStage = .startDate
         case .startDate: currentStage = .endDate
         default: break
         }
     }
-    
 }
 
-struct BreakType: View {
-    @Binding var breakType: String
+struct TrimesterNumber: View {
+    @Binding var trimesterNumber: Int
     
     var body: some View {
         VStack {
@@ -122,22 +121,28 @@ struct BreakType: View {
                 .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
-            Picker("Break Type", selection: $breakType) {
-                Text("Christmas").tag("Christmas")
-                Text("Winter (Febuary)").tag("Winter (Febuary)")
-                Text("Spring").tag("Spring")
-            }
+            Picker(
+                selection: $trimesterNumber,
+                label: Text("Grade"),
+                content: {
+                    ForEach(1..<4) { quarter in
+                        Text("\(quarter)")
+                            .tag(quarter)
+                    }
+                }
+                
+            )
             .pickerStyle(WheelPickerStyle())
         }
     }
 }
 
-struct BreakStartDate: View {
+struct TrimesterStartDate: View {
     @Binding var startDate: Date
     
     var body: some View {
         VStack {
-            Text("When is the first day of the break?")
+            Text("When is the first day of the quarter?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
@@ -154,12 +159,12 @@ struct BreakStartDate: View {
     }
 }
 
-struct BreakEndDate: View {
+struct TrimesterEndDate: View {
     @Binding var endDate: Date
     
     var body: some View {
         VStack {
-            Text("When is the last day of the break?")
+            Text("When is the last day of the quarter?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
@@ -176,9 +181,9 @@ struct BreakEndDate: View {
     }
 }
 
-struct AddingBreak: View {
-    @Binding var breakAdded: Bool
-    @Binding var breakType: String
+struct AddingTrimester: View {
+    @Binding var quarterAdded: Bool
+    @Binding var trimesterNumber: Int
     @Binding var startDate: Date
     @Binding var endDate: Date
     
@@ -190,13 +195,13 @@ struct AddingBreak: View {
         }
         .onAppear {
             Task {
-                try await addBreak(SchoolBreak(schoolID: UserDefaults.standard.integer(forKey: "schoolID"), breakType: breakType, startDate: startDate, endDate: endDate))
+                try await addTrimester(Trimester(schoolID: UserDefaults.standard.integer(forKey: "schoolID"), trimesterNumber: trimesterNumber, startDate: startDate, endDate: endDate))
             }
-            breakAdded = true
+            quarterAdded = true
         }
     }
-    func addBreak(_ schoolBreak: SchoolBreak) async throws {
-        guard let url = URL(string: "\(baseURL)/break/create/") else { fatalError("Invalid URL") }
+    func addTrimester(_ trimester: Trimester) async throws {
+        guard let url = URL(string: "\(baseURL)/trimester/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -209,7 +214,7 @@ struct AddingBreak: View {
                 formatter.timeZone = TimeZone(secondsFromGMT: 0)
                 return formatter
             }())
-            request.httpBody = try encoder.encode(schoolBreak)
+            request.httpBody = try encoder.encode(trimester)
         } catch {
             print("Failed to encode parameters: \(error)")
         }
@@ -223,5 +228,5 @@ struct AddingBreak: View {
 }
 
 #Preview {
-    SetSchoolBreak()
+    AddTrimester()
 }

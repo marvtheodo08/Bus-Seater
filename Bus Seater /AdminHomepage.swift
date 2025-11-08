@@ -11,6 +11,7 @@ struct AdminHomepage: View {
     @State var userLoggingOut = false
     @State var AdminAddingBus = false
     @State var adminSettingBreak = false
+    @State var adminSettingGrading = false
     @State var fetchingBuses = true
     @State private var busSelected: Bus? = nil
     @State private var buses = [Bus]()
@@ -107,6 +108,8 @@ struct AdminHomepage: View {
                                 .padding()
                                 Button(action: {adminSettingBreak = true}, label: {Text("Set school breaks")})
                                     .foregroundStyle(.black)
+                                Button(action: {adminSettingGrading = true}, label: {Text("Set school breaks")})
+                                    .foregroundStyle(.black)
                             }
                             .padding(.top, 50)
 
@@ -118,6 +121,9 @@ struct AdminHomepage: View {
                     }
                     .navigationDestination(isPresented: $AdminAddingBus) {
                         AddBuses()
+                    }
+                    .navigationDestination(isPresented: $adminSettingGrading) {
+                        AddGradingPeriod()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()
