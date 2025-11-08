@@ -189,7 +189,7 @@ struct AddingSemester: View {
     
     var body: some View {
         VStack {
-            ProgressView("Adding break to database...")
+            ProgressView("Adding semester to database...")
                 .multilineTextAlignment(.center)
                 .colorScheme(.light)
         }
