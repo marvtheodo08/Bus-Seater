@@ -11,7 +11,7 @@ class StudentAssignment: ObservableObject {
     
     func assignStudent(seat: Seat, studentID: Int) async throws {
         
-        guard let url = URL(string: "\(baseURL)/update/seat/true/\(seat.busID)/\(seat.rowNumber)/\(seat.seatNumber)/\(studentID)") else {
+        guard let url = URL(string: "\(baseURL)/updateSeatTrue?busID=\(seat.busID)&rowNumber=\(seat.rowNumber)&seatNumber=\(seat.seatNumber)&studentID=\(studentID)") else {
             throw URLError(.badURL)
         }
 
@@ -30,7 +30,7 @@ class StudentAssignment: ObservableObject {
     }
     
     func unassignStudent(seat: Seat) async throws {
-        guard let url = URL(string: "\(baseURL)/update/seat/false/\(seat.busID)/\(seat.rowNumber)/\(seat.seatNumber)") else {
+        guard let url = URL(string: "\(baseURL)/updateSeatFalse?busID=\(seat.busID)&rowNumber=\(seat.rowNumber)&seatNumber=\(seat.seatNumber)") else {
             throw URLError(.badURL)
         }
 

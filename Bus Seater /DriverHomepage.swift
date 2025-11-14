@@ -150,7 +150,7 @@ struct DriverHomepage: View {
     }
     @MainActor
     func fetchStudents(busID: Int) async throws {
-        guard let url = URL(string: "\(baseURL)/students/\(busID)") else {
+        guard let url = URL(string: "\(baseURL)/students?busID=\(busID)") else {
             throw URLError(.badURL)
         }
         

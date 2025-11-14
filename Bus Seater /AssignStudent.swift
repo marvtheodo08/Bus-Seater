@@ -11,6 +11,7 @@ struct AssignStudent: View {
     var student: Student? = nil
     @EnvironmentObject var obtainBusInfo: ObtainBusInfo
     @EnvironmentObject var getSeats: GetSeats
+    @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
     @State private var driverInfo: Driver? = nil
     @State private var busInfo: Bus? = nil
     @State private var busID: Int = 0
@@ -96,8 +97,7 @@ struct AssignStudent: View {
         }
         .onAppear {
             Task {
-                driverInfo = try await obtainDriverInfo(accountID: UserDefaults.standard.integer(forKey: "accountID"))
-                busID = driverInfo?.busID ?? 0
+                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: UserDefaults.standard.integer(forKey: "accountID"))
                 busInfo = try await obtainBusInfo.obtainBusInfo(id: busID)
                 rowNum = busInfo?.rowAmount ?? 0
                 do {
@@ -170,23 +170,6 @@ struct SeatView: View {
             }
         }
     }
-}
-
-func obtainDriverInfo (accountID: Int) async throws -> Driver{
-    guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/drivers/info/\(accountID)") else {
-        throw URLError(.badURL)
-    }
-    
-    let (data, response) = try await URLSession.shared.data(from: url)
-    
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-        throw URLError(.badServerResponse)
-    }
-    
-    print("Status code: \(httpResponse.statusCode)")
-    
-    let driverInfo = try JSONDecoder().decode(Driver.self, from: data)
-    return driverInfo
 }
 
 
