@@ -79,7 +79,7 @@ struct Driver_SignUp: View {
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     
     var body: some View {
-        ZStack() {
+        ZStack {
             
             VStack {
                 Spacer()

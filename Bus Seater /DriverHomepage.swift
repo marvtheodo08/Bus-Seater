@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DriverHomepage: View {
     @State var userLoggingOut = false
-    @State var DriverAddingStudent = false
     @State private var studentSelected: Student? = nil
     @State private var students = [Student]()
     @State var fetchingStudents = true
@@ -36,11 +35,11 @@ struct DriverHomepage: View {
             else {
                 if students.isEmpty {
                     ZStack{
-                        Button(action: {DriverAddingStudent = true}, label: {
+                        NavigationLink(destination: AddStudent()){
                             Image(systemName: "plus")
                                 .foregroundStyle(.gray)
                                 .font(.system(size: 50))
-                        })
+                        }
                         Text("Add your students here.")
                             .foregroundStyle(.black)
                             .padding(.top, 120)
@@ -53,9 +52,6 @@ struct DriverHomepage: View {
                             .padding(.bottom, 700)
                             .padding(.trailing, 250)
                             .font(.system(size: 20))
-                    }
-                    .navigationDestination(isPresented: $DriverAddingStudent) {
-                        AddStudent()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()
@@ -93,8 +89,7 @@ struct DriverHomepage: View {
                                             student in AssignStudent(student: student)
                                         }
                                     }
-                                    // ➕ Add Bus button after all buses
-                                    Button(action: {DriverAddingStudent = true}, label: {
+                                    NavigationLink(destination: AddStudent()){
                                         VStack{
                                             Image(systemName: "plus")
                                                 .foregroundStyle(.gray)
@@ -102,7 +97,7 @@ struct DriverHomepage: View {
                                             Text("Add more students")
                                                 .foregroundStyle(.black)
                                         }
-                                    })
+                                    }
                                     
                                 }
                                 .padding()
@@ -111,9 +106,6 @@ struct DriverHomepage: View {
 
                         }
                         
-                    }
-                    .navigationDestination(isPresented: $DriverAddingStudent) {
-                        AddStudent()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()

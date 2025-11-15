@@ -9,9 +9,6 @@ import SwiftUI
 
 struct AdminHomepage: View {
     @State var userLoggingOut = false
-    @State var AdminAddingBus = false
-    @State var adminSettingBreak = false
-    @State var adminSettingGrading = false
     @State var fetchingBuses = true
     @State private var busSelected: Bus? = nil
     @State private var buses = [Bus]()
@@ -38,11 +35,12 @@ struct AdminHomepage: View {
             else {
                 if buses.isEmpty {
                     ZStack{
-                        Button(action: {AdminAddingBus = true}, label: {
+                        NavigationLink(destination: AddBuses()){
                             Image(systemName: "plus")
                                 .foregroundStyle(.gray)
                                 .font(.system(size: 50))
-                        })
+                        }
+                        
                         Text("Add your buses here.")
                             .foregroundStyle(.black)
                             .padding(.top, 120)
@@ -55,9 +53,6 @@ struct AdminHomepage: View {
                             .padding(.bottom, 700)
                             .padding(.trailing, 250)
                             .font(.system(size: 20))
-                    }
-                    .navigationDestination(isPresented: $AdminAddingBus) {
-                        AddBuses()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()
@@ -94,7 +89,7 @@ struct AdminHomepage: View {
                                         }
                                     }
                                     // ➕ Add Bus button after all buses
-                                    Button(action: {AdminAddingBus = true}, label: {
+                                    NavigationLink(destination: AddBuses()){
                                         VStack{
                                             Image(systemName: "plus")
                                                 .foregroundStyle(.gray)
@@ -102,29 +97,24 @@ struct AdminHomepage: View {
                                             Text("Add more buses")
                                                 .foregroundStyle(.black)
                                         }
-                                    })
+                                    }
                                     
                                 }
                                 .padding()
-                                Button(action: {adminSettingBreak = true}, label: {Text("Set school breaks")})
-                                    .foregroundStyle(.black)
-                                    .padding()
-                                Button(action: {adminSettingGrading = true}, label: {Text("Set grading period")})
-                                    .foregroundStyle(.black)
+                                NavigationLink(destination: SetSchoolBreak()){
+                                    Text("Set school breaks")
+                                }
+                                .foregroundStyle(.black)
+                                .padding()
+                                NavigationLink(destination: AddQuarter()){
+                                    Text("Set quarter")
+                                }
+                                .foregroundStyle(.black)
                             }
                             .padding(.top, 50)
 
                         }
                         
-                    }
-                    .navigationDestination(isPresented: $adminSettingBreak) {
-                        SetSchoolBreak()
-                    }
-                    .navigationDestination(isPresented: $AdminAddingBus) {
-                        AddBuses()
-                    }
-                    .navigationDestination(isPresented: $adminSettingGrading) {
-                        AddGradingPeriod()
                     }
                     .fullScreenCover(isPresented: $userLoggingOut) {
                         Login()

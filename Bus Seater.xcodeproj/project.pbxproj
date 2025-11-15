@@ -37,10 +37,7 @@
 		7E37DF232CF7DD63001EB870 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF222CF7DD63001EB870 /* Bus.swift */; };
 		7E39E9322E9D4A2E00D51EE9 /* StudentAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39E9312E9D4A2E00D51EE9 /* StudentAssignment.swift */; };
 		7E5C52002E5CCCBA003CD5D6 /* AddStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5C51FF2E5CCCBA003CD5D6 /* AddStudent.swift */; };
-		7E5FF9D42EBE97A10010EF59 /* AddGradingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FF9D32EBE97A10010EF59 /* AddGradingPeriod.swift */; };
 		7E5FF9D62EBE9FC30010EF59 /* AddQuarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */; };
-		7E5FF9D82EBEA0DC0010EF59 /* AddSemester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FF9D72EBEA0DC0010EF59 /* AddSemester.swift */; };
-		7E5FF9DA2EBEA5830010EF59 /* AddTrimester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FF9D92EBEA5830010EF59 /* AddTrimester.swift */; };
 		7E69B36B2EB44EA400BB70CD /* BusRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69B36A2EB44EA400BB70CD /* BusRows.swift */; };
 		7E7EEDCA2E63A9EE0019134D /* AssignStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EEDC92E63A9ED0019134D /* AssignStudent.swift */; };
 		7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */; };
@@ -100,10 +97,7 @@
 		7E37DF222CF7DD63001EB870 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 		7E39E9312E9D4A2E00D51EE9 /* StudentAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAssignment.swift; sourceTree = "<group>"; };
 		7E5C51FF2E5CCCBA003CD5D6 /* AddStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudent.swift; sourceTree = "<group>"; };
-		7E5FF9D32EBE97A10010EF59 /* AddGradingPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGradingPeriod.swift; sourceTree = "<group>"; };
 		7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuarter.swift; sourceTree = "<group>"; };
-		7E5FF9D72EBEA0DC0010EF59 /* AddSemester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSemester.swift; sourceTree = "<group>"; };
-		7E5FF9D92EBEA5830010EF59 /* AddTrimester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrimester.swift; sourceTree = "<group>"; };
 		7E69B36A2EB44EA400BB70CD /* BusRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRows.swift; sourceTree = "<group>"; };
 		7E7EEDC92E63A9ED0019134D /* AssignStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignStudent.swift; sourceTree = "<group>"; };
 		7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSeats.swift; sourceTree = "<group>"; };
@@ -172,10 +166,7 @@
 				7E7EEDC92E63A9ED0019134D /* AssignStudent.swift */,
 				0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */,
 				7E37DF222CF7DD63001EB870 /* Bus.swift */,
-				7E5FF9D32EBE97A10010EF59 /* AddGradingPeriod.swift */,
 				7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */,
-				7E5FF9D92EBEA5830010EF59 /* AddTrimester.swift */,
-				7E5FF9D72EBEA0DC0010EF59 /* AddSemester.swift */,
 				7E8C659A2E5BBE1600058C07 /* BusActions.swift */,
 				7E69B36A2EB44EA400BB70CD /* BusRows.swift */,
 				7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */,
@@ -369,7 +360,6 @@
 				0C75DB2A2C70BE79005247BC /* StudentNotifications.swift in Sources */,
 				7E37DF212CF7DB11001EB870 /* Student.swift in Sources */,
 				7E155B3C2E3114DE00DC1351 /* AppState.swift in Sources */,
-				7E5FF9D42EBE97A10010EF59 /* AddGradingPeriod.swift in Sources */,
 				7E8C659B2E5BBE1600058C07 /* BusActions.swift in Sources */,
 				7E0AD8362E539C4C00BC6460 /* ManageBus.swift in Sources */,
 				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
@@ -388,7 +378,6 @@
 				7E85D49E2CE1957700341DE7 /* School.swift in Sources */,
 				7E5FF9D62EBE9FC30010EF59 /* AddQuarter.swift in Sources */,
 				7E31E3BA2E170A6900E1E8A1 /* AddBuses.swift in Sources */,
-				7E5FF9DA2EBEA5830010EF59 /* AddTrimester.swift in Sources */,
 				0CC7C6952C7627600018C041 /* Admin_SignUp.swift in Sources */,
 				7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */,
 				7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */,
@@ -396,7 +385,6 @@
 				0C75DB262C70BE6D005247BC /* Student_SignUp.swift in Sources */,
 				0C75DB292C70BE77005247BC /* SignUp.swift in Sources */,
 				7E20BDB22EB7F51F00B9658C /* TestingConfig.swift in Sources */,
-				7E5FF9D82EBEA0DC0010EF59 /* AddSemester.swift in Sources */,
 				7E37DF232CF7DD63001EB870 /* Bus.swift in Sources */,
 				0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */,
 			);
