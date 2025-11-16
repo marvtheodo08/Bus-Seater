@@ -1,5 +1,5 @@
 # Bus Seater
-Welcome to Bus Seater, the world's first bus seating app!
+Welcome to Bus Seater, the world's first school bus seating app!
 ## How it works
 There are 3 types of accounts:
 - Student Account
