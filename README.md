@@ -10,7 +10,7 @@ A student account allows a student to pick their seat for the week, a driver acc
 
 When a user signs up, they have the option to sign up for any account type. But, when a user signs up for a student account, there is an authetication process to verify is the info is true. Once everything is verified, they are able to pick their seat for the following week.
 
-The student is able to pick their seat starting on the Friday before the following week, and they have until Sunday to pick. On weeks with breaks, they are not able to pick their seats.
+The student is able to pick their seat starting on the Friday before the following week at 5pm Eastern Time, and they have until Sunday 8pm to pick. On weeks with breaks, they are not able to pick their seats.
 
 A strike system keeps the student in check so they can still pick their seats. If the student does mischivous, the driver is able to block the student from picking their seat for the following weak, and recieve a strike. After three stikes, the student can not pick their seat for the rest of the quarter!
 
