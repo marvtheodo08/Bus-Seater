@@ -30,9 +30,9 @@ struct YourApp: App {
   @StateObject private var obtainBusInfo = ObtainBusInfo()
   @StateObject private var obtainBusID = ObtainBusID()
   @StateObject private var busActions = BusActions()
-  @State private var obtainbusIDfromAccount = ObtainBusIDfromAccount()
-  @State private var getSeats = GetSeats()
-  @State private var studentAssignment = StudentAssignment()
+  @StateObject private var obtainbusIDfromAccount = ObtainBusIDfromAccount()
+  @StateObject private var getSeats = GetSeats()
+  @StateObject private var studentAssignment = StudentAssignment()
   var body: some Scene {
     WindowGroup {
       NavigationView {

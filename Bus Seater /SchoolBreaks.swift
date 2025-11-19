@@ -206,7 +206,7 @@ struct AddingBreak: View {
             encoder.dateEncodingStrategy = .formatted({
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
-                formatter.timeZone = TimeZone(secondsFromGMT: 0)
+                formatter.timeZone = TimeZone(identifier: "America/New_York")
                 return formatter
             }())
             request.httpBody = try encoder.encode(schoolBreak)
