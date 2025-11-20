@@ -10,7 +10,6 @@
 		0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F17022CCB134900C62695 /* DriverHomepage.swift */; };
 		0C5F17052CCB13C500C62695 /* AdminHomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F17042CCB13C500C62695 /* AdminHomepage.swift */; };
 		0C5F17072CCB1F5D00C62695 /* LastUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */; };
-		0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F17082CCD181F00C62695 /* NotifsPermissions.swift */; };
 		0C75DB222C70BE5F005247BC /* Bus_SeaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */; };
 		0C75DB232C70BE64005247BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5608162C25AA7C00828882 /* ContentView.swift */; };
 		0C75DB242C70BE67005247BC /* StudentHomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7B427D2C527B5F000ADE5F /* StudentHomepage.swift */; };
@@ -43,6 +42,7 @@
 		7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */; };
 		7E85D49E2CE1957700341DE7 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* School.swift */; };
 		7E8C659B2E5BBE1600058C07 /* BusActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C659A2E5BBE1600058C07 /* BusActions.swift */; };
+		7E8D2DB42ECE765C0087458F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 7E8D2DB32ECE765C0087458F /* FirebaseMessaging */; };
 		7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */; };
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +76,6 @@
 		0C5F17022CCB134900C62695 /* DriverHomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomepage.swift; sourceTree = "<group>"; };
 		0C5F17042CCB13C500C62695 /* AdminHomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomepage.swift; sourceTree = "<group>"; };
 		0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastUserInfo.swift; sourceTree = "<group>"; };
-		0C5F17082CCD181F00C62695 /* NotifsPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifsPermissions.swift; sourceTree = "<group>"; };
 		0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bus Seater 1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C75DB072C70BE0C005247BC /* Bus Seater Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C75DB112C70BE0C005247BC /* Bus Seater UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bus Seater UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E8D2DB42ECE765C0087458F /* FirebaseMessaging in Frameworks */,
 				0CA752542C70C3D700DF03F4 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +139,7 @@
 				0C5608132C25AA7C00828882 /* Bus Seater  */,
 				0C5608242C25AA7E00828882 /* Bus SeaterTests */,
 				0C56082E2C25AA7E00828882 /* Bus SeaterUITests */,
+				7E8D2DB22ECE765C0087458F /* Frameworks */,
 				0C5608122C25AA7C00828882 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -178,7 +179,6 @@
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				7E0AD8352E539C4C00BC6460 /* ManageBus.swift */,
 				7EABE03A2D68F4B000C00697 /* NewAccount.swift */,
-				0C5F17082CCD181F00C62695 /* NotifsPermissions.swift */,
 				7E85D49D2CE1957700341DE7 /* School.swift */,
 				7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */,
 				0C278BF22C3C90080009B5A4 /* SignUp.swift */,
@@ -219,6 +219,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		7E8D2DB22ECE765C0087458F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,6 +244,7 @@
 			name = "Bus Seater 1";
 			packageProductDependencies = (
 				0CA752532C70C3D700DF03F4 /* FirebaseAuth */,
+				7E8D2DB32ECE765C0087458F /* FirebaseMessaging */,
 			);
 			productName = "Bus Seater 1";
 			productReference = 0C75DAF82C70BE0A005247BC /* Bus Seater 1.app */;
@@ -362,7 +370,6 @@
 				7E155B3C2E3114DE00DC1351 /* AppState.swift in Sources */,
 				7E8C659B2E5BBE1600058C07 /* BusActions.swift in Sources */,
 				7E0AD8362E539C4C00BC6460 /* ManageBus.swift in Sources */,
-				0C5F17092CCD181F00C62695 /* NotifsPermissions.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
@@ -747,6 +754,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		7E8D2DB32ECE765C0087458F /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CA752522C70C3D700DF03F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

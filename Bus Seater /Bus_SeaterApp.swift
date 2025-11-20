@@ -8,20 +8,53 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+import FirebaseMessaging
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
+    
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+        FirebaseApp.configure()
+
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
+            if granted {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+
+        Messaging.messaging().delegate = self
+        
+        return true
+    }
+
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        guard let token = fcmToken else { return }
+        print("FCM Token:", token)
+        sendTokenToServer(token)
+    }
+    
+    func sendTokenToServer(_ token: String) {
+        guard let url = URL(string: "\(baseURL)/register_token") else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body = ["token": token]
+        request.httpBody = try? JSONEncoder().encode(body)
+
+        URLSession.shared.dataTask(with: request).resume()
+    }
 }
+
 
 @main
 struct YourApp: App {
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @StateObject private var notifsPermissions = NotifsPermissions()
   @StateObject private var getSchools = GetSchools()
   @StateObject private var newAccount = NewAccount()
   @StateObject private var obtainAccountInfo = ObtainAccountInfo()
@@ -39,7 +72,6 @@ struct YourApp: App {
         ContentView()
               .preferredColorScheme(.light)
       }
-      .environmentObject(notifsPermissions)
       .environmentObject(getSchools)
       .environmentObject(newAccount)
       .environmentObject(obtainAccountInfo)
