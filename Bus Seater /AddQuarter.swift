@@ -202,7 +202,7 @@ struct AddingQuarter: View {
         }
     }
     func addQuarter(_ quarter: SchoolQuarter) async throws {
-        guard let url = URL(string: "\(baseURL)/quarter/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/quarter/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

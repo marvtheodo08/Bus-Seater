@@ -37,7 +37,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
     }
     
     func sendTokenToServer(_ token: String) {
-        guard let url = URL(string: "\(baseURL)/register_token") else { return }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/register_token") else { return }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

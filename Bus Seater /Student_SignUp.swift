@@ -495,7 +495,7 @@ struct StudentVerification: View {
     }
     
     func verifyStudent(firstname: String, lastname: String, grade: String, schoolID: Int, busID: Int) async throws -> Student {
-        guard let url = URL(string: "\(baseURL)/student/verify/\(firstname)/\(lastname)/\(grade)/\(schoolID)/\(busID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/student/verify/\(firstname)/\(lastname)/\(grade)/\(schoolID)/\(busID)") else {
             throw URLError(.badURL)
         }
                 

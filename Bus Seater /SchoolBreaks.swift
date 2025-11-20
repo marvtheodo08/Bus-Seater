@@ -196,7 +196,7 @@ struct AddingBreak: View {
         }
     }
     func addBreak(_ schoolBreak: SchoolBreak) async throws {
-        guard let url = URL(string: "\(baseURL)/break/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/break/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
