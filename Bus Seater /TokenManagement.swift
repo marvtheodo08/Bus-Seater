@@ -27,7 +27,7 @@ class AddToToken: ObservableObject {
         let body = TokenUpdateRequest(token: token, accountID: accountID, accountType: accountType)
         request.httpBody = try encoder.encode(body)
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
@@ -47,7 +47,7 @@ class RemoveFromToken: ObservableObject {
         let encoder = JSONEncoder()
         request.httpBody = try encoder.encode(token)
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
