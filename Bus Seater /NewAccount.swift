@@ -16,14 +16,6 @@ class NewAccount: ObservableObject {
         var accountType: String
         var schoolID: Int
         
-        enum CodingKeys: String, CodingKey {
-            case firstName = "first_name"
-            case lastName = "last_name"
-            case email
-            case accountType = "account_type"
-            case schoolID = "school_id"
-        }
-        
         init(firstName: String, lastName: String, email: String, accountType: String, schoolID: Int) {
             self.firstName = firstName
             self.lastName = lastName
@@ -42,7 +34,9 @@ class NewAccount: ObservableObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            request.httpBody = try JSONEncoder().encode(account)
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(account)
         } catch {
             print("Failed to encode parameters: \(error)")
         }

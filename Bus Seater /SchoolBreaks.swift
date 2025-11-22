@@ -13,13 +13,6 @@ struct SchoolBreak: Codable {
     let startDate: Date
     let endDate: Date
     
-    enum CodingKeys: String, CodingKey {
-        case schoolID = "school_id"
-        case breakType = "break_type"
-        case startDate = "start_date"
-        case endDate = "end_date"
-    }
-    
     init(schoolID: Int, breakType: String, startDate: Date, endDate: Date) {
         self.schoolID = schoolID
         self.breakType = breakType
@@ -196,19 +189,18 @@ struct AddingBreak: View {
         }
     }
     func addBreak(_ schoolBreak: SchoolBreak) async throws {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/break/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/break/create/") else { throw URLError(.badURL) }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.timeZone = TimeZone(identifier: "America/New_York")
             let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .formatted({
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                formatter.timeZone = TimeZone(identifier: "America/New_York")
-                return formatter
-            }())
+            encoder.dateEncodingStrategy = .formatted(formatter)
+            encoder.keyEncodingStrategy = .convertToSnakeCase
             request.httpBody = try encoder.encode(schoolBreak)
         } catch {
             print("Failed to encode parameters: \(error)")

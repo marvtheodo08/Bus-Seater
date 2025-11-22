@@ -14,15 +14,6 @@ struct Account: Codable {
     var email: String
     var accountType: String
     var schoolID: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case email
-        case accountType = "account_type"
-        case schoolID = "school_id"
-    }
 }
 
 class ObtainAccountInfo: ObservableObject {
@@ -37,8 +28,9 @@ class ObtainAccountInfo: ObservableObject {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-        
-        let accountInfo = try JSONDecoder().decode(Account.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let accountInfo = try decoder.decode(Account.self, from: data)
         print(accountInfo)
         return accountInfo
     }

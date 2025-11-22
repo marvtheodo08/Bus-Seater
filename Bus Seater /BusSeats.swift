@@ -17,27 +17,12 @@ struct Seat: Identifiable, Codable {
     var id: String {
         "\(busID).\(rowNumber).\(seatNumber)"
     }
-    
-    enum CodingKeys: String, CodingKey {
-        case seatNumber = "seat_number"
-        case rowNumber = "row_num"
-        case busID = "bus_id"
-        case studentID = "student_id"
-        case isOccupied = "is_occupied"
-    }
-    
 }
 
 struct NewSeat: Codable {
     var busID: Int
     var rowNumber: Int
     var seatNumber: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case busID = "bus_id"
-        case rowNumber = "row_num"
-        case seatNumber = "seat_number"
-    }
     
     init(busID: Int, rowNumber: Int, seatNumber: Int) {
         self.busID = busID
@@ -61,7 +46,10 @@ class GetSeats: ObservableObject {
         
         print("Status code: \(httpResponse.statusCode)")
         
-        let fetchedbuses = try JSONDecoder().decode([Seat].self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let fetchedbuses = try decoder.decode([Seat].self, from: data)
         
         return fetchedbuses
     }

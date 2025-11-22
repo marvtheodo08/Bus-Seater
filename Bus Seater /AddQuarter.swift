@@ -13,13 +13,6 @@ struct SchoolQuarter: Codable {
     let startDate: Date
     let endDate: Date
     
-    enum CodingKeys: String, CodingKey {
-        case schoolID = "school_id"
-        case quarterNumber = "quarter_number"
-        case startDate = "start_date"
-        case endDate = "end_date"
-    }
-    
     init(schoolID: Int, quarterNumber: Int, startDate: Date, endDate: Date) {
         self.schoolID = schoolID
         self.quarterNumber = quarterNumber
@@ -208,13 +201,12 @@ struct AddingQuarter: View {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.timeZone = TimeZone(identifier: "America/New_York")
             let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .formatted({
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                formatter.timeZone = TimeZone(secondsFromGMT: 0)
-                return formatter
-            }())
+            encoder.dateEncodingStrategy = .formatted(formatter)
+            encoder.keyEncodingStrategy = .convertToSnakeCase
             request.httpBody = try encoder.encode(quarter)
         } catch {
             print("Failed to encode parameters: \(error)")

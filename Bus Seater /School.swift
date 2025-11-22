@@ -13,16 +13,8 @@ struct School: Identifiable, Codable {
     let municipality: String
     let state: String
     let stateAbbreviation: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case schoolName = "school_name"
-        case municipality
-        case state
-        case stateAbbreviation = "state_abbreviation"
-    }
-    
 }
+
 class GetSchools: ObservableObject {
     func fetchSchools(state: String, municipality: String) async throws -> [School]{
         guard let url = URL(string: "https://bus-seater-api.onrender.com/schools?state=\(state)&municipality=\(municipality)") else {
@@ -35,8 +27,10 @@ class GetSchools: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let fetchedSchools = try JSONDecoder().decode([School].self, from: data)
-        
-        return fetchedSchools
+        do{
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode([School].self, from: data)
+        }
     }
 }

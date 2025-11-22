@@ -12,12 +12,6 @@ struct NewRow: Codable {
     var seatCount: Int
     var busID: Int
     
-    enum CodingKeys: String, CodingKey {
-        case rowNumber = "row_num"
-        case seatCount = "seat_count"
-        case busID = "bus_id"
-    }
-    
     init(rowNumber: Int, seatCount: Int, busID: Int) {
         self.rowNumber = rowNumber
         self.seatCount = seatCount

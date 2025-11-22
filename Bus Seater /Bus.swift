@@ -13,22 +13,10 @@ struct Bus: Identifiable, Codable {
     let busCode: String
     let schoolID: Int
     let rowAmount: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case seatCount = "seat_count"
-        case busCode = "bus_code"
-        case schoolID = "school_id"
-        case rowAmount = "row_amount"
-    }
-    
 }
 
 struct BusID: Codable {
     let busID: Int
-    enum CodingKeys: String, CodingKey {
-        case busID = "bus_id"
-    }
 }
 
 struct NewBus: Codable {
@@ -36,14 +24,7 @@ struct NewBus: Codable {
     var seatCount: Int
     var busCode: String
     var schoolID: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case rowAmount = "row_amount"
-        case seatCount = "seat_count"
-        case busCode = "bus_code"
-        case schoolID = "school_id"
-    }
-    
+
     init(rowAmount: Int, seatCount: Int, busCode: String, schoolID: Int) {
         self.rowAmount = rowAmount
         self.seatCount = seatCount
@@ -65,8 +46,12 @@ class ObtainBusIDfromAccount: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let busID = try JSONDecoder().decode(BusID.self, from: data)
-        return busID.busID
+        do{
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let busID = try decoder.decode(BusID.self, from: data)
+            return busID.busID
+        }
     }
 }
 
@@ -82,16 +67,17 @@ class ObtainBusInfo: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let busInfo = try JSONDecoder().decode(Bus.self, from: data)
-        return busInfo
+        do{
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode(Bus.self, from: data)
+        }
     }
 }
 
 class ObtainBusID: ObservableObject {
-    @Published var id: BusID?
-    
     @MainActor
-    func obtainBusID(bus_code: String, school_id: Int) async throws {
+    func obtainBusID(bus_code: String, school_id: Int) async throws -> Int{
         guard let url = URL(string: "https://bus-seater-api.onrender.com/bus?schoolID=\(school_id)&busCode=\(bus_code)") else {
             throw URLError(.badURL)
         }
@@ -102,9 +88,10 @@ class ObtainBusID: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        let busID = try JSONDecoder().decode(BusID.self, from: data)
-        self.id = busID
-        print(busID)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let busID = try decoder.decode(BusID.self, from: data)
+        return busID.busID
     }
 }
 
@@ -122,7 +109,10 @@ class GetBuses: ObservableObject {
         
         print("Status code: \(httpResponse.statusCode)")
         
-        let fetchedbuses = try JSONDecoder().decode([Bus].self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let fetchedbuses = try decoder.decode([Bus].self, from: data)
         
         return fetchedbuses
     }

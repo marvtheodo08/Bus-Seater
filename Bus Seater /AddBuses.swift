@@ -152,8 +152,7 @@ struct AddingBus: View {
             schoolID = UserDefaults.standard.integer(forKey: "schoolID")
             Task {
                 try await addBus(NewBus(rowAmount: rows, seatCount: seats, busCode: busCode, schoolID: schoolID))
-                try await obtainBusID.obtainBusID(bus_code: busCode, school_id: schoolID)
-                busID = obtainBusID.id?.busID ?? 0
+                busID = try await obtainBusID.obtainBusID(bus_code: busCode, school_id: schoolID)
                 var i = 1
                 while i <= rows {
                     if i == rows {
@@ -186,7 +185,9 @@ struct AddingBus: View {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            request.httpBody = try JSONEncoder().encode(bus)
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(bus)
         } catch {
             print("Failed to encode parameters: \(error)")
         }
@@ -205,6 +206,8 @@ struct AddingBus: View {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
             request.httpBody = try JSONEncoder().encode(row)
         } catch {
             print("Failed to encode parameters: \(error)")
