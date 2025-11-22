@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseMessaging
 
 struct AdminHomepage: View {
     @State var userLoggingOut = false
@@ -15,6 +16,7 @@ struct AdminHomepage: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var getBuses: GetBuses
     @EnvironmentObject var busActions: BusActions
+    @EnvironmentObject var removeFromToken: RemoveFromToken
     
     // 3 columns = 3 buses per row
     // Columns suggusted by ChatGPT
@@ -151,9 +153,9 @@ struct AdminHomepage: View {
             }
         }
     }
-    func logout() {
-        userLoggingOut = true
+    func logout() {userLoggingOut = true
         appState.isUserLoggedIn = false
+        let token = Messaging.messaging().fcmToken
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")
@@ -162,7 +164,9 @@ struct AdminHomepage: View {
         defaults.removeObject(forKey: "accountType")
         defaults.removeObject(forKey: "accountID")
         defaults.set(false, forKey: "WasUserLoggedIn")
-    }
+        Task {
+            try await removeFromToken.removeFromToken(token: token!)
+        }}
 }
 
 #Preview {

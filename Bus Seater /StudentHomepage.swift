@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseMessaging
 
 struct StudentHomepage: View {
     @State var userLoggingOut = false
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var removeFromToken: RemoveFromToken
 
     var body: some View {
         ZStack{
@@ -17,6 +19,7 @@ struct StudentHomepage: View {
                 .foregroundStyle(.black)
             Button(action: {userLoggingOut = true
                 appState.isUserLoggedIn = false
+                let token = Messaging.messaging().fcmToken
                 let defaults = UserDefaults.standard
                 defaults.removeObject(forKey: "firstName")
                 defaults.removeObject(forKey: "lastName")
@@ -24,7 +27,10 @@ struct StudentHomepage: View {
                 defaults.removeObject(forKey: "email")
                 defaults.removeObject(forKey: "accountType")
                 defaults.removeObject(forKey: "accountID")
-                defaults.set(false, forKey: "WasUserLoggedIn")}, label: {Text("Logout")})
+                defaults.set(false, forKey: "WasUserLoggedIn")
+                Task {
+                    try await removeFromToken.removeFromToken(token: token!)
+                }}, label: {Text("Logout")})
                 .foregroundStyle(.black)
                 .padding(.bottom, 700)
                 .padding(.leading, 250)

@@ -66,6 +66,8 @@ struct YourApp: App {
   @StateObject private var obtainbusIDfromAccount = ObtainBusIDfromAccount()
   @StateObject private var getSeats = GetSeats()
   @StateObject private var studentAssignment = StudentAssignment()
+  @StateObject private var addToToken = AddToToken()
+  @StateObject private var removeFromToken = RemoveFromToken()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -83,6 +85,7 @@ struct YourApp: App {
       .environmentObject(obtainbusIDfromAccount)
       .environmentObject(getSeats)
       .environmentObject(studentAssignment)
+      .environmentObject(addToToken)
     }
   }
 }
