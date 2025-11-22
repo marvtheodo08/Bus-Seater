@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FirebaseAuth
-import FirebaseMessaging
 
 //Enum suggested by ChatGPT
 enum AccountType: String, Identifiable {
@@ -91,7 +90,6 @@ struct LoggingUserIn: View {
     @State private var accountType: String = ""
     @State private var type: AccountType? = nil
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
-    @EnvironmentObject var addToToken: AddToToken
 
     
     var body: some View {
@@ -104,7 +102,6 @@ struct LoggingUserIn: View {
         .onAppear{
             Task {
                 do {
-                    let token = Messaging.messaging().fcmToken
                     let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                     let defaults = UserDefaults.standard
                     defaults.set(account.firstName, forKey: "firstName")
@@ -115,7 +112,6 @@ struct LoggingUserIn: View {
                     defaults.set(account.id, forKey: "accountID")
                     defaults.set(true, forKey: "WasUserLoggedIn")
                     accountType = account.accountType
-                    try await addToToken.addToToken(token: token!, accountID: defaults.integer(forKey: "accountID"), accountType: defaults.string(forKey: "accountType") ?? "")
                 }
                 catch {
                     print("Failed to fetch obtain account info: \(error)")

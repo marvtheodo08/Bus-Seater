@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseMessaging
 
 struct DriverHomepage: View {
     @State var userLoggingOut = false
@@ -17,7 +16,6 @@ struct DriverHomepage: View {
     @State private var busID: Int = 0
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
-    @EnvironmentObject var removeFromToken: RemoveFromToken
     
     // 3 columns = 3 buses per row
     let columns = [
@@ -132,7 +130,6 @@ struct DriverHomepage: View {
     }
     func logout() {userLoggingOut = true
         appState.isUserLoggedIn = false
-        let token = Messaging.messaging().fcmToken
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")
@@ -140,10 +137,7 @@ struct DriverHomepage: View {
         defaults.removeObject(forKey: "email")
         defaults.removeObject(forKey: "accountType")
         defaults.removeObject(forKey: "accountID")
-        defaults.set(false, forKey: "WasUserLoggedIn")
-        Task {
-            try await removeFromToken.removeFromToken(token: token!)
-        }}
+        defaults.set(false, forKey: "WasUserLoggedIn")}
     @MainActor
     func fetchStudents(busID: Int) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/students?busID=\(busID)") else {
