@@ -189,7 +189,7 @@ struct AddingQuarter: View {
         }
         .onAppear {
             Task {
-                try await addQuarter(SchoolQuarter(schoolID: UserDefaults.standard.integer(forKey: "schoolID"), quarterNumber: quarterNumber, startDate: startDate, endDate: endDate))
+                try await addQuarter(SchoolQuarter(schoolId: UserDefaults.standard.integer(forKey: "schoolID"), quarterNumber: quarterNumber, startDate: startDate, endDate: endDate))
             }
             quarterAdded = true
         }
