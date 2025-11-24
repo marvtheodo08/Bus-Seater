@@ -14,14 +14,14 @@ class NewAccount: ObservableObject {
         var lastName: String
         var email: String
         var accountType: String
-        var schoolID: Int
+        var schoolId: Int
         
-        init(firstName: String, lastName: String, email: String, accountType: String, schoolID: Int) {
+        init(firstName: String, lastName: String, email: String, accountType: String, schoolId: Int) {
             self.firstName = firstName
             self.lastName = lastName
             self.email = email
             self.accountType = accountType
-            self.schoolID = schoolID
+            self.schoolId = schoolId
         }
         
     }

@@ -60,19 +60,19 @@ struct AssignStudent: View {
                             // Seat formatting suggested by ChatGPT
                             ForEach(1...rowNum, id: \.self) { row in
                                 if row < rowNum{
-                                    ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber <= 2 }) { seat in
+                                    ForEach(seats.filter { $0.rowNum == row && $0.seatNumber <= 2 }) { seat in
                                         SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
                                     }
                                     
                                     Color.clear
                                         .frame(width: 15, height: 15)
                                     
-                                    ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber > 2 }) { seat in
+                                    ForEach(seats.filter { $0.rowNum == row && $0.seatNumber > 2 }) { seat in
                                         SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
                                     }
                                 }
                                 else {
-                                    ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber == 1 }) { seat in
+                                    ForEach(seats.filter { $0.rowNum == row && $0.seatNumber == 1 }) { seat in
                                         SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
                                     }
                                     
@@ -81,7 +81,7 @@ struct AssignStudent: View {
                                     Color.clear
                                         .frame(width: 15, height: 15)
                                     
-                                    ForEach(seats.filter { $0.rowNumber == row && $0.seatNumber > 1 }) { seat in
+                                    ForEach(seats.filter { $0.rowNum == row && $0.seatNumber > 1 }) { seat in
                                         SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
                                     }
                                 }
@@ -121,7 +121,7 @@ struct SeatView: View {
     var body: some View {
         Group {
             if seat.isOccupied {
-                if seat.studentID == student.id {
+                if seat.studentId == student.id {
                     VStack{
                         Text("C")
                             .font(.system(size: 20))
@@ -145,7 +145,7 @@ struct SeatView: View {
             else {
                 Button(action: {selectedSeat = seat; assignmentConfirm = true; print("\(seat)"); print("\(student.id)")}, label: {
                     VStack{
-                        Text("\(seat.rowNumber) \(seat.seatNumber)")
+                        Text("\(seat.rowNum) \(seat.seatNumber)")
                             .font(.system(size: 7))
                     }
                     .foregroundStyle(.white)
@@ -153,7 +153,7 @@ struct SeatView: View {
                     .padding(25)
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                 })
-                .alert("Would you like to assign this student to row \(selectedSeat?.rowNumber ?? 0), seat \(selectedSeat?.seatNumber ?? 0)?", isPresented: $assignmentConfirm) {
+                .alert("Would you like to assign this student to row \(selectedSeat?.rowNum ?? 0), seat \(selectedSeat?.seatNumber ?? 0)?", isPresented: $assignmentConfirm) {
                     Button("Yes", role: .destructive) {
                         Task {
                             dismiss()

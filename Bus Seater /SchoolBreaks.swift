@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SchoolBreak: Codable {
-    let schoolID: Int
+    let schoolId: Int
     let breakType: String
     let startDate: Date
     let endDate: Date
     
-    init(schoolID: Int, breakType: String, startDate: Date, endDate: Date) {
-        self.schoolID = schoolID
+    init(schoolId: Int, breakType: String, startDate: Date, endDate: Date) {
+        self.schoolId = schoolId
         self.breakType = breakType
         self.startDate = startDate
         self.endDate = endDate
@@ -183,7 +183,7 @@ struct AddingBreak: View {
         }
         .onAppear {
             Task {
-                try await addBreak(SchoolBreak(schoolID: UserDefaults.standard.integer(forKey: "schoolID"), breakType: breakType, startDate: startDate, endDate: endDate))
+                try await addBreak(SchoolBreak(schoolId: UserDefaults.standard.integer(forKey: "schoolID"), breakType: breakType, startDate: startDate, endDate: endDate))
             }
             breakAdded = true
         }

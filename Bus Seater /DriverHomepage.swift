@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct DriverHomepage: View {
-    @State var userLoggingOut = false
     @State private var studentSelected: Student? = nil
     @State private var students = [Student]()
     @State var fetchingStudents = true
     @State private var accountID: Int = 0
     @State private var busID: Int = 0
-    @EnvironmentObject var appState: AppState
     @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
     
     // 3 columns = 3 buses per row
@@ -52,9 +50,6 @@ struct DriverHomepage: View {
                             .padding(.bottom, 700)
                             .padding(.trailing, 250)
                             .font(.system(size: 20))
-                    }
-                    .fullScreenCover(isPresented: $userLoggingOut) {
-                        Login()
                     }
                 }
                 else {
@@ -107,9 +102,6 @@ struct DriverHomepage: View {
                         }
                         
                     }
-                    .fullScreenCover(isPresented: $userLoggingOut) {
-                        Login()
-                    }
                 }
                 
             }
@@ -128,8 +120,7 @@ struct DriverHomepage: View {
             }
         }
     }
-    func logout() {userLoggingOut = true
-        appState.isUserLoggedIn = false
+    func logout() {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")

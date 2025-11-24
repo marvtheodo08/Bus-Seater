@@ -8,14 +8,14 @@
 import Foundation
 
 struct NewRow: Codable {
-    var rowNumber: Int
+    var rowNum: Int
     var seatCount: Int
-    var busID: Int
+    var busId: Int
     
-    init(rowNumber: Int, seatCount: Int, busID: Int) {
-        self.rowNumber = rowNumber
+    init(rowNum: Int, seatCount: Int, busId: Int) {
+        self.rowNum = rowNum
         self.seatCount = seatCount
-        self.busID = busID
+        self.busId = busId
     }
     
 }

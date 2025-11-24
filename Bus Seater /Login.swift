@@ -22,7 +22,6 @@ struct Login: View {
     @State var password: String  = ""
     @State var userSigningUp = false
     @State var userLoggingIn = false
-    @EnvironmentObject var appState: AppState
     
     var body: some View {
             ZStack {
@@ -90,7 +89,6 @@ struct LoggingUserIn: View {
     @State private var accountType: String = ""
     @State private var type: AccountType? = nil
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
-
     
     var body: some View {
         VStack {
@@ -106,7 +104,7 @@ struct LoggingUserIn: View {
                     let defaults = UserDefaults.standard
                     defaults.set(account.firstName, forKey: "firstName")
                     defaults.set(account.lastName, forKey: "lastName")
-                    defaults.set(account.schoolID, forKey: "schoolID")
+                    defaults.set(account.schoolId, forKey: "schoolID")
                     defaults.set(account.email, forKey: "email")
                     defaults.set(account.accountType, forKey: "accountType")
                     defaults.set(account.id, forKey: "accountID")

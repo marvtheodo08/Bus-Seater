@@ -151,23 +151,23 @@ struct AddingBus: View {
             seats = rows * 4 - 1
             schoolID = UserDefaults.standard.integer(forKey: "schoolID")
             Task {
-                try await addBus(NewBus(rowAmount: rows, seatCount: seats, busCode: busCode, schoolID: schoolID))
+                try await addBus(NewBus(rowAmount: rows, seatCount: seats, busCode: busCode, schoolId: schoolID))
                 busID = try await obtainBusID.obtainBusID(bus_code: busCode, school_id: schoolID)
                 var i = 1
                 while i <= rows {
                     if i == rows {
-                        try await addRow(NewRow(rowNumber: i, seatCount: 3, busID: busID))
+                        try await addRow(NewRow(rowNum: i, seatCount: 3, busId: busID))
                         var j = 1
                         while j <= 3 {
-                            try await addSeat(NewSeat(busID: busID, rowNumber: i, seatNumber: j))
+                            try await addSeat(NewSeat(busId: busID, rowNum: i, seatNumber: j))
                             j = j + 1
                         }
                     }
                     else {
-                        try await addRow(NewRow(rowNumber: i, seatCount: 4, busID: busID))
+                        try await addRow(NewRow(rowNum: i, seatCount: 4, busId: busID))
                         var j = 1
                         while j <= 4 {
-                            try await addSeat(NewSeat(busID: busID, rowNumber: i, seatNumber: j))
+                            try await addSeat(NewSeat(busId: busID, rowNum: i, seatNumber: j))
                             j = j + 1
                         }
                     }

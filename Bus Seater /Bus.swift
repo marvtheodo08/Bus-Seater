@@ -11,25 +11,25 @@ struct Bus: Identifiable, Codable {
     let id: Int
     let seatCount: Int
     let busCode: String
-    let schoolID: Int
+    let schoolId: Int
     let rowAmount: Int
 }
 
 struct BusID: Codable {
-    let busID: Int
+    let busId: Int
 }
 
 struct NewBus: Codable {
     var rowAmount: Int
     var seatCount: Int
     var busCode: String
-    var schoolID: Int
+    var schoolId: Int
 
-    init(rowAmount: Int, seatCount: Int, busCode: String, schoolID: Int) {
+    init(rowAmount: Int, seatCount: Int, busCode: String, schoolId: Int) {
         self.rowAmount = rowAmount
         self.seatCount = seatCount
         self.busCode = busCode
-        self.schoolID = schoolID
+        self.schoolId = schoolId
     }
     
 }
@@ -50,7 +50,7 @@ class ObtainBusIDfromAccount: ObservableObject {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let busID = try decoder.decode(BusID.self, from: data)
-            return busID.busID
+            return busID.busId
         }
     }
 }
@@ -91,7 +91,7 @@ class ObtainBusID: ObservableObject {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let busID = try decoder.decode(BusID.self, from: data)
-        return busID.busID
+        return busID.busId
     }
 }
 

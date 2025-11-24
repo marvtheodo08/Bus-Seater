@@ -157,7 +157,7 @@ struct AddingStudent: View {
             accountID = UserDefaults.standard.integer(forKey: "accountID")
             Task {
                 busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: accountID)
-                try await addStudent(NewStudent(busID: busID, schoolID: schoolID, grade: grade, firstName: firstname, lastName: lastname))
+                try await addStudent(NewStudent(busId: busID, schoolId: schoolID, grade: grade, firstName: firstname, lastName: lastname))
             }
             studentAdded = true
         }

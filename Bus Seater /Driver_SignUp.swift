@@ -136,14 +136,14 @@ struct Driver_SignUp: View {
             DriverHomepage()
                 .onAppear() {
                     Task {
-                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolID: schoolID))
+                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolId: schoolID))
                         do {
                           let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                             try await addDriver(Driver(accountID: account.id, schoolID: schoolID, busID: bus))
                             let defaults = UserDefaults.standard
                             defaults.set(account.firstName, forKey: "firstName")
                             defaults.set(account.lastName, forKey: "lastName")
-                            defaults.set(account.schoolID, forKey: "schoolID")
+                            defaults.set(account.schoolId, forKey: "schoolID")
                             defaults.set(account.email, forKey: "email")
                             defaults.set(account.accountType, forKey: "accountType")
                             defaults.set(account.id, forKey: "accountID")

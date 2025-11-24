@@ -9,24 +9,24 @@ import Foundation
 
 struct Seat: Identifiable, Codable {
     let seatNumber: Int
-    let rowNumber: Int
+    let rowNum: Int
     let busID: Int
-    let studentID: Int?
+    let studentId: Int?
     let isOccupied: Bool
     
     var id: String {
-        "\(busID).\(rowNumber).\(seatNumber)"
+        "\(busID).\(rowNum).\(seatNumber)"
     }
 }
 
 struct NewSeat: Codable {
-    var busID: Int
-    var rowNumber: Int
+    var busId: Int
+    var rowNum: Int
     var seatNumber: Int
     
-    init(busID: Int, rowNumber: Int, seatNumber: Int) {
-        self.busID = busID
-        self.rowNumber = rowNumber
+    init(busId: Int, rowNum: Int, seatNumber: Int) {
+        self.busId = busId
+        self.rowNum = rowNum
         self.seatNumber = seatNumber
     }
     

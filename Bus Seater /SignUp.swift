@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SignUp: View {
-    @EnvironmentObject var appState: AppState
     
     var body: some View {
             ZStack {

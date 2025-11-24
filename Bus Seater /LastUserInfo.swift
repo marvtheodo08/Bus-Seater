@@ -13,7 +13,7 @@ struct Account: Codable {
     var lastName: String
     var email: String
     var accountType: String
-    var schoolID: Int
+    var schoolId: Int
 }
 
 class ObtainAccountInfo: ObservableObject {

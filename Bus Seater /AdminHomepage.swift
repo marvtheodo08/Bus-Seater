@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct AdminHomepage: View {
-    @State var userLoggingOut = false
     @State var fetchingBuses = true
     @State private var busSelected: Bus? = nil
     @State private var buses = [Bus]()
-    @EnvironmentObject var appState: AppState
     @EnvironmentObject var getBuses: GetBuses
     @EnvironmentObject var busActions: BusActions
     
@@ -53,9 +51,6 @@ struct AdminHomepage: View {
                             .padding(.bottom, 700)
                             .padding(.trailing, 250)
                             .font(.system(size: 20))
-                    }
-                    .fullScreenCover(isPresented: $userLoggingOut) {
-                        Login()
                     }
                 }
                 else {
@@ -116,9 +111,6 @@ struct AdminHomepage: View {
                         }
                         
                     }
-                    .fullScreenCover(isPresented: $userLoggingOut) {
-                        Login()
-                    }
                 }
                 
             }
@@ -151,8 +143,7 @@ struct AdminHomepage: View {
             }
         }
     }
-    func logout() {userLoggingOut = true
-        appState.isUserLoggedIn = false
+    func logout() {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")
@@ -160,7 +151,8 @@ struct AdminHomepage: View {
         defaults.removeObject(forKey: "email")
         defaults.removeObject(forKey: "accountType")
         defaults.removeObject(forKey: "accountID")
-        defaults.set(false, forKey: "WasUserLoggedIn")}
+        defaults.set(false, forKey: "WasUserLoggedIn")
+    }
 }
 
 #Preview {
