@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SchoolQuarter: Codable {
-    let schoolID: Int
+    let schoolId: Int
     let quarterNumber: Int
     let startDate: Date
     let endDate: Date
     
-    init(schoolID: Int, quarterNumber: Int, startDate: Date, endDate: Date) {
-        self.schoolID = schoolID
+    init(schoolId: Int, quarterNumber: Int, startDate: Date, endDate: Date) {
+        self.schoolId = schoolId
         self.quarterNumber = quarterNumber
         self.startDate = startDate
         self.endDate = endDate
