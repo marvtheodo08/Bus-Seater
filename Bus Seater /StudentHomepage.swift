@@ -10,6 +10,9 @@ import FirebaseMessaging
 
 struct StudentHomepage: View {
     
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @AppStorage("accountType") private var accountType = ""
+    
     var body: some View {
         ZStack{
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
@@ -21,6 +24,8 @@ struct StudentHomepage: View {
         }
     }
     func logout() {
+        WasUserLoggedIn = false
+        accountType = ""
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")

@@ -10,24 +10,25 @@ import Firebase
 import UserNotifications
 
 struct ContentView: View {
-    @EnvironmentObject var appState: AppState
     
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @AppStorage("accountType") private var accountType = ""
+
     var body: some View {
-        let defaults = UserDefaults.standard
-        if appState.isUserLoggedIn {
-            switch defaults.string(forKey: "accountType"){
-            case "admin":
-                AdminHomepage()
-            case "driver":
-                DriverHomepage()
-            default:
-                StudentHomepage()
+            if WasUserLoggedIn{
+                if accountType == "admin"{
+                    AdminHomepage()
+                }
+                else if accountType == "driver"{
+                    DriverHomepage()
+                }
+                else if accountType == "student"{
+                    StudentHomepage()
+                }
             }
-        }
-        else {
-            Login()
-        }
-        
+            else {
+                Login()
+            }
     }
     
 }

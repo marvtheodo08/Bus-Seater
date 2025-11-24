@@ -14,6 +14,8 @@ struct DriverHomepage: View {
     @State private var accountID: Int = 0
     @State private var busID: Int = 0
     @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @AppStorage("accountType") private var accountType: String = ""
     
     // 3 columns = 3 buses per row
     let columns = [
@@ -121,14 +123,14 @@ struct DriverHomepage: View {
         }
     }
     func logout() {
+        WasUserLoggedIn = false
+        accountType = ""
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")
         defaults.removeObject(forKey: "schoolID")
         defaults.removeObject(forKey: "email")
-        defaults.removeObject(forKey: "accountType")
-        defaults.removeObject(forKey: "accountID")
-        defaults.set(false, forKey: "WasUserLoggedIn")}
+        defaults.removeObject(forKey: "accountID")}
     @MainActor
     func fetchStudents(busID: Int) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/students?busID=\(busID)") else {

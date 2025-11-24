@@ -86,9 +86,10 @@ struct Login: View {
 struct LoggingUserIn: View {
     @Binding var email: String
     @Binding var userLoggingIn: Bool
-    @State private var accountType: String = ""
     @State private var type: AccountType? = nil
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @AppStorage("accountType") private var accountType = ""
     
     var body: some View {
         VStack {
@@ -100,16 +101,16 @@ struct LoggingUserIn: View {
         .onAppear{
             Task {
                 do {
+                    WasUserLoggedIn = true
                     let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                    accountType = account.accountType
                     let defaults = UserDefaults.standard
                     defaults.set(account.firstName, forKey: "firstName")
                     defaults.set(account.lastName, forKey: "lastName")
                     defaults.set(account.schoolId, forKey: "schoolID")
                     defaults.set(account.email, forKey: "email")
-                    defaults.set(account.accountType, forKey: "accountType")
-                    defaults.set(account.id, forKey: "accountID")
-                    defaults.set(true, forKey: "WasUserLoggedIn")
                     accountType = account.accountType
+                    defaults.set(account.id, forKey: "accountID")
                 }
                 catch {
                     print("Failed to fetch obtain account info: \(error)")

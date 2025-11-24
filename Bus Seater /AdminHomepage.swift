@@ -13,6 +13,8 @@ struct AdminHomepage: View {
     @State private var buses = [Bus]()
     @EnvironmentObject var getBuses: GetBuses
     @EnvironmentObject var busActions: BusActions
+    @AppStorage("accountType") private var accountType: String = ""
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
     
     // 3 columns = 3 buses per row
     // Columns suggusted by ChatGPT
@@ -144,14 +146,14 @@ struct AdminHomepage: View {
         }
     }
     func logout() {
+        WasUserLoggedIn = false
+        accountType = ""
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "firstName")
         defaults.removeObject(forKey: "lastName")
         defaults.removeObject(forKey: "schoolID")
         defaults.removeObject(forKey: "email")
-        defaults.removeObject(forKey: "accountType")
         defaults.removeObject(forKey: "accountID")
-        defaults.set(false, forKey: "WasUserLoggedIn")
     }
 }
 
