@@ -8,7 +8,6 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
-import FirebaseMessaging
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -36,6 +35,8 @@ struct YourApp: App {
   @StateObject private var obtainbusIDfromAccount = ObtainBusIDfromAccount()
   @StateObject private var getSeats = GetSeats()
   @StateObject private var studentAssignment = StudentAssignment()
+  @StateObject private var logout = Logout()
+  @StateObject private var getUserToken = GetUserToken()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -52,6 +53,8 @@ struct YourApp: App {
       .environmentObject(obtainbusIDfromAccount)
       .environmentObject(getSeats)
       .environmentObject(studentAssignment)
+      .environmentObject(logout)
+      .environmentObject(getUserToken)
     }
   }
 }

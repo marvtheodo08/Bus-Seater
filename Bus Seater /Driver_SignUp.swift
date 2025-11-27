@@ -13,23 +13,16 @@ import FirebaseAuth
 struct Driver_SignUp: View {
     
     // Defining Driver struct for JSON function
-    struct Driver: Codable {
-        var accountID: Int
-        var schoolID: Int
-        var busID: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case accountID = "account_id"
-            case schoolID = "school_id"
-            case busID = "bus_id"
+    
+    struct NewDriver: Codable{
+        let accountId: Int
+        let schoolId: Int
+        let busId: Int
+        init(accountId: Int, schoolId: Int, busId: Int) {
+            self.accountId = accountId
+            self.schoolId = schoolId
+            self.busId = busId
         }
-        
-        init(accountID: Int, schoolID: Int, busID: Int) {
-            self.accountID = accountID
-            self.schoolID = schoolID
-            self.busID = busID
-        }
-        
     }
     
     // Enum suggested by ChatGPT
@@ -77,6 +70,8 @@ struct Driver_SignUp: View {
     @State private var bus: Int = 0
     @EnvironmentObject var newAccount: NewAccount
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @AppStorage("accountType") private var accountType = ""
     
     var body: some View {
         ZStack {
@@ -132,31 +127,29 @@ struct Driver_SignUp: View {
             }
             .padding(.bottom, 250)
         }
-        .fullScreenCover(isPresented: $isVerified) {
-            DriverHomepage()
-                .onAppear() {
-                    Task {
-                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolId: schoolID))
-                        do {
-                          let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
-                            try await addDriver(Driver(accountID: account.id, schoolID: schoolID, busID: bus))
-                            let defaults = UserDefaults.standard
-                            defaults.set(account.firstName, forKey: "firstName")
-                            defaults.set(account.lastName, forKey: "lastName")
-                            defaults.set(account.schoolId, forKey: "schoolID")
-                            defaults.set(account.email, forKey: "email")
-                            defaults.set(account.accountType, forKey: "accountType")
-                            defaults.set(account.id, forKey: "accountID")
-                            defaults.set(true, forKey: "WasUserLoggedIn")
-                        }
-                        catch {
-                            print("Failed to fetch account info: \(error)")
-                        }
+        .onChange(of: isVerified){ oldValue, newValue in
+            if newValue {
+                Task {
+                    try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolId: schoolID))
+                    do {
+                        let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                        try await addDriver(NewDriver(accountId: account.id, schoolId: schoolID, busId: bus))
+                        let defaults = UserDefaults.standard
+                        defaults.set(account.firstName, forKey: "firstName")
+                        defaults.set(account.lastName, forKey: "lastName")
+                        defaults.set(account.schoolId, forKey: "schoolID")
+                        defaults.set(account.email, forKey: "email")
+                        defaults.set(account.id, forKey: "accountID")
+                        accountType = account.accountType
+                        WasUserLoggedIn = true
+                    }
+                    catch {
+                        print("Failed to fetch account info: \(error)")
                     }
                 }
+            }
         }
     }
-    
     func goBack() {
         switch currentStage {
         case .password: currentStage = .email
@@ -182,14 +175,16 @@ struct Driver_SignUp: View {
         }
     }
     
-    func addDriver(_ driver: Driver) async throws {
+    func addDriver(_ driver: NewDriver) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/driver/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            request.httpBody = try JSONEncoder().encode(driver)
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(driver)
         } catch {
             print("Failed to encode parameters: \(error)")
         }
@@ -231,7 +226,6 @@ struct Driver_SignUp: View {
             }
         }
     }
-    
 }
 
 // Email stage view

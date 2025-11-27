@@ -13,6 +13,14 @@ struct Bus: Identifiable, Codable {
     let busCode: String
     let schoolId: Int
     let rowAmount: Int
+    
+    init(id: Int, seatCount: Int, busCode: String, schoolId: Int, rowAmount: Int) {
+        self.id = id
+        self.seatCount = seatCount
+        self.busCode = busCode
+        self.schoolId = schoolId
+        self.rowAmount = rowAmount
+    }
 }
 
 struct BusID: Codable {

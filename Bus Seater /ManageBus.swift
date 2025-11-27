@@ -10,6 +10,7 @@ import SwiftUI
 struct ManageBus: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var busActions: BusActions
+    @EnvironmentObject var getUserToken: GetUserToken
     var bus: Bus? = nil
     @State private var doubleCheck = false
     var body: some View {
@@ -23,13 +24,12 @@ struct ManageBus: View {
                 Button("Yes", role: .destructive) {
                     Task {
                         do {
-                            try await deleteBus(id: bus?.id ?? 0)
+                            try await deleteBus(bus: bus!)
+                            dismiss()
                         } catch {
                             print("Error deleting bus: \(error)")
                         }
                         busActions.busDeleted = true
-                        dismiss()
-                        
                     }
                 }
                 Button("Cancel", role: .cancel) { }
@@ -47,13 +47,20 @@ struct ManageBus: View {
         }
             
     }
-    func deleteBus(id: Int) async throws {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/delete/bus/\(id)") else {
+    func deleteBus(bus: Bus) async throws {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/deleteBus?id=\(bus.id)") else {
             throw URLError(.badURL)
         }
+        
+
+        let token = try await getUserToken.getUserToken()
 
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
+
+        // 2. Set headers
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {

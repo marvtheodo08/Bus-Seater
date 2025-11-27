@@ -44,6 +44,8 @@
 		7E8D2DB42ECE765C0087458F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 7E8D2DB32ECE765C0087458F /* FirebaseMessaging */; };
 		7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */; };
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
+		7EECFD8C2ED6772800D789B2 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECFD8B2ED6772800D789B2 /* Logout.swift */; };
+		7EECFD902ED79F4200D789B2 /* GetUserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECFD8F2ED79F4200D789B2 /* GetUserToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		7E8C659A2E5BBE1600058C07 /* BusActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusActions.swift; sourceTree = "<group>"; };
 		7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolBreaks.swift; sourceTree = "<group>"; };
 		7EABE03A2D68F4B000C00697 /* NewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccount.swift; sourceTree = "<group>"; };
+		7EECFD8B2ED6772800D789B2 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
+		7EECFD8F2ED79F4200D789B2 /* GetUserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 				7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */,
 				7E8C659A2E5BBE1600058C07 /* BusActions.swift */,
 				7E69B36A2EB44EA400BB70CD /* BusRows.swift */,
+				7EECFD8F2ED79F4200D789B2 /* GetUserToken.swift */,
+				7EECFD8B2ED6772800D789B2 /* Logout.swift */,
 				7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */,
 				0C5608162C25AA7C00828882 /* ContentView.swift */,
 				0C7B42772C527417000ADE5F /* Driver_SignUp.swift */,
@@ -369,9 +375,11 @@
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
 				0C75DB272C70BE70005247BC /* Driver_SignUp.swift in Sources */,
+				7EECFD8C2ED6772800D789B2 /* Logout.swift in Sources */,
 				7E69B36B2EB44EA400BB70CD /* BusRows.swift in Sources */,
 				7E39E9322E9D4A2E00D51EE9 /* StudentAssignment.swift in Sources */,
 				0C5F17072CCB1F5D00C62695 /* LastUserInfo.swift in Sources */,
+				7EECFD902ED79F4200D789B2 /* GetUserToken.swift in Sources */,
 				7E6CD6D62ED13AF5009EC2B0 /* SeatSelectionCheck.swift in Sources */,
 				7E7EEDCA2E63A9EE0019134D /* AssignStudent.swift in Sources */,
 				7E5C52002E5CCCBA003CD5D6 /* AddStudent.swift in Sources */,

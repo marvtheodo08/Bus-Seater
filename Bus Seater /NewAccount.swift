@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 class NewAccount: ObservableObject {
     
@@ -29,9 +30,11 @@ class NewAccount: ObservableObject {
     //Function prompted by ChatGPT
     func addAccount(_ account: Account) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/account/create/") else { fatalError("Invalid URL") }
+        let token = try await getUserToken()
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         do {
             let encoder = JSONEncoder()
@@ -46,5 +49,13 @@ class NewAccount: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
+    }
+    func getUserToken() async throws -> String{
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.userAuthenticationRequired)
+        }
+
+        let token = try await user.getIDTokenResult(forcingRefresh: false).token
+        return token
     }
 }

@@ -13,8 +13,7 @@ struct AdminHomepage: View {
     @State private var buses = [Bus]()
     @EnvironmentObject var getBuses: GetBuses
     @EnvironmentObject var busActions: BusActions
-    @AppStorage("accountType") private var accountType: String = ""
-    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @EnvironmentObject var logout: Logout
     
     // 3 columns = 3 buses per row
     // Columns suggusted by ChatGPT
@@ -44,7 +43,7 @@ struct AdminHomepage: View {
                         Text("Add your buses here.")
                             .foregroundStyle(.black)
                             .padding(.top, 120)
-                        Button(action: {logout()}, label: {Text("Logout")})
+                        Button(action: {logout.logout()}, label: {Text("Logout")})
                         .foregroundStyle(.black)
                         .padding(.bottom, 700)
                         .padding(.leading, 250)
@@ -57,7 +56,7 @@ struct AdminHomepage: View {
                 }
                 else {
                     ZStack{
-                        Button(action: {logout()}, label: {Text("Logout")})
+                        Button(action: {logout.logout()}, label: {Text("Logout")})
                         .foregroundStyle(.black)
                         .padding(.bottom, 700)
                         .padding(.leading, 250)
@@ -144,16 +143,6 @@ struct AdminHomepage: View {
                 }
             }
         }
-    }
-    func logout() {
-        WasUserLoggedIn = false
-        accountType = ""
-        let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "firstName")
-        defaults.removeObject(forKey: "lastName")
-        defaults.removeObject(forKey: "schoolID")
-        defaults.removeObject(forKey: "email")
-        defaults.removeObject(forKey: "accountID")
     }
 }
 

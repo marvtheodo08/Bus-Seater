@@ -60,6 +60,8 @@ struct Student_SignUp: View {
     @State private var busID: Int = 0
     @EnvironmentObject var newAccount: NewAccount
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
+    @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
+    @AppStorage("accountType") private var accountType = ""
     
     var body: some View {
         ZStack {
@@ -120,27 +122,26 @@ struct Student_SignUp: View {
             }
             .padding(.bottom, 250)
         }
-        .fullScreenCover(isPresented: $isEmailVerified) {
-            StudentHomepage()
-                .onAppear() {
-                    Task {
-                        try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "student", schoolId: schoolID))
-                        do {
-                          let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
-                            let defaults = UserDefaults.standard
-                            defaults.set(account.firstName, forKey: "firstName")
-                            defaults.set(account.lastName, forKey: "lastName")
-                            defaults.set(account.schoolId, forKey: "schoolID")
-                            defaults.set(account.email, forKey: "email")
-                            defaults.set(account.accountType, forKey: "accountType")
-                            defaults.set(account.id, forKey: "accountID")
-                            defaults.set(true, forKey: "WasUserLoggedIn")
-                        }
-                        catch {
-                            print("Failed to fetch account info: \(error)")
-                        }
+        .onChange(of: isEmailVerified){ oldValue, newValue in
+            if newValue {
+                Task {
+                    try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "student", schoolId: schoolID))
+                    do {
+                      let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                        let defaults = UserDefaults.standard
+                        defaults.set(account.firstName, forKey: "firstName")
+                        defaults.set(account.lastName, forKey: "lastName")
+                        defaults.set(account.schoolId, forKey: "schoolID")
+                        defaults.set(account.email, forKey: "email")
+                        defaults.set(account.id, forKey: "accountID")
+                        accountType = account.accountType
+                        WasUserLoggedIn = true
+                    }
+                    catch {
+                        print("Failed to fetch account info: \(error)")
                     }
                 }
+            }
         }
 
     }
