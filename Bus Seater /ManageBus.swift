@@ -14,9 +14,14 @@ struct ManageBus: View {
     var bus: Bus? = nil
     @State private var doubleCheck = false
     var body: some View {
-        ZStack(alignment: .topTrailing){
+        ZStack{
             VStack
             {
+                NavigationLink(destination: ViewStudents(bus: bus)){
+                    Text("View Students")
+                        .foregroundStyle(.black)
+                        .padding()
+                }
                 Button(action: {doubleCheck = true} , label: {Text("Delete Bus")
                     .foregroundStyle(.red)})
             }
@@ -36,16 +41,14 @@ struct ManageBus: View {
             } message: {
                 Text("This action cannot be undone.")
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white)
             Button(action: {dismiss()}, label: {
                 Image(systemName: "xmark")
                     .foregroundStyle(.black)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
             })
-
+            .padding(.bottom, 700)
+            .padding(.leading, 310)
         }
-            
     }
     func deleteBus(bus: Bus) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/deleteBus?id=\(bus.id)") else {

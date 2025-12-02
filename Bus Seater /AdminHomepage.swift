@@ -80,8 +80,10 @@ struct AdminHomepage: View {
                                             .padding(25)
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                                         })
-                                        .sheet(item: $busSelected) {
-                                            bus in ManageBus(bus: bus)
+                                        .sheet(item: $busSelected) {bus in
+                                            NavigationStack {
+                                                ManageBus(bus: bus)
+                                            }
                                         }
                                     }
                                     // ➕ Add Bus button after all buses

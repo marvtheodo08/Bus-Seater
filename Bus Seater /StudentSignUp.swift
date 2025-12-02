@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 import FirebaseAuth
 
-struct Student_SignUp: View {
+struct StudentSignUp: View {
     
     // Enum suggested by ChatGPT
     // Enum for tracking the stages
@@ -545,5 +545,5 @@ struct StudentVerification: View {
 }
 
 #Preview {
-    Student_SignUp()
+    StudentSignUp()
 }

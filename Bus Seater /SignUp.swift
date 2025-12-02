@@ -18,7 +18,7 @@ struct SignUp: View {
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         .padding(.bottom, 300)
                     HStack{
-                        NavigationLink(destination: Admin_SignUp()) {
+                        NavigationLink(destination: AdminSignUp()) {
                             VStack{
                                 Image(systemName: "clipboard")
                                 Text("Admin")
@@ -33,7 +33,7 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        NavigationLink(destination: Driver_SignUp()) {
+                        NavigationLink(destination: DriverSignUp()) {
                             VStack{
                                 Image(systemName: "bus")
                                 Text("Driver")
@@ -48,7 +48,7 @@ struct SignUp: View {
                         Spacer()
                             .frame(width: 30)
                         
-                        NavigationLink(destination: Student_SignUp()) {
+                        NavigationLink(destination: StudentSignUp()) {
                             VStack{
                                 Image(systemName: "studentdesk")
                                 Text("Student")

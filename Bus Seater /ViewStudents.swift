@@ -1,19 +1,19 @@
 //
-//  DriverHomepage.swift
+//  ViewStudents.swift
 //  Bus Seater 1
 //
-//  Created by Marvheen Theodore on 10/24/24.
+//  Created by Marvheen Theodore on 12/1/25.
 //
 
 import SwiftUI
 
-struct DriverHomepage: View {
+struct ViewStudents: View {
+    @Environment(\.dismiss) var dismiss
     @State private var studentSelected: Student? = nil
     @State private var students = [Student]()
     @State var fetchingStudents = true
-    @State private var accountID: Int = 0
     @State private var busID: Int = 0
-    @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
+    var bus: Bus? = nil
     @EnvironmentObject var logout: Logout
     
     // 3 columns = 3 buses per row
@@ -34,31 +34,33 @@ struct DriverHomepage: View {
             else {
                 if students.isEmpty {
                     ZStack{
-                        Text("No students for your bus yet. Check back later.")
+                        NavigationLink(destination: AddStudent()){
+                            Image(systemName: "plus")
+                                .foregroundStyle(.gray)
+                                .font(.system(size: 50))
+                        }
+                        Text("Add your students here.")
                             .foregroundStyle(.black)
                             .padding(.top, 120)
-                        Button(action: {logout.logout()}, label: {Text("Logout")})
-                        .foregroundStyle(.black)
+                        Button(action: {dismiss()}, label: {
+                            Image(systemName: "xmark")
+                                .foregroundStyle(.black)
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        })
                         .padding(.bottom, 700)
-                        .padding(.leading, 250)
-                        Button(action: {}, label: {Image(systemName: "gearshape.fill")})
-                            .foregroundStyle(.gray)
-                            .padding(.bottom, 700)
-                            .padding(.trailing, 250)
-                            .font(.system(size: 20))
+                        .padding(.leading, 310)
+                        
                     }
                 }
                 else {
                     ZStack{
-                        Button(action: {logout.logout()}, label: {Text("Logout")})
-                        .foregroundStyle(.black)
+                        Button(action: {dismiss()}, label: {
+                            Image(systemName: "xmark")
+                                .foregroundStyle(.black)
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        })
                         .padding(.bottom, 700)
-                        .padding(.leading, 250)
-                        Button(action: {}, label: {Image(systemName: "gearshape.fill")})
-                            .foregroundStyle(.gray)
-                            .padding(.bottom, 700)
-                            .padding(.trailing, 250)
-                            .font(.system(size: 20))
+                        .padding(.leading, 310)
                         VStack(alignment: .leading) {
                             ScrollView{
                                 LazyVGrid(columns: columns, spacing: 16) {
@@ -80,6 +82,15 @@ struct DriverHomepage: View {
                                             student in AssignStudent(student: student)
                                         }
                                     }
+                                    NavigationLink(destination: AddStudent()){
+                                        VStack{
+                                            Image(systemName: "plus")
+                                                .foregroundStyle(.gray)
+                                                .font(.system(size: 40))
+                                            Text("Add more students")
+                                                .foregroundStyle(.black)
+                                        }
+                                    }
                                     
                                 }
                                 .padding()
@@ -87,19 +98,16 @@ struct DriverHomepage: View {
                             .padding(.top, 50)
 
                         }
-                        
                     }
                 }
                 
             }
         }
         .onAppear{
-            accountID = UserDefaults.standard.integer(forKey: "accountID")
             Task{
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
-                    busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: accountID)
-                    try await fetchStudents(busID: busID)
+                    try await fetchStudents(busID: bus?.id ?? 0)
                 } catch {
                     print("Failed to fetch students: \(error)")
                 }
@@ -119,14 +127,17 @@ struct DriverHomepage: View {
             throw URLError(.badServerResponse)
         }
         
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
         print("Status code: \(httpResponse.statusCode)")
         
-        let fetchedstudents = try JSONDecoder().decode([Student].self, from: data)
-        print(fetchedstudents)
+        let fetchedstudents = try decoder.decode([Student].self, from: data)
+        
         students = fetchedstudents
     }
 }
 
 #Preview {
-    DriverHomepage()
+    ViewStudents()
 }

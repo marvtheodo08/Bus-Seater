@@ -1,29 +1,15 @@
 //
-//  Driver_SignUp.swift
-//  Bus Seater
+//  Admin_SignUp.swift
+//  Bus Seater 1
 //
-//  Created by Marvheen Theodore on 7/25/24.
+//  Created by Marvheen Theodore on 8/21/24.
 //
 
 import SwiftUI
 import Foundation
 import FirebaseAuth
 
-
-struct Driver_SignUp: View {
-    
-    // Defining Driver struct for JSON function
-    
-    struct NewDriver: Codable{
-        let accountId: Int
-        let schoolId: Int
-        let busId: Int
-        init(accountId: Int, schoolId: Int, busId: Int) {
-            self.accountId = accountId
-            self.schoolId = schoolId
-            self.busId = busId
-        }
-    }
+struct AdminSignUp: View {
     
     // Enum suggested by ChatGPT
     // Enum for tracking the stages
@@ -34,32 +20,11 @@ struct Driver_SignUp: View {
         case state
         case municipality
         case school
-        case bus
         case verification
     }
     
-    class Account: Codable, ObservableObject {
-        var firstName: String
-        var lastName: String
-        var email: String
-        var accountType: String
-        var schoolID: Int
-        
-        enum CodingKeys: String, CodingKey {
-            case firstName = "first_name"
-            case lastName = "last_name"
-            case email
-            case accountType = "account_type"
-            case schoolID = "school_id"
-        }
-        
-    }
-    
-    // Track current stage
-    @State private var currentStage: Stage = .email
-    
-    // Shared variables across views
     @State private var isVerified: Bool = false
+    @State private var currentStage: Stage = .email
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var firstname: String = ""
@@ -67,7 +32,6 @@ struct Driver_SignUp: View {
     @State private var state: String = ""
     @State private var municipality: String = ""
     @State private var schoolID: Int = 0
-    @State private var bus: Int = 0
     @EnvironmentObject var newAccount: NewAccount
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
     @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
@@ -75,30 +39,26 @@ struct Driver_SignUp: View {
     
     var body: some View {
         ZStack {
-            
             VStack {
                 Spacer()
                 
                 // Display the current stage view
                 switch currentStage {
                 case .email:
-                    DriverEmail(email: $email)
+                    AdminEmail(email: $email)
                 case .password:
-                    DriverPassword(password: $password)
+                    AdminPassword(password: $password)
                 case .name:
-                    DriverName(firstname: $firstname, lastname: $lastname)
+                    AdminName(firstname: $firstname, lastname: $lastname)
                 case .state:
-                    DriverState(state: $state)
+                    AdminState(state: $state)
                 case .municipality:
-                    DriverMunicipality(municipality: $municipality)
+                    AdminMunicipality(municipality: $municipality)
                 case .school:
-                    DriverSchool(schoolID: $schoolID, state: $state, municipality: $municipality)
-                case .bus:
-                    DriverBus(bus: $bus, schoolID: $schoolID)
+                    AdminSchool(schoolID: $schoolID, state: $state, municipality: $municipality)
                 case .verification:
-                    DriverVerification(isVerified: $isVerified, firstname: $firstname, lastname: $lastname, email: $email, schoolID: $schoolID)
+                    AdminVerification(isVerified: $isVerified, firstname: $firstname, lastname: $lastname, email: $email, schoolID: $schoolID)
                 }
-                
                 
                 // Navigation Buttons sugguested by ChatGPT
                 HStack {
@@ -110,14 +70,14 @@ struct Driver_SignUp: View {
                         }
                     }
                     Spacer()
-                    if currentStage != .bus {
+                    if currentStage != .school {
                         Button(action: { goNext() }) {
                             Image(systemName: "arrow.right")
                                 .padding()
                                 .foregroundStyle(.blue)
                         }
                     }
-                    else if currentStage == .bus {
+                    else if currentStage == .school {
                         Button(action: {emailVerification(email: email, password: password, firstname: firstname)}, label: {Text("Create Account")
                                 .foregroundStyle(.black)
                         })
@@ -127,20 +87,19 @@ struct Driver_SignUp: View {
             }
             .padding(.bottom, 250)
         }
-        .onChange(of: isVerified){ oldValue, newValue in
+        .onChange(of: isVerified) { oldValue, newValue in
             if newValue {
                 Task {
-                    try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "driver", schoolId: schoolID))
+                    try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "admin", schoolId: schoolID))
                     do {
-                        let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
-                        try await addDriver(NewDriver(accountId: account.id, schoolId: schoolID, busId: bus))
+                      let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                         let defaults = UserDefaults.standard
                         defaults.set(account.firstName, forKey: "firstName")
                         defaults.set(account.lastName, forKey: "lastName")
                         defaults.set(account.schoolId, forKey: "schoolID")
                         defaults.set(account.email, forKey: "email")
                         defaults.set(account.id, forKey: "accountID")
-                        accountType = account.accountType
+                        accountType = "admin"
                         WasUserLoggedIn = true
                     }
                     catch {
@@ -150,6 +109,9 @@ struct Driver_SignUp: View {
             }
         }
     }
+    
+    
+    
     func goBack() {
         switch currentStage {
         case .password: currentStage = .email
@@ -157,8 +119,7 @@ struct Driver_SignUp: View {
         case .state: currentStage = .name
         case .municipality: currentStage = .state
         case .school: currentStage = .municipality
-        case .bus: currentStage = .school
-        case .verification: currentStage = .bus
+        case .verification: currentStage = .school
         default: break
         }
     }
@@ -170,58 +131,33 @@ struct Driver_SignUp: View {
         case .name: currentStage = .state
         case .state: currentStage = .municipality
         case .municipality: currentStage = .school
-        case .school: currentStage = .bus
         default: break
         }
     }
     
-    func addDriver(_ driver: NewDriver) async throws {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/driver/create/") else { fatalError("Invalid URL") }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            let encoder = JSONEncoder()
-            encoder.keyEncodingStrategy = .convertToSnakeCase
-            request.httpBody = try encoder.encode(driver)
-        } catch {
-            print("Failed to encode parameters: \(error)")
-        }
-        
-        let (_, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
-            throw URLError(.badServerResponse)
-        }
-        
-    }
-    
+    // Firebase email verification function (moved outside of the body)
     func emailVerification(email: String, password: String, firstname: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error signing up:", error)
+                print("Error signing up:", error.localizedDescription)
                 return
             }
             
             guard let user = authResult?.user else { return }
-            
-            // Update display name
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = firstname
             changeRequest.commitChanges { error in
                 if let error = error {
                     print("Error updating display name:", error)
                 } else {
-                    // Send verification email after updating display name
                     user.sendEmailVerification { error in
                         if let error = error {
-                            print("Error sending verification email:", error)
+                            print("Error sending verification email:", error.localizedDescription)
                         } else {
                             print("Verification email sent with display name:", firstname)
                             currentStage = .verification
                         }
                     }
-                    
                 }
             }
         }
@@ -229,12 +165,12 @@ struct Driver_SignUp: View {
 }
 
 // Email stage view
-struct DriverEmail: View {
+struct AdminEmail: View {
     @Binding var email: String
     
     var body: some View {
         VStack {
-            Text("What is your email address?")
+            Text("What is your admin email address?")
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .foregroundStyle(.black)
@@ -245,14 +181,13 @@ struct DriverEmail: View {
                 .textContentType(.emailAddress)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
 }
 
 // Password stage view
-struct DriverPassword: View {
+struct AdminPassword: View {
     @Binding var password: String
     
     var body: some View {
@@ -266,14 +201,13 @@ struct DriverPassword: View {
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
 }
 
 // Name stage view
-struct DriverName: View {
+struct AdminName: View {
     @Binding var firstname: String
     @Binding var lastname: String
     
@@ -288,19 +222,17 @@ struct DriverName: View {
             TextField("First name", text: $firstname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
             
             TextField("Last name", text: $lastname)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(3))
-                .accentColor(.black)
         }
         .padding()
     }
 }
 
 // State stage View
-struct DriverState: View {
+struct AdminState: View {
     @Binding var state: String
     
     let states = [
@@ -332,7 +264,7 @@ struct DriverState: View {
 }
 
 // Municipality stage View
-struct DriverMunicipality: View {
+struct AdminMunicipality: View {
     @Binding var municipality: String
     
     var body: some View {
@@ -354,7 +286,7 @@ struct DriverMunicipality: View {
 }
 
 // School stage View
-struct DriverSchool: View {
+struct AdminSchool: View {
     @Binding var schoolID: Int
     @Binding var state: String
     @Binding var municipality: String
@@ -373,7 +305,7 @@ struct DriverSchool: View {
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
                 } else {
-                    Text("What school do you drive for?")
+                    Text("What school are you administrator of?")
                         .multilineTextAlignment(.center)
                         .font(.title)
                         .foregroundStyle(.black)
@@ -384,6 +316,7 @@ struct DriverSchool: View {
                             Text("\(school.schoolName), \(school.municipality)").tag(school.id)
                         }
                     }
+                    
                 }
             }
         }
@@ -396,63 +329,12 @@ struct DriverSchool: View {
                     print("Failed to fetch schools: \(error)")
                 }
                 loading = false
-                
             }
         }
     }
 }
 
-
-// Bus stage View
-struct DriverBus: View {
-    @Binding var bus: Int
-    @Binding var schoolID: Int
-    @EnvironmentObject var getBuses: GetBuses
-    @State var loading: Bool = true
-    @State private var buses = [Bus]()
-    
-    var body: some View {
-        VStack {
-            if loading {
-                ProgressView("Loading available buses...")
-                    .multilineTextAlignment(.center)
-            } else {
-                if buses.isEmpty {
-                    Text("No buses available for this school yet, please check back later.")
-                        .foregroundStyle(.black)
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text("What bus do you drive?")
-                        .multilineTextAlignment(.center)
-                        .font(.title)
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 50)
-                    
-                    Picker("Select a bus", selection: $bus) {
-                        ForEach(buses, id: \.id) { bus in
-                            Text("\(bus.busCode)").tag(bus.id)
-                        }
-                    }
-                }
-            }
-        }
-        .onAppear {
-            Task {
-                do {
-                    loading = true
-                    buses = try await getBuses.fetchBuses(schoolID: schoolID)
-                } catch {
-                    print("Failed to fetch schools: \(error)")
-                }
-                loading = false
-                
-            }
-        }
-    }
-
-}
-
-struct DriverVerification: View {
+struct AdminVerification: View {
     @Binding var isVerified: Bool
     @State private var pollingTimer: Timer? = nil
     @Binding var firstname: String
@@ -472,7 +354,7 @@ struct DriverVerification: View {
         }
     }
     
-    //Function created by ChatGPT
+    // Function created by ChatGPT
     func startPolling() {
         pollingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             guard let user = Auth.auth().currentUser else { return }
@@ -495,5 +377,5 @@ struct DriverVerification: View {
 }
 
 #Preview {
-    Driver_SignUp()
+    AdminSignUp()
 }
