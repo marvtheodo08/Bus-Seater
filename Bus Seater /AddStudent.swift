@@ -163,7 +163,7 @@ struct AddingStudent: View {
         }
     }
     func addStudent(_ student: NewStudent) async throws {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/student/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/student/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

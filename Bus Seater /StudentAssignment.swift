@@ -11,7 +11,7 @@ class StudentAssignment: ObservableObject {
     
     func assignStudent(seat: Seat, studentID: Int) async throws {
         
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/updateSeatTrue?busID=\(seat.busID)&rowNumber=\(seat.rowNum)&seatNumber=\(seat.seatNumber)&studentID=\(studentID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/updateSeatTrue?busID=\(seat.busID)&rowNumber=\(seat.rowNum)&seatNumber=\(seat.seatNumber)&studentID=\(studentID)") else {
             throw URLError(.badURL)
         }
 
@@ -30,7 +30,7 @@ class StudentAssignment: ObservableObject {
     }
     
     func unassignStudent(seat: Seat) async throws {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/updateSeatFalse?busID=\(seat.busID)&rowNumber=\(seat.rowNum)&seatNumber=\(seat.seatNumber)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/updateSeatFalse?busID=\(seat.busID)&rowNumber=\(seat.rowNum)&seatNumber=\(seat.seatNumber)") else {
             throw URLError(.badURL)
         }
 

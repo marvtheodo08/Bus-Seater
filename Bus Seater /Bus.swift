@@ -44,7 +44,7 @@ struct NewBus: Codable {
 
 class ObtainBusIDfromAccount: ObservableObject {
     func obtainBusIDfromAccountID(accountID: Int) async throws -> Int {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/driverBusID?accountID=\(accountID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/driverBusID?accountID=\(accountID)") else {
             throw URLError(.badURL)
         }
         
@@ -65,7 +65,7 @@ class ObtainBusIDfromAccount: ObservableObject {
 
 class ObtainBusInfo: ObservableObject {
     func obtainBusInfo(id: Int) async throws -> Bus {
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/busInfo?id=\(id)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/busInfo?id=\(id)") else {
             throw URLError(.badURL)
         }
         
@@ -86,7 +86,7 @@ class ObtainBusInfo: ObservableObject {
 class ObtainBusID: ObservableObject {
     @MainActor
     func obtainBusID(bus_code: String, school_id: Int) async throws -> Int{
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/bus?schoolID=\(school_id)&busCode=\(bus_code)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/bus?schoolID=\(school_id)&busCode=\(bus_code)") else {
             throw URLError(.badURL)
         }
         
@@ -105,7 +105,7 @@ class ObtainBusID: ObservableObject {
 
 class GetBuses: ObservableObject {
     func fetchBuses(schoolID: Int) async throws -> [Bus]{
-        guard let url = URL(string: "https://bus-seater-api.onrender.com/buses?schoolID=\(schoolID)") else {
+        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/buses?schoolID=\(schoolID)") else {
             throw URLError(.badURL)
         }
         
