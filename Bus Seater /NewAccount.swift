@@ -29,7 +29,7 @@ class NewAccount: ObservableObject {
     
     //Function prompted by ChatGPT
     func addAccount(_ account: Account) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/account/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/account/create/") else { fatalError("Invalid URL") }
         let token = try await getUserToken()
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

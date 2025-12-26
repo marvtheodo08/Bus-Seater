@@ -79,7 +79,7 @@ struct ViewStudents: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                                         })
                                         .sheet(item: $studentSelected) {
-                                            student in AssignStudent(student: student)
+                                            student in SeatSelection(student: student)
                                         }
                                     }
                                     NavigationLink(destination: AddStudent()){
@@ -117,7 +117,7 @@ struct ViewStudents: View {
     }
     @MainActor
     func fetchStudents(busID: Int) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/students?busID=\(busID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/students?busID=\(busID)") else {
             throw URLError(.badURL)
         }
         

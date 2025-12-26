@@ -189,7 +189,7 @@ struct AddingBreak: View {
         }
     }
     func addBreak(_ schoolBreak: SchoolBreak) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/break/create/") else { throw URLError(.badURL) }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/break/create/") else { throw URLError(.badURL) }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

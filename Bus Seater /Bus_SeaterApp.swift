@@ -37,6 +37,7 @@ struct YourApp: App {
   @StateObject private var studentAssignment = StudentAssignment()
   @StateObject private var logout = Logout()
   @StateObject private var getUserToken = GetUserToken()
+  @StateObject private var getStudentFromID = GetStudentFromID()
   var body: some Scene {
     WindowGroup {
       NavigationView {
@@ -55,6 +56,7 @@ struct YourApp: App {
       .environmentObject(studentAssignment)
       .environmentObject(logout)
       .environmentObject(getUserToken)
+      .environmentObject(getStudentFromID)
     }
   }
 }

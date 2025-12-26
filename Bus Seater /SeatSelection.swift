@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct AssignStudent: View {
+struct SeatSelection: View {
     var student: Student? = nil
     @EnvironmentObject var obtainBusInfo: ObtainBusInfo
     @EnvironmentObject var getSeats: GetSeats
     @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
-    @State private var driverInfo: Driver? = nil
     @State private var busInfo: Bus? = nil
     @State private var busID: Int = 0
+    @State private var accountType: String = ""
     @State var loadingSeats = true
     @State private var rowNum: Int = 0
     @State private var seatNum: Int = 0
     @State private var seats = [Seat]()
-    @State private var assignmentConfirm = false
+    @State private var selectionConfirm = false
     @State private var selectedSeat: Seat? = nil
 
     
@@ -54,26 +54,31 @@ struct AssignStudent: View {
                         Text("Legend")
                             .bold()
                             .font(.system(size: 30))
-                        Text("C: Current Seat of selected student")
+                        if accountType == "driver"{
+                          Text("C: Current seat of selected student")
+                        }
+                        else{
+                            Text("C: Your current seat")
+                        }
                         Text("X: Unavailable Seat")
                         LazyVGrid(columns: columns, spacing: 16) {
                             // Seat formatting suggested by ChatGPT
                             ForEach(1...rowNum, id: \.self) { row in
                                 if row < rowNum{
                                     ForEach(seats.filter { $0.rowNum == row && $0.seatNumber <= 2 }) { seat in
-                                        SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
+                                        SeatChoices(selectionConfirm: $selectionConfirm, selectedSeat: $selectedSeat, accountType: $accountType, student: student!, seat: seat)
                                     }
                                     
                                     Color.clear
                                         .frame(width: 15, height: 15)
                                     
                                     ForEach(seats.filter { $0.rowNum == row && $0.seatNumber > 2 }) { seat in
-                                        SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
+                                        SeatChoices(selectionConfirm: $selectionConfirm, selectedSeat: $selectedSeat, accountType: $accountType, student: student!, seat: seat)
                                     }
                                 }
                                 else {
                                     ForEach(seats.filter { $0.rowNum == row && $0.seatNumber == 1 }) { seat in
-                                        SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
+                                        SeatChoices(selectionConfirm: $selectionConfirm, selectedSeat: $selectedSeat, accountType: $accountType, student: student!, seat: seat)
                                     }
                                     
                                     Color.clear
@@ -82,7 +87,7 @@ struct AssignStudent: View {
                                         .frame(width: 15, height: 15)
                                     
                                     ForEach(seats.filter { $0.rowNum == row && $0.seatNumber > 1 }) { seat in
-                                        SeatView(assignmentConfirm: $assignmentConfirm, selectedSeat: $selectedSeat, student: student!, seat: seat)
+                                        SeatChoices(selectionConfirm: $selectionConfirm, selectedSeat: $selectedSeat, accountType: $accountType, student: student!, seat: seat)
                                     }
                                 }
                             }
@@ -97,7 +102,7 @@ struct AssignStudent: View {
         }
         .onAppear {
             Task {
-                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: UserDefaults.standard.integer(forKey: "accountID"))
+                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountType: UserDefaults.standard.string(forKey: "accountType")!, accountID: UserDefaults.standard.integer(forKey: "accountID"))
                 busInfo = try await obtainBusInfo.obtainBusInfo(id: busID)
                 rowNum = busInfo?.rowAmount ?? 0
                 do {
@@ -105,19 +110,31 @@ struct AssignStudent: View {
                 } catch {
                     print("Failed to fetch seats: \(error)")
                 }
+                accountType = UserDefaults.standard.string(forKey: "accountType")!
                 loadingSeats = false
             }
         }
     }
 }
 
-struct SeatView: View {
-    @Binding var assignmentConfirm: Bool
+struct SeatChoices: View {
+    @Binding var selectionConfirm: Bool
     @Binding var selectedSeat: Seat?
+    @Binding var accountType: String
     var student: Student
     @EnvironmentObject var studentAssignment: StudentAssignment
     @Environment(\.dismiss) var dismiss
     let seat: Seat
+    
+    var alertMessage: String {
+        switch accountType {
+        case "driver":
+            return "Would you like to assign \(student.firstName) \(student.lastName) to row \(selectedSeat?.rowNum ?? 0), seat \(selectedSeat?.seatNumber ?? 0)?"
+        default:
+            return "Are you sure you would like to choose row \(selectedSeat?.rowNum ?? 0), seat \(selectedSeat?.seatNumber ?? 0) as your seat?"
+        }
+    }
+    
     var body: some View {
         Group {
             if seat.isOccupied {
@@ -143,7 +160,7 @@ struct SeatView: View {
                 }
             }
             else {
-                Button(action: {selectedSeat = seat; assignmentConfirm = true; print("\(seat)"); print("\(student.id)")}, label: {
+                Button(action: {selectedSeat = seat; selectionConfirm = true; print("\(seat)"); print("\(student.id)")}, label: {
                     VStack{
                         Text("\(seat.rowNum) \(seat.seatNumber)")
                             .font(.system(size: 7))
@@ -153,7 +170,7 @@ struct SeatView: View {
                     .padding(25)
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                 })
-                .alert("Would you like to assign this student to row \(selectedSeat?.rowNum ?? 0), seat \(selectedSeat?.seatNumber ?? 0)?", isPresented: $assignmentConfirm) {
+                .alert(alertMessage, isPresented: $selectionConfirm) {
                     Button("Yes", role: .destructive) {
                         Task {
                             dismiss()
@@ -174,5 +191,5 @@ struct SeatView: View {
 
 
 #Preview {
-    AssignStudent()
+    SeatSelection()
 }

@@ -176,7 +176,7 @@ struct DriverSignUp: View {
     }
     
     func addDriver(_ driver: NewDriver) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/driver/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/driver/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

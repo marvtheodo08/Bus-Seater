@@ -42,8 +42,6 @@ struct StudentSignUp: View {
         
     }
     
-    @EnvironmentObject var getSchools: GetSchools
-    
     // Track current stage
     @State private var currentStage: Stage = .email
     
@@ -58,8 +56,11 @@ struct StudentSignUp: View {
     @State private var municipality: String = ""
     @State private var schoolID: Int = 0
     @State private var busID: Int = 0
+    @State private var student: Student? = nil
     @EnvironmentObject var newAccount: NewAccount
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
+    @EnvironmentObject var getUserToken: GetUserToken
+    @EnvironmentObject var getSchools: GetSchools
     @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
     @AppStorage("accountType") private var accountType = ""
     
@@ -87,7 +88,7 @@ struct StudentSignUp: View {
                 case .bus:
                     StudentBus(busID: $busID, schoolID: $schoolID)
                 case .verification:
-                    StudentVerification(isEmailVerified: $isEmailVerified, firstname: $firstname, lastname: $lastname, grade: $grade, schoolID: $schoolID, busID: $busID, email: $email, password: $password)
+                    StudentVerification(isEmailVerified: $isEmailVerified, firstname: $firstname, lastname: $lastname, grade: $grade, schoolID: $schoolID, busID: $busID, email: $email, password: $password, student: $student)
                 }
                 
                 
@@ -127,13 +128,14 @@ struct StudentSignUp: View {
                 Task {
                     try await newAccount.addAccount(NewAccount.Account(firstName: firstname, lastName: lastname, email: email, accountType: "student", schoolId: schoolID))
                     do {
-                      let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
+                        let account = try await obtainAccountInfo.obtainAccountInfo(email: email)
                         let defaults = UserDefaults.standard
                         defaults.set(account.firstName, forKey: "firstName")
                         defaults.set(account.lastName, forKey: "lastName")
                         defaults.set(account.schoolId, forKey: "schoolID")
                         defaults.set(account.email, forKey: "email")
                         defaults.set(account.id, forKey: "accountID")
+                        try await addAccountIDtoStudent(student: student!, accountID: account.id)
                         accountType = account.accountType
                         WasUserLoggedIn = true
                     }
@@ -143,7 +145,7 @@ struct StudentSignUp: View {
                 }
             }
         }
-
+        
     }
     
     func goBack() {
@@ -174,6 +176,32 @@ struct StudentSignUp: View {
         }
     }
     
+    func addAccountIDtoStudent(student: Student, accountID: Int) async throws {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/addIDToStudent?accountID=\(accountID)") else {
+            throw URLError(.badURL)
+        }
+        
+        let token = try await getUserToken.getUserToken()
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(student)
+        } catch {
+            print("Failed to encode parameters: \(error)")
+        }
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+            throw URLError(.badServerResponse)
+        }
+        
+    }
 }
 
 // Email stage view
@@ -428,7 +456,7 @@ struct StudentVerification: View {
     @Binding var busID: Int
     @Binding var email: String
     @Binding var password: String
-    @State private var student: Student? = nil
+    @Binding var student: Student?
     @State private var infoTrue: Bool = false
     @State private var studentChecked: Bool = false
     @State private var pollingTimer: Timer? = nil
@@ -442,10 +470,11 @@ struct StudentVerification: View {
             .onAppear {
                 Task {
                     do {
-                        let result = try await verifyStudent(firstname: firstname, lastname: lastname, grade: grade, schoolID: schoolID, busID: busID)
-                        student = result
-                        infoTrue = true
-                        emailVerification(email: email, password: password, firstname: firstname)
+                        student = try await verifyStudent(firstname: firstname, lastname: lastname, grade: grade, schoolID: schoolID, busID: busID)
+                        if ((student ?? nil) != nil){
+                            infoTrue = true
+                            emailVerification(email: email, password: password, firstname: firstname)
+                        }
                     } catch {
                         student = nil
                         infoTrue = false
@@ -496,7 +525,7 @@ struct StudentVerification: View {
     }
     
     func verifyStudent(firstname: String, lastname: String, grade: String, schoolID: Int, busID: Int) async throws -> Student {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/student/verify/\(firstname)/\(lastname)/\(grade)/\(schoolID)/\(busID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/verifyStudent?firstName=\(firstname)&lastName=\(lastname)&grade=\(grade)&schoolID=\(schoolID)&busID=\(busID)") else {
             throw URLError(.badURL)
         }
                 
@@ -511,7 +540,10 @@ struct StudentVerification: View {
             throw URLError(.badServerResponse)
         }
         
-        let fetchedStudent = try JSONDecoder().decode(Student.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let fetchedStudent = try decoder.decode(Student.self, from: data)
         
         return fetchedStudent
     }

@@ -11,13 +11,21 @@ class StudentAssignment: ObservableObject {
     
     func assignStudent(seat: Seat, studentID: Int) async throws {
         
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/updateSeatTrue?busID=\(seat.busID)&rowNumber=\(seat.rowNum)&seatNumber=\(seat.seatNumber)&studentID=\(studentID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/updateSeatTrue?studentID=\(studentID)") else {
             throw URLError(.badURL)
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(seat)
+        } catch {
+            print("Failed to encode parameters: \(error)")
+        }
 
         let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -25,12 +33,10 @@ class StudentAssignment: ObservableObject {
         }
         
         print("\(seat)")
-        print("\(studentID)")
-
     }
     
     func unassignStudent(seat: Seat) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/updateSeatFalse?busID=\(seat.busID)&rowNumber=\(seat.rowNum)&seatNumber=\(seat.seatNumber)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/updateSeatFalse") else {
             throw URLError(.badURL)
         }
 

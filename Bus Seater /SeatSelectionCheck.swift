@@ -13,7 +13,7 @@ struct IsSelectionOpen: Codable {
 
 class SelectionCheck: ObservableObject {
     func selectionCheck(schoolID: Int) async throws -> Bool {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/check_seat_selection?schoolID=\(schoolID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/check_seat_selection?schoolID=\(schoolID)") else {
             throw URLError(.badURL)
         }
         

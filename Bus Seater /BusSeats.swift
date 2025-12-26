@@ -10,12 +10,12 @@ import Foundation
 struct Seat: Identifiable, Codable {
     let seatNumber: Int
     let rowNum: Int
-    let busID: Int
+    let busId: Int
     let studentId: Int?
     let isOccupied: Bool
     
     var id: String {
-        "\(busID).\(rowNum).\(seatNumber)"
+        "\(busId).\(rowNum).\(seatNumber)"
     }
 }
 
@@ -34,7 +34,7 @@ struct NewSeat: Codable {
 
 class GetSeats: ObservableObject {
     func fetchSeats(busID: Int) async throws -> [Seat]{
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/seats?busID=\(busID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/seats?busID=\(busID)") else {
             throw URLError(.badURL)
         }
         

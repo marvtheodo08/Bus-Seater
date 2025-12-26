@@ -12,6 +12,7 @@ struct DriverHomepage: View {
     @State private var students = [Student]()
     @State var fetchingStudents = true
     @State private var accountID: Int = 0
+    @State private var accountType: String = ""
     @State private var busID: Int = 0
     @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
     @EnvironmentObject var logout: Logout
@@ -77,7 +78,7 @@ struct DriverHomepage: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                                         })
                                         .sheet(item: $studentSelected) {
-                                            student in AssignStudent(student: student)
+                                            student in SeatSelection(student: student)
                                         }
                                     }
                                     
@@ -95,10 +96,11 @@ struct DriverHomepage: View {
         }
         .onAppear{
             accountID = UserDefaults.standard.integer(forKey: "accountID")
+            accountType = UserDefaults.standard.string(forKey: "accountType")!
             Task{
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 do {
-                    busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: accountID)
+                    busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountType: accountType, accountID: accountID)
                     try await fetchStudents(busID: busID)
                 } catch {
                     print("Failed to fetch students: \(error)")
@@ -109,7 +111,7 @@ struct DriverHomepage: View {
     }
     @MainActor
     func fetchStudents(busID: Int) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/students?busID=\(busID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/students?busID=\(busID)") else {
             throw URLError(.badURL)
         }
         

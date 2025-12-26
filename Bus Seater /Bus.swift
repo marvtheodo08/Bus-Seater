@@ -43,35 +43,51 @@ struct NewBus: Codable {
 }
 
 class ObtainBusIDfromAccount: ObservableObject {
-    func obtainBusIDfromAccountID(accountID: Int) async throws -> Int {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/driverBusID?accountID=\(accountID)") else {
-            throw URLError(.badURL)
+    func obtainBusIDfromAccountID(accountType: String, accountID: Int) async throws -> Int {
+        
+        let url: URL
+
+        if accountType == "driver" {
+            guard let driverURL = URL(
+                string: "https://bus-seater-api.onrender.com/driverBusID?accountID=\(accountID)"
+            ) else {
+                throw URLError(.badURL)
+            }
+            url = driverURL
+        } else {
+            guard let studentURL = URL(
+                string: "https://bus-seater-api.onrender.com/studentBusID?accountID=\(accountID)"
+            ) else {
+                throw URLError(.badURL)
+            }
+            url = studentURL
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let busID = try decoder.decode(BusID.self, from: data)
+        return busID.busId
         
-        do{
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let busID = try decoder.decode(BusID.self, from: data)
-            return busID.busId
-        }
     }
 }
 
 class ObtainBusInfo: ObservableObject {
     func obtainBusInfo(id: Int) async throws -> Bus {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/busInfo?id=\(id)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/busInfo?id=\(id)") else {
             throw URLError(.badURL)
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            print("❌ Bad response:", response)
             throw URLError(.badServerResponse)
         }
         
@@ -86,7 +102,7 @@ class ObtainBusInfo: ObservableObject {
 class ObtainBusID: ObservableObject {
     @MainActor
     func obtainBusID(bus_code: String, school_id: Int) async throws -> Int{
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/bus?schoolID=\(school_id)&busCode=\(bus_code)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/bus?schoolID=\(school_id)&busCode=\(bus_code)") else {
             throw URLError(.badURL)
         }
         
@@ -105,7 +121,7 @@ class ObtainBusID: ObservableObject {
 
 class GetBuses: ObservableObject {
     func fetchBuses(schoolID: Int) async throws -> [Bus]{
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/buses?schoolID=\(schoolID)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/buses?schoolID=\(schoolID)") else {
             throw URLError(.badURL)
         }
         

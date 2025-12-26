@@ -14,6 +14,8 @@ struct Student: Identifiable, Codable {
     let grade: String
     let firstName: String
     let lastName: String
+    let unbanDate: Date?
+    let strikes: Int
     
 }
 

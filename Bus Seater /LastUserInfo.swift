@@ -19,7 +19,7 @@ struct Account: Codable {
 class ObtainAccountInfo: ObservableObject {
     @MainActor
     func obtainAccountInfo(email: String) async throws -> Account{
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/accountInfo?email=\(email)") else {
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/accountInfo?email=\(email)") else {
             throw URLError(.badURL)
         }
         

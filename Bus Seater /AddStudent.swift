@@ -138,6 +138,7 @@ struct StudentGrade: View {
 
 struct AddingStudent: View {
     @State private var accountID: Int = 0
+    @State private var accountType: String = ""
     @State private var busID: Int = 0
     @State private var schoolID: Int = 0
     @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
@@ -155,15 +156,16 @@ struct AddingStudent: View {
         .onAppear {
             schoolID = UserDefaults.standard.integer(forKey: "schoolID")
             accountID = UserDefaults.standard.integer(forKey: "accountID")
+            accountType = UserDefaults.standard.string(forKey: "accountType")!
             Task {
-                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountID: accountID)
+                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountType: accountType, accountID: accountID)
                 try await addStudent(NewStudent(busId: busID, schoolId: schoolID, grade: grade, firstName: firstname, lastName: lastname))
             }
             studentAdded = true
         }
     }
     func addStudent(_ student: NewStudent) async throws {
-        guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/student/create/") else { fatalError("Invalid URL") }
+        guard let url = URL(string: "https://bus-seater-api.onrender.com/student/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
