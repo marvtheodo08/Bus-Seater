@@ -64,7 +64,7 @@ struct DriverHomepage: View {
                             ScrollView{
                                 LazyVGrid(columns: columns, spacing: 16) {
                                     ForEach(students) { student in
-                                        Button(action: {studentSelected = student}, label: {
+                                        NavigationLink(destination: StudentSettings(student: student)){
                                             VStack{
                                                 Image(systemName: "studentdesk")
                                                 Text("\(student.firstName) \(student.lastName)")
@@ -76,9 +76,6 @@ struct DriverHomepage: View {
                                             .frame(width: 40.0, height: 40.0)
                                             .padding(25)
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
-                                        })
-                                        .sheet(item: $studentSelected) {
-                                            student in SeatSelection(student: student)
                                         }
                                     }
                                     
@@ -123,7 +120,10 @@ struct DriverHomepage: View {
         
         print("Status code: \(httpResponse.statusCode)")
         
-        let fetchedstudents = try JSONDecoder().decode([Student].self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let fetchedstudents = try decoder.decode([Student].self, from: data)
         print(fetchedstudents)
         students = fetchedstudents
     }

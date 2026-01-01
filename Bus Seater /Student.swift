@@ -16,8 +16,26 @@ struct Student: Identifiable, Codable {
     let lastName: String
     let unbanDate: Date?
     let strikes: Int
-    
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        id = try container.decode(Int.self, forKey: .id)
+        busId = try container.decode(Int.self, forKey: .busId)
+        schoolId = try container.decode(Int.self, forKey: .schoolId)
+        grade = try container.decode(String.self, forKey: .grade)
+        firstName = try container.decode(String.self, forKey: .firstName)
+        lastName = try container.decode(String.self, forKey: .lastName)
+        strikes = try container.decode(Int.self, forKey: .strikes)
+
+        if let dateString = try container.decodeIfPresent(String.self, forKey: .unbanDate) {
+            unbanDate = DateFormatter.mysqlDate.date(from: dateString)
+        } else {
+            unbanDate = nil
+        }
+    }
 }
+
 
 struct NewStudent: Codable {
     let busId: Int

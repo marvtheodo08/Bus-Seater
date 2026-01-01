@@ -7,17 +7,20 @@
 
 import SwiftUI
 
+enum Stage {
+    case name
+    case grade
+    case addingStudent
+}
+
 struct AddStudent: View {
-    enum Stage {
-        case name
-        case grade
-        case addingStudent
-    }
+    @Environment(\.dismiss) var dismiss
     @State private var studentAdded: Bool = false
     @State private var currentStage: Stage = .name
     @State private var firstname: String = ""
     @State private var lastname: String = ""
     @State private var grade: String = ""
+    var bus: Bus?
     var body: some View {
         ZStack {
             Color(.white)
@@ -33,36 +36,43 @@ struct AddStudent: View {
                 case .grade:
                     StudentGrade(grade: $grade)
                 case .addingStudent:
-                    AddingStudent(firstname: $firstname, lastname: $lastname, grade: $grade, studentAdded: $studentAdded)
+                    AddingStudent(firstname: $firstname, lastname: $lastname, grade: $grade, bus: bus)
                 }
-                HStack {
-                    if currentStage != .name {
-                        Button(action: { goBack() }) {
-                            Image(systemName: "arrow.left")
-                                .padding()
-                                .foregroundStyle(.blue)
+                if currentStage != .addingStudent{
+                    HStack {
+                        if currentStage != .name {
+                            Button(action: { goBack() }) {
+                                Image(systemName: "arrow.left")
+                                    .padding()
+                                    .foregroundStyle(.blue)
+                            }
+                        }
+                        Spacer()
+                        if currentStage != .grade {
+                            Button(action: { goNext() }) {
+                                Image(systemName: "arrow.right")
+                                    .padding()
+                                    .foregroundStyle(.blue)
+                            }
+                        }
+                        else if currentStage == .grade {
+                            Button(action: {currentStage = .addingStudent}, label: {Text("Add Student")
+                                    .foregroundStyle(.black)
+                            })
                         }
                     }
-                    Spacer()
-                    if currentStage != .grade {
-                        Button(action: { goNext() }) {
-                            Image(systemName: "arrow.right")
-                                .padding()
-                                .foregroundStyle(.blue)
-                        }
-                    }
-                    else if currentStage == .grade {
-                        Button(action: {currentStage = .addingStudent}, label: {Text("Add Student")
-                                .foregroundStyle(.black)
-                        })
-                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
             .padding(.bottom, 250)
-        }
-        .fullScreenCover(isPresented: $studentAdded) {
-            DriverHomepage()
+            
+            Button(action: {dismiss()}, label: {
+                Image(systemName: "xmark")
+                    .foregroundStyle(.black)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            })
+            .padding(.bottom, 700)
+            .padding(.leading, 310)
         }
     }
     
@@ -137,41 +147,58 @@ struct StudentGrade: View {
 }
 
 struct AddingStudent: View {
+    @Environment(\.dismiss) var dismiss
     @State private var accountID: Int = 0
-    @State private var accountType: String = ""
     @State private var busID: Int = 0
     @State private var schoolID: Int = 0
-    @EnvironmentObject var obtainbusIDfromAccount: ObtainBusIDfromAccount
     @Binding var firstname: String
     @Binding var lastname: String
     @Binding var grade: String
-    @Binding var studentAdded: Bool
+    @EnvironmentObject var getUserToken: GetUserToken
+    @EnvironmentObject var studentAdded: StudentAdded
+    var bus: Bus?
     
     var body: some View {
-        VStack {
-            ProgressView("Adding student to database...")
-                .multilineTextAlignment(.center)
-                .colorScheme(.light)
+        NavigationStack{
+            if !studentAdded.studentAdded {
+                VStack {
+                    ProgressView("Adding student to database...")
+                        .multilineTextAlignment(.center)
+                        .colorScheme(.light)
+                }
+            }
+            else{
+                ViewStudents(bus: bus)
+            }
         }
         .onAppear {
             schoolID = UserDefaults.standard.integer(forKey: "schoolID")
-            accountID = UserDefaults.standard.integer(forKey: "accountID")
-            accountType = UserDefaults.standard.string(forKey: "accountType")!
             Task {
-                busID = try await obtainbusIDfromAccount.obtainBusIDfromAccountID(accountType: accountType, accountID: accountID)
-                try await addStudent(NewStudent(busId: busID, schoolId: schoolID, grade: grade, firstName: firstname, lastName: lastname))
+                try await addStudent(NewStudent(
+                    busId: bus?.id ?? 0,
+                    schoolId: schoolID,
+                    grade: grade,
+                    firstName: firstname,
+                    lastName: lastname
+                ))
             }
-            studentAdded = true
+            studentAdded.studentAdded = true
+            dismiss()
         }
     }
     func addStudent(_ student: NewStudent) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/student/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
+        let token = try await getUserToken.getUserToken()
+        
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         do {
-            request.httpBody = try JSONEncoder().encode(student)
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(student)
         } catch {
             print("Failed to encode parameters: \(error)")
         }

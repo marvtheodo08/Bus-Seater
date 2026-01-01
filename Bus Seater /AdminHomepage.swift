@@ -69,7 +69,7 @@ struct AdminHomepage: View {
                             ScrollView{
                                 LazyVGrid(columns: columns, spacing: 16) {
                                     ForEach(buses) { bus in
-                                        Button(action: {busSelected = bus}, label: {
+                                        NavigationLink(destination: ManageBus(bus: bus)){
                                             VStack{
                                                 Image(systemName: "bus")
                                                 Text("\(bus.busCode)")
@@ -79,11 +79,6 @@ struct AdminHomepage: View {
                                             .frame(width: 40.0, height: 40.0)
                                             .padding(25)
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
-                                        })
-                                        .sheet(item: $busSelected) {bus in
-                                            NavigationStack {
-                                                ManageBus(bus: bus)
-                                            }
                                         }
                                     }
                                     // ➕ Add Bus button after all buses

@@ -201,11 +201,8 @@ struct AddingQuarter: View {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            formatter.timeZone = TimeZone(identifier: "America/New_York")
             let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .formatted(formatter)
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.mysqlDate)
             encoder.keyEncodingStrategy = .convertToSnakeCase
             request.httpBody = try encoder.encode(quarter)
         } catch {

@@ -34,12 +34,10 @@
 		7E31E3BA2E170A6900E1E8A1 /* AddBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */; };
 		7E37DF212CF7DB11001EB870 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF202CF7DB11001EB870 /* Student.swift */; };
 		7E37DF232CF7DD63001EB870 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37DF222CF7DD63001EB870 /* Bus.swift */; };
-		7E39E9322E9D4A2E00D51EE9 /* StudentAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39E9312E9D4A2E00D51EE9 /* StudentAssignment.swift */; };
 		7E47E8BA2EDE70A90043C2B5 /* ViewStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E8B92EDE70A90043C2B5 /* ViewStudents.swift */; };
 		7E5C52002E5CCCBA003CD5D6 /* AddStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5C51FF2E5CCCBA003CD5D6 /* AddStudent.swift */; };
 		7E5FF9D62EBE9FC30010EF59 /* AddQuarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */; };
 		7E69B36B2EB44EA400BB70CD /* BusRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69B36A2EB44EA400BB70CD /* BusRows.swift */; };
-		7E6CD6D62ED13AF5009EC2B0 /* SeatSelectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6CD6D52ED13AF5009EC2B0 /* SeatSelectionCheck.swift */; };
 		7E7EEDCA2E63A9EE0019134D /* SeatSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EEDC92E63A9ED0019134D /* SeatSelection.swift */; };
 		7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */; };
 		7E85D49E2CE1957700341DE7 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85D49D2CE1957700341DE7 /* School.swift */; };
@@ -49,6 +47,11 @@
 		7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EABE03A2D68F4B000C00697 /* NewAccount.swift */; };
 		7EECFD8C2ED6772800D789B2 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECFD8B2ED6772800D789B2 /* Logout.swift */; };
 		7EECFD902ED79F4200D789B2 /* GetUserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EECFD8F2ED79F4200D789B2 /* GetUserToken.swift */; };
+		7EEF19B62F007AC100411951 /* SeatChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF19B52F007AC100411951 /* SeatChange.swift */; };
+		7EEF19B82F02D7A700411951 /* SeatInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF19B72F02D7A700411951 /* SeatInfo.swift */; };
+		7EEF19BA2F05846700411951 /* StudentAdded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF19B92F05846700411951 /* StudentAdded.swift */; };
+		7EEF19BC2F05912A00411951 /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF19BB2F05912A00411951 /* StudentInfo.swift */; };
+		7EEF19BE2F05A30F00411951 /* StudentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF19BD2F05A30F00411951 /* StudentSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,12 +101,10 @@
 		7E31E3B92E170A6800E1E8A1 /* AddBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuses.swift; sourceTree = "<group>"; };
 		7E37DF202CF7DB11001EB870 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		7E37DF222CF7DD63001EB870 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
-		7E39E9312E9D4A2E00D51EE9 /* StudentAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAssignment.swift; sourceTree = "<group>"; };
 		7E47E8B92EDE70A90043C2B5 /* ViewStudents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStudents.swift; sourceTree = "<group>"; };
 		7E5C51FF2E5CCCBA003CD5D6 /* AddStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudent.swift; sourceTree = "<group>"; };
 		7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuarter.swift; sourceTree = "<group>"; };
 		7E69B36A2EB44EA400BB70CD /* BusRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRows.swift; sourceTree = "<group>"; };
-		7E6CD6D52ED13AF5009EC2B0 /* SeatSelectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatSelectionCheck.swift; sourceTree = "<group>"; };
 		7E7EEDC92E63A9ED0019134D /* SeatSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatSelection.swift; sourceTree = "<group>"; };
 		7E80B5C62E52B3CB0085FF8E /* BusSeats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSeats.swift; sourceTree = "<group>"; };
 		7E85D49D2CE1957700341DE7 /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
@@ -112,6 +113,11 @@
 		7EABE03A2D68F4B000C00697 /* NewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccount.swift; sourceTree = "<group>"; };
 		7EECFD8B2ED6772800D789B2 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
 		7EECFD8F2ED79F4200D789B2 /* GetUserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserToken.swift; sourceTree = "<group>"; };
+		7EEF19B52F007AC100411951 /* SeatChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatChange.swift; sourceTree = "<group>"; };
+		7EEF19B72F02D7A700411951 /* SeatInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatInfo.swift; sourceTree = "<group>"; };
+		7EEF19B92F05846700411951 /* StudentAdded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAdded.swift; sourceTree = "<group>"; };
+		7EEF19BB2F05912A00411951 /* StudentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfo.swift; sourceTree = "<group>"; };
+		7EEF19BD2F05A30F00411951 /* StudentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,7 @@
 				7E5FF9D52EBE9FC30010EF59 /* AddQuarter.swift */,
 				7E5C51FF2E5CCCBA003CD5D6 /* AddStudent.swift */,
 				0C5F17042CCB13C500C62695 /* AdminHomepage.swift */,
+				7EEF19B52F007AC100411951 /* SeatChange.swift */,
 				0CC7C6942C7627600018C041 /* AdminSignUp.swift */,
 				0C5608142C25AA7C00828882 /* Bus_SeaterApp.swift */,
 				7E37DF222CF7DD63001EB870 /* Bus.swift */,
@@ -185,17 +192,19 @@
 				7E28D3552EFC66FE005E5D61 /* GetStudent.swift */,
 				7EECFD8F2ED79F4200D789B2 /* GetUserToken.swift */,
 				0C5F17062CCB1F5D00C62695 /* LastUserInfo.swift */,
+				7EEF19BD2F05A30F00411951 /* StudentSettings.swift */,
 				0CB9850A2C28C21600920872 /* Login.swift */,
 				7EECFD8B2ED6772800D789B2 /* Logout.swift */,
 				7E0AD8352E539C4C00BC6460 /* ManageBus.swift */,
+				7EEF19B92F05846700411951 /* StudentAdded.swift */,
 				7EABE03A2D68F4B000C00697 /* NewAccount.swift */,
+				7EEF19B72F02D7A700411951 /* SeatInfo.swift */,
 				7E85D49D2CE1957700341DE7 /* School.swift */,
 				7E955E482EAEEB3E00C30A01 /* SchoolBreaks.swift */,
 				7E7EEDC92E63A9ED0019134D /* SeatSelection.swift */,
-				7E6CD6D52ED13AF5009EC2B0 /* SeatSelectionCheck.swift */,
 				0C278BF22C3C90080009B5A4 /* SignUp.swift */,
+				7EEF19BB2F05912A00411951 /* StudentInfo.swift */,
 				7E37DF202CF7DB11001EB870 /* Student.swift */,
-				7E39E9312E9D4A2E00D51EE9 /* StudentAssignment.swift */,
 				0C7B427D2C527B5F000ADE5F /* StudentHomepage.swift */,
 				7E28D3532EFC5EF8005E5D61 /* StudentSelection.swift */,
 				0C7B42752C5273FB000ADE5F /* StudentSignUp.swift */,
@@ -382,16 +391,17 @@
 				7E8C659B2E5BBE1600058C07 /* BusActions.swift in Sources */,
 				7E0AD8362E539C4C00BC6460 /* ManageBus.swift in Sources */,
 				0C75DB2B2C70BE7D005247BC /* Login.swift in Sources */,
+				7EEF19B62F007AC100411951 /* SeatChange.swift in Sources */,
 				0C5F17032CCB134900C62695 /* DriverHomepage.swift in Sources */,
 				0C75DB272C70BE70005247BC /* DriverSignUp.swift in Sources */,
 				7EECFD8C2ED6772800D789B2 /* Logout.swift in Sources */,
+				7EEF19BA2F05846700411951 /* StudentAdded.swift in Sources */,
 				7E69B36B2EB44EA400BB70CD /* BusRows.swift in Sources */,
-				7E39E9322E9D4A2E00D51EE9 /* StudentAssignment.swift in Sources */,
 				0C5F17072CCB1F5D00C62695 /* LastUserInfo.swift in Sources */,
 				7EECFD902ED79F4200D789B2 /* GetUserToken.swift in Sources */,
-				7E6CD6D62ED13AF5009EC2B0 /* SeatSelectionCheck.swift in Sources */,
 				7E47E8BA2EDE70A90043C2B5 /* ViewStudents.swift in Sources */,
 				7E7EEDCA2E63A9EE0019134D /* SeatSelection.swift in Sources */,
+				7EEF19BE2F05A30F00411951 /* StudentSettings.swift in Sources */,
 				7E5C52002E5CCCBA003CD5D6 /* AddStudent.swift in Sources */,
 				7E80B5C72E52B3CB0085FF8E /* BusSeats.swift in Sources */,
 				0C5F17052CCB13C500C62695 /* AdminHomepage.swift in Sources */,
@@ -403,8 +413,10 @@
 				0CC7C6952C7627600018C041 /* AdminSignUp.swift in Sources */,
 				7E955E492EAEEB3F00C30A01 /* SchoolBreaks.swift in Sources */,
 				7E28D3562EFC66FE005E5D61 /* GetStudent.swift in Sources */,
+				7EEF19BC2F05912A00411951 /* StudentInfo.swift in Sources */,
 				7EABE03B2D68F4B000C00697 /* NewAccount.swift in Sources */,
 				0C75DB232C70BE64005247BC /* ContentView.swift in Sources */,
+				7EEF19B82F02D7A700411951 /* SeatInfo.swift in Sources */,
 				0C75DB262C70BE6D005247BC /* StudentSignUp.swift in Sources */,
 				0C75DB292C70BE77005247BC /* SignUp.swift in Sources */,
 				7E28D3542EFC5EF8005E5D61 /* StudentSelection.swift in Sources */,

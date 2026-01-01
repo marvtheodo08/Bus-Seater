@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ViewStudents: View {
-    @Environment(\.dismiss) var dismiss
     @State private var studentSelected: Student? = nil
     @State private var students = [Student]()
     @State var fetchingStudents = true
     @State private var busID: Int = 0
+    @State private var addingStudent = false
     var bus: Bus? = nil
     @EnvironmentObject var logout: Logout
+    @EnvironmentObject var studentAdded: StudentAdded
     
     // 3 columns = 3 buses per row
     let columns = [
@@ -34,7 +35,7 @@ struct ViewStudents: View {
             else {
                 if students.isEmpty {
                     ZStack{
-                        NavigationLink(destination: AddStudent()){
+                        NavigationLink(destination: AddStudent(bus: bus)){
                             Image(systemName: "plus")
                                 .foregroundStyle(.gray)
                                 .font(.system(size: 50))
@@ -42,30 +43,16 @@ struct ViewStudents: View {
                         Text("Add your students here.")
                             .foregroundStyle(.black)
                             .padding(.top, 120)
-                        Button(action: {dismiss()}, label: {
-                            Image(systemName: "xmark")
-                                .foregroundStyle(.black)
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        })
-                        .padding(.bottom, 700)
-                        .padding(.leading, 310)
                         
                     }
                 }
                 else {
                     ZStack{
-                        Button(action: {dismiss()}, label: {
-                            Image(systemName: "xmark")
-                                .foregroundStyle(.black)
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        })
-                        .padding(.bottom, 700)
-                        .padding(.leading, 310)
                         VStack(alignment: .leading) {
                             ScrollView{
                                 LazyVGrid(columns: columns, spacing: 16) {
                                     ForEach(students) { student in
-                                        Button(action: {studentSelected = student}, label: {
+                                        Button(action: {studentSelected = student}){
                                             VStack{
                                                 Image(systemName: "studentdesk")
                                                 Text("\(student.firstName) \(student.lastName)")
@@ -77,12 +64,12 @@ struct ViewStudents: View {
                                             .frame(width: 40.0, height: 40.0)
                                             .padding(25)
                                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
-                                        })
+                                        }
                                         .sheet(item: $studentSelected) {
-                                            student in SeatSelection(student: student)
+                                            student in StudentInfo(student: student)
                                         }
                                     }
-                                    NavigationLink(destination: AddStudent()){
+                                    Button(action: {addingStudent = true}){
                                         VStack{
                                             Image(systemName: "plus")
                                                 .foregroundStyle(.gray)
@@ -102,6 +89,26 @@ struct ViewStudents: View {
                 }
                 
             }
+        }
+        .onChange(of: studentAdded.studentAdded) { oldValue, newValue in
+            if newValue {
+                Task {
+                    Task{
+                        fetchingStudents = true
+                        try await Task.sleep(nanoseconds: 1_000_000_000)
+                        do {
+                            try await fetchStudents(busID: bus?.id ?? 0)
+                        } catch {
+                            print("Failed to fetch students: \(error)")
+                        }
+                        studentAdded.studentAdded = false
+                        fetchingStudents = false
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $addingStudent){
+            AddStudent(bus: bus)
         }
         .onAppear{
             Task{

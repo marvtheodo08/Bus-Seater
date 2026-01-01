@@ -13,10 +13,7 @@ struct Seat: Identifiable, Codable {
     let busId: Int
     let studentId: Int?
     let isOccupied: Bool
-    
-    var id: String {
-        "\(busId).\(rowNum).\(seatNumber)"
-    }
+    let id: Int
 }
 
 struct NewSeat: Codable {

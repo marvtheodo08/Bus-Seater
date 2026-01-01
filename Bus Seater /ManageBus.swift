@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ManageBus: View {
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var busActions: BusActions
     @EnvironmentObject var getUserToken: GetUserToken
     var bus: Bus? = nil
@@ -30,24 +29,19 @@ struct ManageBus: View {
                     Task {
                         do {
                             try await deleteBus(bus: bus!)
-                            dismiss()
+                            busActions.busDeleted = true
                         } catch {
                             print("Error deleting bus: \(error)")
                         }
-                        busActions.busDeleted = true
                     }
                 }
                 Button("Cancel", role: .cancel) { }
             } message: {
                 Text("This action cannot be undone.")
             }
-            Button(action: {dismiss()}, label: {
-                Image(systemName: "xmark")
-                    .foregroundStyle(.black)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-            })
-            .padding(.bottom, 700)
-            .padding(.leading, 310)
+        }
+        .fullScreenCover(isPresented: $busActions.busDeleted){
+            AdminHomepage()
         }
     }
     func deleteBus(bus: Bus) async throws {
