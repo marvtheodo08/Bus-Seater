@@ -119,9 +119,11 @@ struct DriverHomepage: View {
         }
         
         print("Status code: \(httpResponse.statusCode)")
+
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.mysqlDate)
         
         let fetchedstudents = try decoder.decode([Student].self, from: data)
         print(fetchedstudents)

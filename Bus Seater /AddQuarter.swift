@@ -180,6 +180,7 @@ struct AddingQuarter: View {
     @Binding var quarterNumber: Int
     @Binding var startDate: Date
     @Binding var endDate: Date
+    @EnvironmentObject var getUserToken: GetUserToken
     
     var body: some View {
         VStack {
@@ -197,13 +198,16 @@ struct AddingQuarter: View {
     func addQuarter(_ quarter: SchoolQuarter) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/quarter/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
+        let token = try await getUserToken.getUserToken()
+        
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         do {
             let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .formatted(DateFormatter.mysqlDate)
             encoder.keyEncodingStrategy = .convertToSnakeCase
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.mysqlDate)
             request.httpBody = try encoder.encode(quarter)
         } catch {
             print("Failed to encode parameters: \(error)")

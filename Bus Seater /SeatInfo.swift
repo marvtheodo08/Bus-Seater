@@ -64,6 +64,7 @@ struct SeatInfo: View {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.mysqlDate)
         
         let seat = try decoder.decode(Student.self, from: data)
         

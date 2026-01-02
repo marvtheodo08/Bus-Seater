@@ -23,6 +23,7 @@ class GetStudentFromID: ObservableObject {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.mysqlDate)
         
         let student = try decoder.decode(Student.self, from: data)
         
