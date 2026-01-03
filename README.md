@@ -16,4 +16,4 @@ This app ensures that everyone has a seat they are happy in without rushing the 
 
 Anything account related, such as creation and login, is handled with FirebaseAuth, but user data, such as their first and last name, email, school id, and account type, will be added to a MySQL database once the account is created.
 
-The app was coded entierly with Swift, with SwiftUI being its core user interface, and uses both JSON parsing and stringification to interact with the database. The backend API was built using Python, and is hosted via Render.
+The app was coded entierly with Swift, with SwiftUI being its core user interface, and uses both JSON parsing and stringification to interact with the database. The database was built with MySQL, hosted via AWS, and the backend API was built using Python, hosted via Render.
