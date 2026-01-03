@@ -174,6 +174,7 @@ struct AddingBreak: View {
     @Binding var breakType: String
     @Binding var startDate: Date
     @Binding var endDate: Date
+    @EnvironmentObject var getUserToken: GetUserToken
     
     var body: some View {
         VStack {
@@ -191,8 +192,11 @@ struct AddingBreak: View {
     func addBreak(_ schoolBreak: SchoolBreak) async throws {
         guard let url = URL(string: "https://bus-seater-hhd5bscugehkd8bf.canadacentral-01.azurewebsites.net/break/create/") else { throw URLError(.badURL) }
         var request = URLRequest(url: url)
+        let token = try await getUserToken.getUserToken()
+
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         do {
             let formatter = DateFormatter()

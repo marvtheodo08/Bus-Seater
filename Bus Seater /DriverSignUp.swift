@@ -70,6 +70,8 @@ struct DriverSignUp: View {
     @State private var bus: Int = 0
     @EnvironmentObject var newAccount: NewAccount
     @EnvironmentObject var obtainAccountInfo: ObtainAccountInfo
+    @EnvironmentObject var getUserToken: GetUserToken
+
     @AppStorage("WasUserLoggedIn") private var WasUserLoggedIn = false
     @AppStorage("accountType") private var accountType = ""
     
@@ -178,8 +180,11 @@ struct DriverSignUp: View {
     func addDriver(_ driver: NewDriver) async throws {
         guard let url = URL(string: "https://bus-seater-api.onrender.com/driver/create/") else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
+        let token = try await getUserToken.getUserToken()
+
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         do {
             let encoder = JSONEncoder()
