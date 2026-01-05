@@ -7,6 +7,7 @@
 
 import Foundation
 
+//extension created by ChatGPT
 extension DateFormatter {
     static let mysqlDate: DateFormatter = {
         let f = DateFormatter()

@@ -103,7 +103,7 @@ struct StudentHomepage: View {
                             .padding()
                             
                             Button(action: {openSelection = true}, label: {
-                                Text("Don't have an account? Sign up here!")
+                                Text("Seat Selection")
                             })
                             .sheet(isPresented: $openSelection) {
                                 StudentSelection(student: student)

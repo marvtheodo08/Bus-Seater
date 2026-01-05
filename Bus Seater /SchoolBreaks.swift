@@ -32,7 +32,7 @@ struct SetSchoolBreak: View {
     }
     
     @State private var breakAdded = false
-    @State private var breakType: String = "Christmas"
+    @State private var breakType: String = ""
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var currentStage: Stage = .breakType
@@ -115,12 +115,10 @@ struct BreakType: View {
                 .foregroundStyle(.black)
                 .padding(.bottom, 50)
             
-            Picker("Break Type", selection: $breakType) {
-                Text("Christmas").tag("Christmas")
-                Text("Winter (Febuary)").tag("Winter (Febuary)")
-                Text("Spring").tag("Spring")
-            }
-            .pickerStyle(WheelPickerStyle())
+            TextField("Break", text: $breakType)
+                .padding()
+                .background(Color.gray.opacity(0.3).cornerRadius(3.0))
+                .padding()
         }
     }
 }

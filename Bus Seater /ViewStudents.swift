@@ -136,6 +136,7 @@ struct ViewStudents: View {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.mysqlDate)
         
         print("Status code: \(httpResponse.statusCode)")
         
